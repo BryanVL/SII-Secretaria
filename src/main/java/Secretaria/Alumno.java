@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 
 public class Alumno implements Serializable {
-//prueba
+
 	@Id
 	private Long dni;
 	private static final long serialVersionUID = 1L;
