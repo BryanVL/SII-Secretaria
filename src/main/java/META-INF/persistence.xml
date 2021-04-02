@@ -3,6 +3,18 @@
 	<persistence-unit name="Secretaria" transaction-type="RESOURCE_LOCAL">
 		<class>Secretaria.Alumno</class>
 		<class>Secretaria.Grupo</class>
+		<class>Secretaria.Asignatura</class>
+		<class>Secretaria.Asignaturas_Matricula</class>
+		<class>Secretaria.Centro</class>
+		<class>Secretaria.Encuesta</class>
+		<class>Secretaria.Expediente</class>
+		<class>Secretaria.Grupos_por_Asignatura</class>
+		<class>Secretaria.Idiomas</class>
+		<class>Secretaria.Matricula</class>
+		<class>Secretaria.Optativa</class>
+		<class>Secretaria.Titulacion</class>
+		<class>Secretaria.Clase</class>
+		<class>Secretaria.GU_CursoLetra</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sii"/>
 			<property name="javax.persistence.jdbc.user" value="siiuser"/>
