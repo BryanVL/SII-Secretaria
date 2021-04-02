@@ -14,12 +14,43 @@ public class Asignaturas_Matricula implements Serializable {
 	
 	
 	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Grupo grupo;
 	
 	@Id @ManyToOne
 	private Asignatura asignatura;
 	
-	@ManyToOne
+	@Id @ManyToOne
 	private Matricula matricula;
+
+	
+	
+	public Asignaturas_Matricula() {
+		super();
+	}
+	
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+	public Asignatura getAsignatura() {
+		return asignatura;
+	}
+
+	public void setAsignatura(Asignatura asignatura) {
+		this.asignatura = asignatura;
+	}
+
+	public Matricula getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
 	
 }

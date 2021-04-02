@@ -14,7 +14,6 @@
 		<class>Secretaria.Optativa</class>
 		<class>Secretaria.Titulacion</class>
 		<class>Secretaria.Clase</class>
-		<class>Secretaria.GU_CursoLetra</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sii"/>
 			<property name="javax.persistence.jdbc.user" value="siiuser"/>

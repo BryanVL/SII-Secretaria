@@ -13,18 +13,20 @@ public class Expediente implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id @Column(precision=9)
-	private Double Num_expediente;
+	@Id @Column(length=9)
+	private Integer Num_expediente;
 	private Boolean Activo;
 	@Column(precision=4, scale=2)
-	private Double Nota_media_provisional;
-	@Column(precision=3)
-	private Double Creditos_superados;
+	private Float Nota_media_provisional;
+	@Column(precision=3, scale=1)
+	private Float Creditos_superados;
 	
 	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Titulacion titulacion;
 	
 	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Alumno alumno;
 	
 	@OneToMany(mappedBy="expediente")
@@ -32,31 +34,75 @@ public class Expediente implements Serializable {
 	
 	@OneToMany(mappedBy="expediente")
 	private List<Matricula> matriculas;
+
 	
+	public Expediente() {
+		super();
+	}
 	
-	public Double getNum_expediente() {
+	public Integer getNum_expediente() {
 		return Num_expediente;
 	}
-	public void setNum_expediente(Double num_expediente) {
+
+	public void setNum_expediente(Integer num_expediente) {
 		Num_expediente = num_expediente;
 	}
+
 	public Boolean getActivo() {
 		return Activo;
 	}
+
 	public void setActivo(Boolean activo) {
 		Activo = activo;
 	}
-	public Double getNota_media_provisional() {
+
+	public Float getNota_media_provisional() {
 		return Nota_media_provisional;
 	}
-	public void setNota_media_provisional(Double nota_media_provisional) {
+
+	public void setNota_media_provisional(Float nota_media_provisional) {
 		Nota_media_provisional = nota_media_provisional;
 	}
-	public Double getCreditos_superados() {
+
+	public Float getCreditos_superados() {
 		return Creditos_superados;
 	}
-	public void setCreditos_superados(Double creditos_superados) {
+
+	public void setCreditos_superados(Float creditos_superados) {
 		Creditos_superados = creditos_superados;
 	}
+
+	public Titulacion getTitulacion() {
+		return titulacion;
+	}
+
+	public void setTitulacion(Titulacion titulacion) {
+		this.titulacion = titulacion;
+	}
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
+	}
+
+	public List<Encuesta> getEncuestas() {
+		return encuestas;
+	}
+
+	public void setEncuestas(List<Encuesta> encuestas) {
+		this.encuestas = encuestas;
+	}
+
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+	
 
 }

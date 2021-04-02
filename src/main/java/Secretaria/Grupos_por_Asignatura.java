@@ -21,10 +21,15 @@ public class Grupos_por_Asignatura implements Serializable {
 	@ManyToMany
 	private List<Encuesta> encuestas;
 	
-	@ManyToOne
+	@Id @ManyToOne
 	private Grupo grupo;
-	@ManyToOne
+	@Id @ManyToOne
 	private Asignatura asignatura;
+	
+	
+	public Grupos_por_Asignatura() {
+		super();
+	}
 	
 	public String getCurso_Academico() {
 		return Curso_Academico;
@@ -38,5 +43,26 @@ public class Grupos_por_Asignatura implements Serializable {
 	public void setOferta(String oferta) {
 		Oferta = oferta;
 	}
+	public List<Encuesta> getEncuestas() {
+		return encuestas;
+	}
+	public void setEncuestas(List<Encuesta> encuestas) {
+		this.encuestas = encuestas;
+	}
+	public Grupo getGrupo() {
+		return grupo;
+	}
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+	public Asignatura getAsignatura() {
+		return asignatura;
+	}
+	public void setAsignatura(Asignatura asignatura) {
+		this.asignatura = asignatura;
+	}
+	
+	
+	
 	
 }

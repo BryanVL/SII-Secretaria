@@ -27,12 +27,10 @@ public class Alumno implements Serializable {
 	private String Email_institucional;
 	@Column(length=40)
 	private String Email_personal;
-	
-	@Column(precision=9)
-	private Double Telefono;
-	@Column(precision=9)
-	private Double Movil;
-	
+	@Column(length=9)
+	private Integer Telefono;
+	@Column(length=9)
+	private Integer Movil;
 	@Column(length=50)
 	private String Direccion;
 	@Column(length=40)
@@ -41,7 +39,6 @@ public class Alumno implements Serializable {
 	private String Provincia;
 	@Column(precision=5)
 	private Double CP;
-	
 	@Column(length=40)
 	private String Usuario;
 
@@ -49,6 +46,10 @@ public class Alumno implements Serializable {
 	@OneToMany(mappedBy="alumno")
 	private List<Expediente> expedientes;
 	
+	
+	public Alumno() {
+		super();
+	}
 	
 	public Long getID() {
 		return ID;
@@ -106,19 +107,19 @@ public class Alumno implements Serializable {
 		Email_personal = email_personal;
 	}
 
-	public Double getTelefono() {
+	public Integer getTelefono() {
 		return Telefono;
 	}
 
-	public void setTelefono(Double telefono) {
+	public void setTelefono(Integer telefono) {
 		Telefono = telefono;
 	}
 
-	public Double getMovil() {
+	public Integer getMovil() {
 		return Movil;
 	}
 
-	public void setMovil(Double movil) {
+	public void setMovil(Integer movil) {
 		Movil = movil;
 	}
 
@@ -160,6 +161,14 @@ public class Alumno implements Serializable {
 
 	public void setUsuario(String usuario) {
 		Usuario = usuario;
+	}
+
+	public List<Expediente> getExpedientes() {
+		return expedientes;
+	}
+
+	public void setExpedientes(List<Expediente> expedientes) {
+		this.expedientes = expedientes;
 	}
 
 	

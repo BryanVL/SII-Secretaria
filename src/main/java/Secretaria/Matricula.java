@@ -21,8 +21,8 @@ public class Matricula implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=false)
 	private Date Fecha_de_matricula;
-	@Column(precision=10)
-	private Double Num_Archivo;
+	@Column(length=10)
+	private Integer Num_Archivo;
 	@Column(length=6)
 	private String Turno_Preferente;
 	@Column(length=2)
@@ -32,45 +32,79 @@ public class Matricula implements Serializable {
 	private List<Asignaturas_Matricula> AsigMat;
 	
 	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Expediente expediente;
+
 	
+	public Matricula() {
+		super();
+	}
 	
 	public String getCurso_academico() {
 		return Curso_academico;
 	}
+
 	public void setCurso_academico(String curso_academico) {
 		Curso_academico = curso_academico;
 	}
+
 	public String getEstado() {
 		return Estado;
 	}
+
 	public void setEstado(String estado) {
 		Estado = estado;
 	}
+
 	public Date getFecha_de_matricula() {
 		return Fecha_de_matricula;
 	}
+
 	public void setFecha_de_matricula(Date fecha_de_matricula) {
 		Fecha_de_matricula = fecha_de_matricula;
 	}
-	public Double getNum_Archivo() {
+
+	public Integer getNum_Archivo() {
 		return Num_Archivo;
 	}
-	public void setNum_Archivo(Double num_Archivo) {
+
+	public void setNum_Archivo(Integer num_Archivo) {
 		Num_Archivo = num_Archivo;
 	}
+
 	public String getTurno_Preferente() {
 		return Turno_Preferente;
 	}
+
 	public void setTurno_Preferente(String turno_Preferente) {
 		Turno_Preferente = turno_Preferente;
 	}
+
 	public String getNuevo_Ingreso() {
 		return Nuevo_Ingreso;
 	}
+
 	public void setNuevo_Ingreso(String nuevo_Ingreso) {
 		Nuevo_Ingreso = nuevo_Ingreso;
 	}
+
+	public List<Asignaturas_Matricula> getAsigMat() {
+		return AsigMat;
+	}
+
+	public void setAsigMat(List<Asignaturas_Matricula> asigMat) {
+		AsigMat = asigMat;
+	}
+
+	public Expediente getExpediente() {
+		return expediente;
+	}
+
+	public void setExpediente(Expediente expediente) {
+		this.expediente = expediente;
+	}
+	
+	
 	
 	
 }

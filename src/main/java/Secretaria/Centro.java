@@ -14,21 +14,26 @@ public class Centro implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer ID;
+	private Long ID;
 	@Column(unique=true, length=80, nullable=false)
 	private String Nombre;
 	@Column(length=300, nullable=false)
 	private String Direccion;
-	@Column(precision=9)
-	private Double TLF_Conserjeria;
+	@Column(length=9)
+	private Integer TLF_Conserjeria;
 	
 	@ManyToMany
 	private List<Titulacion> titulaciones;
 	
-	public Integer getID() {
+	
+	public Centro() {
+		super();
+	}
+	
+	public Long getID() {
 		return ID;
 	}
-	public void setID(Integer iD) {
+	public void setID(Long iD) {
 		ID = iD;
 	}
 	public String getNombre() {
@@ -43,11 +48,17 @@ public class Centro implements Serializable {
 	public void setDireccion(String direccion) {
 		Direccion = direccion;
 	}
-	public Double getTLF_Conserjeria() {
+	public Integer getTLF_Conserjeria() {
 		return TLF_Conserjeria;
 	}
-	public void setTLF_Conserjeria(Double tLF_Conserjeria) {
+	public void setTLF_Conserjeria(Integer tLF_Conserjeria) {
 		TLF_Conserjeria = tLF_Conserjeria;
+	}
+	public List<Titulacion> getTitulaciones() {
+		return titulaciones;
+	}
+	public void setTitulaciones(List<Titulacion> titulaciones) {
+		this.titulaciones = titulaciones;
 	}
 	
 }

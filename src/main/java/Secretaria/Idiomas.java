@@ -17,7 +17,9 @@ public class Idiomas implements Serializable {
 	@Id
 	@Column(length=20)
 	private String Nombre;
+	
 	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Asignatura asignatura;
 	
 	

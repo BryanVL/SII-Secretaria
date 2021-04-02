@@ -1,13 +1,14 @@
 package Secretaria;
 
-
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Embeddable
-public class ClasePK {
+public class ClasePK implements Serializable {
 
 	/**
 	 * 
@@ -18,6 +19,7 @@ public class ClasePK {
 	private Date Dia;
 	@Temporal(TemporalType.TIME)
 	private Date Hora_inicio;
+	
 	
 	public Date getDia() {
 		return Dia;
@@ -31,6 +33,5 @@ public class ClasePK {
 	public void setHora_inicio(Date hora_inicio) {
 		Hora_inicio = hora_inicio;
 	}
-	
 	
 }

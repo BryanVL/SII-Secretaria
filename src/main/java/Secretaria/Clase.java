@@ -15,31 +15,59 @@ public class Clase implements Serializable {
 	
 	/*@EmbeddedId
 	private ClasePK id;*/
-	
 	@Id
-	private long id;
-	
+	@Temporal(TemporalType.DATE)
+	private Date Dia;
+	@Id
+	@Temporal(TemporalType.TIME)
+	private Date Hora_inicio;
+
 	@Temporal(TemporalType.TIME)
 	private Date Hora_fin;
 	
 	@ManyToOne
+	@JoinColumn(nullable=false)
 	private Asignatura asignatura;
-	
-	@Id @ManyToOne
+
+	@ManyToOne @Id
 	private Grupo grupo;
+
 	
-	public long getId() {
+	public Clase() {
+		super();
+	}
+	
+	/*public ClasePK getId() {
 		return id;
 	}
-	public void setId(long id) {
+
+	public void setId(ClasePK id) {
 		this.id = id;
-	}
+	}*/
+	
 	
 	public Date getHora_fin() {
 		return Hora_fin;
 	}
+
 	public void setHora_fin(Date hora_fin) {
 		Hora_fin = hora_fin;
+	}
+
+	public Asignatura getAsignatura() {
+		return asignatura;
+	}
+
+	public void setAsignatura(Asignatura asignatura) {
+		this.asignatura = asignatura;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 	
 	
