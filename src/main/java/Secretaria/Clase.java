@@ -14,8 +14,8 @@ public class Clase implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/*@EmbeddedId
-	private ClasePK id;
-	*/
+	private ClasePK id;*/
+	
 	@Id
 	private long id;
 	
