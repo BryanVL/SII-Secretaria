@@ -69,6 +69,43 @@ public class Clase implements Serializable {
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Dia == null) ? 0 : Dia.hashCode());
+		result = prime * result + ((Hora_inicio == null) ? 0 : Hora_inicio.hashCode());
+		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Clase other = (Clase) obj;
+		if (Dia == null) {
+			if (other.Dia != null)
+				return false;
+		} else if (!Dia.equals(other.Dia))
+			return false;
+		if (Hora_inicio == null) {
+			if (other.Hora_inicio != null)
+				return false;
+		} else if (!Hora_inicio.equals(other.Hora_inicio))
+			return false;
+		if (grupo == null) {
+			if (other.grupo != null)
+				return false;
+		} else if (!grupo.equals(other.grupo))
+			return false;
+		return true;
+	}
 	
 	
 }
