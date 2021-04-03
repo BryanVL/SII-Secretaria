@@ -222,6 +222,34 @@ public class Asignatura implements Serializable {
 		this.optativa = optativa;
 	}
 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Referencia == null) ? 0 : Referencia.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Asignatura other = (Asignatura) obj;
+		if (Referencia == null) {
+			if (other.Referencia != null)
+				return false;
+		} else if (!Referencia.equals(other.Referencia))
+			return false;
+		return true;
+	}
+	
+
 	
    
 }

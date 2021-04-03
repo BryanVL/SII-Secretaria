@@ -111,6 +111,33 @@ public class Titulacion implements Serializable {
 		this.centros = centros;
 	}
 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Codigo == null) ? 0 : Codigo.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Titulacion other = (Titulacion) obj;
+		if (Codigo == null) {
+			if (other.Codigo != null)
+				return false;
+		} else if (!Codigo.equals(other.Codigo))
+			return false;
+		return true;
+	}
+
 	
    
 }
