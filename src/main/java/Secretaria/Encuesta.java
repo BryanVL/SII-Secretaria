@@ -52,6 +52,31 @@ public class Encuesta implements Serializable {
 	public void setGrAsig(List<Grupos_por_Asignatura> grAsig) {
 		GrAsig = grAsig;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Fecha_envio == null) ? 0 : Fecha_envio.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Encuesta other = (Encuesta) obj;
+		if (Fecha_envio == null) {
+			if (other.Fecha_envio != null)
+				return false;
+		} else if (!Fecha_envio.equals(other.Fecha_envio))
+			return false;
+		return true;
+	}
 	
 	
 }

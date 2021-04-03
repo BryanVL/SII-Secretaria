@@ -43,6 +43,31 @@ public class Optativa implements Serializable {
 	public void setMencion(String mencion) {
 		Mencion = mencion;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((asignatura == null) ? 0 : asignatura.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Optativa other = (Optativa) obj;
+		if (asignatura == null) {
+			if (other.asignatura != null)
+				return false;
+		} else if (!asignatura.equals(other.asignatura))
+			return false;
+		return true;
+	}
 	
 	
 
