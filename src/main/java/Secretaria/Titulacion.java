@@ -17,8 +17,8 @@ public class Titulacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(precision=4)
-	private Double Codigo;
+	@Column(length=4)
+	private Integer Codigo;
 	@Column(length=20, nullable=false)
 	private String Nombre;
 	@Column(precision=3, nullable=false)
@@ -42,12 +42,12 @@ public class Titulacion implements Serializable {
 	}
 
 
-	public Double getCodigo() {
+	public Integer getCodigo() {
 		return Codigo;
 	}
 
 
-	public void setCodigo(Double codigo) {
+	public void setCodigo(Integer codigo) {
 		Codigo = codigo;
 	}
 

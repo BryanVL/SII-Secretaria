@@ -14,8 +14,9 @@ public class Matricula implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id @Column(length=10)
-	private String Curso_academico;
+	@EmbeddedId
+	private Matricula_PK id;
+	
 	@Column(length=10, nullable=false)
 	private String Estado;
 	@Temporal(TemporalType.DATE)
@@ -31,87 +32,104 @@ public class Matricula implements Serializable {
 	@OneToMany(mappedBy="matricula")
 	private List<Asignaturas_Matricula> AsigMat;
 	
+	@MapsId("idExp")
 	@ManyToOne
-	@JoinColumn(nullable=false)
 	private Expediente expediente;
 
 	
 	public Matricula() {
 		super();
 	}
-	
-	public String getCurso_academico() {
-		return Curso_academico;
+
+
+	public Matricula_PK getId() {
+		return id;
 	}
 
-	public void setCurso_academico(String curso_academico) {
-		Curso_academico = curso_academico;
+
+	public void setId(Matricula_PK id) {
+		this.id = id;
 	}
+
 
 	public String getEstado() {
 		return Estado;
 	}
 
+
 	public void setEstado(String estado) {
 		Estado = estado;
 	}
+
 
 	public Date getFecha_de_matricula() {
 		return Fecha_de_matricula;
 	}
 
+
 	public void setFecha_de_matricula(Date fecha_de_matricula) {
 		Fecha_de_matricula = fecha_de_matricula;
 	}
+
 
 	public Integer getNum_Archivo() {
 		return Num_Archivo;
 	}
 
+
 	public void setNum_Archivo(Integer num_Archivo) {
 		Num_Archivo = num_Archivo;
 	}
+
 
 	public String getTurno_Preferente() {
 		return Turno_Preferente;
 	}
 
+
 	public void setTurno_Preferente(String turno_Preferente) {
 		Turno_Preferente = turno_Preferente;
 	}
+
 
 	public String getNuevo_Ingreso() {
 		return Nuevo_Ingreso;
 	}
 
+
 	public void setNuevo_Ingreso(String nuevo_Ingreso) {
 		Nuevo_Ingreso = nuevo_Ingreso;
 	}
+
 
 	public List<Asignaturas_Matricula> getAsigMat() {
 		return AsigMat;
 	}
 
+
 	public void setAsigMat(List<Asignaturas_Matricula> asigMat) {
 		AsigMat = asigMat;
 	}
+
 
 	public Expediente getExpediente() {
 		return expediente;
 	}
 
+
 	public void setExpediente(Expediente expediente) {
 		this.expediente = expediente;
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Curso_academico == null) ? 0 : Curso_academico.hashCode());
-		result = prime * result + ((expediente == null) ? 0 : expediente.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -122,18 +140,15 @@ public class Matricula implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Matricula other = (Matricula) obj;
-		if (Curso_academico == null) {
-			if (other.Curso_academico != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Curso_academico.equals(other.Curso_academico))
-			return false;
-		if (expediente == null) {
-			if (other.expediente != null)
-				return false;
-		} else if (!expediente.equals(other.expediente))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	

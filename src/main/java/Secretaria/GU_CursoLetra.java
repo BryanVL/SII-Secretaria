@@ -6,15 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class GU_CursoLetra {
+public class GU_CursoLetra implements Serializable {
 
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
 	
-	@Column(length=1)
+	@Column(length=1, nullable=false)
 	private Integer Curso;
-	@Column(length=1)
+	@Column(length=1, nullable=false)
 	private String Letra;
 	
 	

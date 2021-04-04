@@ -8,7 +8,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Embeddable
-public class ClasePK implements Serializable {
+public class Clase_PK implements Serializable {
 
 	/**
 	 * 
@@ -19,7 +19,11 @@ public class ClasePK implements Serializable {
 	private Date Dia;
 	@Temporal(TemporalType.TIME)
 	private Date Hora_inicio;
+	private Long idG;
 	
+	public Clase_PK() {
+		super();
+	}
 	
 	public Date getDia() {
 		return Dia;
@@ -33,14 +37,23 @@ public class ClasePK implements Serializable {
 	public void setHora_inicio(Date hora_inicio) {
 		Hora_inicio = hora_inicio;
 	}
+	public Long getIdG() {
+		return idG;
+	}
+	public void setIdG(Long idG) {
+		this.idG = idG;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((Dia == null) ? 0 : Dia.hashCode());
 		result = prime * result + ((Hora_inicio == null) ? 0 : Hora_inicio.hashCode());
+		result = prime * result + ((idG == null) ? 0 : idG.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -49,7 +62,7 @@ public class ClasePK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ClasePK other = (ClasePK) obj;
+		Clase_PK other = (Clase_PK) obj;
 		if (Dia == null) {
 			if (other.Dia != null)
 				return false;
@@ -60,7 +73,14 @@ public class ClasePK implements Serializable {
 				return false;
 		} else if (!Hora_inicio.equals(other.Hora_inicio))
 			return false;
+		if (idG == null) {
+			if (other.idG != null)
+				return false;
+		} else if (!idG.equals(other.idG))
+			return false;
 		return true;
 	}
+	
+	
 	
 }

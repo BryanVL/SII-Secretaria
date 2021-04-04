@@ -14,7 +14,7 @@ public class Encuesta implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id @Temporal(TemporalType.TIME)
+	@Id @Temporal(TemporalType.DATE)
 	private Date Fecha_envio;
 	
 	@ManyToOne

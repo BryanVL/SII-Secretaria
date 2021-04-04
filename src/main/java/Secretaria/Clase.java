@@ -13,23 +13,17 @@ public class Clase implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	/*@EmbeddedId
-	private ClasePK id;*/
-	@Id
-	@Temporal(TemporalType.DATE)
-	private Date Dia;
-	@Id
-	@Temporal(TemporalType.TIME)
-	private Date Hora_inicio;
+	@EmbeddedId
+	private Clase_PK id;
 
 	@Temporal(TemporalType.TIME)
 	private Date Hora_fin;
 	
 	@ManyToOne
-	@JoinColumn(nullable=false)
 	private Asignatura asignatura;
 
-	@ManyToOne @Id
+	@MapsId("idG")
+	@ManyToOne
 	private Grupo grupo;
 
 	
@@ -37,13 +31,13 @@ public class Clase implements Serializable {
 		super();
 	}
 	
-	/*public ClasePK getId() {
+	public Clase_PK getId() {
 		return id;
 	}
 
-	public void setId(ClasePK id) {
+	public void setId(Clase_PK id) {
 		this.id = id;
-	}*/
+	}
 	
 	
 	public Date getHora_fin() {
@@ -74,9 +68,7 @@ public class Clase implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Dia == null) ? 0 : Dia.hashCode());
-		result = prime * result + ((Hora_inicio == null) ? 0 : Hora_inicio.hashCode());
-		result = prime * result + ((grupo == null) ? 0 : grupo.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -89,23 +81,13 @@ public class Clase implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Clase other = (Clase) obj;
-		if (Dia == null) {
-			if (other.Dia != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Dia.equals(other.Dia))
-			return false;
-		if (Hora_inicio == null) {
-			if (other.Hora_inicio != null)
-				return false;
-		} else if (!Hora_inicio.equals(other.Hora_inicio))
-			return false;
-		if (grupo == null) {
-			if (other.grupo != null)
-				return false;
-		} else if (!grupo.equals(other.grupo))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
+
 	
 }

@@ -16,7 +16,6 @@ public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ID")
 	private Long ID;
 	@Embedded @Column(unique=true, nullable=false)
 	private GU_CursoLetra cl;
@@ -43,8 +42,6 @@ public class Grupo implements Serializable {
 	
 	@OneToMany(mappedBy="grupo")
 	private List<Clase> clases;
-	
-	
 	
 	@OneToMany(mappedBy="grupo")
 	private List<Grupos_por_Asignatura> GrAsig;
@@ -182,11 +179,6 @@ public class Grupo implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 	
 
 }
