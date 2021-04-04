@@ -202,6 +202,32 @@ public class Alumno implements Serializable {
 		return true;
 	}
 
+//	@Override
+//	public String toString() {
+//		StringJoiner sj = new StringJoiner(", ","Alumno [","]");
+//		if(ID != null) 					{ sj.add("ID=" + ID);}
+//		if(DNI != null) 				{ sj.add("DNI=" + DNI);}
+//		if(Nombre != null) 				{ sj.add("Nombre=" + Nombre);}
+//		if(Apellido1 != null) 			{ sj.add("Apellido1=" + Apellido1);}
+//		if(Apellido2 != null) 			{ sj.add("Apellido2=" + Apellido2);}
+//		if(Email_institucional != null) { sj.add("Email_institucional=" + Email_institucional);}
+//		if(Email_personal != null) 		{ sj.add("Email_personal=" + Email_personal);}
+//		if(Telefono != null)			{ sj.add("Telefono=" + Telefono);}
+//		if(Movil != null) 				{ sj.add("Movil=" + Movil);}
+//		if(Direccion != null) 			{ sj.add("Direccion=" + Direccion);}
+//		if(Localidad != null) 			{ sj.add("Localidad=" + Localidad);}
+//		if(Provincia != null) 			{ sj.add("Provincia=" + Provincia);}
+//		if(Usuario != null) 			{ sj.add("Usuario=" + Usuario);}
+//		if(expedientes != null) {
+//			StringJoiner sj2 = new StringJoiner(", ","Expedientes=(",")");
+//			for(Expediente e : expedientes) {
+//				if(e.getNum_expediente() != null) { sj.add(e.getNum_expediente().toString());}
+//			}
+//			sj.add(sj2.toString());
+//		}
+//		return sj.toString();
+//	}
+	
 	@Override
 	public String toString() {
 		String res = "Alumno [" + (ID != null ? "ID=" + ID : "") + (DNI != null ? ", DNI=" + DNI : "")
