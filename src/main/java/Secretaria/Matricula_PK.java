@@ -17,12 +17,6 @@ public class Matricula_PK implements Serializable {
 	@Column(length=9)
 	private Integer idExp;
 	
-	//Quitar este constructor
-	public Matricula_PK(String curso, Integer id) {
-		Curso_academico = curso;
-		idExp = id;
-	}
-	
 	public Matricula_PK() {
 		super();
 	}

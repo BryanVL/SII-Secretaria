@@ -16,13 +16,6 @@ public class Asignaturas_Matricula_PK implements Serializable {
 	@Column(length=5)
 	private Integer idAsig;
 	
-	
-	//Quitar este constructor
-	public Asignaturas_Matricula_PK(Matricula_PK mat, Integer ida) {
-		idM = mat;
-		idAsig = ida;
-	}
-	
 	public Asignaturas_Matricula_PK() {
 		super();
 	}

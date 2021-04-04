@@ -35,12 +35,6 @@ public class Expediente implements Serializable {
 	
 	@OneToMany(mappedBy="expediente", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Matricula> matriculas;
-
-	
-	//Quitar este constructor
-	public Expediente(Integer NExp) {
-		Num_expediente = NExp;
-	}
 	
 	public Expediente() {
 		super();

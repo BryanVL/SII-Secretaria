@@ -53,12 +53,6 @@ public class Alumno implements Serializable {
 	@OneToMany(mappedBy="alumno", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Expediente> expedientes;
 	
-	//Quitar este constructor
-	public Alumno(Long id, String dni) {
-		ID = id;
-		DNI = dni;
-	}
-	
 	public Alumno() {
 		super();
 	}

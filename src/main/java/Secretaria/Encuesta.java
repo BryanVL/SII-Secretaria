@@ -3,6 +3,7 @@ package Secretaria;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -23,12 +24,6 @@ public class Encuesta implements Serializable {
 	
 	@ManyToMany(mappedBy="encuestas", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupos_por_Asignatura> GrAsig;
-
-	
-	//Quitar este constructor
-	public Encuesta(Date fecha) {
-		Fecha_envio = fecha;
-	}
 	
 	public Encuesta() {
 		super();
@@ -81,6 +76,21 @@ public class Encuesta implements Serializable {
 		} else if (!Fecha_envio.equals(other.Fecha_envio))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		String res = "Encuesta [" + (Fecha_envio != null ? "Fecha_envio=" + Fecha_envio + ", " : "")
+				+ (expediente != null ? "expediente=" + expediente.getNum_expediente() + ", " : "");
+		StringJoiner sj = new StringJoiner(", ", "(",")");
+		if(GrAsig != null) {
+			res += ", Grupos_por_Asignatura=";
+			for(Grupos_por_Asignatura g : GrAsig) {
+				sj.add(g.getId() != null ? g.getId().toString() : "");
+			}
+			res += sj.toString();
+		}
+		return res + "]";
 	}
 	
 	

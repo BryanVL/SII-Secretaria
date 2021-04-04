@@ -3,6 +3,7 @@ package Secretaria;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -35,12 +36,6 @@ public class Matricula implements Serializable {
 	@MapsId("idExp")
 	@ManyToOne
 	private Expediente expediente;
-
-	
-	//Quitar este constructor
-	public Matricula(String curso, Integer ide) {
-		id = new Matricula_PK(curso,ide);
-	}
 	
 	public Matricula() {
 		super();
@@ -152,10 +147,23 @@ public class Matricula implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		String res = "Matricula [" + (id != null ? "id=" + id.toString() : "") + (Estado != null ? ", Estado=" + Estado : "")
+				+ (Fecha_de_matricula != null ? ", Fecha_de_matricula=" + Fecha_de_matricula : "")
+				+ (Num_Archivo != null ? ", Num_Archivo=" + Num_Archivo : "")
+				+ (Turno_Preferente != null ? ", Turno_Preferente=" + Turno_Preferente : "")
+				+ (Nuevo_Ingreso != null ? ", Nuevo_Ingreso=" + Nuevo_Ingreso : "");
+		StringJoiner sj = new StringJoiner(", ", "(",")");
+		if(AsigMat != null) {
+			res += ", Asignaturas_Matricula=";
+			for(Asignaturas_Matricula a : AsigMat) {
+				sj.add(a.getId() != null ? a.getId().toString() : "");
+			}
+			res += sj.toString();
+		}
+			res	+= (expediente != null ? ", expediente=" + expediente.getNum_expediente() : "") + "]";
+		return res;
+	}
 }

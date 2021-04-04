@@ -90,5 +90,13 @@ public class Clase implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Clase [" + (id != null ? "id=" + id.toString() + ", " : "")
+				+ (Hora_fin != null ? "Hora_fin=" + Hora_fin + ", " : "")
+				+ (asignatura != null ? "asignatura=" + asignatura.getReferencia() + ", " : "")
+				+ (grupo != null ? "grupo=" + grupo.getID() : "") + "]";
+	}
+
 	
 }

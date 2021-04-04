@@ -103,6 +103,14 @@ public class Asignaturas_Matricula implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Asignaturas_Matricula [" + (id != null ? "id=" + id.toString() + ", " : "")
+				+ (grupo != null ? "grupo=" + grupo.getID() + ", " : "")
+				+ (asignatura != null ? "asignatura=" + asignatura.getReferencia() + ", " : "")
+				+ (matricula != null ? "matricula=" + matricula.getId().toString() : "") + "]";
+	}
 	
 	
 	

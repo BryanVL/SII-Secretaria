@@ -2,6 +2,7 @@ package Secretaria;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -109,6 +110,24 @@ public class Grupos_por_Asignatura implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		String res = "Grupos_por_Asignatura [" + (id != null ? "id=" + id.toString() : "")
+				+ (Oferta != null ? ", Oferta=" + Oferta : "");
+		StringJoiner sj = new StringJoiner(", ", "(",")");
+		if(encuestas != null) {
+			res += ", Encuestas=";
+			for(Encuesta e : encuestas) {
+				sj.add(e.getFecha_envio() != null ? e.getFecha_envio().toString() : "");
+			}
+			res += sj.toString();
+		}
+			res	+= (grupo != null ? ", grupo=" + grupo.getID() : "")
+				+ (asignatura != null ? ", asignatura=" + asignatura.getReferencia() : "") + "]";
+		return res;
 	}
 	
 	

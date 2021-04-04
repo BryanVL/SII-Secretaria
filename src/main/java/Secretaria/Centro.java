@@ -26,7 +26,6 @@ public class Centro implements Serializable {
 	@ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Titulacion> titulaciones;
 	
-	
 	public Centro() {
 		super();
 	}

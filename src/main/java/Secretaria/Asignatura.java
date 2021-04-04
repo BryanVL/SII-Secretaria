@@ -2,6 +2,7 @@ package Secretaria;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -248,10 +249,55 @@ public class Asignatura implements Serializable {
 			return false;
 		return true;
 	}
-	
 
+
+	@Override
+	public String toString() {
+		String res = "Asignatura [" + (Referencia != null ? "Referencia=" + Referencia  : "")
+				+ (Codigo != null ? ", Codigo=" + Codigo  : "")
+				+ (Creditos_total != null ? ", Creditos_total=" + Creditos_total : "")
+				+ (Creditos_teoria != null ? ", Creditos_teoria=" + Creditos_teoria : "")
+				+ (Ofertada != null ? ", Ofertada=" + Ofertada : "")
+				+ (Nombre != null ? ", Nombre=" + Nombre : "") + (Curso != null ? "Curso=" + Curso : "")
+				+ (Caracter != null ? ", Caracter=" + Caracter : "")
+				+ (Duracion != null ? ", Duracion=" + Duracion : "")
+				+ (Unidad_temporal != null ? ", Unidad_temporal=" + Unidad_temporal : "");
+		StringJoiner sj = new StringJoiner(", ", "(",")");
+		if(idiomas != null) {
+			res += ", Idiomas=";
+			for(Idiomas i : idiomas) {
+				sj.add(i.getNombre() != null ? i.getNombre().toString() : "");
+			}
+			res += sj.toString();
+		}
+		res += (titulacion != null ? "titulacion=" + titulacion + ", " : "");
+		StringJoiner sj2 = new StringJoiner(", ", "(",")");
+		if(clases != null) {
+			res += ", Clases=";
+			for(Clase c : clases) {
+				sj2.add(c.getId() != null ? c.getId().toString() : "");
+			}
+			res += sj2.toString();
+		}
+		StringJoiner sj3 = new StringJoiner(", ", "(",")");
+		if(GrAsig != null) {
+			res += ", Grupos_por_Asignatura=";
+			for(Grupos_por_Asignatura g : GrAsig) {
+				sj3.add(g.getId() != null ? g.getId().toString() : "");
+			}
+			res += sj3.toString();
+		}
+		StringJoiner sj4 = new StringJoiner(", ", "(",")");
+		if(AsigMat != null) {
+			res += ", Asignaturas_Matricula=";
+			for(Asignaturas_Matricula a : AsigMat) {
+				sj4.add(a.getId() != null ? a.getId().toString() : "");
+			}
+			res += sj4.toString();
+		}
+		return res + (optativa != null ? ", optativa=" + optativa : "") + "]";
+	}
 	
-   
 }
 
 

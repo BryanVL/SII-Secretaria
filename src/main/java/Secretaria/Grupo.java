@@ -2,6 +2,7 @@ package Secretaria;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -38,7 +39,7 @@ public class Grupo implements Serializable {
 	private Grupo ID1;
 	
 	@OneToMany(mappedBy="grupo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
-	private List<Asignaturas_Matricula> AsMat;
+	private List<Asignaturas_Matricula> AsigMat;
 	
 	@OneToMany(mappedBy="grupo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Clase> clases;
@@ -131,12 +132,12 @@ public class Grupo implements Serializable {
 		ID1 = iD1;
 	}
 
-	public List<Asignaturas_Matricula> getAsMat() {
-		return AsMat;
+	public List<Asignaturas_Matricula> getAsigMat() {
+		return AsigMat;
 	}
 
-	public void setAsMat(List<Asignaturas_Matricula> asMat) {
-		AsMat = asMat;
+	public void setAsigMat(List<Asignaturas_Matricula> AsigMat) {
+		this.AsigMat = AsigMat;
 	}
 
 	public List<Clase> getClases() {
@@ -179,6 +180,53 @@ public class Grupo implements Serializable {
 			return false;
 		return true;
 	}
-	
 
+	@Override
+	public String toString() {
+		String res = "Grupo [" + (ID != null ? "ID=" + ID : "") + (cl != null ? cl.toString() : "")
+				+ (Turno_Mañana_Tarde != null ? ", Turno_Mañana_Tarde=" + Turno_Mañana_Tarde : "")
+				+ (Ingles != null ? ", Ingles=" + Ingles : "")
+				+ (Visible != null ? ", Visible=" + Visible : "")
+				+ (Asignar != null ? ", Asignar=" + Asignar : "")
+				+ (Plazas != null ? ", Plazas=" + Plazas : "")
+				+ (titulacion != null ? ", titulacion=" + titulacion.getCodigo() : "");	
+		StringJoiner sj = new StringJoiner(", ", "(",")");
+		if(grupos != null) {
+			res += ", Grupos=";
+			for(Grupo g : grupos) {
+				sj.add(g.getID() != null ? g.getID().toString() : "");
+			}
+			res += sj.toString();
+		}
+		
+		
+			res	+= (ID1 != null ? ", ID1=" + ID1 : "");        //DUDA
+			
+			
+		StringJoiner sj2 = new StringJoiner(", ", "(",")");
+		if(AsigMat != null) {
+			res += ", Asignaturas_Matricula=";
+			for(Asignaturas_Matricula a : AsigMat) {
+				sj2.add(a.getId() != null ? a.getId().toString() : "");
+			}
+			res += sj2.toString();
+		}		
+		StringJoiner sj3 = new StringJoiner(", ", "(",")");
+		if(clases != null) {
+			res += ", Clases=";
+			for(Clase c : clases) {
+				sj3.add(c.getId() != null ? c.getId().toString() : "");
+			}
+			res += sj3.toString();
+		}
+		StringJoiner sj4 = new StringJoiner(", ", "(",")");
+		if(GrAsig != null) {
+			res += ", Grupos_por_Asignatura=";
+			for(Grupos_por_Asignatura g : GrAsig) {
+				sj4.add(g.getId() != null ? g.getId().toString() : "");
+			}
+			res += sj4.toString();
+		}
+		return res + "]";
+	}
 }
