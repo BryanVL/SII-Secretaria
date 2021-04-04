@@ -20,6 +20,7 @@ public class Clase implements Serializable {
 	private Date Hora_fin;
 	
 	@ManyToOne
+	@Column(nullable=false)
 	private Asignatura asignatura;
 
 	@MapsId("idG")
