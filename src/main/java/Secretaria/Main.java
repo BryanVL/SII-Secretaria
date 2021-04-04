@@ -13,7 +13,7 @@ public class Main {
 		 
 		 em.close();
 		 emf.close();
-		 System.out.println("Tablas creadas");
+		 System.out.println("Tablas y esquemas DDL creados");
 	}
 
 }
