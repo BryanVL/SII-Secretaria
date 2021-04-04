@@ -21,7 +21,7 @@ public class Encuesta implements Serializable {
 	@JoinColumn(nullable=false)
 	private Expediente expediente;
 	
-	@ManyToMany(mappedBy="encuestas")
+	@ManyToMany(mappedBy="encuestas", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupos_por_Asignatura> GrAsig;
 
 	

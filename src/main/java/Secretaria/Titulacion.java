@@ -24,13 +24,13 @@ public class Titulacion implements Serializable {
 	@Column(precision=3, nullable=false)
 	private Float Creditos;
 	
-	@OneToMany(mappedBy="titulacion")
+	@OneToMany(mappedBy="titulacion", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Asignatura> asignaturas;
 	
-	@OneToMany(mappedBy="titulacion")
+	@OneToMany(mappedBy="titulacion", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Expediente> expedientes;
 	
-	@OneToMany(mappedBy="titulacion")
+	@OneToMany(mappedBy="titulacion", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupo> grupos;
 	
 	@ManyToMany(mappedBy="titulaciones")

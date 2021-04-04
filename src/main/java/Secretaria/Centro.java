@@ -22,7 +22,7 @@ public class Centro implements Serializable {
 	@Column(length=9)
 	private Integer TLF_Conserjeria;
 	
-	@ManyToMany
+	@ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Titulacion> titulaciones;
 	
 	

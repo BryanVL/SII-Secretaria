@@ -29,10 +29,10 @@ public class Expediente implements Serializable {
 	@JoinColumn(nullable=false)
 	private Alumno alumno;
 	
-	@OneToMany(mappedBy="expediente")
+	@OneToMany(mappedBy="expediente", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Encuesta> encuestas;
 	
-	@OneToMany(mappedBy="expediente")
+	@OneToMany(mappedBy="expediente", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Matricula> matriculas;
 
 	

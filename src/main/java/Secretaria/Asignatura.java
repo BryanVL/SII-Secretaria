@@ -38,23 +38,23 @@ public class Asignatura implements Serializable {
 	private String Unidad_temporal;
 	
 	
-	@OneToMany(mappedBy="asignatura")
+	@OneToMany(mappedBy="asignatura", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Idiomas> idiomas;
 	
 	@ManyToOne
 	@JoinColumn(nullable=false)
 	private Titulacion titulacion;
 	
-	@OneToMany(mappedBy="asignatura")
+	@OneToMany(mappedBy="asignatura", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Clase> clases;
 	
-	@OneToMany(mappedBy="asignatura")
+	@OneToMany(mappedBy="asignatura", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupos_por_Asignatura> GrAsig;
 	
-	@OneToMany(mappedBy="asignatura")
+	@OneToMany(mappedBy="asignatura", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Asignaturas_Matricula> AsigMat;
 	
-	@OneToOne(mappedBy="asignatura")
+	@OneToOne(mappedBy="asignatura", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private Optativa optativa;
 
 	

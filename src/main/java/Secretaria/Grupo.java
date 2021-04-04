@@ -32,18 +32,18 @@ public class Grupo implements Serializable {
 	@JoinColumn(nullable=false)
 	private Titulacion titulacion;
 	
-	@OneToMany(mappedBy="ID1")
+	@OneToMany(mappedBy="ID1", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupo> grupos;
 	@ManyToOne
 	private Grupo ID1;
 	
-	@OneToMany(mappedBy="grupo")
+	@OneToMany(mappedBy="grupo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Asignaturas_Matricula> AsMat;
 	
-	@OneToMany(mappedBy="grupo")
+	@OneToMany(mappedBy="grupo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Clase> clases;
 	
-	@OneToMany(mappedBy="grupo")
+	@OneToMany(mappedBy="grupo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupos_por_Asignatura> GrAsig;
 
 	

@@ -43,7 +43,7 @@ public class Alumno implements Serializable {
 	private String Usuario;
 
 	
-	@OneToMany(mappedBy="alumno")
+	@OneToMany(mappedBy="alumno", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Expediente> expedientes;
 	
 	
