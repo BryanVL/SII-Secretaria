@@ -73,5 +73,12 @@ public class Idiomas implements Serializable {
 			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Idiomas [" + (Nombre != null ? "Nombre=" + Nombre + ", " : "")
+				+ (asignatura != null ? "asignatura=" + asignatura.getReferencia() : "") + "]";
+	}
    
 }

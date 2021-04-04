@@ -17,6 +17,12 @@ public class Matricula_PK implements Serializable {
 	@Column(length=9)
 	private Integer idExp;
 	
+	//Quitar este constructor
+	public Matricula_PK(String curso, Integer id) {
+		Curso_academico = curso;
+		idExp = id;
+	}
+	
 	public Matricula_PK() {
 		super();
 	}
@@ -62,6 +68,12 @@ public class Matricula_PK implements Serializable {
 		} else if (!idExp.equals(other.idExp))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "{" + (Curso_academico != null ? "Curso_academico=" + Curso_academico + ", " : "")
+				+ (idExp != null ? "idExp=" + idExp : "") + "}";
 	}
 	
 	

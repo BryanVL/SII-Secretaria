@@ -66,6 +66,12 @@ public class GU_CursoLetra implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return (Curso != null ? ", Curso=" + Curso : "")
+				+ (Letra != null ? ", Letra=" + Letra : "");
+	}
 	
 	
 }

@@ -2,8 +2,15 @@ package Secretaria;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.StringJoiner;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Alumno implements Serializable {
@@ -46,6 +53,11 @@ public class Alumno implements Serializable {
 	@OneToMany(mappedBy="alumno", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Expediente> expedientes;
 	
+	//Quitar este constructor
+	public Alumno(Long id, String dni) {
+		ID = id;
+		DNI = dni;
+	}
 	
 	public Alumno() {
 		super();
@@ -196,6 +208,31 @@ public class Alumno implements Serializable {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		String res = "Alumno [" + (ID != null ? "ID=" + ID : "") + (DNI != null ? ", DNI=" + DNI : "")
+				+ (Nombre != null ? ", Nombre=" + Nombre: "")
+				+ (Apellido1 != null ? ", Apellido1=" + Apellido1: "")
+				+ (Apellido2 != null ? ", Apellido2=" + Apellido2: "")
+				+ (Email_institucional != null ? ", Email_institucional=" + Email_institucional : "")
+				+ (Email_personal != null ? ", Email_personal=" + Email_personal : "")
+				+ (Telefono != null ? ", Telefono=" + Telefono : "")
+				+ (Movil != null ? ", Movil=" + Movil : "")
+				+ (Direccion != null ? ", Direccion=" + Direccion : "")
+				+ (Localidad != null ? ", Localidad=" + Localidad : "")
+				+ (Provincia != null ? ", Provincia=" + Provincia : "") + (CP != null ? "CP=" + CP : "")
+				+ (Usuario != null ? ", Usuario=" + Usuario : "");
+		StringJoiner sj = new StringJoiner(", ", "(",")");
+		if(expedientes != null) {
+			res += ", Expedientes=";
+			for(Expediente e : expedientes) {
+				sj.add(e.getNum_expediente() != null ? e.getNum_expediente().toString() : "");
+			}
+			res += sj.toString();
+		}
+		
+		return res + "]";
+	}
+
 }
 

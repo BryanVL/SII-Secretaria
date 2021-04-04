@@ -16,6 +16,13 @@ public class Asignaturas_Matricula_PK implements Serializable {
 	@Column(length=5)
 	private Integer idAsig;
 	
+	
+	//Quitar este constructor
+	public Asignaturas_Matricula_PK(Matricula_PK mat, Integer ida) {
+		idM = mat;
+		idAsig = ida;
+	}
+	
 	public Asignaturas_Matricula_PK() {
 		super();
 	}
@@ -61,6 +68,12 @@ public class Asignaturas_Matricula_PK implements Serializable {
 		} else if (!idM.equals(other.idM))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "{" + (idM != null ? "idM=" + idM.toString() + ", " : "")
+				+ (idAsig != null ? "idAsig=" + idAsig : "") + "}";
 	}
 	
 }

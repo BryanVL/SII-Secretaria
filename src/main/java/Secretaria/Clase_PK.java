@@ -80,6 +80,13 @@ public class Clase_PK implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "{" + (Dia != null ? "Dia=" + Dia + ", " : "")
+				+ (Hora_inicio != null ? "Hora_inicio=" + Hora_inicio + ", " : "") + (idG != null ? "idG=" + idG : "")
+				+ "}";
+	}
 	
 	
 	

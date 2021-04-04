@@ -2,6 +2,7 @@ package Secretaria;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -84,6 +85,22 @@ public class Centro implements Serializable {
 		} else if (!ID.equals(other.ID))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		String res = "Centro [" + (ID != null ? "ID=" + ID : "") + (Nombre != null ? ", Nombre=" + Nombre : "")
+				+ (Direccion != null ? ", Direccion=" + Direccion : "")
+				+ (TLF_Conserjeria != null ? ", TLF_Conserjeria=" + TLF_Conserjeria : "");
+		StringJoiner sj = new StringJoiner(", ", "(",")");
+		if(titulaciones != null) {
+			res += ", Titulaciones=";
+			for(Titulacion t : titulaciones) {
+				sj.add(t.getCodigo() != null ? t.getCodigo().toString() : "");
+			}
+			res += sj.toString();
+		}
+		return res + "]";
 	}
 	
 	

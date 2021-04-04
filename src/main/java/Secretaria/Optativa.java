@@ -68,6 +68,13 @@ public class Optativa implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Optativa [" + (asignatura != null ? "asignatura=" + asignatura.getReferencia() + ", " : "")
+				+ (Plazas != null ? "Plazas=" + Plazas + ", " : "") + (Mencion != null ? "Mencion=" + Mencion : "")
+				+ "]";
+	}
 	
 	
 

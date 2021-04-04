@@ -37,6 +37,11 @@ public class Matricula implements Serializable {
 	private Expediente expediente;
 
 	
+	//Quitar este constructor
+	public Matricula(String curso, Integer ide) {
+		id = new Matricula_PK(curso,ide);
+	}
+	
 	public Matricula() {
 		super();
 	}

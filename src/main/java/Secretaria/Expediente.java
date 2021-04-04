@@ -2,6 +2,7 @@ package Secretaria;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -35,6 +36,11 @@ public class Expediente implements Serializable {
 	@OneToMany(mappedBy="expediente", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Matricula> matriculas;
 
+	
+	//Quitar este constructor
+	public Expediente(Integer NExp) {
+		Num_expediente = NExp;
+	}
 	
 	public Expediente() {
 		super();
@@ -128,6 +134,33 @@ public class Expediente implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		String res = "Expediente [" + (Num_expediente != null ? "Num_expediente=" + Num_expediente : "")
+				+ (Activo != null ? ", Activo=" + Activo : "")
+				+ (Nota_media_provisional != null ? ", Nota_media_provisional=" + Nota_media_provisional : "")
+				+ (Creditos_superados != null ? ", Creditos_superados=" + Creditos_superados : "")
+				+ (titulacion != null ? ", Titulacion=" + titulacion.getCodigo() : "")
+				+ (alumno != null ? ", Alumno=" + alumno.getID() : "");
+		StringJoiner sj = new StringJoiner(", ", "(",")");
+		if(encuestas != null) {
+			res += ", Encuestas=";
+			for(Encuesta e : encuestas) {
+				sj.add(e.getFecha_envio() != null ? e.getFecha_envio().toString() : "");
+			}
+			res += sj.toString();
+		}
+		StringJoiner sj2 = new StringJoiner(", ", "(",")");
+		if(matriculas != null) {
+			res += ", Matriculas=";
+			for(Matricula m : matriculas) {
+				sj2.add(m.getId().toString() != null ? m.getId().toString() : "");
+			}
+			res += sj2.toString();
+		}
 	
+		return res +  "]";
+	}
 
 }

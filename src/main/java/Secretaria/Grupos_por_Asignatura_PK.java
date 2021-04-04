@@ -60,5 +60,11 @@ public class Grupos_por_Asignatura_PK implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "{" + (Curso_Academico != null ? "Curso_Academico=" + Curso_Academico + ", " : "")
+				+ (idG != null ? "idG=" + idG + ", " : "") + (idAsig != null ? "idAsig=" + idAsig : "") + "}";
+	}
 	
 }

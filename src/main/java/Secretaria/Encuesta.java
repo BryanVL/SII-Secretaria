@@ -25,6 +25,11 @@ public class Encuesta implements Serializable {
 	private List<Grupos_por_Asignatura> GrAsig;
 
 	
+	//Quitar este constructor
+	public Encuesta(Date fecha) {
+		Fecha_envio = fecha;
+	}
+	
 	public Encuesta() {
 		super();
 	}
