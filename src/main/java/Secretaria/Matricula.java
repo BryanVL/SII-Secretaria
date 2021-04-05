@@ -29,6 +29,7 @@ public class Matricula implements Serializable {
 	private String Turno_Preferente;
 	@Column(length=2)
 	private String Nuevo_Ingreso;
+	private String Listado_Asignaturas;
 	
 	@OneToMany(mappedBy="matricula")
 	private List<Asignaturas_Matricula> AsigMat;
@@ -100,7 +101,15 @@ public class Matricula implements Serializable {
 	public void setNuevo_Ingreso(String nuevo_Ingreso) {
 		Nuevo_Ingreso = nuevo_Ingreso;
 	}
+	
+	public String getListado_Asignaturas() {
+		return Listado_Asignaturas;
+	}
 
+
+	public void setListado_Asignaturas(String listado_Asignaturas) {
+		Listado_Asignaturas = listado_Asignaturas;
+	}
 
 	public List<Asignaturas_Matricula> getAsigMat() {
 		return AsigMat;
@@ -154,7 +163,8 @@ public class Matricula implements Serializable {
 				+ (Fecha_de_matricula != null ? ", Fecha_de_matricula=" + Fecha_de_matricula : "")
 				+ (Num_Archivo != null ? ", Num_Archivo=" + Num_Archivo : "")
 				+ (Turno_Preferente != null ? ", Turno_Preferente=" + Turno_Preferente : "")
-				+ (Nuevo_Ingreso != null ? ", Nuevo_Ingreso=" + Nuevo_Ingreso : "");
+				+ (Nuevo_Ingreso != null ? ", Nuevo_Ingreso=" + Nuevo_Ingreso : "")
+				+ (Listado_Asignaturas != null ? ", Listado_Asignaturas=" + Listado_Asignaturas : "");
 		StringJoiner sj = new StringJoiner(", ", "(",")");
 		if(AsigMat != null) {
 			res += ", Asignaturas_Matricula=";
@@ -166,4 +176,7 @@ public class Matricula implements Serializable {
 			res	+= (expediente != null ? ", expediente=" + expediente.getNum_expediente() : "") + "]";
 		return res;
 	}
+
+
+
 }

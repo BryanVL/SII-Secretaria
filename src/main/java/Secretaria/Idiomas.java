@@ -19,7 +19,6 @@ public class Idiomas implements Serializable {
 	private String Nombre;
 	
 	@ManyToOne
-	@JoinColumn(nullable=false)
 	private Asignatura asignatura;
 	
 	

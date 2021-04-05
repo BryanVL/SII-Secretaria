@@ -35,6 +35,7 @@ public class Titulacion implements Serializable {
 	private List<Grupo> grupos;
 	
 	@ManyToMany(mappedBy="titulaciones")
+	@JoinColumn(nullable=false)
 	private List<Centro> centros;
 	
 	public Titulacion() {

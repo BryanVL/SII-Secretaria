@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 import javax.persistence.*;
 
 @Entity
+@Table( uniqueConstraints = { @UniqueConstraint(columnNames = {"Curso","Letra"}) } )
 public class Grupo implements Serializable {
 
 
@@ -18,8 +19,12 @@ public class Grupo implements Serializable {
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long ID;
-	@Embedded @Column(unique=true, nullable=false)
-	private GU_CursoLetra cl;
+	
+	@Column(length=1, nullable=false)
+	private Integer Curso;
+	@Column(length=1, nullable=false)
+	private String Letra;
+	
 	@Column(length=6, nullable=false)
 	private String Turno_Mañana_Tarde;
 	@Column(length=2, nullable=false)
@@ -59,14 +64,23 @@ public class Grupo implements Serializable {
 	public void setID(Long iD) {
 		ID = iD;
 	}
-
-	public GU_CursoLetra getCl() {
-		return cl;
+	
+	public Integer getCurso() {
+		return Curso;
 	}
 
-	public void setCl(GU_CursoLetra cl) {
-		this.cl = cl;
+	public void setCurso(Integer curso) {
+		Curso = curso;
 	}
+
+	public String getLetra() {
+		return Letra;
+	}
+
+	public void setLetra(String letra) {
+		Letra = letra;
+	}
+
 
 	public String getTurno_Mañana_Tarde() {
 		return Turno_Mañana_Tarde;
@@ -183,7 +197,8 @@ public class Grupo implements Serializable {
 
 	@Override
 	public String toString() {
-		String res = "Grupo [" + (ID != null ? "ID=" + ID : "") + (cl != null ? cl.toString() : "")
+		String res = "Grupo [" + (ID != null ? "ID=" + ID : "") + (Curso != null ? ", Curso=" + Curso : "")
+				+ (Letra != null ? ", Letra=" + Letra : "")
 				+ (Turno_Mañana_Tarde != null ? ", Turno_Mañana_Tarde=" + Turno_Mañana_Tarde : "")
 				+ (Ingles != null ? ", Ingles=" + Ingles : "")
 				+ (Visible != null ? ", Visible=" + Visible : "")
@@ -229,4 +244,6 @@ public class Grupo implements Serializable {
 		}
 		return res + "]";
 	}
+
+
 }

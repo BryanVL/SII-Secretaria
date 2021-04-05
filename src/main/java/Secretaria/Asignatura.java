@@ -40,6 +40,7 @@ public class Asignatura implements Serializable {
 	
 	
 	@OneToMany(mappedBy="asignatura", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
+	@JoinColumn(nullable=false)
 	private List<Idiomas> idiomas;
 	
 	@ManyToOne
