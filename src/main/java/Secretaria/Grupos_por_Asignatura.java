@@ -115,24 +115,18 @@ public class Grupos_por_Asignatura implements Serializable {
 
 	@Override
 	public String toString() {
-		String res = "Grupos_por_Asignatura [" + (id != null ? "id=" + id.toString() : "")
-				+ (Oferta != null ? ", Oferta=" + Oferta : "");
-		StringJoiner sj = new StringJoiner(", ", "(",")");
+		StringJoiner sj = new StringJoiner(", ","Grupos_por_Asignatura [","]");
+		StringJoiner sj2;
+		if(id != null) 				{sj.add("id=" + id.toString());}
+		if(Oferta != null) 			{sj.add("Oferta=" + Oferta);}
 		if(encuestas != null) {
-			res += ", Encuestas=";
-			for(Encuesta e : encuestas) {
-				sj.add(e.getFecha_envio() != null ? e.getFecha_envio().toString() : "");
-			}
-			res += sj.toString();
+			sj2 = new StringJoiner(", ","Encuestas=(",")");
+			for(Encuesta e : encuestas) { if(e.getFecha_envio() != null) { sj2.add(e.getFecha_envio().toString());}}
+			sj.add(sj2.toString());
 		}
-			res	+= (grupo != null ? ", grupo=" + grupo.getID() : "")
-				+ (asignatura != null ? ", asignatura=" + asignatura.getReferencia() : "") + "]";
-		return res;
+		if(grupo != null) 			{sj.add("grupo=" + grupo.getID());}
+		if(asignatura != null) 		{sj.add("asignatura=" + asignatura.getReferencia());}
+		return sj.toString();
 	}
-	
-	
-	
-	
-	
 	
 }

@@ -1,6 +1,7 @@
 package Secretaria;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -62,11 +63,14 @@ public class Asignaturas_Matricula_PK implements Serializable {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "{" + (idM != null ? "idM=" + idM.toString() + ", " : "")
-				+ (idAsig != null ? "idAsig=" + idAsig : "") + "}";
+		StringJoiner sj = new StringJoiner(", ", "{","}");
+		if(idM != null)			{sj.add("idM=" + idM.toString());}
+		if(idAsig != null) 		{sj.add("idAsig" + idAsig);}
+		return sj.toString();
 	}
+
 	
 }

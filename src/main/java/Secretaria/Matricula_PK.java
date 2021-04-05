@@ -1,6 +1,7 @@
 package Secretaria;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -66,9 +67,10 @@ public class Matricula_PK implements Serializable {
 
 	@Override
 	public String toString() {
-		return "{" + (Curso_academico != null ? "Curso_academico=" + Curso_academico + ", " : "")
-				+ (idExp != null ? "idExp=" + idExp : "") + "}";
+		StringJoiner sj = new StringJoiner(", ", "{", "}");
+		if(Curso_academico != null)		{sj.add("Curso_Academico=" + Curso_academico);}
+		if(idExp != null)				{sj.add("idExp=" + idExp);}
+		return sj.toString();
 	}
-	
 	
 }

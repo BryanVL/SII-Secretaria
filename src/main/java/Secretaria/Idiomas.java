@@ -1,6 +1,8 @@
 package Secretaria;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
+
 import javax.persistence.*;
 
 /**
@@ -73,11 +75,12 @@ public class Idiomas implements Serializable {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Idiomas [" + (Nombre != null ? "Nombre=" + Nombre + ", " : "")
-				+ (asignatura != null ? "asignatura=" + asignatura.getReferencia() : "") + "]";
+		StringJoiner sj = new StringJoiner(", ","Idiomas [","]");
+		if(Nombre != null) 			{sj.add("Nombre=" + Nombre);}
+		if(asignatura != null) 		{sj.add("asignatura=" + asignatura.getReferencia());}
+		return sj.toString();
 	}
-   
+
 }

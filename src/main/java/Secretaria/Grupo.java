@@ -197,53 +197,39 @@ public class Grupo implements Serializable {
 
 	@Override
 	public String toString() {
-		String res = "Grupo [" + (ID != null ? "ID=" + ID : "") + (Curso != null ? ", Curso=" + Curso : "")
-				+ (Letra != null ? ", Letra=" + Letra : "")
-				+ (Turno_Mañana_Tarde != null ? ", Turno_Mañana_Tarde=" + Turno_Mañana_Tarde : "")
-				+ (Ingles != null ? ", Ingles=" + Ingles : "")
-				+ (Visible != null ? ", Visible=" + Visible : "")
-				+ (Asignar != null ? ", Asignar=" + Asignar : "")
-				+ (Plazas != null ? ", Plazas=" + Plazas : "")
-				+ (titulacion != null ? ", titulacion=" + titulacion.getCodigo() : "");	
-		StringJoiner sj = new StringJoiner(", ", "(",")");
+		StringJoiner sj = new StringJoiner(", ","Grupo [","]");
+		StringJoiner sj2;
+		if(ID != null) 					{sj.add("ID=" + ID);}
+		if(Curso != null) 				{sj.add("Curso=" + Curso);}
+		if(Letra != null) 				{sj.add("Letra=" + Letra);}
+		if(Turno_Mañana_Tarde != null) 	{sj.add("Turno_Mañana_Tarde=" + Turno_Mañana_Tarde);}
+		if(Ingles != null) 				{sj.add("Ingles=" + Ingles);}
+		if(Visible != null) 			{sj.add("Visible=" + Visible);}
+		if(Asignar != null) 			{sj.add("Asignar=" + Asignar);}
+		if(Plazas != null) 				{sj.add("Plazas=" + Plazas);}
+		if(titulacion != null) 			{sj.add("titulacion=" + titulacion.getCodigo());}
 		if(grupos != null) {
-			res += ", Grupos=";
-			for(Grupo g : grupos) {
-				sj.add(g.getID() != null ? g.getID().toString() : "");
-			}
-			res += sj.toString();
+			sj2 = new StringJoiner(", ","Grupos=(",")");
+			for(Grupo e : grupos) { if(e.getID() != null) { sj2.add(e.getID().toString());}}
+			sj.add(sj2.toString());
 		}
-		
-		
-			res	+= (ID1 != null ? ", ID1=" + ID1 : "");        //DUDA
-			
-			
-		StringJoiner sj2 = new StringJoiner(", ", "(",")");
+		if(ID1 != null) 				{sj.add("ID1=" + ID1.getID());}
 		if(AsigMat != null) {
-			res += ", Asignaturas_Matricula=";
-			for(Asignaturas_Matricula a : AsigMat) {
-				sj2.add(a.getId() != null ? a.getId().toString() : "");
-			}
-			res += sj2.toString();
-		}		
-		StringJoiner sj3 = new StringJoiner(", ", "(",")");
+			sj2 = new StringJoiner(", ","Asignaturas_Matricula=(",")");
+			for(Asignaturas_Matricula e : AsigMat) { if(e.getId() != null) { sj2.add(e.getId().toString());}}
+			sj.add(sj2.toString());
+		}
 		if(clases != null) {
-			res += ", Clases=";
-			for(Clase c : clases) {
-				sj3.add(c.getId() != null ? c.getId().toString() : "");
-			}
-			res += sj3.toString();
+			sj2 = new StringJoiner(", ","Clases=(",")");
+			for(Clase e : clases) { if(e.getId() != null) { sj2.add(e.getId().toString());}}
+			sj.add(sj2.toString());
 		}
-		StringJoiner sj4 = new StringJoiner(", ", "(",")");
 		if(GrAsig != null) {
-			res += ", Grupos_por_Asignatura=";
-			for(Grupos_por_Asignatura g : GrAsig) {
-				sj4.add(g.getId() != null ? g.getId().toString() : "");
-			}
-			res += sj4.toString();
+			sj2 = new StringJoiner(", ","Grupos_por_Asignatura=(",")");
+			for(Grupos_por_Asignatura e : GrAsig) { if(e.getId() != null) { sj2.add(e.getId().toString());}}
+			sj.add(sj2.toString());
 		}
-		return res + "]";
+		return sj.toString();
 	}
-
 
 }

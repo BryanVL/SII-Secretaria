@@ -139,44 +139,34 @@ public class Titulacion implements Serializable {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		String res = "Titulacion [" + (Codigo != null ? "Codigo=" + Codigo : "")
-				+ (Nombre != null ? ", Nombre=" + Nombre : "")
-				+ (Creditos != null ? ", Creditos=" + Creditos : "");
-		StringJoiner sj = new StringJoiner(", ", "(",")");
+		StringJoiner sj = new StringJoiner(", ","Titulacion [","]");
+		StringJoiner sj2;
+		if(Codigo != null) 				{sj.add("Codigo=" + Codigo);}
+		if(Nombre != null) 				{sj.add("Nombre=" + Nombre);}
+		if(Creditos != null) 			{sj.add("Creditos=" + Creditos);}
 		if(asignaturas != null) {
-			res += ", Asignaturas=";
-			for(Asignatura a : asignaturas) {
-				sj.add(a.getReferencia() != null ? a.getReferencia().toString() : "");
-			}
-			res += sj.toString();
+			sj2 = new StringJoiner(", ","Asignaturas=(",")");
+			for(Asignatura e : asignaturas) { if(e.getReferencia() != null) { sj2.add(e.getReferencia().toString());}}
+			sj.add(sj2.toString());
 		}
-		StringJoiner sj2 = new StringJoiner(", ", "(",")");
 		if(expedientes != null) {
-			res += ", Asignaturas=";
-			for(Expediente e : expedientes) {
-				sj2.add(e.getNum_expediente() != null ? e.getNum_expediente().toString() : "");
-			}
-			res += sj2.toString();
+			sj2 = new StringJoiner(", ","Expedientes=(",")");
+			for(Expediente e : expedientes) { if(e.getNum_expediente() != null) { sj2.add(e.getNum_expediente().toString());}}
+			sj.add(sj2.toString());
 		}
-		StringJoiner sj3 = new StringJoiner(", ", "(",")");
 		if(grupos != null) {
-			res += ", Grupos=";
-			for(Grupo g : grupos) {
-				sj3.add(g.getID() != null ? g.getID().toString() : "");
-			}
-			res += sj3.toString();
+			sj2 = new StringJoiner(", ","Grupos=(",")");
+			for(Grupo e : grupos) { if(e.getID() != null) { sj2.add(e.getID().toString());}}
+			sj.add(sj2.toString());
 		}
-		StringJoiner sj4 = new StringJoiner(", ", "(",")");
 		if(centros != null) {
-			res += ", Centros=";
-			for(Centro c : centros) {
-				sj4.add(c.getID() != null ? c.getID().toString() : "");
-			}
-			res += sj4.toString();
+			sj2 = new StringJoiner(", ","Centros=(",")");
+			for(Centro e : centros) { if(e.getID() != null) { sj2.add(e.getID().toString());}}
+			sj.add(sj2.toString());
 		}
-		return res + "]";
+		return sj.toString();
 	}
+	
 }

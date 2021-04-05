@@ -1,6 +1,7 @@
 package Secretaria;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -106,13 +107,12 @@ public class Asignaturas_Matricula implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Asignaturas_Matricula [" + (id != null ? "id=" + id.toString() + ", " : "")
-				+ (grupo != null ? "grupo=" + grupo.getID() + ", " : "")
-				+ (asignatura != null ? "asignatura=" + asignatura.getReferencia() + ", " : "")
-				+ (matricula != null ? "matricula=" + matricula.getId().toString() : "") + "]";
+		StringJoiner sj = new StringJoiner(", ","Asignaturas_Matricula [","]");
+		if(id != null) 				{sj.add("id=" + id.toString());}
+		if(grupo != null) 			{sj.add("grupo=" + grupo.getID());}
+		if(asignatura != null) 		{sj.add("asignatura=" + asignatura.getReferencia());}
+		if(matricula != null) 		{sj.add("matricula=" + matricula.getId().toString());}
+		return sj.toString();
 	}
-	
-	
-	
 	
 }

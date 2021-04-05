@@ -1,6 +1,7 @@
 package Secretaria;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -71,12 +72,11 @@ public class Optativa implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Optativa [" + (asignatura != null ? "asignatura=" + asignatura.getReferencia() + ", " : "")
-				+ (Plazas != null ? "Plazas=" + Plazas + ", " : "") + (Mencion != null ? "Mencion=" + Mencion : "")
-				+ "]";
+		StringJoiner sj = new StringJoiner(", ","Optativa [","]");
+		if(asignatura != null) 			{sj.add("asignatura=" + asignatura.getReferencia());}
+		if(Plazas != null) 				{sj.add("Plazas=" + Plazas);}
+		if(Mencion != null) 			{sj.add("Mencion=" + Mencion);}
+		return sj.toString();
 	}
-	
-	
-
 	
 }

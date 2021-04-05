@@ -2,6 +2,7 @@ package Secretaria;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.StringJoiner;
 
 import javax.persistence.*;
 
@@ -92,11 +93,12 @@ public class Clase implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Clase [" + (id != null ? "id=" + id.toString() + ", " : "")
-				+ (Hora_fin != null ? "Hora_fin=" + Hora_fin + ", " : "")
-				+ (asignatura != null ? "asignatura=" + asignatura.getReferencia() + ", " : "")
-				+ (grupo != null ? "grupo=" + grupo.getID() : "") + "]";
+		StringJoiner sj = new StringJoiner(", ","Clase [","]");
+		if(id != null) 				{sj.add("id=" + id.toString());}
+		if(Hora_fin != null) 		{sj.add("Hora_fin=" + Hora_fin);}
+		if(asignatura != null) 		{sj.add("asignatura=" + asignatura.getReferencia());}
+		if(grupo != null) 			{sj.add("grupo=" + grupo.getID());}
+		return sj.toString();
 	}
-
 	
 }

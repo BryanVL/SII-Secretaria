@@ -159,24 +159,22 @@ public class Matricula implements Serializable {
 
 	@Override
 	public String toString() {
-		String res = "Matricula [" + (id != null ? "id=" + id.toString() : "") + (Estado != null ? ", Estado=" + Estado : "")
-				+ (Fecha_de_matricula != null ? ", Fecha_de_matricula=" + Fecha_de_matricula : "")
-				+ (Num_Archivo != null ? ", Num_Archivo=" + Num_Archivo : "")
-				+ (Turno_Preferente != null ? ", Turno_Preferente=" + Turno_Preferente : "")
-				+ (Nuevo_Ingreso != null ? ", Nuevo_Ingreso=" + Nuevo_Ingreso : "")
-				+ (Listado_Asignaturas != null ? ", Listado_Asignaturas=" + Listado_Asignaturas : "");
-		StringJoiner sj = new StringJoiner(", ", "(",")");
+		StringJoiner sj = new StringJoiner(", ","Matricula [","]");
+		StringJoiner sj2;
+		if(id != null) 						{sj.add("id=" + id.toString());}
+		if(Estado != null) 					{sj.add("Estado=" + Estado);}
+		if(Fecha_de_matricula != null) 		{sj.add("Fecha_de_matricula=" + Fecha_de_matricula.toString());}
+		if(Num_Archivo != null) 			{sj.add("Num_Archivo=" + Num_Archivo);}
+		if(Turno_Preferente != null) 		{sj.add("Turno_Preferente=" + Turno_Preferente);}
+		if(Nuevo_Ingreso != null) 			{sj.add("Nuevo_Ingreso=" + Nuevo_Ingreso);}
+		if(Listado_Asignaturas != null) 	{sj.add("Listado_Asignaturas=" + Listado_Asignaturas);}
 		if(AsigMat != null) {
-			res += ", Asignaturas_Matricula=";
-			for(Asignaturas_Matricula a : AsigMat) {
-				sj.add(a.getId() != null ? a.getId().toString() : "");
-			}
-			res += sj.toString();
+			sj2 = new StringJoiner(", ","Asignaturas_Matricula=(",")");
+			for(Asignaturas_Matricula e : AsigMat) { if(e.getId() != null) { sj2.add(e.getId().toString());}}
+			sj.add(sj2.toString());
 		}
-			res	+= (expediente != null ? ", expediente=" + expediente.getNum_expediente() : "") + "]";
-		return res;
+		if(expediente != null) 				{sj.add("expediente=" + expediente.getNum_expediente());}
+		return sj.toString();
 	}
-
-
 
 }

@@ -88,19 +88,18 @@ public class Centro implements Serializable {
 
 	@Override
 	public String toString() {
-		String res = "Centro [" + (ID != null ? "ID=" + ID : "") + (Nombre != null ? ", Nombre=" + Nombre : "")
-				+ (Direccion != null ? ", Direccion=" + Direccion : "")
-				+ (TLF_Conserjeria != null ? ", TLF_Conserjeria=" + TLF_Conserjeria : "");
-		StringJoiner sj = new StringJoiner(", ", "(",")");
+		StringJoiner sj = new StringJoiner(", ","Centro [","]");
+		StringJoiner sj2;
+		if(ID != null) 					{sj.add("ID=" + ID);}
+		if(Nombre != null) 				{sj.add("Nombre=" + Nombre);}
+		if(Direccion != null) 			{sj.add("Direccion=" + Direccion);}
+		if(TLF_Conserjeria != null) 	{sj.add("TLF_Conserjeria=" + TLF_Conserjeria);}
 		if(titulaciones != null) {
-			res += ", Titulaciones=";
-			for(Titulacion t : titulaciones) {
-				sj.add(t.getCodigo() != null ? t.getCodigo().toString() : "");
-			}
-			res += sj.toString();
+			sj2 = new StringJoiner(", ","Titulaciones=(",")");
+			for(Titulacion e : titulaciones) { if(e.getCodigo() != null) { sj2.add(e.getCodigo().toString());}}
+			sj.add(sj2.toString());
 		}
-		return res + "]";
+		return sj.toString();
 	}
-	
 	
 }

@@ -80,17 +80,16 @@ public class Encuesta implements Serializable {
 
 	@Override
 	public String toString() {
-		String res = "Encuesta [" + (Fecha_envio != null ? "Fecha_envio=" + Fecha_envio + ", " : "")
-				+ (expediente != null ? "expediente=" + expediente.getNum_expediente() + ", " : "");
-		StringJoiner sj = new StringJoiner(", ", "(",")");
+		StringJoiner sj = new StringJoiner(", ","Encuesta [","]");
+		StringJoiner sj2;
+		if(Fecha_envio != null) 		{sj.add("Fecha_envio=" + Fecha_envio);}
+		if(expediente != null) 			{sj.add("Expediente=" + expediente.getNum_expediente());}
 		if(GrAsig != null) {
-			res += ", Grupos_por_Asignatura=";
-			for(Grupos_por_Asignatura g : GrAsig) {
-				sj.add(g.getId() != null ? g.getId().toString() : "");
-			}
-			res += sj.toString();
+			sj2 = new StringJoiner(", ","Grupos_por_Asignatura=(",")");
+			for(Grupos_por_Asignatura e : GrAsig) { if(e.getId() != null) { sj2.add(e.getId().toString());}}
+			sj.add(sj2.toString());
 		}
-		return res + "]";
+		return sj.toString();
 	}
 	
 	

@@ -1,6 +1,7 @@
 package Secretaria;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -63,8 +64,12 @@ public class Grupos_por_Asignatura_PK implements Serializable {
 
 	@Override
 	public String toString() {
-		return "{" + (Curso_Academico != null ? "Curso_Academico=" + Curso_Academico + ", " : "")
-				+ (idG != null ? "idG=" + idG + ", " : "") + (idAsig != null ? "idAsig=" + idAsig : "") + "}";
+		StringJoiner sj = new StringJoiner(", ", "{", "}");
+		if(Curso_Academico != null)		{sj.add("Curso_Academico=" + Curso_Academico);}
+		if(idG != null)					{sj.add("idG=" + idG);}
+		if(idAsig != null)				{sj.add("idAsig=" + idAsig);}
+		return sj.toString();
 	}
+
 	
 }

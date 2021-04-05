@@ -131,30 +131,25 @@ public class Expediente implements Serializable {
 
 	@Override
 	public String toString() {
-		String res = "Expediente [" + (Num_expediente != null ? "Num_expediente=" + Num_expediente : "")
-				+ (Activo != null ? ", Activo=" + Activo : "")
-				+ (Nota_media_provisional != null ? ", Nota_media_provisional=" + Nota_media_provisional : "")
-				+ (Creditos_superados != null ? ", Creditos_superados=" + Creditos_superados : "")
-				+ (titulacion != null ? ", Titulacion=" + titulacion.getCodigo() : "")
-				+ (alumno != null ? ", Alumno=" + alumno.getID() : "");
-		StringJoiner sj = new StringJoiner(", ", "(",")");
+		StringJoiner sj = new StringJoiner(", ","Expediente [","]");
+		StringJoiner sj2;
+		if(Num_expediente != null) 			{sj.add("Num_expediente=" + Num_expediente);}
+		if(Activo != null) 					{sj.add("Activo=" + Activo);}
+		if(Nota_media_provisional != null) 	{sj.add("Nota_media_provisional=" + Nota_media_provisional);}
+		if(Creditos_superados != null) 		{sj.add("Creditos_superados=" + Creditos_superados);}
+		if(titulacion != null) 				{sj.add("Titulacion=" + titulacion.getCodigo());}
+		if(alumno != null) 					{sj.add("Alumno=" + alumno.getID());}
 		if(encuestas != null) {
-			res += ", Encuestas=";
-			for(Encuesta e : encuestas) {
-				sj.add(e.getFecha_envio() != null ? e.getFecha_envio().toString() : "");
-			}
-			res += sj.toString();
+			sj2 = new StringJoiner(", ","Encuestas=(",")");
+			for(Encuesta e : encuestas) { if(e.getFecha_envio() != null) { sj2.add(e.getFecha_envio().toString());}}
+			sj.add(sj2.toString());
 		}
-		StringJoiner sj2 = new StringJoiner(", ", "(",")");
 		if(matriculas != null) {
-			res += ", Matriculas=";
-			for(Matricula m : matriculas) {
-				sj2.add(m.getId().toString() != null ? m.getId().toString() : "");
-			}
-			res += sj2.toString();
+			sj2 = new StringJoiner(", ","Matriculas=(",")");
+			for(Matricula e : matriculas) { if(e.getId() != null) { sj2.add(e.getId().toString());}}
+			sj.add(sj2.toString());
 		}
-	
-		return res +  "]";
+		return sj.toString();
 	}
 
 }

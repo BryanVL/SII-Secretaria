@@ -2,6 +2,7 @@ package Secretaria;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.StringJoiner;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
@@ -83,11 +84,12 @@ public class Clase_PK implements Serializable {
 
 	@Override
 	public String toString() {
-		return "{" + (Dia != null ? "Dia=" + Dia + ", " : "")
-				+ (Hora_inicio != null ? "Hora_inicio=" + Hora_inicio + ", " : "") + (idG != null ? "idG=" + idG : "")
-				+ "}";
+		StringJoiner sj = new StringJoiner(", ", "{", "}");
+		if(Dia != null)				{sj.add("Dia=" + Dia);}
+		if(Hora_inicio != null)		{sj.add("Hora_inicio=" + Hora_inicio);}
+		if(idG != null)				{sj.add("idG=" + idG);}
+		return sj.toString();
 	}
-	
-	
+
 	
 }
