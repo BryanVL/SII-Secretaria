@@ -46,7 +46,7 @@ public class Alumno implements Serializable {
 	@Column(length=25)
 	private String Provincia;
 	@Column(precision=5)
-	private Double CP;
+	private Integer CP;
 	@Column(length=40)
 	private String Usuario;
 
@@ -154,11 +154,11 @@ public class Alumno implements Serializable {
 		Provincia = provincia;
 	}
 
-	public Double getCP() {
+	public Integer getCP() {
 		return CP;
 	}
 
-	public void setCP(Double cP) {
+	public void setCP(Integer cP) {
 		CP = cP;
 	}
 
