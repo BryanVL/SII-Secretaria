@@ -1,13 +1,12 @@
-package Secretaria;
+package jpa;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.StringJoiner;
 
 import javax.persistence.*;
 
 @Entity
-public class Clase implements Serializable {
+public class Asignaturas_Matricula implements Serializable {
 
 	/**
 	 * 
@@ -15,55 +14,70 @@ public class Clase implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private Clase_PK id;
-
-	@Temporal(TemporalType.TIME)
-	private Date Hora_fin;
+	private Asignaturas_Matricula_PK id;
 	
 	@ManyToOne
 	@JoinColumn(nullable=false)
-	private Asignatura asignatura;
-
-	@MapsId("idG")
-	@ManyToOne
 	private Grupo grupo;
+	
+	@MapsId("idAsig")
+	@ManyToOne
+	private Asignatura asignatura;
+	
+	@MapsId("idM")
+	@Id @ManyToOne
+	private Matricula matricula;
 
 	
-	public Clase() {
+	
+	public Asignaturas_Matricula() {
 		super();
 	}
-	
-	public Clase_PK getId() {
+
+	public Asignaturas_Matricula_PK getId() {
 		return id;
 	}
 
-	public void setId(Clase_PK id) {
+
+
+	public void setId(Asignaturas_Matricula_PK id) {
 		this.id = id;
 	}
-	
-	
-	public Date getHora_fin() {
-		return Hora_fin;
-	}
 
-	public void setHora_fin(Date hora_fin) {
-		Hora_fin = hora_fin;
-	}
 
-	public Asignatura getAsignatura() {
-		return asignatura;
-	}
-
-	public void setAsignatura(Asignatura asignatura) {
-		this.asignatura = asignatura;
-	}
 
 	public Grupo getGrupo() {
 		return grupo;
 	}
 
+
+
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
+	}
+
+
+
+	public Asignatura getAsignatura() {
+		return asignatura;
+	}
+
+
+
+	public void setAsignatura(Asignatura asignatura) {
+		this.asignatura = asignatura;
+	}
+
+
+
+	public Matricula getMatricula() {
+		return matricula;
+	}
+
+
+
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
 	}
 
 	@Override
@@ -82,7 +96,7 @@ public class Clase implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Clase other = (Clase) obj;
+		Asignaturas_Matricula other = (Asignaturas_Matricula) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -93,11 +107,11 @@ public class Clase implements Serializable {
 
 	@Override
 	public String toString() {
-		StringJoiner sj = new StringJoiner(", ","Clase [","]");
+		StringJoiner sj = new StringJoiner(", ","Asignaturas_Matricula [","]");
 		if(id != null) 				{sj.add("id=" + id.toString());}
-		if(Hora_fin != null) 		{sj.add("Hora_fin=" + Hora_fin);}
-		if(asignatura != null) 		{sj.add("asignatura=" + asignatura.getReferencia());}
 		if(grupo != null) 			{sj.add("grupo=" + grupo.getID());}
+		if(asignatura != null) 		{sj.add("asignatura=" + asignatura.getReferencia());}
+		if(matricula != null) 		{sj.add("matricula=" + matricula.getId().toString());}
 		return sj.toString();
 	}
 	

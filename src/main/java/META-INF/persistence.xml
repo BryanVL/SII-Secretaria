@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="Secretaria" transaction-type="RESOURCE_LOCAL">
-		<class>Secretaria.Alumno</class>
-		<class>Secretaria.Grupo</class>
-		<class>Secretaria.Asignatura</class>
-		<class>Secretaria.Asignaturas_Matricula</class>
-		<class>Secretaria.Centro</class>
-		<class>Secretaria.Encuesta</class>
-		<class>Secretaria.Expediente</class>
-		<class>Secretaria.Grupos_por_Asignatura</class>
-		<class>Secretaria.Idiomas</class>
-		<class>Secretaria.Matricula</class>
-		<class>Secretaria.Optativa</class>
-		<class>Secretaria.Titulacion</class>
-		<class>Secretaria.Clase</class>
+	<persistence-unit name="Secretaria" transaction-type="JTA">
+		<jta-data-source>jdbc/sii</jta-data-source>
+		<class>jpa.Alumno</class>
+		<class>jpa.Grupo</class>
+		<class>jpa.Asignatura</class>
+		<class>jpa.Asignaturas_Matricula</class>
+		<class>jpa.Centro</class>
+		<class>jpa.Encuesta</class>
+		<class>jpa.Expediente</class>
+		<class>jpa.Grupos_por_Asignatura</class>
+		<class>jpa.Idiomas</class>
+		<class>jpa.Matricula</class>
+		<class>jpa.Optativa</class>
+		<class>jpa.Titulacion</class>
+		<class>jpa.Clase</class>
+		<shared-cache-mode>NONE</shared-cache-mode>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sii"/>
 			<property name="javax.persistence.jdbc.user" value="siiuser"/>
