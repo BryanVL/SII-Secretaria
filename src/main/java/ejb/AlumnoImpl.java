@@ -20,7 +20,7 @@ import jpa.Alumno;
 @Stateless
 @LocalBean
 public class AlumnoImpl implements InterfazImportar{
-    @PersistenceContext(unitName = "Alumno")
+    @PersistenceContext(unitName = "Secretaria")
     private EntityManager em;
 
 	@Override
