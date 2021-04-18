@@ -6,13 +6,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import excepcionesEJB.GrupoException;
-import interfacesEJB.InterfazCRUDgrupo;
+import interfacesEJB.InterfazGrupo;
 import jpa.Grupo;
 
 @Stateless
 @LocalBean
-public class GrupoImpl implements InterfazCRUDgrupo{
+public class GrupoImpl implements InterfazGrupo{
 
+	//private static final Logger LOG = Logger.getLogger(LotesEJB.class.getCanonicalName());
     @PersistenceContext(unitName = "Secretaria")
     private EntityManager em;
 
@@ -30,7 +31,7 @@ public class GrupoImpl implements InterfazCRUDgrupo{
 	public void Leer(Grupo g) throws GrupoException {
 		// TODO Auto-generated method stub
 		Grupo grupoExistente = em.find(Grupo.class, g.getID());
-		if (grupoExistente != null) {
+		if (grupoExistente == null) {
 			throw new GrupoException();
 		}
 		System.out.println(g);
@@ -54,6 +55,15 @@ public class GrupoImpl implements InterfazCRUDgrupo{
 			throw new GrupoException();
 		}
 		em.merge(g);
+	}
+
+
+	@Override
+	public void ComprobarPlazas(Grupo g) throws GrupoException {
+		// TODO Auto-generated method stub
+		if(g.getPlazas()==0) {
+			throw new GrupoException();
+		}
 	}
     
 }

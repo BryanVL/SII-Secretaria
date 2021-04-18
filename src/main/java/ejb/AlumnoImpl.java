@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ImportarException;
+import interfacesEJB.InterfazAlumno;
 import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 
@@ -19,7 +20,7 @@ import jpa.Alumno;
 
 @Stateless
 @LocalBean
-public class AlumnoImpl implements InterfazImportar{
+public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
     @PersistenceContext(unitName = "Secretaria")
     private EntityManager em;
 
@@ -28,4 +29,11 @@ public class AlumnoImpl implements InterfazImportar{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void validarAcceso(String dir) throws AlumnoException {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
