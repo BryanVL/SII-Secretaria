@@ -31,9 +31,15 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 	}
 
 	@Override
-	public void validarAcceso(String dir) throws AlumnoException {
+	public void validarAcceso(Alumno a) throws AlumnoException {
 		// TODO Auto-generated method stub
-		
+    	Alumno alumno=em.find(Alumno.class, a.getID());
+    	
+    	if(alumno==null) {
+    		throw new AlumnoException();
+    	}
+    	
+    	
 	}
 	
 }
