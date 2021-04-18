@@ -10,18 +10,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import excepcionesEJB.AlumnoException;
-import interfacesEJB.InterfazAlumno;
+import excepcionesEJB.ImportarException;
+import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 
 
 
 @Stateless
-public class AlumnoImpl implements InterfazAlumno{
+public class AlumnoImpl implements InterfazImportar{
     @PersistenceContext(unitName = "Alumno")
     private EntityManager em;
 
 	@Override
-	public void Importar_Alumno(Alumno a) throws AlumnoException {
+	public void Importar(String dir) throws ImportarException {
 		// TODO Auto-generated method stub
 		
 	}
