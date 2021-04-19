@@ -14,7 +14,7 @@ public interface InterfazGrupo {
 	
 	/**Este  método es para leer un grupo
 	 * @param g grupo a leer*/
-	public void Leer(Grupo g) throws GrupoException;
+	public Grupo Leer(Grupo g) throws GrupoException;
 	
 	/**Este  método es para borrar un grupo
 	 * @param g grupo a borrar*/

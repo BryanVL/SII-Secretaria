@@ -11,5 +11,5 @@ public interface InterfazExpediente {
 
 	/**Este método es para visualizar el expediente
 	 * @param e expediente a visualizar*/
-	public void VisualizarExpediente(Expediente e) throws ImportarException;
+	public Expediente VisualizarExpediente(Expediente e) throws ImportarException;
 }

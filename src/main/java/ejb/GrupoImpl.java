@@ -28,13 +28,13 @@ public class GrupoImpl implements InterfazGrupo{
 	}
 
 	@Override
-	public void Leer(Grupo g) throws GrupoException {
+	public Grupo Leer(Grupo g) throws GrupoException {
 		// TODO Auto-generated method stub
 		Grupo grupoExistente = em.find(Grupo.class, g.getID());
 		if (grupoExistente == null) {
 			throw new GrupoException();
 		}
-		System.out.println(g);
+		return grupoExistente;
 	}
 
 	@Override

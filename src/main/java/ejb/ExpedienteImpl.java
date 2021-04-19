@@ -100,13 +100,13 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 	}
 
 	@Override
-	public void VisualizarExpediente(Expediente e) throws ImportarException {
+	public Expediente VisualizarExpediente(Expediente e) throws ImportarException {
 		// TODO Auto-generated method stub
 		Expediente expedienteExistente = em.find(Expediente.class, e.getNum_expediente());
 		if (expedienteExistente == null) {
 			throw new GrupoException();
 		}
-		System.out.println(e);
+		return expedienteExistente;
 	}
 	
 	
