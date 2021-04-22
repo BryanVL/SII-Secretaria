@@ -144,11 +144,6 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 	            for (CSVRecord csvRecord : csvParser) {
 	            	if(n>=5) {
 	            		
-	            		String nExpediente = csvRecord.get(4);
-	            		String notaMedia = csvRecord.get(17);
-	            		String creditosSuperados = csvRecord.get(18);
-	            		
-
 			    		String dni = csvRecord.get(1);
 			    		String nombre = csvRecord.get(2);
 			    		String apellido1 = csvRecord.get(3);  
