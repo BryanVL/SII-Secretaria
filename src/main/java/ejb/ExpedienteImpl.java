@@ -75,11 +75,11 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 		    	
 		    	   if(n>=5) {
 		           Cell cell = row.getCell(4);  
-		           String notaMedia = cell.getStringCellValue();
-		           cell = row.getCell(17);  
-		           String creditosSuperados = cell.getStringCellValue();
-		           cell = row.getCell(18);  
 		           String nExpediente = cell.getStringCellValue();
+		           cell = row.getCell(17);  
+		           String notaMedia = cell.getStringCellValue();
+		           cell = row.getCell(18);  
+		           String creditosSuperados = cell.getStringCellValue();
 	               Expediente e = new Expediente();
 		               
 	               e.setNota_media_provisional(Float.parseFloat(notaMedia));
