@@ -1,7 +1,7 @@
 package excepcionesEJB;
 
 
-public class GrupoException extends RuntimeException{
+public class GrupoException extends Exception{
 
     public GrupoException() {
     }
