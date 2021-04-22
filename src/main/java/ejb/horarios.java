@@ -160,6 +160,9 @@ public class horarios implements InterfazImportar{
         Asignatura asignatura = em.find(Asignatura.class, Integer.parseInt(asig));  
         c.setAsignatura(asignatura);
         
+        //GrupoImpl gi = new GrupoImpl();
+        //Grupo g = gi.buscarPorCursoLetra(curso, grupo);
+        
         
         TypedQuery query = em.createQuery("Select g from Grupo g", Grupo.class);	              
         List<Grupo> grupos = query.getResultList();
