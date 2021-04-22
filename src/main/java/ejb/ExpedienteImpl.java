@@ -1,6 +1,7 @@
 package ejb;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,12 +27,12 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.sun.tools.hat.internal.parser.Reader;
 
-import excepcionesEJB.GrupoException;
+import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.ImportarException;
 import interfacesEJB.InterfazExpediente;
 import interfacesEJB.InterfazImportar;
 import jpa.Expediente;
-import jpa.Grupo;
+
 
 @Stateless
 @LocalBean
@@ -129,11 +130,11 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 	}
 
 	@Override
-	public Expediente VisualizarExpediente(Expediente e) throws GrupoException {
+	public Expediente VisualizarExpediente(Expediente e) throws ExpedienteException {
 		// TODO Auto-generated method stub
 		Expediente expedienteExistente = em.find(Expediente.class, e.getNum_expediente());
 		if (expedienteExistente == null) {
-			throw new GrupoException();
+			throw new ExpedienteException();
 		}
 		return expedienteExistente;
 	}

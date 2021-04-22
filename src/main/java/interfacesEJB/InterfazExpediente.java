@@ -2,8 +2,7 @@ package interfacesEJB;
 
 import javax.ejb.Local;
 
-import excepcionesEJB.GrupoException;
-import excepcionesEJB.ImportarException;
+import excepcionesEJB.ExpedienteException;
 import jpa.Expediente;
 
 
@@ -12,5 +11,6 @@ public interface InterfazExpediente {
 
 	/**Este método es para visualizar el expediente
 	 * @param e expediente a visualizar*/
-	public Expediente VisualizarExpediente(Expediente e) throws GrupoException;
+	public Expediente VisualizarExpediente(Expediente e) throws ExpedienteException;
+	
 }

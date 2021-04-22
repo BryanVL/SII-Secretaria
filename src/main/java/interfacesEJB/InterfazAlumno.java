@@ -4,7 +4,6 @@
 package interfacesEJB;
 
 import javax.ejb.Local;
-
 import excepcionesEJB.AlumnoException;
 import jpa.Alumno;
 
@@ -16,10 +15,12 @@ import jpa.Alumno;
 @Local
 public interface InterfazAlumno {
 
-	/**Este método 
-	 * @param dir dirección donde se encuentra el excel*/
+	/**Este método hace algo xD
+	 * @param a alumno */
 	public void validarAcceso(Alumno a) throws AlumnoException;
 	
-	
+	/**Este método es para visualizar el alumno
+	 * @param a alumno a visualizar*/
+	public Alumno VisualizarAlumno(Alumno a) throws AlumnoException;
 	
 }
