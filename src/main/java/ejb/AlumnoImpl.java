@@ -170,7 +170,7 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 			    		a.setLocalidad(localidad);
 			    		a.setProvincia(provincia);
 			    		a.setCP( Integer.parseInt(cp) );
-			    		
+			    		 
 			    		em.persist(a);
 	            	}
 	            	n++;
