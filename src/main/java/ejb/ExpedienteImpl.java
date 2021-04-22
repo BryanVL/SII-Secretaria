@@ -44,7 +44,7 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 	@Override
 	public void Importar(String dir) throws ImportarException {
 		// TODO Auto-generated method stub
-		if(dir.substring(dir.length()-4).equals("xlsx")) {
+		if(dir.endsWith("xlsx")) {
 			//Para el archivo xlsx de 'Datos alumnadoFAKE' sin título
 			
 		       File f = new File(dir);
@@ -94,7 +94,7 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 		           iRow++;  
 		           row = sh.getRow(iRow);
 		       }
-		}else if(dir.substring(dir.length()-3).equals("csv")){
+		}else if(dir.endsWith("csv")){
 			 //Para el archivo csv de 'alumnos' 
 			BufferedReader reader;
 			try {

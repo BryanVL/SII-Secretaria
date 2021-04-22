@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -83,20 +84,47 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 		    {
 		    	
 		    	if(n>=5) {
-		    		Cell cell = row.getCell(4);  
-		    		String nExpediente = cell.getStringCellValue();
-		    		cell = row.getCell(17);  
-		    		String notaMedia = cell.getStringCellValue();
-		    		cell = row.getCell(18);  
-		    		String creditosSuperados = cell.getStringCellValue();
-		    		Expediente e = new Expediente();
-		               
-		    		e.setNota_media_provisional(Float.parseFloat(notaMedia));
-		    		e.setCreditos_superados(Float.parseFloat(creditosSuperados));
-		    		e.setNum_expediente(Integer.parseInt(nExpediente));
-		    		e.setActivo(true);
-	            	
-		    		em.persist(e);
+		    		  
+		    		Cell cell = row.getCell(1);  
+		    		String dni = cell.getStringCellValue();
+		    		cell = row.getCell(2);  
+		    		String nombre = cell.getStringCellValue();
+		    		cell = row.getCell(3);  
+		    		String apellido1 = cell.getStringCellValue();
+		    		cell = row.getCell(4);  
+		    		String apellido2 = cell.getStringCellValue();
+		    		cell = row.getCell(7);  
+		    		String email_i = cell.getStringCellValue();
+		    		cell = row.getCell(8);  
+		    		String email_p = cell.getStringCellValue();
+		    		cell = row.getCell(9);  
+		    		String telefono = cell.getStringCellValue();
+		    		cell = row.getCell(10);  
+		    		String movil = cell.getStringCellValue();
+		    		cell = row.getCell(11);  
+		    		String direccion = cell.getStringCellValue();
+		    		cell = row.getCell(12);  
+		    		String localidad = cell.getStringCellValue();
+		    		cell = row.getCell(13);  
+		    		String provincia = cell.getStringCellValue();
+		    		cell = row.getCell(14);  
+		    		String cp = cell.getStringCellValue();
+		    		
+		    		Alumno a = new Alumno();
+		    		a.setDNI(dni);
+		    		a.setNombre(nombre);
+		    		a.setApellido1(apellido1);
+		    		a.setApellido2(apellido2);
+		    		a.setEmail_institucional(email_i);
+		    		a.setEmail_personal(email_p);
+		    		a.setTelefono( Integer.parseInt(telefono.replaceAll(" ","")) );
+		    		a.setMovil(Integer.parseInt(movil.replaceAll(" ", "")) );
+		    		a.setDireccion(direccion);
+		    		a.setLocalidad(localidad);
+		    		a.setProvincia(provincia);
+		    		a.setCP( Integer.parseInt(cp) );
+		    		
+		    		em.persist(a);
 		    	}
 		    	
 		        n++;
@@ -104,7 +132,7 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 		        row = sh.getRow(iRow);
 		    }
 		       
-		} else if (dir.substring(dir.length()-3).equals("csv")){
+		} else if (dir.endsWith("csv")){
 			 //Para el archivo csv de 'alumnos' 
 			BufferedReader reader;
 			
@@ -119,13 +147,36 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 	            		String nExpediente = csvRecord.get(4);
 	            		String notaMedia = csvRecord.get(17);
 	            		String creditosSuperados = csvRecord.get(18);
-	            		Expediente e = new Expediente();
-	               
-	            		e.setNota_media_provisional(Float.parseFloat(notaMedia));
-	            		e.setCreditos_superados(Float.parseFloat(creditosSuperados));
-	            		e.setNum_expediente(Integer.parseInt(nExpediente));
-	            		e.setActivo(true);
-	            		em.persist(e);
+	            		
+
+			    		String dni = csvRecord.get(1);
+			    		String nombre = csvRecord.get(2);
+			    		String apellido1 = csvRecord.get(3);  
+			    		String apellido2 = csvRecord.get(4);
+			    		String email_i = csvRecord.get(7);
+			    		String email_p = csvRecord.get(8); 
+			    		String telefono = csvRecord.get(9);
+			    		String movil = csvRecord.get(10);
+			    		String direccion = csvRecord.get(11);
+			    		String localidad = csvRecord.get(12);
+			    		String provincia = csvRecord.get(13);
+			    		String cp = csvRecord.get(14);
+	            		
+	            		Alumno a = new Alumno();
+			    		a.setDNI(dni);
+			    		a.setNombre(nombre);
+			    		a.setApellido1(apellido1);
+			    		a.setApellido2(apellido2);
+			    		a.setEmail_institucional(email_i);
+			    		a.setEmail_personal(email_p);
+			    		a.setTelefono( Integer.parseInt(telefono.replaceAll(" ","")) );
+			    		a.setMovil(Integer.parseInt(movil.replaceAll(" ", "")) );
+			    		a.setDireccion(direccion);
+			    		a.setLocalidad(localidad);
+			    		a.setProvincia(provincia);
+			    		a.setCP( Integer.parseInt(cp) );
+			    		
+			    		em.persist(a);
 	            	}
 	            	n++;
 				}
