@@ -1,6 +1,6 @@
 package excepcionesEJB;
 
-public class ImportarException extends RuntimeException{
+public class ImportarException extends Exception{
 
     public ImportarException() {
     }
