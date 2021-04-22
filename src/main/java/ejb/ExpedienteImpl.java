@@ -44,7 +44,8 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 	public void Importar(String dir) throws ImportarException {
 		// TODO Auto-generated method stub
 		if(dir.substring(dir.length()-4).equals("xlsx")) {
-			//Para el archivo csv de 'alumnos' 
+			//Para el archivo xlsx de 'Datos alumnadoFAKE' sin título
+			
 		       File f = new File(dir);
 		       InputStream inp = null;
 			try {
@@ -71,7 +72,7 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 		       int n=1;
 		       while(row!=null) 
 		       {
-		    	  
+		    	
 		    	   if(n>=5) {
 		           Cell cell = row.getCell(4);  
 		           String notaMedia = cell.getStringCellValue();
@@ -93,7 +94,7 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 		           row = sh.getRow(iRow);
 		       }
 		}else if(dir.substring(dir.length()-3).equals("csv")){
-			//Para el archivo xlsx de 'Datos alumnadoFAKE' sin título
+			 //Para el archivo csv de 'alumnos' 
 			BufferedReader reader;
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
