@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,11 +37,14 @@ import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.GrupoException;
 import excepcionesEJB.ImportarException;
 import interfacesEJB.InterfazImportar;
+import jpa.Alumno;
 import jpa.Asignatura;
+import jpa.Asignaturas_Matricula;
 import jpa.Clase;
 import jpa.Clase_PK;
 import jpa.Expediente;
 import jpa.Grupo;
+import jpa.Matricula;
 
 /**
  * Session Bean implementation class horarios
@@ -193,7 +198,7 @@ public class horarios implements InterfazImportar{
         return c;
 	}
 	
-
+	//Visualizar solo una clase
 	public Clase VisualizarHorarios(Clase c) throws ClaseException {
 		
 		Clase claseExistente = em.find(Clase.class, c.getId());
@@ -205,4 +210,47 @@ public class horarios implements InterfazImportar{
 		return claseExistente;
 	}
 
+	//Visualizar todas las clases de un grupo
+	public List<Clase> VisualizarHorarios(Grupo g) throws ClaseException {
+		
+		TypedQuery query = em.createQuery("Select c from Clase c where c.getGrupo().getId() = g.getId()", Clase.class);	              
+        List<Clase> clases = query.getResultList();
+		
+		if (clases == null) {
+			throw new ClaseException();
+		}
+
+		return clases;
+	}
+	
+	//visualizar horarios de asignaturas
+	public HashMap<Asignatura, List<Clase>> VisualizarHorarios(Alumno a) throws ClaseException, AlumnoException {
+
+		
+		HashMap<Asignatura, List<Clase>> res = new HashMap<Asignatura, List<Clase>>();
+		Alumno alu = em.find(Alumno.class, a.getID());
+		if (alu == null) {	
+			throw new AlumnoException();
+		}
+
+		List<Expediente> exp = alu.getExpedientes();
+		List<Matricula> mat;
+		List<Asignaturas_Matricula> asigM;
+		
+		for(Expediente e: exp) {
+			mat = e.getMatriculas();
+			for(Matricula m: mat) {
+				asigM = m.getAsigMat();
+				for(Asignaturas_Matricula asiM: asigM) {
+					List<Clase> clases = new ArrayList<Clase>();
+					Asignatura asig = asiM.getAsignatura();
+					clases.addAll(asig.getClases());
+					res.put(asig, clases);
+				}
+			}
+		}
+		
+		return res;
+	}
+	
 }
