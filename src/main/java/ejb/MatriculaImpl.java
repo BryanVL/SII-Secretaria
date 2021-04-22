@@ -102,13 +102,15 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 		    		String Nuevo_Ingreso = cell.getStringCellValue();
 		    		cell = row.getCell(7); 
 		    		String Listado_Asignaturas = cell.getStringCellValue();
-		    		cell = row.getCell(8); 
-		    		String AsigMat = cell.getStringCellValue();
 		    		
-		    		//Administro la clave primaria de Matricula
+		    		//Administro la clave primaria de Matricula:
 		    		Matricula_PK mpk = new Matricula_PK();
 		    		mpk.setCurso_academico(Curso_academico);
 		    		mpk.setIdExp(Integer.parseInt(idExp));
+		    		
+		    		//Administro el expediente asignado a la Matricula:
+		    		Expediente e = new Expediente();
+		    		e.setNum_expediente(Integer.parseInt(idExp));
 		    		
 		    		//Administro los datos de la fila total:
 		    		Matricula m = new Matricula();
@@ -119,21 +121,17 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 		    		m.setTurno_Preferente(Turno_Preferente);
 		    		m.setNuevo_Ingreso(Nuevo_Ingreso);
 		    		m.setListado_Asignaturas(Listado_Asignaturas);
+		    		m.setExpediente(e);
 		    		
-		    		//Asignar el asigMat
-		    		String[] asigMat = AsigMat.split(",");
-		    		Asignaturas_Matricula am = new Asignaturas_Matricula();
-		    		Asignaturas_Matricula_PK ampk = new Asignaturas_Matricula_PK();
-		    		Matricula_PK mapk = new Matricula_PK();
-		    		String[] asmapk;
+		    		//Asigno los valores de la lista de asignaturas_matricula:
+		    		String[] asig = Listado_Asignaturas.split("-,");
 		    		List<Asignaturas_Matricula> lista = new ArrayList();
-		    		for(int i = 0; i < asigMat.length; i+=2) {
-		    			asmapk = asigMat[i].split("/");
-		    			mapk.setCurso_academico(asmapk[0]);
-		    			mapk.setIdExp(Integer.parseInt(asmapk[1]));
-		    			ampk.setIdM(mapk);
-		    			ampk.setIdAsig(Integer.parseInt(asigMat[i+1]));
-		    			am.setId(ampk);
+		    		Asignaturas_Matricula_PK amk = new Asignaturas_Matricula_PK();
+		    		Asignaturas_Matricula am = new Asignaturas_Matricula();
+		    		for(int i = 0; i < asig.length; i++) {
+		    			amk.setIdM(mpk);
+		    			amk.setIdAsig(Integer.parseInt(asig[i]));
+		    			am.setId(amk);
 		    			lista.add(am);
 		    		}
 	            	m.setAsigMat(lista);
@@ -166,12 +164,15 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 			    		String Turno_Preferente = csvRecord.get(5);
 			    		String Nuevo_Ingreso = csvRecord.get(6);
 			    		String Listado_Asignaturas = csvRecord.get(7);
-			    		String AsigMat = csvRecord.get(8);
 			    		
 			    		//Administro la clave primaria de Matricula
 			    		Matricula_PK mpk = new Matricula_PK();
 			    		mpk.setCurso_academico(Curso_academico);
 			    		mpk.setIdExp(Integer.parseInt(idExp));
+			    		
+			    		//Administro el expediente asignado a la Matricula:
+			    		Expediente e = new Expediente();
+			    		e.setNum_expediente(Integer.parseInt(idExp));
 			    		
 			    		//Administro los datos de la fila total:
 			    		Matricula m = new Matricula();
@@ -182,21 +183,17 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 			    		m.setTurno_Preferente(Turno_Preferente);
 			    		m.setNuevo_Ingreso(Nuevo_Ingreso);
 			    		m.setListado_Asignaturas(Listado_Asignaturas);
+			    		m.setExpediente(e);
 			    		
-			    		//Asignar el asigMat
-			    		String[] asigMat = AsigMat.split(",");
-			    		Asignaturas_Matricula am = new Asignaturas_Matricula();
-			    		Asignaturas_Matricula_PK ampk = new Asignaturas_Matricula_PK();
-			    		Matricula_PK mapk = new Matricula_PK();
-			    		String[] asmapk;
+			    		//Asigno los valores de la lista de asignaturas_matricula:
+			    		String[] asig = Listado_Asignaturas.split("-,");
 			    		List<Asignaturas_Matricula> lista = new ArrayList();
-			    		for(int i = 0; i < asigMat.length; i+=2) {
-			    			asmapk = asigMat[i].split("/");
-			    			mapk.setCurso_academico(asmapk[0]);
-			    			mapk.setIdExp(Integer.parseInt(asmapk[1]));
-			    			ampk.setIdM(mapk);
-			    			ampk.setIdAsig(Integer.parseInt(asigMat[i+1]));
-			    			am.setId(ampk);
+			    		Asignaturas_Matricula_PK amk = new Asignaturas_Matricula_PK();
+			    		Asignaturas_Matricula am = new Asignaturas_Matricula();
+			    		for(int i = 0; i < asig.length; i++) {
+			    			amk.setIdM(mpk);
+			    			amk.setIdAsig(Integer.parseInt(asig[i]));
+			    			am.setId(amk);
 			    			lista.add(am);
 			    		}
 		            	m.setAsigMat(lista);
