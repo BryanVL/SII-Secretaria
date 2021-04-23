@@ -9,9 +9,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import excepcionesEJB.AlumnoException;
+import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.GrupoException;
+import excepcionesEJB.MatriculaException;
 import interfacesEJB.InterfazGrupo;
+import jpa.Alumno;
+import jpa.Asignatura;
+import jpa.Asignaturas_Matricula;
+import jpa.Asignaturas_Matricula_PK;
 import jpa.Grupo;
+import jpa.Matricula;
 
 @Stateless
 @LocalBean
@@ -112,6 +120,34 @@ public class GrupoImpl implements InterfazGrupo{
         }
 	        
 		return g;
+	}
+	
+	
+	public void asignarGrupo(Matricula matricula, Grupo grupo, Asignatura asignatura) throws MatriculaException, GrupoException, AsignaturaException {
+		Matricula m = em.find(Matricula.class, matricula.getId());
+		if(m==null) {
+			throw new MatriculaException("La matricula no ha sido encontrada");
+		}
+		
+		Grupo g = em.find(Grupo.class, grupo.getID());
+		if(g==null) {
+			throw new GrupoException("El grupo no ha sido encontrado");
+		}
+		
+		Asignatura asig = em.find(Asignatura.class, asignatura.getReferencia());
+		if(asig==null) {
+			throw new AsignaturaException("La asignatura no ha sido encontrada");
+		}
+		
+		Asignaturas_Matricula am = new Asignaturas_Matricula();
+		am.setMatricula(m);
+		am.setGrupo(g);
+		am.setAsignatura(asig);
+		Asignaturas_Matricula_PK id = new Asignaturas_Matricula_PK();
+		id.setIdAsig(asig.getReferencia());
+		id.setIdM(m.getId());
+		am.setId(id);
+		em.persist(am);	
 	}
     
 }
