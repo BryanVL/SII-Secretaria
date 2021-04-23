@@ -4,9 +4,14 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.GrupoException;
+import excepcionesEJB.MatriculaException;
 import jpa.Alumno;
+import jpa.Asignatura;
+import jpa.Asignaturas_Matricula;
 import jpa.Grupo;
+import jpa.Matricula;
 
 @Local
 public interface InterfazAsignaturas_Matricula {
@@ -17,4 +22,10 @@ public interface InterfazAsignaturas_Matricula {
 	 */
 	public List<Alumno> VisualizarAlumnosPorGrupo(Grupo g) throws GrupoException;
 	
+	public List<Asignaturas_Matricula> AplicarFiltros(Grupo g) throws GrupoException;
+	
+	public List<Asignaturas_Matricula> AplicarFiltros(Asignatura a) throws AsignaturaException;
+
+	public List<Asignaturas_Matricula> AplicarFiltros(Matricula m) throws MatriculaException;
+
 }

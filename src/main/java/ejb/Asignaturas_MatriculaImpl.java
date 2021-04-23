@@ -9,17 +9,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.GrupoException;
+import excepcionesEJB.MatriculaException;
+import interfacesEJB.InterfazAsignaturas_Matricula;
 import jpa.Alumno;
+import jpa.Asignatura;
 import jpa.Asignaturas_Matricula;
 import jpa.Grupo;
+import jpa.Matricula;
 
 @Stateless
 @LocalBean
-public class Asignaturas_MatriculaImpl {
+public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 	@PersistenceContext(name = "Secretaria")
 	EntityManager em;
 	
+	@Override
 	public List<Alumno> VisualizarAlumnosPorGrupo(Grupo g) throws GrupoException{
 		
 		Grupo grupoExistente = em.find(Grupo.class,g.getID());
@@ -28,7 +34,7 @@ public class Asignaturas_MatriculaImpl {
 			throw new GrupoException("El grupo indicado no existe.");
 		}
 		
-		TypedQuery query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE g.getID() = a.getGrupo().getID()",Alumno.class);
+		TypedQuery query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE g.getID() = a.getGrupo().getID()",Asignaturas_Matricula.class);
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 		
 		List<Alumno> listaAlum = new ArrayList();
@@ -39,5 +45,35 @@ public class Asignaturas_MatriculaImpl {
 		
 		return listaAlum;
 	}
+
+	@Override
+	public List<Asignaturas_Matricula> AplicarFiltros(Grupo g) throws GrupoException{
+		
+		Grupo grupoExistente = em.find(Grupo.class,g.getID());
+		
+		if(grupoExistente == null) {
+			throw new GrupoException("El grupo indicado no existe.");
+		}
+		
+		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a order by a.getGrupo()",Asignaturas_Matricula.class);
+		List<Asignaturas_Matricula> listaAsig = query.getResultList();
+		
+		return listaAsig;
+	}
+
+	@Override
+	public List<Asignaturas_Matricula> AplicarFiltros(Asignatura a) throws AsignaturaException {
+		
+		return null;
+	}
+
+	@Override
+	public List<Asignaturas_Matricula> AplicarFiltros(Matricula m) throws MatriculaException {
+		
+		return null;
+		
+	}
 	
+	
+
 }
