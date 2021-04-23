@@ -1,6 +1,7 @@
 package jpa;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.StringJoiner;
 
 import javax.persistence.*;
@@ -20,8 +21,8 @@ public class Idiomas implements Serializable {
 	@Column(length=20)
 	private String Nombre;
 	
-	@ManyToOne
-	private Asignatura asignatura;
+	@ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
+	private List<Asignatura> asignaturas;
 	
 	
 	public Idiomas() {
@@ -37,16 +38,17 @@ public class Idiomas implements Serializable {
 	public void setNombre(String nombre) {
 		Nombre = nombre;
 	}
-
-
-	public Asignatura getAsignatura() {
-		return asignatura;
+	
+	public List<Asignatura> getAsignaturas() {
+		return asignaturas;
 	}
 
 
-	public void setAsignatura(Asignatura asignatura) {
-		this.asignatura = asignatura;
+	public void setAsignaturas(List<Asignatura> asignaturas) {
+		this.asignaturas = asignaturas;
 	}
+
+
 
 
 	@Override
@@ -79,8 +81,8 @@ public class Idiomas implements Serializable {
 	public String toString() {
 		StringJoiner sj = new StringJoiner(", ","Idiomas [","]");
 		if(Nombre != null) 			{sj.add("Nombre=" + Nombre);}
-		if(asignatura != null) 		{sj.add("asignatura=" + asignatura.getReferencia());}
 		return sj.toString();
 	}
+
 
 }
