@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import excepcionesEJB.GrupoException;
 import jpa.Alumno;
 import jpa.Asignaturas_Matricula;
 import jpa.Grupo;
@@ -19,7 +20,14 @@ public class Asignaturas_MatriculaImpl {
 	@PersistenceContext(name = "Secretaria")
 	EntityManager em;
 	
-	public List<Alumno> VisualizarAlumnosPorGrupo(Grupo g){
+	public List<Alumno> VisualizarAlumnosPorGrupo(Grupo g) throws GrupoException{
+		
+		Grupo grupoExistente = em.find(Grupo.class,g.getID());
+		
+		if(grupoExistente == null) {
+			throw new GrupoException("El grupo indicado no existe.");
+		}
+		
 		TypedQuery query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE g.getID() = a.getGrupo().getID()",Alumno.class);
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 		
