@@ -25,7 +25,7 @@ public class Encuesta implements Serializable {
 	@ManyToMany(mappedBy="encuestas", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupos_por_Asignatura> GrAsig;
 	
-	private boolean asignatura_ingles;
+	private Boolean asignatura_ingles;
 	
 	public Encuesta() {
 		super();
@@ -55,7 +55,7 @@ public class Encuesta implements Serializable {
 		GrAsig = grAsig;
 	}
 	
-	public boolean getAsignatura_ingles() {
+	public Boolean getAsignatura_ingles() {
 		return asignatura_ingles;
 	}
 	
@@ -92,13 +92,14 @@ public class Encuesta implements Serializable {
 	public String toString() {
 		StringJoiner sj = new StringJoiner(", ","Encuesta [","]");
 		StringJoiner sj2;
-		if(Fecha_envio != null) 		{sj.add("Fecha_envio=" + Fecha_envio);}
-		if(expediente != null) 			{sj.add("Expediente=" + expediente.getNum_expediente());}
+		if(Fecha_envio != null) 				{sj.add("Fecha_envio=" + Fecha_envio);}
+		if(expediente != null) 					{sj.add("Expediente=" + expediente.getNum_expediente());}
 		if(GrAsig != null) {
 			sj2 = new StringJoiner(", ","Grupos_por_Asignatura=(",")");
 			for(Grupos_por_Asignatura e : GrAsig) { if(e.getId() != null) { sj2.add(e.getId().toString());}}
 			sj.add(sj2.toString());
 		}
+		if(asignatura_ingles != null) 			{sj.add("asignatura_ingles=" + asignatura_ingles);}
 		return sj.toString();
 	}
 	
