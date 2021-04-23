@@ -25,6 +25,8 @@ public class Encuesta implements Serializable {
 	@ManyToMany(mappedBy="encuestas", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupos_por_Asignatura> GrAsig;
 	
+	private boolean asignatura_ingles;
+	
 	public Encuesta() {
 		super();
 	}
@@ -52,7 +54,15 @@ public class Encuesta implements Serializable {
 	public void setGrAsig(List<Grupos_por_Asignatura> grAsig) {
 		GrAsig = grAsig;
 	}
-
+	
+	public boolean getAsignatura_ingles() {
+		return asignatura_ingles;
+	}
+	
+	public void setAsignatura_ingles(boolean asignatura_ingles) {
+		this.asignatura_ingles = asignatura_ingles;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
