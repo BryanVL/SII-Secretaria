@@ -217,6 +217,7 @@ public class Grupo implements Serializable {
 		if(Visible != null) 			{sj.add("Visible=" + Visible);}
 		if(Asignar != null) 			{sj.add("Asignar=" + Asignar);}
 		if(Plazas != null) 				{sj.add("Plazas=" + Plazas);}
+		if(PlazasDisponibles != null) 	{sj.add("PlazasDisponibles=" + PlazasDisponibles);}
 		if(titulacion != null) 			{sj.add("titulacion=" + titulacion.getCodigo());}
 		if(grupos != null) {
 			sj2 = new StringJoiner(", ","Grupos=(",")");
