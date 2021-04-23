@@ -154,12 +154,15 @@ public class GrupoImpl implements InterfazGrupo{
 			throw new AsignaturaException("La asignatura no ha sido encontrada");
 		}
 		
+		
+		
 		if(g.getPlazasDisponibles()>0) {
 			g.setPlazasDisponibles(g.getPlazasDisponibles()-1);
 			Asignaturas_Matricula am = new Asignaturas_Matricula();
 			am.setMatricula(m);
 			am.setGrupo(g);
 			am.setAsignatura(asig);
+			am.setAsignacionAutomatica(true);
 			Asignaturas_Matricula_PK id = new Asignaturas_Matricula_PK();
 			id.setIdAsig(asig.getReferencia());
 			id.setIdM(m.getId());
