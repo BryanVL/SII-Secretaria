@@ -1,9 +1,11 @@
 package interfacesEJB;
 
+import javax.ejb.Local;
+
 import excepcionesEJB.OptativaException;
 import jpa.Optativa;
 
-
+@Local
 public interface InterfazOptativa {
 
 	/**Este método es para visualizar el expediente

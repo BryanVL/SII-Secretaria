@@ -1,8 +1,11 @@
 package interfacesEJB;
 
+import javax.ejb.Local;
+
 import excepcionesEJB.TitulacionException;
 import jpa.Titulacion;
 
+@Local
 public interface InterfazTitulacion {
 
 	
