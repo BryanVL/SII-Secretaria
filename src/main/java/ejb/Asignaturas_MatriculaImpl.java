@@ -63,6 +63,7 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 
 	@Override
 	public List<Asignaturas_Matricula> AplicarFiltros(Asignatura a) throws AsignaturaException {
+		
 		Asignatura asignaturaExistente = em.find(Asignatura.class,a.getReferencia());
 
 		if(asignaturaExistente == null) {
@@ -77,6 +78,7 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 
 	@Override
 	public List<Asignaturas_Matricula> AplicarFiltros(Matricula m) throws MatriculaException {
+		
 		Matricula matriculaExistente = em.find(Matricula.class,m.getId());
 
 		if(matriculaExistente == null) {
