@@ -63,14 +63,30 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 
 	@Override
 	public List<Asignaturas_Matricula> AplicarFiltros(Asignatura a) throws AsignaturaException {
-		
-		return null;
+		Asignatura asignaturaExistente = em.find(Asignatura.class,a.getReferencia());
+
+		if(asignaturaExistente == null) {
+		throw new AsignaturaException("La asignatura indicada no existe.");
+		}
+
+		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a order by a.getAsignatura()",Asignaturas_Matricula.class);
+		List<Asignaturas_Matricula> listaAsig = query.getResultList();
+
+		return listaAsig;
 	}
 
 	@Override
 	public List<Asignaturas_Matricula> AplicarFiltros(Matricula m) throws MatriculaException {
-		
-		return null;
+		Matricula matriculaExistente = em.find(Matricula.class,m.getId());
+
+		if(matriculaExistente == null) {
+		throw new MatriculaException("La matricula indicada no existe.");
+		}
+
+		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a order by a.getMatricula()",Asignaturas_Matricula.class);
+		List<Asignaturas_Matricula> listaAsig = query.getResultList();
+
+		return listaAsig;
 		
 	}
 	
