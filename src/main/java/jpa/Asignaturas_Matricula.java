@@ -119,10 +119,11 @@ public class Asignaturas_Matricula implements Serializable {
 	@Override
 	public String toString() {
 		StringJoiner sj = new StringJoiner(", ","Asignaturas_Matricula [","]");
-		if(id != null) 				{sj.add("id=" + id.toString());}
-		if(grupo != null) 			{sj.add("grupo=" + grupo.getID());}
-		if(asignatura != null) 		{sj.add("asignatura=" + asignatura.getReferencia());}
-		if(matricula != null) 		{sj.add("matricula=" + matricula.getId().toString());}
+		if(id != null) 							{sj.add("id=" + id.toString());}
+		if(grupo != null) 						{sj.add("grupo=" + grupo.getID());}
+		if(asignatura != null) 					{sj.add("asignatura=" + asignatura.getReferencia());}
+		if(asignacionAutomatica != null) 		{sj.add("asignacionAtuomatica=" + asignacionAutomatica);}
+		if(matricula != null) 					{sj.add("matricula=" + matricula.getId().toString());}
 		return sj.toString();
 	}
 	
