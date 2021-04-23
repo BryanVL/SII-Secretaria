@@ -72,8 +72,7 @@ public class GrupoImpl implements InterfazGrupo{
 
 	@Override
 	public void ComprobarPlazas(Grupo g) throws GrupoException {
-		// TODO Auto-generated method stub
-		if(g.getPlazas()==0) {
+		if(g.getPlazasDisponibles()==0) {
 			throw new GrupoException();
 		}
 	}
@@ -149,21 +148,28 @@ public class GrupoImpl implements InterfazGrupo{
 		if(g==null) {
 			throw new GrupoException("El grupo no ha sido encontrado");
 		}
-		
+			
 		Asignatura asig = em.find(Asignatura.class, asignatura.getReferencia());
 		if(asig==null) {
 			throw new AsignaturaException("La asignatura no ha sido encontrada");
 		}
 		
-		Asignaturas_Matricula am = new Asignaturas_Matricula();
-		am.setMatricula(m);
-		am.setGrupo(g);
-		am.setAsignatura(asig);
-		Asignaturas_Matricula_PK id = new Asignaturas_Matricula_PK();
-		id.setIdAsig(asig.getReferencia());
-		id.setIdM(m.getId());
-		am.setId(id);
-		em.persist(am);	
+		if(g.getPlazasDisponibles()>0) {
+			g.setPlazasDisponibles(g.getPlazasDisponibles()-1);
+			Asignaturas_Matricula am = new Asignaturas_Matricula();
+			am.setMatricula(m);
+			am.setGrupo(g);
+			am.setAsignatura(asig);
+			Asignaturas_Matricula_PK id = new Asignaturas_Matricula_PK();
+			id.setIdAsig(asig.getReferencia());
+			id.setIdM(m.getId());
+			am.setId(id);
+			em.persist(am);	
+		}else {
+			throw new GrupoException("No quedan plazas disponibles en este grupo");
+		}
+		
 	}
+	
     
 }

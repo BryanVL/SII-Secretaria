@@ -33,6 +33,8 @@ public class Grupo implements Serializable {
 	private Boolean Asignar;
 	@Column(length=3)
 	private Integer Plazas;
+	@Column(length=3)
+	private Integer PlazasDisponibles;
 	
 	@ManyToOne
 	@JoinColumn(nullable=false)
@@ -120,6 +122,14 @@ public class Grupo implements Serializable {
 
 	public void setPlazas(Integer plazas) {
 		Plazas = plazas;
+	}
+	
+	public Integer getPlazasDisponibles() {
+		return PlazasDisponibles;
+	}
+
+	public void setPlazasDisponibles(Integer plazas) {
+		PlazasDisponibles = plazas;
 	}
 
 	public Titulacion getTitulacion() {
