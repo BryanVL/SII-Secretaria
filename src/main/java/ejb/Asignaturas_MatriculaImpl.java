@@ -1,6 +1,5 @@
 package ejb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -15,10 +14,12 @@ public class Asignaturas_MatriculaImpl {
 	@PersistenceContext(name = "Secretaria")
 	EntityManager em;
 	
-	public List<Alumno> VisualizarAlumnosPorGrupo(Integer curso, String letra){
-		List<Alumno> lista = new ArrayList();
+	public List<Alumno> VisualizarAlumnosPorGrupo(Integer cur, String let){
+		List<Alumno> lista = em.createQuery("SELECT idExp FROM asignaturas_Matricula where curso == cur && letra == let").getResultList();
 		
-		return null;
+		
+		
+		return lista;
 	}
 	
 }
