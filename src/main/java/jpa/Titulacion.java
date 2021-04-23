@@ -34,9 +34,11 @@ public class Titulacion implements Serializable {
 	@OneToMany(mappedBy="titulacion", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Grupo> grupos;
 	
-	@ManyToMany(mappedBy="titulaciones")
-	@JoinColumn(nullable=false)
+	@ManyToMany(mappedBy="titulaciones", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Centro> centros;
+	
+	@ManyToMany(mappedBy="titulaciones", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
+	private List<Optativa> optativas;
 	
 	public Titulacion() {
 		super();
@@ -111,6 +113,15 @@ public class Titulacion implements Serializable {
 	public void setCentros(List<Centro> centros) {
 		this.centros = centros;
 	}
+	
+	public List<Optativa> getOptativas() {
+		return optativas;
+	}
+
+
+	public void setOptativas(List<Optativa> optativas) {
+		this.optativas = optativas;
+	}
 
 
 	@Override
@@ -168,5 +179,6 @@ public class Titulacion implements Serializable {
 		}
 		return sj.toString();
 	}
+
 	
 }

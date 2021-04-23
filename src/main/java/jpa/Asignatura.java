@@ -39,8 +39,7 @@ public class Asignatura implements Serializable {
 	private String Unidad_temporal;
 	
 	
-	@OneToMany(mappedBy="asignatura", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
-	@JoinColumn(nullable=false)
+	@ManyToMany(mappedBy="asignaturas", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Idiomas> idiomas;
 	
 	@ManyToOne

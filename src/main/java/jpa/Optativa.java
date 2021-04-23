@@ -1,6 +1,7 @@
 package jpa;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.StringJoiner;
 
 import javax.persistence.*;
@@ -21,6 +22,8 @@ public class Optativa implements Serializable {
 	@Column(length=30)
 	private String Mencion;
 	
+	@ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
+	private List<Titulacion> titulaciones;
 	
 	public Optativa() {
 		super();
@@ -43,6 +46,13 @@ public class Optativa implements Serializable {
 	}
 	public void setMencion(String mencion) {
 		Mencion = mencion;
+	}
+	public List<Titulacion> getTitulaciones() {
+		return titulaciones;
+	}
+
+	public void setTitulaciones(List<Titulacion> titulaciones) {
+		this.titulaciones = titulaciones;
 	}
 
 	@Override
@@ -78,5 +88,6 @@ public class Optativa implements Serializable {
 		if(Mencion != null) 			{sj.add("Mencion=" + Mencion);}
 		return sj.toString();
 	}
+
 	
 }

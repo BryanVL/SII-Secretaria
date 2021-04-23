@@ -157,7 +157,7 @@ public class GrupoImpl implements InterfazGrupo{
 		
 		
 		if(g.getPlazasDisponibles()>0) {
-			g.setPlazasDisponibles(g.getPlazasDisponibles()-1);
+			//g.setPlazasDisponibles(g.getPlazasDisponibles()-1);//Disminuir en uno plazas
 			Asignaturas_Matricula am = new Asignaturas_Matricula();
 			am.setMatricula(m);
 			am.setGrupo(g);
