@@ -36,6 +36,7 @@ import excepcionesEJB.ClaseException;
 import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.GrupoException;
 import excepcionesEJB.ImportarException;
+import excepcionesEJB.MatriculaException;
 import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 import jpa.Asignatura;
@@ -224,7 +225,7 @@ public class horarios implements InterfazImportar{
 	}
 	
 	//visualizar horarios de asignaturas
-	public HashMap<Asignatura, List<Clase>> VisualizarHorarios(Alumno a) throws ClaseException, AlumnoException {
+	public HashMap<Asignatura, List<Clase>> VisualizarHorarios(Alumno a, Matricula matricula) throws ClaseException, AlumnoException, MatriculaException {
 
 		
 		HashMap<Asignatura, List<Clase>> res = new HashMap<Asignatura, List<Clase>>();
@@ -232,8 +233,22 @@ public class horarios implements InterfazImportar{
 		if (alu == null) {	
 			throw new AlumnoException();
 		}
-
-		List<Expediente> exp = alu.getExpedientes();
+		
+		Matricula matr = em.find(Matricula.class, matricula.getId());
+		if (matr == null) {	
+			throw new MatriculaException();
+		}
+		
+		
+		for(Asignaturas_Matricula asiM: matr.getAsigMat()) {
+			List<Clase> clases = new ArrayList<Clase>();
+			Asignatura asig = asiM.getAsignatura();
+			clases.addAll(asig.getClases());
+			res.put(asig, clases);
+		}
+		
+		
+		/*List<Expediente> exp = alu.getExpedientes();
 		List<Matricula> mat;
 		List<Asignaturas_Matricula> asigM;
 		
@@ -248,7 +263,7 @@ public class horarios implements InterfazImportar{
 					res.put(asig, clases);
 				}
 			}
-		}
+		}*/
 		
 		return res;
 	}
