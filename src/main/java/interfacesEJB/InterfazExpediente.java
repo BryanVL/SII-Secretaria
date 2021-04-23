@@ -3,6 +3,7 @@ package interfacesEJB;
 import javax.ejb.Local;
 
 import excepcionesEJB.ExpedienteException;
+import excepcionesEJB.TitulacionException;
 import jpa.Expediente;
 
 

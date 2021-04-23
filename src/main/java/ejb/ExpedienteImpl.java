@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -27,11 +29,17 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.sun.tools.hat.internal.parser.Reader;
 
+import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ExpedienteException;
+import excepcionesEJB.GrupoException;
 import excepcionesEJB.ImportarException;
+import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazExpediente;
 import interfacesEJB.InterfazImportar;
+import jpa.Alumno;
 import jpa.Expediente;
+import jpa.Grupo;
+import jpa.Titulacion;
 
 
 @Stateless
@@ -66,35 +74,60 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 				e.printStackTrace();
 			}
 		      
-		       
-		       Sheet sh = wb.getSheetAt(0);
-		       int iRow = 0;
-		       Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-		       int n=1;
-		       while(row!=null) 
-		       {
+			try {
+				Sheet sh = wb.getSheetAt(0);
+				int iRow = 0;
+				Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
+				int n=1;
+				while(row!=null) 
+				{
 		    	
-		    	   if(n>=5) {
-		           Cell cell = row.getCell(4);  
-		           String nExpediente = cell.getStringCellValue();
-		           cell = row.getCell(17);  
-		           String notaMedia = cell.getStringCellValue();
-		           cell = row.getCell(18);  
-		           String creditosSuperados = cell.getStringCellValue();
-	               Expediente e = new Expediente();
-		               
-	               e.setNota_media_provisional(Float.parseFloat(notaMedia));
-	               e.setCreditos_superados(Float.parseFloat(creditosSuperados));
-	               e.setNum_expediente(Integer.parseInt(nExpediente));
-	               e.setActivo(true);
+					if(n>=5) {
+		    		   Cell cell = row.getCell(4);  
+		    		   String nExpediente = cell.getStringCellValue();
+		    		   cell = row.getCell(17);  
+		    		   String notaMedia = cell.getStringCellValue();
+		    		   cell = row.getCell(18);  
+		    		   String creditosSuperados = cell.getStringCellValue();
+		           
+		    		   cell = row.getCell(1); 
+		    		   String dniAlumno = cell.getStringCellValue();
+		    		   TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
+		    		   query.setParameter("fdni", dniAlumno);
+		    		   List<Alumno> alumnos = query.getResultList();
+		    		   if(alumnos.size() == 0) {
+		    			   throw new AlumnoException();
+		    		   }
+               	
+		    		   String codigoTitulacion = nExpediente.substring(0, 4);
+		    		   Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
+		    		   if(titulacionExistente == null) {
+		    			   throw new TitulacionException();
+		    		   }
+		           
+		           
+		    		   Expediente e = new Expediente();  
+		    		   e.setNota_media_provisional(Float.parseFloat(notaMedia));
+		    		   e.setCreditos_superados(Float.parseFloat(creditosSuperados));
+		    		   e.setNum_expediente(Integer.parseInt(nExpediente));
+		    		   e.setActivo(true);
+		    		   e.setTitulacion(titulacionExistente);
+		    		   e.setAlumno(alumnos.get(0));
 	            	
-	               em.persist(e);
+		    		   em.persist(e);
 		    	   }
 		           n++;
 		           iRow++;  
 		           row = sh.getRow(iRow);
 		       }
-		}else if(dir.endsWith("csv")){
+			} catch (AlumnoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TitulacionException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} else if (dir.endsWith("csv")){
 			 //Para el archivo csv de 'alumnos' 
 			BufferedReader reader;
 			try {
@@ -105,22 +138,45 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 	            	
 	            	if(n>=5) {
 	            		
-	            	String nExpediente = csvRecord.get(4);
-	                String notaMedia = csvRecord.get(17);
-	                String creditosSuperados = csvRecord.get(18);
-	                Expediente e = new Expediente();
-	               
-	                e.setNota_media_provisional(Float.parseFloat(notaMedia));
-	                e.setCreditos_superados(Float.parseFloat(creditosSuperados));
-	                e.setNum_expediente(Integer.parseInt(nExpediente));
-	                e.setActivo(true);
-	            	em.persist(e);
+	            		String nExpediente = csvRecord.get(4);
+	                	String notaMedia = csvRecord.get(17);
+	                	String creditosSuperados = csvRecord.get(18);
+	                	
+	                	String dniAlumno = csvRecord.get(1);
+	                	TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
+	                	query.setParameter("fdni", dniAlumno);
+	                    List<Alumno> alumnos = query.getResultList();
+	                    if(alumnos.size() == 0) {
+	                    	throw new AlumnoException();
+	                    }
+	                	
+	                	String codigoTitulacion = nExpediente.substring(0, 4);
+	                	Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
+	                	if(titulacionExistente == null) {
+	                    	throw new TitulacionException();
+	                    }
+
+	                	Expediente e = new Expediente();
+	                	e.setNota_media_provisional(Float.parseFloat(notaMedia));
+	                	e.setCreditos_superados(Float.parseFloat(creditosSuperados));
+	                	e.setNum_expediente(Integer.parseInt(nExpediente));
+	                	e.setActivo(true);
+	                	e.setTitulacion(titulacionExistente);
+	                	e.setAlumno(alumnos.get(0));
+	                
+	            		em.persist(e);
 	            	}
 	            	n++;
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (AlumnoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (TitulacionException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
             
 		}else {

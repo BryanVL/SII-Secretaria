@@ -34,7 +34,7 @@ public class Asignatura implements Serializable {
 	@Column(length=10)
 	private String Caracter;
 	@Column(length=1)
-	private Integer Duracion;
+	private String Duracion;
 	@Column(length=10)
 	private String Unidad_temporal;
 	
@@ -145,12 +145,12 @@ public class Asignatura implements Serializable {
 	}
 
 
-	public Integer getDuracion() {
+	public String getDuracion() {
 		return Duracion;
 	}
 
 
-	public void setDuracion(Integer duracion) {
+	public void setDuracion(String duracion) {
 		Duracion = duracion;
 	}
 
