@@ -28,6 +28,7 @@ public class Asignaturas_Matricula implements Serializable {
 	@Id @ManyToOne
 	private Matricula matricula;
 
+	private Boolean asignacionAutomatica; //Si es true la asignación ha sido automatica
 	
 	
 	public Asignaturas_Matricula() {
@@ -72,6 +73,16 @@ public class Asignaturas_Matricula implements Serializable {
 
 	public Matricula getMatricula() {
 		return matricula;
+	}
+
+	
+	public Boolean getAsignacionAutomatica() {
+		return asignacionAutomatica;
+	}
+
+
+	public void setAsignacionAutomatica(Boolean asignacionAutomatica) {
+		this.asignacionAutomatica = asignacionAutomatica;
 	}
 
 
