@@ -53,12 +53,12 @@ import jpa.Matricula;
  */
 @Stateless
 @LocalBean
-public class horarios implements InterfazImportar, InterfazHorarios{
+public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 
 	@PersistenceContext(name="Secretaria")
 	private EntityManager em;
  
-    public horarios() {
+    public ClaseImpl() {
         // TODO Auto-generated constructor stub
     }
 
