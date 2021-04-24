@@ -14,7 +14,7 @@ import interfacesEJB.InterfazMatricula;
 
 public class AsignaturaMatriculaPrueba {
 	
-	private static final Logger LOG = Logger.getLogger(MatriculaPrueba.class.getCanonicalName());
+	private static final Logger LOG = Logger.getLogger(AsignaturaMatriculaPrueba.class.getCanonicalName());
 	private static final String GRUPO_EJB = "java:global/classes/Asignaturas_MatriculaImpl!ejb.Asignaturas_MatriculaImpl";	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
