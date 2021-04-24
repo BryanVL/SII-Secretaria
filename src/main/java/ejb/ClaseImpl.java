@@ -127,16 +127,19 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
 				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
-				int n=1;
+				int n=0;
 	            for (CSVRecord csvRecord : csvParser) {
 	            	
-	            	if(n>=1) {                
-		                String curso = csvRecord.get(0);  
-		                String gr = csvRecord.get(1);  
-			            String asig = csvRecord.get(2);  
-			            String dia = csvRecord.get(3); 
-			            String hora_inicio = csvRecord.get(4); 			           
-			            String hora_fin = csvRecord.get(5);  
+	            	if(n>=1) {    
+	            		
+	            		String[] lista =  csvRecord.get(0).split(";");
+	            		
+		                String curso = lista[0];  
+		                String gr = lista[1];  
+			            String asig = lista[2];  
+			            String dia = lista[3]; 
+			            String hora_inicio = lista[4]; 			           
+			            String hora_fin = lista[5];  
 	               
 			            Clase c = new Clase();
 				           try {

@@ -39,7 +39,7 @@ public class EncuestaPrueba {
 	}
 	
 	@Test
-	public void testImportarTitulacion() {
+	public void testPedirIngles() {
 		Encuesta encuesta = new Encuesta();
 		encuesta.setAsignatura_ingles(true);
 		encuesta.setFecha_envio(new Date("12/09/2019"));
