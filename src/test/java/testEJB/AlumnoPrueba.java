@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import interfacesEJB.InterfazAlumno;
 import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
@@ -38,11 +39,13 @@ public class AlumnoPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF1"})
 	public void testValidarAcceso() {
 		assertEquals(1,1);
 	}
 	
 	@Test
+	@Requisitos({"RF11"})
 	public void testVisualizarAlumno() {
 		assertEquals(1,1);
 	}
