@@ -55,21 +55,8 @@ public class MatriculaPrueba {
 			mpk.setCurso_academico("2020/2021");
 			mpk.setIdExp(1);
 			m.setId(mpk);
-			m.setEstado("Activa");
+			interfazMatricula.VisualizarMatricula(m);
 			
-			m.setNum_Archivo(306000001);
-			m.setTurno_Preferente("Mañana");
-			m.setNuevo_Ingreso("Si");
-			
-			
-			
-			Matricula m2 = interfazMatricula.VisualizarMatricula();
-			
-			if(m!=null) {
-				assertEquals(m,m2);
-			}else {
-				fail("No coinciden las referencias");
-			}
 		} catch (ImportarException e) {
 			fail("No debería lanzarse excepción");
 		} catch (MatriculaException e) {
@@ -98,7 +85,7 @@ public class MatriculaPrueba {
 		
 		
 		try {
-			assertEquals(m,interfazMatricula.VisualizarTitulacion(mpk.get));
+			interfazMatricula.VisualizarMatricula(m);
 		} catch (MatriculaException e) {
 			fail("No debería lanzarse excepción");
 		}

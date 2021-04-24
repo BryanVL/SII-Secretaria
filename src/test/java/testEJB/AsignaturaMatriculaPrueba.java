@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -33,24 +34,28 @@ public class AsignaturaMatriculaPrueba {
 	
 	@Test
 	@Requisitos({"RF7"})
-	public void testVisualizarAsignaturas_Matricula() {
+	@Ignore
+	public void testVisualizarAlumnosPorGrupo() {
 		assertEquals(1,1);
 	}
 	
 	@Test
 	@Requisitos({"RF18"})
+	@Ignore
 	public void testFiltrarPorAsignatura() {
 		assertEquals(1,1);
 	}
 	
 	@Test
 	@Requisitos({"RF18"})
+	@Ignore
 	public void testFiltrarPorGrupo() {
 		assertEquals(1,1);
 	}
 	
 	@Test
 	@Requisitos({"RF18"})
+	@Ignore
 	public void testFiltrarPorAsignaturas_Matricula() {
 		assertEquals(1,1);
 	}

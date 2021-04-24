@@ -53,6 +53,7 @@ public class BaseDatos {
 		//---------------------Bryan---------------------//
 		bryan.setNombre("Bryan");
 		bryan.setApellido1("velicka");
+		bryan.setID(1234L);
 		bryan.setDNI("125678A");
 		bryan.setEmail_institucional("velicka.b@uma.es");
 		b.setNum_expediente(123);

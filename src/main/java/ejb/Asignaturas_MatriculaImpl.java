@@ -34,7 +34,7 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 			throw new GrupoException("El grupo indicado no existe.");
 		}
 		
-		TypedQuery query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE g.getID() = a.getGrupo().getID()",Asignaturas_Matricula.class);
+		TypedQuery query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE g.ID = a.grupo.ID",Asignaturas_Matricula.class);
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 		
 		List<Alumno> listaAlum = new ArrayList();
@@ -55,7 +55,7 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 			throw new GrupoException("El grupo indicado no existe.");
 		}
 		
-		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a order by a.getGrupo()",Asignaturas_Matricula.class);
+		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a order by a.grupo",Asignaturas_Matricula.class);
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 		
 		return listaAsig;
