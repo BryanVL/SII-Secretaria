@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -12,10 +13,15 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.GrupoException;
+import excepcionesEJB.MatriculaException;
 import interfacesEJB.InterfazGrupo;
 import interfacesEJB.InterfazTitulacion;
+import jpa.Asignatura;
 import jpa.Grupo;
+import jpa.Matricula;
+import jpa.Matricula_PK;
 import jpa.Titulacion;
 
 
@@ -36,7 +42,7 @@ public class GrupoPrueba {
 		
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
-	@Ignore
+	
 	@Test
 	public void testCrearGrupo() {
 		Grupo grupoB = new Grupo();
@@ -59,7 +65,7 @@ public class GrupoPrueba {
 			fail("El grupo ya existia");
 		}
 	}
-	@Ignore
+	
 	@Test
 	public void testLeerGrupo() {
 		Grupo grupo = new Grupo();
@@ -73,7 +79,7 @@ public class GrupoPrueba {
 		
 		assertEquals(nuevo, grupo);
 	}
-	@Ignore
+	
 	@Test
 	public void testBorrarGrupo() {
 		Grupo grupo = new Grupo();
@@ -93,7 +99,7 @@ public class GrupoPrueba {
 		
 	}
 	
-	@Ignore
+	
 	@Test
 	public void testActualizarGrupo() {
 		Grupo g = new Grupo();
@@ -119,7 +125,7 @@ public class GrupoPrueba {
 		}
 	}
 	
-	@Ignore
+	
 	@Test
 	public void testComprobarPlazas() {
 		Grupo g = new Grupo();
@@ -154,7 +160,7 @@ public class GrupoPrueba {
 		assertTrue(g.getID()== 1l);
 	}
 	
-
+	
 	@Test
 	public void testBuscarGrupoLetra() {
 		Integer curso = 1;
@@ -172,10 +178,34 @@ public class GrupoPrueba {
 		assertTrue(probando);
 	}
 	
-	@Ignore
+	
 	@Test
 	public void testAsignarGrupo() {
+		Matricula matricula = new Matricula();
+		Matricula_PK mPK = new Matricula_PK();
+		mPK.setCurso_academico("18/19");
+		mPK.setIdExp(123);
+		matricula.setId(mPK);
+		matricula.setEstado("Activo");
+		matricula.setFecha_de_matricula(new Date("12/09/2018"));
+		Grupo grupo = new Grupo();
+		grupo.setID(1l);
+		Asignatura asignatura = new Asignatura();
+		asignatura.setReferencia(12345);
 		
+		try {
+			interfazGrupo.asignarGrupo(matricula, grupo, asignatura);
+		} catch (MatriculaException | GrupoException | AsignaturaException e) {
+			fail("Alguno de los argumentos no ha sido encontrado (matricula, grupo o asignatura)");
+		}
+		
+		try {
+			grupo=interfazGrupo.Leer(grupo);
+		} catch (GrupoException e) {
+			fail("Grupo no encontrado");
+		}
+		
+		assertTrue(grupo.getID() == 1l);
 	}
 	
 	
