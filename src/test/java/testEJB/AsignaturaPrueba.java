@@ -36,13 +36,13 @@ public class AsignaturaPrueba {
 	
 	@Test
 	@Requisitos({"RF7"})
-	public void testImportarOptativa() {
+	public void testImportarAsignatura() {
 
 	}
 	
 	@Test
 	@Requisitos({"RF11"})
-	public void testVisualizarOptativa() {
+	public void testVisualizarAsignatura() {
 		
 		
 

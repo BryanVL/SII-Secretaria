@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import interfacesEJB.InterfazAsignaturas_Matricula;
 import interfacesEJB.InterfazMatricula;
 
@@ -31,21 +32,25 @@ public class AsignaturaMatriculaPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF7"})
 	public void testVisualizarAsignaturas_Matricula() {
 		assertEquals(1,1);
 	}
 	
 	@Test
+	@Requisitos({"RF18"})
 	public void testFiltrarPorAsignatura() {
 		assertEquals(1,1);
 	}
 	
 	@Test
+	@Requisitos({"RF18"})
 	public void testFiltrarPorGrupo() {
 		assertEquals(1,1);
 	}
 	
 	@Test
+	@Requisitos({"RF18"})
 	public void testFiltrarPorAsignaturas_Matricula() {
 		assertEquals(1,1);
 	}
