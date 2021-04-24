@@ -31,34 +31,25 @@ import es.uma.informatica.sii.ejb.practica.entidades.Ingrediente;
 import es.uma.informatica.sii.ejb.practica.entidades.Lote;
 import es.uma.informatica.sii.ejb.practica.entidades.Producto;*/
 
-public class SampleTest {
+public class SampleT {
 	
-	private static final Logger LOG = Logger.getLogger(SampleTest.class.getCanonicalName());
+	private static final Logger LOG = Logger.getLogger(SampleT.class.getCanonicalName());
 
-	private static final String PRODUCTOS_EJB = "java:global/classes/ProductosEJB";
-	private static final String GLASSFISH_CONFIGI_FILE_PROPERTY = "org.glassfish.ejb.embedded.glassfish.configuration.file";
-	private static final String CONFIG_FILE = "/Secretaria/src/test/java/META-INF/domain.xml";
+	private static final String PRODUCTOS_EJB = "java:global/classes/ProductosEJB";	
 	private static final String LOTES_EJB = "java:global/classes/LotesEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
-	private static EJBContainer ejbContainer;
-	private static Context ctx;
+	
 	
 	//private GestionLotes gestionLotes;
 	//private GestionProductos gestionProductos;
 	
-	@BeforeClass
-	public static void setUpClass() {
-		Properties properties = new Properties();
-		properties.setProperty(GLASSFISH_CONFIGI_FILE_PROPERTY, CONFIG_FILE);
-		ejbContainer = EJBContainer.createEJBContainer(properties);
-		ctx = ejbContainer.getContext();
-	}
+	
 	
 	@Before
 	public void setup() throws NamingException  {
-		//gestionLotes = (GestionLotes) ctx.lookup(LOTES_EJB);
-		//gestionProductos = (GestionProductos) ctx.lookup(PRODUCTOS_EJB);
+		//gestionLotes = (GestionLotes) SuiteTest.ctx.lookup(LOTES_EJB);
+		//gestionProductos = (GestionProductos) SuiteTest.ctx.lookup(PRODUCTOS_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
@@ -418,11 +409,6 @@ public class SampleTest {
 		}
 	}*/
 	
-	@AfterClass
-	public static void tearDownClass() {
-		if (ejbContainer != null) {
-			ejbContainer.close();
-		}
-	}
+
 
 }
