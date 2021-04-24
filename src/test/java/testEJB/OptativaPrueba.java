@@ -29,12 +29,17 @@ public class OptativaPrueba {
 
 	private static final String OPTATIVA_EJB = "java:global/classes/OptativaImpl!ejb.OptativaImpl";
 	private static final String ASIGNATURA_EJB = "java:global/classes/OptativaImpl!ejb.AsignaturaImpl";	
+
+	private static final String TITULACION_EJB = "java:global/classes/AsignaturaImpl!ejb.TitulacionImpl";	
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
 	
 	
 	private InterfazImportar interfazImportar;
+	private InterfazImportar interfazImportar2;
+	private InterfazImportar interfazImportar3;
+	
 	private InterfazOptativa interfazOptativa;
 	private InterfazAsignatura interfazAsignatura;
 	
@@ -42,6 +47,9 @@ public class OptativaPrueba {
 	@Before
 	public void setup() throws NamingException  {
 		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(OPTATIVA_EJB);
+		interfazImportar2 = (InterfazImportar) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
+		interfazImportar3 = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
+		
 		interfazOptativa = (InterfazOptativa) SuiteTest.ctx.lookup(OPTATIVA_EJB);
 		interfazAsignatura = (InterfazAsignatura) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
@@ -52,8 +60,13 @@ public class OptativaPrueba {
 	public void testImportarOptativa() {
 
 		String dir = "src/test/resources/Optativas_Informatica.csv";
+		String dir2 = "src/test/resources/GII.csv";
+		String dir3 = "src/test/resources/Titulacion.csv";
 		
 		try {
+
+			interfazImportar3.Importar(dir3);
+			interfazImportar2.Importar(dir2);
 			interfazImportar.Importar(dir);
 			
 			

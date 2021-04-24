@@ -40,6 +40,7 @@ public class AsignaturaPrueba {
 	@Before
 	public void setup() throws NamingException  {
 		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
+		interfazImportar2 = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
 		interfazAsignatura = (InterfazAsignatura) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
@@ -49,8 +50,11 @@ public class AsignaturaPrueba {
 	public void testImportarAsignatura() {
 
 		String dir = "src/test/resources/GII.csv";
+		String dir2 = "src/test/resources/Titulacion.csv";
 		
 		try {
+			
+			interfazImportar2.Importar(dir2);
 			interfazImportar.Importar(dir);
 			
 			
