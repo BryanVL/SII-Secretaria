@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazImportar;
@@ -40,21 +41,25 @@ public class ClasePrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF7"})
 	public void testImportarClase() {
 		
 	}
 	
 	@Test
+	@Requisitos({"RF11"})
 	public void testVisualizarHorarioClase() {
 		assertEquals(1,1);
 	}
 	
 	@Test
+	@Requisitos({"RF11"})
 	public void testVisualizarHorarioGrupo() {
 		assertEquals(1,1);
 	}
 	
 	@Test
+	@Requisitos({"RF11"})
 	public void testVisualizarHorarioAlumnoporMatricula() {
 		assertEquals(1,1);
 	}
