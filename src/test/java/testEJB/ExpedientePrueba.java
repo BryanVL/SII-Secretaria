@@ -10,9 +10,13 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.ImportarException;
+import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazExpediente;
 import interfacesEJB.InterfazImportar;
+import jpa.Expediente;
+import jpa.Titulacion;
 
 public class ExpedientePrueba {
 
@@ -40,27 +44,40 @@ public class ExpedientePrueba {
 	
 	@Test
 	public void testImportarExpediente() {
-		String dir = "src/test/resources/Titulacion.xlsx";
+		String dir = "src/test/resources/alumnos.csv";
+		
 		try {
 			interfazImportar.Importar(dir);
-			assertEquals(1,1);
 			
+			Expediente e = new Expediente();
+			e.setNum_expediente(104200001);
+			Expediente expediente = interfazExpediente.VisualizarExpediente(104200001);
 			
+			if(e!=null) {
+				assertEquals(e,expediente);
+			}else {
+				fail("No coinciden las referencias");
+			}
 		} catch (ImportarException e) {
+			fail("No debería lanzarse excepción");
+		} catch (ExpedienteException e) {
 			// TODO Auto-generated catch block
-			fail("No debería lanzar excepción");
+			fail("No debería lanzarse excepción");
 		}
-		
 	}
-	
 	
 	@Test
 	public void testVisualizarExpediente() {
-		assertEquals(1,1);
+		
+		//Probamos si el expediente que ya tenemos en la base de datos es el mismo que obtenemos al llamar al método.
+				Expediente ex = new Expediente();
+				ex.setNum_expediente(123);
+				
+				try {
+					assertEquals(ex,interfazExpediente.VisualizarExpediente(123));
+				} catch (ExpedienteException e) {
+					fail("No debería lanzarse excepción");
+				}
+				
 	}
-	
-	
-	
-	
-	
 }
