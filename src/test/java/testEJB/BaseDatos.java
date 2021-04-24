@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import jpa.Alumno;
+
 /*import es.uma.informatica.sii.ejb.practica.entidades.Ingrediente;
 import es.uma.informatica.sii.ejb.practica.entidades.Lote;
 import es.uma.informatica.sii.ejb.practica.entidades.Producto;*/
@@ -20,6 +22,37 @@ public class BaseDatos {
 		EntityManager em = emf.createEntityManager();
 		
 		em.getTransaction().begin();
+		
+		Alumno bryan = new Alumno();
+		Alumno fran = new Alumno();
+		Alumno amin = new Alumno();
+		Alumno noel = new Alumno();
+		Alumno david = new Alumno();
+		
+		bryan.setNombre("Bryan");
+		bryan.setApellido1("velicka");
+		bryan.setDNI("12345678A");
+		bryan.setEmail_institucional("velicka.b@uma.es");
+		
+		fran.setNombre("Franco manuel");
+		fran.setApellido1("garcia");
+		fran.setDNI("12345679B");
+		fran.setEmail_institucional("franco@uma.es");
+		
+		amin.setNombre("amin");
+		amin.setApellido1("chachaSuperFast");
+		amin.setDNI("12345680C");
+		amin.setEmail_institucional("amin@uma.es");
+		
+		noel.setNombre("noel");
+		noel.setApellido1("ApellidoDeNoel");
+		noel.setDNI("12345681D");
+		noel.setEmail_institucional("noel@uma.es");
+		
+		david.setNombre("david");
+		david.setApellido1("ApellidoDeDavid");
+		david.setDNI("12345682E");
+		david.setEmail_institucional("david@uma.es");
 		
 		/*Ingrediente carne = new Ingrediente ("Carne picada");
 		Ingrediente pimienta = new Ingrediente ("Pimienta");
