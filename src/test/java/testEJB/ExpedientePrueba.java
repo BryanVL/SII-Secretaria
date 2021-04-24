@@ -18,7 +18,8 @@ public class ExpedientePrueba {
 
 	private static final Logger LOG = Logger.getLogger(ExpedientePrueba.class.getCanonicalName());
 
-	private static final String EXPEDIENTE_EJB = "java:global/classes/ExpedienteImpl!interfacesEJB.InterfazImportar";	
+	private static final String EXPEDIENTE_EJB = "java:global/classes/ExpedienteImpl!ejb.ExpedienteImpl";
+	
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
@@ -32,6 +33,7 @@ public class ExpedientePrueba {
 	@Before
 	public void setup() throws NamingException  {
 		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
+		interfazExpediente = (InterfazExpediente) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
 		
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
