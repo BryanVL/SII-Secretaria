@@ -229,7 +229,8 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 	//Visualizar todas las clases de un grupo
 	public List<Clase> VisualizarHorarios(Grupo g) throws ClaseException {
 		
-		TypedQuery query = em.createQuery("Select c from Clase c where c.getGrupo().getId() = g.getId()", Clase.class);	              
+		TypedQuery query = em.createQuery("Select c from Clase c where c.Grupo = :id", Clase.class);	  
+		query.setParameter("id", g.getID()); 
         List<Clase> clases = query.getResultList();
 		
 		if (clases == null) {
