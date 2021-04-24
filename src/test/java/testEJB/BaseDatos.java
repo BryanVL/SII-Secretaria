@@ -1,6 +1,7 @@
 package testEJB;
 
 import java.math.BigDecimal;
+import java.sql.Time;
 //import java.sql.Date;
 import java.util.Date;
 import java.util.ArrayList;
@@ -55,11 +56,14 @@ public class BaseDatos {
 		bryan.setDNI("125678A");
 		bryan.setEmail_institucional("velicka.b@uma.es");
 		b.setNum_expediente(123);
+		b.setAlumno(bryan);
 	
-		/*Titulacion tit = new Titulacion();
+		Titulacion tit = new Titulacion();
 		tit.setCodigo(1234);
 		tit.setNombre("Informatica");
 		tit.setCreditos( 240f );
+		
+		em.persist(tit);
 		
 		b.setNum_expediente(123);
 		b.setTitulacion(tit);
@@ -68,6 +72,7 @@ public class BaseDatos {
 		Matricula_PK brk = new Matricula_PK();
 		brk.setCurso_academico("18/19");
 		brk.setIdExp(123);
+		br.setExpediente(b);
 		
 		br.setId(brk);
 		br.setEstado("Activo");
@@ -79,7 +84,7 @@ public class BaseDatos {
 		
 		List<Expediente> lb = new ArrayList<Expediente>();
 		lb.add(b);
-		bryan.setExpedientes(lb);*/
+		bryan.setExpedientes(lb);
 		
 		
 		//---------------------Fran---------------------//
@@ -135,32 +140,35 @@ public class BaseDatos {
 		
 		
 		//-----------------------------------------------//
-		/*Asignatura asignatura = new Asignatura();
+		Asignatura asignatura = new Asignatura();
 		asignatura.setReferencia(12345);
 		asignatura.setCodigo(900);
 		asignatura.setCreditos_total((float)6);
 		asignatura.setOfertada("Si");
 		asignatura.setNombre("Pruebas con Junit");
-		//asignatura.setTitulacion(tit);
+		asignatura.setTitulacion(tit);
 		
-		em.persist(asignatura);*/
+		em.persist(asignatura);
 		
-	/*	Clase cAsig = new Clase();
+		Clase cAsig = new Clase();
 		Clase_PK cAsigPK = new Clase_PK();
 		cAsigPK.setDia(new Date("24/09/2018"));
-		//cAsigPK.setHora_inicio(new);
+		cAsigPK.setHora_inicio(new Time(10,45,0));
 		cAsig.setAsignatura(asignatura);
-		//cAsig*/
+		cAsig.setId(cAsigPK);
 		
-		/*Grupo grupoA = new Grupo();
+		Grupo grupoA = new Grupo();
 		grupoA.setCurso(1);
 		grupoA.setLetra("A");
 		grupoA.setTurno_Mañana_Tarde("Mañana");
 		grupoA.setIngles("Sí");
 		grupoA.setPlazas(50);
 		grupoA.setPlazasDisponibles(50);
-		//grupoA.setTitulacion(tit);
+		grupoA.setTitulacion(tit);
 		em.persist(grupoA);
+		
+		cAsig.setGrupo(grupoA);
+		em.persist(cAsig);
 		
 		Grupo grupoB = new Grupo();
 		grupoB.setCurso(1);
@@ -169,8 +177,8 @@ public class BaseDatos {
 		grupoB.setIngles("Sí");
 		grupoB.setPlazas(50);
 		grupoB.setPlazasDisponibles(50);
-		//grupoB.setTitulacion(tit);
-		em.persist(grupoB);*/
+		grupoB.setTitulacion(tit);
+		em.persist(grupoB);
 		
 		
 		
