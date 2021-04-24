@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazImportar;
@@ -40,11 +41,13 @@ public class OptativaPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF7"})
 	public void testImportarOptativa() {
 
 	}
 	
 	@Test
+	@Requisitos({"RF11"})
 	public void testVisualizarOptativa() {
 		
 		//Probamos si la titulacion que ya tenemos en la base de datos es la misma que obtenemos al llamar al método.
