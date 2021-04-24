@@ -60,9 +60,6 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 	@PersistenceContext(name="Secretaria")
 	private EntityManager em;
  
-    public ClaseImpl() {
-        // TODO Auto-generated constructor stub
-    }
 
 	@Override
 	public void Importar(String dir) throws ImportarException {
