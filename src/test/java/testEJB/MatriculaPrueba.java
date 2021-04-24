@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ImportarException;
 import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazMatricula;
@@ -35,6 +36,7 @@ public class MatriculaPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF7"})
 	public void testImportarMatricula() {
 		
 		
@@ -42,6 +44,7 @@ public class MatriculaPrueba {
 	
 	
 	@Test
+	@Requisitos({"RF11"})
 	public void testVisualizarMatricula() {
 		assertEquals(1,1);
 	}
