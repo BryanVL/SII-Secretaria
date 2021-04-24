@@ -114,7 +114,7 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 			    		if(titulacionExistente == null) {
 			    			throw new TitulacionException();
 			    		}
-		    		
+		    		 
 	            		Asignatura a = new Asignatura();
 			    		a.setReferencia( Integer.parseInt(referencia));
 			    		a.setCodigo( Integer.parseInt(codigo));
