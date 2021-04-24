@@ -1,6 +1,7 @@
 package jpa;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 import java.util.StringJoiner;
 
@@ -19,7 +20,7 @@ public class Clase_PK implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date Dia;
 	@Temporal(TemporalType.TIME)
-	private Date Hora_inicio;
+	private Time Hora_inicio;
 	private Long idG;
 	
 	public Clase_PK() {
@@ -35,7 +36,7 @@ public class Clase_PK implements Serializable {
 	public Date getHora_inicio() {
 		return Hora_inicio;
 	}
-	public void setHora_inicio(Date hora_inicio) {
+	public void setHora_inicio(Time hora_inicio) {
 		Hora_inicio = hora_inicio;
 	}
 	public Long getIdG() {

@@ -192,7 +192,7 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
         c.setHora_fin(new Date(hora_fin));
         Clase_PK id = new Clase_PK();
         id.setDia(new Date(dia));
-        id.setHora_inicio(new Date(hora_inicio));
+        id.setHora_inicio(convertirTime(hora_inicio));
         id.setIdG(g.getID());
         c.setId(id);
         
