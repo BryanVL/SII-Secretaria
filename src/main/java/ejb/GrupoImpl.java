@@ -56,7 +56,7 @@ public class GrupoImpl implements InterfazGrupo{
 		if (grupoExistente == null) {
 			throw new GrupoException();
 		}
-		em.remove(em.merge(g));
+		em.remove(grupoExistente);
 	}
 
 	@Override

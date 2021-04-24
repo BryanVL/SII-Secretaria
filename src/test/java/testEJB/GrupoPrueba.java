@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import excepcionesEJB.GrupoException;
@@ -32,7 +33,7 @@ public class GrupoPrueba {
 		
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
-	
+	@Ignore
 	@Test
 	public void testCrearGrupo() {
 		Grupo grupoB = new Grupo();
@@ -41,6 +42,7 @@ public class GrupoPrueba {
 		tit.setNombre("Informatica");
 		tit.setCreditos( 240f );
 		
+		grupoB.setID(35l);
 		grupoB.setCurso(2);
 		grupoB.setLetra("A");
 		grupoB.setTurno_Mañana_Tarde("Mañana");
@@ -54,19 +56,91 @@ public class GrupoPrueba {
 			fail("El grupo ya existia");
 		}
 	}
-	
+	@Ignore
 	@Test
 	public void testLeerGrupo() {
-	
+		Grupo grupo = new Grupo();
+		Grupo nuevo = new Grupo();
+		grupo.setID(1l);
+		try {
+			nuevo = interfazGrupo.Leer(grupo);
+		} catch (GrupoException e) {
+			fail("no se encontro el objeto");
+		}
+		
+		assertEquals(nuevo, grupo);
 	}
-	
+	@Ignore
 	@Test
 	public void testBorrarGrupo() {
-	
+		Grupo grupo = new Grupo();
+		grupo.setID(1l);
+		
+		try {
+			interfazGrupo.Borrar(grupo);
+		} catch (GrupoException e) {
+			fail("no se encontro el objeto");
+		}
+		
+		try {
+			interfazGrupo.Leer(grupo);
+		} catch (GrupoException e) {
+			//No lo encuentra, como debe ser
+		}
+		
 	}
 	
+	@Ignore
 	@Test
 	public void testActualizarGrupo() {
-	
+		Grupo g = new Grupo();
+		Grupo grupo = new Grupo();
+		g.setID(1l);
+		try {
+			grupo = interfazGrupo.Leer(g);
+		} catch (GrupoException e) {
+			fail("no se encontro el objeto");
+		}
+		
+		grupo.setIngles("No");
+		try {
+			interfazGrupo.Actualizar(grupo);
+		} catch (GrupoException e) {
+			fail("no se encontro el objeto");
+		}
+		
+		try {
+			assertEquals(grupo, interfazGrupo.Leer(g));
+		} catch (GrupoException e) {
+			fail("no se encontro el objeto");
+		}
 	}
+	
+	@Ignore
+	@Test
+	public void testComprobarPlazas() {
+		Grupo g = new Grupo();
+		g.setID(1l);
+		Grupo grupo = new Grupo();
+		try {
+			grupo=interfazGrupo.Leer(g);
+		} catch (GrupoException e) {
+			fail("no se encontro el objeto");
+		}
+		
+		try {
+			interfazGrupo.ComprobarPlazas(grupo);
+		} catch (GrupoException e) {
+			fail("no se encontro el objeto");
+		}
+	}
+	
+	
+	@Test
+	public void testBuscarGrupoLetraTitulacion() {
+		
+	}
+	
+	
+	
 }

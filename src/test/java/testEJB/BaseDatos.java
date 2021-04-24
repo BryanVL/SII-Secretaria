@@ -158,6 +158,7 @@ public class BaseDatos {
 		cAsig.setId(cAsigPK);
 		
 		Grupo grupoA = new Grupo();
+		grupoA.setID(1l);
 		grupoA.setCurso(1);
 		grupoA.setLetra("A");
 		grupoA.setTurno_Mañana_Tarde("Mañana");
@@ -171,6 +172,7 @@ public class BaseDatos {
 		em.persist(cAsig);
 		
 		Grupo grupoB = new Grupo();
+		grupoB.setID(2l);
 		grupoB.setCurso(1);
 		grupoB.setLetra("B");
 		grupoB.setTurno_Mañana_Tarde("Mañana");

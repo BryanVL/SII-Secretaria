@@ -41,7 +41,7 @@ public class EncuestaPrueba {
 	@Test
 	public void testPedirIngles() {
 		Encuesta encuesta = new Encuesta();
-		encuesta.setAsignatura_ingles(true);
+		encuesta.setAsignatura_ingles("");
 		encuesta.setFecha_envio(new Date("12/09/2019"));
 		assertEquals(interfazEncuesta.conseguirAsignaturasIngles(encuesta), encuesta.getAsignatura_ingles().toString());
 		
