@@ -21,8 +21,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import excepcionesEJB.ImportarException;
+import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
+import jpa.Titulacion;
 
 /*import es.uma.informatica.sii.ejb.practica.ejb.GestionLotes;
 import es.uma.informatica.sii.ejb.practica.ejb.GestionProductos;
@@ -46,7 +48,7 @@ public class TitulacionPrueba {
 	
 	
 	private InterfazImportar interfazImportar;
-	//private GestionProductos gestionProductos;
+	private InterfazTitulacion interfazTitulacion;
 	
 	
 	
@@ -60,18 +62,42 @@ public class TitulacionPrueba {
 	@Test
 	public void testImportarTitulacion() {
 		String dir = "src/test/resources/Titulacion.csv";
+		
 		try {
 			interfazImportar.Importar(dir);
 			
+			Titulacion titulacion = new Titulacion();
+			titulacion.setCodigo(1042);
+			titulacion.setNombre("Grado en Ingeniería Informática");
+			titulacion.setCreditos(Float.parseFloat("240"));
+			
+			Titulacion t=interfazTitulacion.VisualizarTitulacion(titulacion);
+					
+			if(t!=null) {
+				assertTrue(true);
+			}else {
+				fail("No coinciden las referencias");
+			}
 		} catch (ImportarException e) {
+			fail("No debería lanzarse excepción");
+		} catch (TitulacionException e) {
 			// TODO Auto-generated catch block
-			fail("No debería lanzar excepción");
+			fail("No debería lanzarse excepción");
 		}
-		
 	}
+	
+	@Test
+	public void testVisualizarTitulacion() {
+		assertEquals(1,1);
+	}
+	
+	
+	}
+	
+	
 	
 
 
 
 
-}
+
