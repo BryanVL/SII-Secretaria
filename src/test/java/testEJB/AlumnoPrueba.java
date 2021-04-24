@@ -16,7 +16,7 @@ import interfacesEJB.InterfazTitulacion;
 public class AlumnoPrueba {
 
 
-	private static final Logger LOG = Logger.getLogger(ClasePrueba.class.getCanonicalName());
+	private static final Logger LOG = Logger.getLogger(AlumnoPrueba.class.getCanonicalName());
 
 	private static final String ALUMNO_EJB = "java:global/classes/TitulacionImpl!ejb.AlumnoImpl";	
 	
