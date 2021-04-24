@@ -18,7 +18,7 @@ public class ExpedientePrueba {
 
 	private static final Logger LOG = Logger.getLogger(ExpedientePrueba.class.getCanonicalName());
 
-	private static final String EXPEDIENTE_EJB = "java:global/classes/ExpedienteImpl";	
+	private static final String EXPEDIENTE_EJB = "java:global/classes/ExpedienteImpl!interfacesEJB.InterfazImportar";	
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	

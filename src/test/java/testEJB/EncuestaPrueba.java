@@ -21,7 +21,7 @@ public class EncuestaPrueba {
 
 	private static final Logger LOG = Logger.getLogger(TitulacionPrueba.class.getCanonicalName());
 
-	private static final String ENCUESTA_EJB = "java:global/classes/TitulacionImpl";	
+	private static final String ENCUESTA_EJB = "java:global/classes/EncuestaImpl!interfacesEJB.InterfazEncuesta";	
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	

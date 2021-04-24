@@ -39,7 +39,7 @@ public class TitulacionPrueba {
 	
 	private static final Logger LOG = Logger.getLogger(TitulacionPrueba.class.getCanonicalName());
 
-	private static final String TITULACION_EJB = "java:global/classes/TitulacionImpl";	
+	private static final String TITULACION_EJB = "java:global/classes/TitulacionImpl!ejb.TitulacionImpl";	
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
