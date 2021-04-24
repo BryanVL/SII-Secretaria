@@ -152,10 +152,7 @@ public class BaseDatos {
 		
 		Clase cAsig = new Clase();
 		Clase_PK cAsigPK = new Clase_PK();
-		cAsigPK.setDia(new Date("24/09/2018"));
-		cAsigPK.setHora_inicio(new Time(10,45,0));
-		cAsig.setAsignatura(asignatura);
-		cAsig.setId(cAsigPK);
+
 		
 		Grupo grupoA = new Grupo();
 		grupoA.setID(1l);
@@ -168,7 +165,13 @@ public class BaseDatos {
 		grupoA.setTitulacion(tit);
 		em.persist(grupoA);
 		
+		cAsigPK.setDia(new Date("24/09/2018"));
+		cAsigPK.setHora_inicio(new Time(10,45,0));
+		cAsigPK.setIdG(1l);
+		cAsig.setAsignatura(asignatura);
+		cAsig.setId(cAsigPK);
 		cAsig.setGrupo(grupoA);
+		
 		em.persist(cAsig);
 		
 		Grupo grupoB = new Grupo();
