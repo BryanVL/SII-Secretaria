@@ -127,15 +127,16 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
 				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
-				int n=1;
+				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
-	            	if(n>=2) {
+	            	if(n>=1) {
 	            		
-			    		String referencia = csvRecord.get(1);
-			    		String plazas = csvRecord.get(2);
-			    		String mencion = csvRecord.get(3);  
-	            		
+	            		String[] lista = csvRecord.get(0).split(";");
+			    		String referencia = lista[0];
+			    		String plazas = lista[1];
+			    		String mencion;
+			    		
 			    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia );
 			    		if(asignaturaExistente == null) {
 			    			throw new AsignaturaException();
@@ -143,7 +144,11 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 			    		
 			    		Optativa o = new Optativa();
 			    		o.setPlazas( Integer.parseInt(plazas) );
-			    		o.setMencion(mencion);
+			    		
+			    		if(lista.length == 3) {
+			    			mencion = lista[2];
+			    			o.setMencion(mencion);
+			    		}
 			    		o.setAsignatura(asignaturaExistente);
 			    		
 			    		Titulacion titulacion = asignaturaExistente.getTitulacion();
