@@ -75,14 +75,14 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 			}
 		      
 			try {
-				Sheet sh = wb.getSheetAt(0);
-				int iRow = 0;
+				Sheet sh = wb.getSheetAt(1);
+				int iRow = 1;
 				Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
 				int n=1;
 				while(row!=null) 
 				{
 		    	
-					if(n>=5) {
+					if(n>=6) {
 		    		   Cell cell = row.getCell(4);  
 		    		   String nExpediente = cell.getStringCellValue();
 		    		   cell = row.getCell(17);  

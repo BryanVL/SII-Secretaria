@@ -20,7 +20,7 @@ public class Titulacion implements Serializable {
 	@Id
 	@Column(length=4)
 	private Integer Codigo;
-	@Column(length=20, nullable=false)
+	@Column(length=100, nullable=false)
 	private String Nombre;
 	@Column(precision=3, nullable=false)
 	private Float Creditos;

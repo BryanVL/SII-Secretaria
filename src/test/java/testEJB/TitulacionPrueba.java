@@ -46,7 +46,7 @@ public class TitulacionPrueba {
 	
 	
 	private InterfazImportar interfazImportar;
-	private InterfazTitulacion interfazTitulacion;
+	//private GestionProductos gestionProductos;
 	
 	
 	
@@ -59,20 +59,15 @@ public class TitulacionPrueba {
 	
 	@Test
 	public void testImportarTitulacion() {
-		String dir = "src/test/resources/Titulacion.xlsx";
+		String dir = "src/test/resources/Titulacion.csv";
 		try {
 			interfazImportar.Importar(dir);
-			assertEquals(1,1);
+			
 		} catch (ImportarException e) {
 			// TODO Auto-generated catch block
 			fail("No debería lanzar excepción");
 		}
 		
-	}
-	
-	@Test
-	public void testVisualizarTitulacion() {
-		assertEquals(1,1);
 	}
 	
 

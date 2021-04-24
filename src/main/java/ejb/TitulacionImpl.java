@@ -67,8 +67,8 @@ public class TitulacionImpl implements InterfazTitulacion, InterfazImportar {
 				e.printStackTrace();
 			}
 		      
-			Sheet sh = wb.getSheetAt(0);
-			int iRow = 0;
+			Sheet sh = wb.getSheet("Hoja1");
+			int iRow = 1;
 		    
 			Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
 		    int n=1; 
@@ -105,14 +105,16 @@ public class TitulacionImpl implements InterfazTitulacion, InterfazImportar {
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
 				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
-				int n=1;
+				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
-	            	if(n>=2) {
+	            	if(n>=1) {
 	            		
-			    		String codigo = csvRecord.get(1);
-			    		String nombre = csvRecord.get(2);
-			    		String creditos = csvRecord.get(3);  
+	            		String[] lista = csvRecord.get(0).split(";");
+	            		
+			    		String codigo = lista[0];
+			    		String nombre = lista[1];
+			    		String creditos = lista[2];  
 			    		
 	            		
 	            		Titulacion t = new Titulacion();
