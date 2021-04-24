@@ -18,7 +18,7 @@ public class AlumnoPrueba {
 
 	private static final Logger LOG = Logger.getLogger(AlumnoPrueba.class.getCanonicalName());
 
-	private static final String ALUMNO_EJB = "java:global/classes/TitulacionImpl!ejb.AlumnoImpl";	
+	private static final String ALUMNO_EJB = "java:global/classes/AlumnoImpl!ejb.AlumnoImpl";	
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
