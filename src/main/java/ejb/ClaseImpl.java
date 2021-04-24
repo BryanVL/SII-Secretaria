@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 import jpa.Asignatura;
 import jpa.Asignaturas_Matricula;
+import jpa.Asignaturas_Matricula_PK;
 import jpa.Clase;
 import jpa.Clase_PK;
 import jpa.Expediente;
@@ -198,6 +200,18 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
         c.setId(id);
         
         return c;
+	}
+	
+	private Time convertirTime(String hora) {
+		Time res;
+		if(hora!=null) {
+			String[] tiempo = hora.split(":");
+			res = new Time(Integer.parseInt(tiempo[0]), Integer.parseInt(tiempo[1]), Integer.parseInt(tiempo[2]));	
+		}else {
+			res= new Time(0,0,0);
+		}
+
+		return res;
 	}
 	
 	//Visualizar solo una clase

@@ -18,6 +18,7 @@ import jpa.Asignatura;
 import jpa.Clase;
 import jpa.Clase_PK;
 import jpa.Expediente;
+import jpa.Grupo;
 import jpa.Matricula;
 import jpa.Matricula_PK;
 import jpa.Titulacion;
@@ -109,6 +110,8 @@ public class BaseDatos {
 		asignatura.setOfertada("Si");
 		asignatura.setNombre("Pruebas con Junit");
 		
+		em.persist(asignatura);
+		
 		Clase cAsig = new Clase();
 		Clase_PK cAsigPK = new Clase_PK();
 		cAsigPK.setDia(new Date("24/09/2018"));
@@ -116,54 +119,17 @@ public class BaseDatos {
 		cAsig.setAsignatura(asignatura);
 		//cAsig
 		
+		Grupo prueba = new Grupo();
+		prueba.setCurso(1);
+		prueba.setLetra("A");
+		prueba.setTurno_Mañana_Tarde("Mañana");
+		prueba.setIngles("Sí");
+		prueba.setPlazas(50);
+		prueba.setPlazasDisponibles(50);
+		prueba.setTitulacion(tit);
+		em.persist(prueba);
 		
 		
-		/*Ingrediente carne = new Ingrediente ("Carne picada");
-		Ingrediente pimienta = new Ingrediente ("Pimienta");
-		Ingrediente especias = new Ingrediente("Especias de hamburguesa");
-		Ingrediente pimenton = new Ingrediente ("Pimentón");
-		Ingrediente sal = new Ingrediente ("Sal");
-		Ingrediente azucar = new Ingrediente ("Azúcar");
-		Ingrediente perejil = new Ingrediente ("Perejil");
-		
-		for (Ingrediente ingrediente: new Ingrediente [] {carne, pimienta, especias, pimenton, sal, azucar, perejil}) {
-			em.persist(ingrediente);
-		}
-		
-		Producto chorizo = new Producto ("Chorizo");
-		Producto salchicha = new Producto ("Salchicha");
-		Producto hamburguesa = new Producto ("Hamburguesa");
-		
-		chorizo.setIngredientes(Stream.of(carne, pimienta, pimenton, sal)
-				.collect(Collectors.toSet()));
-		
-		salchicha.setIngredientes(Stream.of(carne, sal, azucar, perejil)
-				.collect(Collectors.toSet()));
-		
-		hamburguesa.setIngredientes(Stream.of(carne, especias, sal, azucar)
-				.collect(Collectors.toSet()));
-		
-		for (Producto producto: new Producto [] {chorizo, salchicha, hamburguesa}) {
-			em.persist(producto);
-		}
-		
-		Lote lote = new Lote ("LT1", chorizo, BigDecimal.TEN, Date.valueOf("2021-04-11"));
-		lote.setLoteIngredientes(new HashMap<Ingrediente, String>());
-		lote.getLoteIngredientes().put(carne, "C1");
-		lote.getLoteIngredientes().put(pimienta, "Pi1");
-		lote.getLoteIngredientes().put(pimenton, "PM1");
-		lote.getLoteIngredientes().put(sal, "S1");
-		
-		em.persist(lote);
-		
-		lote = new Lote ("LT2", chorizo, BigDecimal.valueOf(25L), Date.valueOf("2021-04-12"));
-		lote.setLoteIngredientes(new HashMap<Ingrediente, String>());
-		lote.getLoteIngredientes().put(carne, "C2");
-		lote.getLoteIngredientes().put(pimienta, "Pi2");
-		lote.getLoteIngredientes().put(pimenton, "PM2");
-		lote.getLoteIngredientes().put(sal, "S2");
-		
-		em.persist(lote);*/
 		
 		em.getTransaction().commit();
 		
