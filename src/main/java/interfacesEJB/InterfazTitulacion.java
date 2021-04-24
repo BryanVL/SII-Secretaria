@@ -9,8 +9,8 @@ import jpa.Titulacion;
 public interface InterfazTitulacion {
 
 	
-	/**Este método es para visualizar el expediente
-	 * @param e expediente a visualizar*/
+	/**Este método es para visualizar la titulacion
+	 * @param codigo Titulacion a visualizar*/
 	public Titulacion VisualizarTitulacion(Integer codigo) throws TitulacionException;
 	
 }

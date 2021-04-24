@@ -141,7 +141,7 @@ public class TitulacionImpl implements InterfazTitulacion, InterfazImportar {
 	@Override
 	public Titulacion VisualizarTitulacion(Integer codigo) throws TitulacionException {
 		// TODO Auto-generated method stub
-		Titulacion titulacionExistente = em.find(Titulacion.class, codigo);
+		Titulacion titulacionExistente = em.find(Titulacion.class, codigo );
 		
 		if (titulacionExistente == null) {
 			throw new TitulacionException();

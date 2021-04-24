@@ -55,7 +55,7 @@ public class TitulacionPrueba {
 	@Before
 	public void setup() throws NamingException  {
 		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
-		
+		interfazTitulacion = (InterfazTitulacion) SuiteTest.ctx.lookup(TITULACION_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
