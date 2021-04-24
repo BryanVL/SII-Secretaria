@@ -1,5 +1,7 @@
 package interfacesEJB;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import excepcionesEJB.AsignaturaException;
@@ -33,6 +35,9 @@ public interface InterfazGrupo {
 	 * Si es 0 el número de plazas lanzamos excepción porque significaría que no nos quedan plazas.
 	 * @param g grupo a actualizar*/
 	public void ComprobarPlazas(Grupo g) throws GrupoException;
+	
+	public Grupo buscarPorCursoLetra(Integer titulacion, Integer curso, String letra) throws GrupoException;
+	public List<Grupo> buscarPorCursoLetra(Integer curso, String letra);
 	
 	public void asignarGrupo(Matricula matricula, Grupo grupo, Asignatura asignatura) throws MatriculaException, GrupoException, AsignaturaException;
 	
