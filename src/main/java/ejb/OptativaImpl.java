@@ -135,7 +135,6 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 	            		String[] lista = csvRecord.get(0).split(";");
 			    		String referencia = lista[0];
 			    		String plazas = lista[1];
-			    		String mencion;
 			    		
 			    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia );
 			    		if(asignaturaExistente == null) {
@@ -146,7 +145,7 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 			    		o.setPlazas( Integer.parseInt(plazas) );
 			    		
 			    		if(lista.length == 3) {
-			    			mencion = lista[2];
+			    			String mencion = lista[2];
 			    			o.setMencion(mencion);
 			    		}
 			    		o.setAsignatura(asignaturaExistente);

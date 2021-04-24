@@ -164,7 +164,7 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
-	            	if(n>=2) {
+	            	if(n>=1) {
 	            		
 	            		String[] lista = csvRecord.get(0).split(";");
 			    		String referencia = lista[3];
@@ -202,15 +202,16 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 		            		a.setTitulacion(titulacionExistente);
 				    		
 		            		//Hacer un if que compare el length de lista y luego se añade o no el otro_idioma
-		            		
-		            		String otro_idioma = lista[11];
-				    		if(otro_idioma!=null) {
-				    			Idiomas idioma = new Idiomas();
-				    			idioma.setNombre("Ingles");
-				    			List<Idiomas> idiomas = new ArrayList<>();
-				    			idiomas.add(idioma);
-				    			a.setIdiomas(idiomas);
-				    		}
+		            		if(lista.length == 12) {
+		            			String otro_idioma = lista[11];
+		            			if(otro_idioma!=null) {
+		            				Idiomas idioma = new Idiomas();
+		            				idioma.setNombre("Ingles");
+		            				List<Idiomas> idiomas = new ArrayList<>();
+		            				idiomas.add(idioma);
+		            				a.setIdiomas(idiomas);
+		            			}
+		            		}
 		            		
 				    		em.persist(a);
 		            	}
