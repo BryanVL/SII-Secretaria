@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazImportar;
@@ -60,6 +61,7 @@ public class TitulacionPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF7"})
 	public void testImportarTitulacion() {
 		String dir = "src/test/resources/Titulacion.csv";
 		
@@ -87,6 +89,7 @@ public class TitulacionPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF11"})
 	public void testVisualizarTitulacion() {
 		
 		//Probamos si la titulacion que ya tenemos en la base de datos es la misma que obtenemos al llamar al método.

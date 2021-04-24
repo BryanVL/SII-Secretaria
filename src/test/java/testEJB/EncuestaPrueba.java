@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ImportarException;
 import interfacesEJB.InterfazEncuesta;
 import interfacesEJB.InterfazImportar;
@@ -39,6 +40,7 @@ public class EncuestaPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF8"})
 	public void testPedirIngles() {
 		Encuesta encuesta = new Encuesta();
 		encuesta.setAsignatura_ingles("");
