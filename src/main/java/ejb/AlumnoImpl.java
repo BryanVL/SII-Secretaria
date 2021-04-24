@@ -202,9 +202,9 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 	
 	
 	@Override
-	public Alumno VisualizarAlumno(Alumno a) throws AlumnoException {
+	public Alumno VisualizarAlumno(Long id) throws AlumnoException {
 		// TODO Auto-generated method stub
-		Alumno alumnoExistente = em.find(Alumno.class, a.getID() );
+		Alumno alumnoExistente = em.find(Alumno.class, id );
 		
 		if (alumnoExistente == null) {
 			throw new AlumnoException();

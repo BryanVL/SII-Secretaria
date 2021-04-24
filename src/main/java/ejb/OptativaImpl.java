@@ -176,9 +176,9 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 	}
 
 	@Override
-	public Optativa VisualizarOptativa(Optativa o) throws OptativaException {
+	public Optativa VisualizarOptativa(Integer referencia) throws OptativaException {
 		// TODO Auto-generated method stub
-		Optativa optativaExistente = em.find(Optativa.class, o.getAsignatura().getReferencia() );
+		Optativa optativaExistente = em.find(Optativa.class, referencia );
 		
 		if (optativaExistente == null) {
 			throw new OptativaException();
