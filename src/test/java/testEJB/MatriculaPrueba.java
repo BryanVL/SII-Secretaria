@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -43,6 +44,7 @@ public class MatriculaPrueba {
 	
 	@Test
 	@Requisitos({"RF7"})
+	@Ignore
 	public void testImportarMatricula() {
 		String dir = "src/test/resources/Titulacion.csv";
 		
@@ -69,6 +71,7 @@ public class MatriculaPrueba {
 	
 	@Test
 	@Requisitos({"RF11"})
+	@Ignore
 	public void testVisualizarMatricula() {
 		//Probamos si la titulacion que ya tenemos en la base de datos es la misma que obtenemos al llamar al método.
 		Matricula m = new Matricula();

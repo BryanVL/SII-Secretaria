@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
@@ -45,6 +46,7 @@ public class ExpedientePrueba {
 	
 	@Test
 	@Requisitos({"RF7"})
+	@Ignore
 	public void testImportarExpediente() {
 		String dir = "src/test/resources/alumnos.csv";
 		
