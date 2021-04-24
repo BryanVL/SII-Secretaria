@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -18,6 +19,7 @@ import javax.ejb.Stateless;
 import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -202,9 +204,14 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 	
 	
 	@Override
-	public Alumno VisualizarAlumno(Long id) throws AlumnoException {
+	public Alumno VisualizarAlumno(String dni) throws AlumnoException {
 		// TODO Auto-generated method stub
-		Alumno alumnoExistente = em.find(Alumno.class, id );
+		
+		TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
+    	query.setParameter("fdni", dni);
+        List<Alumno> alumnos = query.getResultList();
+		
+		Alumno alumnoExistente = em.find(Alumno.class, alumnos.get(0).getID() );
 		
 		if (alumnoExistente == null) {
 			throw new AlumnoException();

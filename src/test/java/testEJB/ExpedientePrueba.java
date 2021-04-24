@@ -55,7 +55,7 @@ public class ExpedientePrueba {
 			e.setNum_expediente(104200001);
 			Expediente expediente = interfazExpediente.VisualizarExpediente(104200001);
 			
-			if(e!=null) {
+			if(expediente!=null) {
 				assertEquals(e,expediente);
 			}else {
 				fail("No coinciden las referencias");
