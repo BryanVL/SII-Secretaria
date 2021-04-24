@@ -112,12 +112,12 @@ public class BaseDatos {
 		
 		em.persist(asignatura);
 		
-		Clase cAsig = new Clase();
+	/*	Clase cAsig = new Clase();
 		Clase_PK cAsigPK = new Clase_PK();
 		cAsigPK.setDia(new Date("24/09/2018"));
 		//cAsigPK.setHora_inicio(new);
 		cAsig.setAsignatura(asignatura);
-		//cAsig
+		//cAsig*/
 		
 		Grupo grupoA = new Grupo();
 		grupoA.setCurso(1);
