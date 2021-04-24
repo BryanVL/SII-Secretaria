@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import org.junit.Before;
@@ -149,13 +151,25 @@ public class GrupoPrueba {
 			fail("no se encontro el objeto");
 		}
 		
-		//assertTrue(g.getID()== 1l);
+		assertTrue(g.getID()== 1l);
 	}
 	
-	@Ignore
+
 	@Test
 	public void testBuscarGrupoLetra() {
+		Integer curso = 1;
+		String letra = "A";
+		List<Grupo> g = new ArrayList<Grupo>();
+
+		g = interfazGrupo.buscarPorCursoLetra(curso, letra);
 		
+		boolean probando = true;
+		for(Grupo grupo: g) {
+			if(grupo.getCurso()!=1 || !grupo.getLetra().equals("A")) {
+				probando = false;
+			}
+		}
+		assertTrue(probando);
 	}
 	
 	@Ignore

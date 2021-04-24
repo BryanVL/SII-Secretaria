@@ -121,7 +121,9 @@ public class GrupoImpl implements InterfazGrupo{
 	
 	public List<Grupo> buscarPorCursoLetra(Integer curso, String letra) {
 		
-		TypedQuery query = em.createQuery("Select g from Grupo g where g.getCurso()=curso and g.getLetra()=letra", Grupo.class);	              
+		TypedQuery query = em.createQuery("Select g from Grupo g where g.Curso=:curso and g.Letra=:letra", Grupo.class);
+		query.setParameter("curso", curso);
+		query.setParameter("letra", letra);
         List<Grupo> grupos = query.getResultList();
 		
     
