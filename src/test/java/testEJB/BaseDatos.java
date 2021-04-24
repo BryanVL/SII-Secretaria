@@ -119,15 +119,25 @@ public class BaseDatos {
 		cAsig.setAsignatura(asignatura);
 		//cAsig
 		
-		Grupo prueba = new Grupo();
-		prueba.setCurso(1);
-		prueba.setLetra("A");
-		prueba.setTurno_Mañana_Tarde("Mañana");
-		prueba.setIngles("Sí");
-		prueba.setPlazas(50);
-		prueba.setPlazasDisponibles(50);
-		prueba.setTitulacion(tit);
-		em.persist(prueba);
+		Grupo grupoA = new Grupo();
+		grupoA.setCurso(1);
+		grupoA.setLetra("A");
+		grupoA.setTurno_Mañana_Tarde("Mañana");
+		grupoA.setIngles("Sí");
+		grupoA.setPlazas(50);
+		grupoA.setPlazasDisponibles(50);
+		grupoA.setTitulacion(tit);
+		em.persist(grupoA);
+		
+		Grupo grupoB = new Grupo();
+		grupoB.setCurso(1);
+		grupoB.setLetra("B");
+		grupoB.setTurno_Mañana_Tarde("Mañana");
+		grupoB.setIngles("Sí");
+		grupoB.setPlazas(50);
+		grupoB.setPlazasDisponibles(50);
+		grupoB.setTitulacion(tit);
+		em.persist(grupoB);
 		
 		
 		
