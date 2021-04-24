@@ -56,7 +56,7 @@ public class BaseDatos {
 		bryan.setEmail_institucional("velicka.b@uma.es");
 		b.setNum_expediente(123);
 	
-		Titulacion tit = new Titulacion();
+		/*Titulacion tit = new Titulacion();
 		tit.setCodigo(1234);
 		tit.setNombre("Informatica");
 		tit.setCreditos( 240f );
@@ -79,7 +79,7 @@ public class BaseDatos {
 		
 		List<Expediente> lb = new ArrayList<Expediente>();
 		lb.add(b);
-		bryan.setExpedientes(lb);
+		bryan.setExpedientes(lb);*/
 		
 		
 		//---------------------Fran---------------------//
@@ -89,7 +89,7 @@ public class BaseDatos {
 		fran.setEmail_institucional("franco@uma.es");
 		
 		f.setNum_expediente(124);
-		f.setTitulacion(tit);
+		//f.setTitulacion(tit);
 		f.setAlumno(fran);
 		
 		
@@ -100,7 +100,7 @@ public class BaseDatos {
 		amin.setEmail_institucional("amin@uma.es");
 		
 		a.setNum_expediente(125);
-		a.setTitulacion(tit);
+		//a.setTitulacion(tit);
 		a.setAlumno(amin);
 		
 		
@@ -111,7 +111,7 @@ public class BaseDatos {
 		noel.setEmail_institucional("noel@uma.es");
 		
 		n.setNum_expediente(126);
-		n.setTitulacion(tit);
+		//n.setTitulacion(tit);
 		n.setAlumno(noel);
 		
 		
@@ -122,7 +122,7 @@ public class BaseDatos {
 		david.setEmail_institucional("david@uma.es");
 		
 		d.setNum_expediente(127);
-		d.setTitulacion(tit);
+		//d.setTitulacion(tit);
 		d.setAlumno(david);
 		
 		
@@ -135,15 +135,15 @@ public class BaseDatos {
 		
 		
 		//-----------------------------------------------//
-		Asignatura asignatura = new Asignatura();
+		/*Asignatura asignatura = new Asignatura();
 		asignatura.setReferencia(12345);
 		asignatura.setCodigo(900);
 		asignatura.setCreditos_total((float)6);
 		asignatura.setOfertada("Si");
 		asignatura.setNombre("Pruebas con Junit");
-		asignatura.setTitulacion(tit);
+		//asignatura.setTitulacion(tit);
 		
-		em.persist(asignatura);
+		em.persist(asignatura);*/
 		
 	/*	Clase cAsig = new Clase();
 		Clase_PK cAsigPK = new Clase_PK();
@@ -152,14 +152,14 @@ public class BaseDatos {
 		cAsig.setAsignatura(asignatura);
 		//cAsig*/
 		
-		Grupo grupoA = new Grupo();
+		/*Grupo grupoA = new Grupo();
 		grupoA.setCurso(1);
 		grupoA.setLetra("A");
 		grupoA.setTurno_Mañana_Tarde("Mañana");
 		grupoA.setIngles("Sí");
 		grupoA.setPlazas(50);
 		grupoA.setPlazasDisponibles(50);
-		grupoA.setTitulacion(tit);
+		//grupoA.setTitulacion(tit);
 		em.persist(grupoA);
 		
 		Grupo grupoB = new Grupo();
@@ -169,8 +169,8 @@ public class BaseDatos {
 		grupoB.setIngles("Sí");
 		grupoB.setPlazas(50);
 		grupoB.setPlazasDisponibles(50);
-		grupoB.setTitulacion(tit);
-		em.persist(grupoB);
+		//grupoB.setTitulacion(tit);
+		em.persist(grupoB);*/
 		
 		
 		
