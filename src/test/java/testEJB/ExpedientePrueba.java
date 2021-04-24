@@ -16,7 +16,7 @@ import interfacesEJB.InterfazImportar;
 
 public class ExpedientePrueba {
 
-	private static final Logger LOG = Logger.getLogger(TitulacionPrueba.class.getCanonicalName());
+	private static final Logger LOG = Logger.getLogger(ExpedientePrueba.class.getCanonicalName());
 
 	private static final String EXPEDIENTE_EJB = "java:global/classes/ExpedienteImpl";	
 	
