@@ -1,6 +1,7 @@
 package testEJB;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.logging.Logger;
@@ -138,9 +139,30 @@ public class GrupoPrueba {
 	
 	@Test
 	public void testBuscarGrupoLetraTitulacion() {
+		Integer titulacion = 1234;
+		Integer curso = 1;
+		String letra = "A";
+		Grupo g = new Grupo();
+		try {
+			g = interfazGrupo.buscarPorCursoLetra(titulacion, curso, letra);
+		} catch (GrupoException e) {
+			fail("no se encontro el objeto");
+		}
+		
+		//assertTrue(g.getID()== 1l);
+	}
+	
+	@Ignore
+	@Test
+	public void testBuscarGrupoLetra() {
 		
 	}
 	
+	@Ignore
+	@Test
+	public void testAsignarGrupo() {
+		
+	}
 	
 	
 }

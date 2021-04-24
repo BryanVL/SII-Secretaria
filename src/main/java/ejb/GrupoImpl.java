@@ -79,7 +79,9 @@ public class GrupoImpl implements InterfazGrupo{
 	
 	public Grupo buscarPorCursoLetra(Integer titulacion, Integer curso, String letra) throws GrupoException {
 		
-		TypedQuery query = em.createQuery("Select g from Grupo g where g.getCurso()=curso and g.getLetra()=letra", Grupo.class);	              
+		TypedQuery query = em.createQuery("Select g from Grupo g where g.Curso=:curso and g.Letra=:letra", Grupo.class);	 
+		query.setParameter("curso", curso);
+		query.setParameter("letra", letra);
         List<Grupo> grupos = query.getResultList();
 		
         
