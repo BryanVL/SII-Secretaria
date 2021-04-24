@@ -21,7 +21,7 @@ public class ClasePrueba {
 
 	private static final Logger LOG = Logger.getLogger(ClasePrueba.class.getCanonicalName());
 
-	private static final String CLASE_EJB = "java:global/classes/TitulacionImpl!ejb.ClaseImpl";	
+	private static final String CLASE_EJB = "java:global/classes/ClaseImpl!ejb.ClaseImpl";	
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
