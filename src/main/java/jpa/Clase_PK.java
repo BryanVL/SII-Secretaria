@@ -19,7 +19,7 @@ public class Clase_PK implements Serializable {
 	
 	@Temporal(TemporalType.DATE)
 	private Date Dia;
-	@Temporal(TemporalType.TIME)
+	
 	private Time Hora_inicio;
 	private Long idG;
 	
