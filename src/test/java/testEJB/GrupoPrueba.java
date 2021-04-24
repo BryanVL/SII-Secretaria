@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.GrupoException;
 import excepcionesEJB.MatriculaException;
@@ -44,6 +45,7 @@ public class GrupoPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF4"})
 	public void testCrearGrupo() {
 		Grupo grupoB = new Grupo();
 		Titulacion tit = new Titulacion();
@@ -67,6 +69,7 @@ public class GrupoPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF4"})
 	public void testLeerGrupo() {
 		Grupo grupo = new Grupo();
 		Grupo nuevo = new Grupo();
@@ -81,6 +84,7 @@ public class GrupoPrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF4"})
 	public void testBorrarGrupo() {
 		Grupo grupo = new Grupo();
 		grupo.setID(1l);
@@ -101,6 +105,7 @@ public class GrupoPrueba {
 	
 	
 	@Test
+	@Requisitos({"RF4"})
 	public void testActualizarGrupo() {
 		Grupo g = new Grupo();
 		Grupo grupo = new Grupo();
@@ -127,6 +132,7 @@ public class GrupoPrueba {
 	
 	
 	@Test
+	@Requisitos({"RF6"})
 	public void testComprobarPlazas() {
 		Grupo g = new Grupo();
 		g.setID(1l);
@@ -146,6 +152,7 @@ public class GrupoPrueba {
 	
 	
 	@Test
+	@Requisitos({"RF3"})
 	public void testBuscarGrupoLetraTitulacion() {
 		Integer titulacion = 1234;
 		Integer curso = 1;
@@ -162,6 +169,7 @@ public class GrupoPrueba {
 	
 	
 	@Test
+	@Requisitos({"RF3"})
 	public void testBuscarGrupoLetra() {
 		Integer curso = 1;
 		String letra = "A";
@@ -180,6 +188,7 @@ public class GrupoPrueba {
 	
 	
 	@Test
+	@Requisitos({"RF3"})
 	public void testAsignarGrupo() {
 		Matricula matricula = new Matricula();
 		Matricula_PK mPK = new Matricula_PK();
