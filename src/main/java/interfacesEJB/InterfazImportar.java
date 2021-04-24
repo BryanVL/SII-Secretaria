@@ -1,9 +1,8 @@
 package interfacesEJB;
 
 import javax.ejb.Local;
-import excepcionesEJB.AlumnoException;
+
 import excepcionesEJB.ImportarException;
-import jpa.Alumno;
 
 
 @Local
