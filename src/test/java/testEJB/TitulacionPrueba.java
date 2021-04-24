@@ -67,14 +67,14 @@ public class TitulacionPrueba {
 			interfazImportar.Importar(dir);
 			
 			Titulacion titulacion = new Titulacion();
-			titulacion.setCodigo(1042);
+			titulacion.setCodigo(1041);
 			titulacion.setNombre("Grado en Ingeniería Informática");
-			titulacion.setCreditos(Float.parseFloat("240"));
+			titulacion.setCreditos(240f);
 			
-			Titulacion t=interfazTitulacion.VisualizarTitulacion(titulacion);
-					
+			Titulacion t = interfazTitulacion.VisualizarTitulacion(1041);
+			
 			if(t!=null) {
-				assertTrue(true);
+				assertEquals(t,titulacion);
 			}else {
 				fail("No coinciden las referencias");
 			}
@@ -88,11 +88,22 @@ public class TitulacionPrueba {
 	
 	@Test
 	public void testVisualizarTitulacion() {
-		assertEquals(1,1);
+		
+		//Probamos si la titulacion que ya tenemos en la base de datos es la misma que obtenemos al llamar al método.
+		Titulacion t = new Titulacion();
+		t.setCodigo(1234);
+		t.setNombre("Informatica");
+		t.setCreditos( 240f );
+		
+		try {
+			assertEquals(t,interfazTitulacion.VisualizarTitulacion(1234));
+		} catch (TitulacionException e) {
+			fail("No debería lanzarse excepción");
+		}
+		
 	}
 	
-	
-	}
+}
 	
 	
 	
