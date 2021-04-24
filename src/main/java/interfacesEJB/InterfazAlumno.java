@@ -21,6 +21,6 @@ public interface InterfazAlumno {
 	
 	/**Este método es para visualizar el alumno
 	 * @param a alumno a visualizar*/
-	public Alumno VisualizarAlumno(Alumno a) throws AlumnoException;
+	public Alumno VisualizarAlumno(Long id) throws AlumnoException;
 	
 }

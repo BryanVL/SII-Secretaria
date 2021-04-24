@@ -12,6 +12,6 @@ public interface InterfazExpediente {
 
 	/**Este método es para visualizar el expediente
 	 * @param e expediente a visualizar*/
-	public Expediente VisualizarExpediente(Expediente e) throws ExpedienteException;
+	public Expediente VisualizarExpediente(Integer num_expediente) throws ExpedienteException;
 	
 }
