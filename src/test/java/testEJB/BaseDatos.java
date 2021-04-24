@@ -34,68 +34,99 @@ public class BaseDatos {
 		
 		em.getTransaction().begin();
 		
+		//Creamos 5 alumnos
 		Alumno bryan = new Alumno();
 		Alumno fran = new Alumno();
 		Alumno amin = new Alumno();
 		Alumno noel = new Alumno();
 		Alumno david = new Alumno();
 		
+		//Sus 5 expedientes (inicial de cada alumno)
 		Expediente b = new Expediente();
 		Expediente f = new Expediente();
 		Expediente a = new Expediente();
 		Expediente n = new Expediente();
 		Expediente d = new Expediente();
 		
-		Matricula br = new Matricula();
 
-		
+		//---------------------Bryan---------------------//
 		bryan.setNombre("Bryan");
 		bryan.setApellido1("velicka");
 		bryan.setDNI("125678A");
 		bryan.setEmail_institucional("velicka.b@uma.es");
 		b.setNum_expediente(123);
+	
 		Titulacion tit = new Titulacion();
 		tit.setCodigo(1234);
+		tit.setNombre("Informatica");
+		tit.setCreditos( 240f );
+		
+		b.setNum_expediente(123);
 		b.setTitulacion(tit);
+		
+		Matricula br = new Matricula();
 		Matricula_PK brk = new Matricula_PK();
 		brk.setCurso_academico("18/19");
 		brk.setIdExp(123);
+		
 		br.setId(brk);
 		br.setEstado("Activo");
 		br.setFecha_de_matricula(new Date("12/09/2018"));
+		
 		List<Matricula> lbr = new ArrayList<Matricula>();
 		lbr.add(br);
 		b.setMatriculas(lbr);
+		
 		List<Expediente> lb = new ArrayList<Expediente>();
 		lb.add(b);
 		bryan.setExpedientes(lb);
 		
 		
-		
+		//---------------------Fran---------------------//
 		fran.setNombre("Franco manuel");
 		fran.setApellido1("garcia");
 		fran.setDNI("125679B");
 		fran.setEmail_institucional("franco@uma.es");
-		f.setNum_expediente(124);
 		
+		f.setNum_expediente(124);
+		f.setTitulacion(tit);
+		f.setAlumno(fran);
+		
+		
+		//---------------------Amin---------------------//
 		amin.setNombre("amin");
 		amin.setApellido1("chachaSuperFast");
 		amin.setDNI("125680C");
 		amin.setEmail_institucional("amin@uma.es");
-		a.setNum_expediente(125);
 		
+		a.setNum_expediente(125);
+		a.setTitulacion(tit);
+		a.setAlumno(amin);
+		
+		
+		//---------------------Noel---------------------//
 		noel.setNombre("noel");
 		noel.setApellido1("ApellidoDeNoel");
 		noel.setDNI("125681D");
 		noel.setEmail_institucional("noel@uma.es");
-		n.setNum_expediente(126);
 		
+		n.setNum_expediente(126);
+		n.setTitulacion(tit);
+		n.setAlumno(noel);
+		
+		
+		//---------------------David---------------------//
 		david.setNombre("david");
 		david.setApellido1("ApellidoDeDavid");
 		david.setDNI("125682E");
 		david.setEmail_institucional("david@uma.es");
-		d.setNum_expediente(127);
 		
+		d.setNum_expediente(127);
+		d.setTitulacion(tit);
+		d.setAlumno(david);
+		
+		
+		//-----------------------------------------------//
 		em.persist(bryan);
 		em.persist(fran);
 		em.persist(amin);
@@ -103,12 +134,14 @@ public class BaseDatos {
 		em.persist(david);
 		
 		
+		//-----------------------------------------------//
 		Asignatura asignatura = new Asignatura();
 		asignatura.setReferencia(12345);
 		asignatura.setCodigo(900);
 		asignatura.setCreditos_total((float)6);
 		asignatura.setOfertada("Si");
 		asignatura.setNombre("Pruebas con Junit");
+		asignatura.setTitulacion(tit);
 		
 		em.persist(asignatura);
 		
