@@ -151,19 +151,20 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
 				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
-				int n=1;
+				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
 	            	if(n>=1) {
-			    		
-			    		String Curso_academico = csvRecord.get(0);
-			    		String idExp = csvRecord.get(1);
-			    		String Estado = csvRecord.get(2);
-			    		String Fecha_de_matricula = csvRecord.get(3);
-			    		String Num_Archivo = csvRecord.get(4);
-			    		String Turno_Preferente = csvRecord.get(5);
-			    		String Nuevo_Ingreso = csvRecord.get(6);
-			    		String Listado_Asignaturas = csvRecord.get(7);
+	            		
+			    		String[] listaa = csvRecord.get(0).split(";");
+			    		String Curso_academico = listaa[0];
+			    		String idExp = listaa[1];
+			    		String Estado = listaa[2];
+			    		String Fecha_de_matricula = listaa[3];
+			    		String Num_Archivo = listaa[4];
+			    		String Turno_Preferente = listaa[5];
+			    		String Nuevo_Ingreso = listaa[6];
+			    		String Listado_Asignaturas = listaa[7];
 			    		
 			    		//Administro la clave primaria de Matricula
 			    		Matricula_PK mpk = new Matricula_PK();

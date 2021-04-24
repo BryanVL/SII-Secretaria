@@ -139,23 +139,24 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
 				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
-				int n=1;
+				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
-	            	if(n>=5) {
+	            	if(n>=4) {
 	            		
-			    		String dni = csvRecord.get(1);
-			    		String nombre = csvRecord.get(2);
-			    		String apellido1 = csvRecord.get(3);  
-			    		String apellido2 = csvRecord.get(4);
-			    		String email_i = csvRecord.get(7);
-			    		String email_p = csvRecord.get(8); 
-			    		String telefono = csvRecord.get(9);
-			    		String movil = csvRecord.get(10);
-			    		String direccion = csvRecord.get(11);
-			    		String localidad = csvRecord.get(12);
-			    		String provincia = csvRecord.get(13);
-			    		String cp = csvRecord.get(14);
+	            		String[] lista = csvRecord.get(0).split(";");
+			    		String dni = lista[0];
+			    		String nombre = lista[1];
+			    		String apellido1 = lista[2];  
+			    		String apellido2 = lista[3];
+			    		String email_i = lista[6];
+			    		String email_p = lista[7]; 
+			    		String telefono = lista[8];
+			    		String movil = lista[9];
+			    		String direccion = lista[10];
+			    		String localidad = lista[11];
+			    		String provincia = lista[12];
+			    		String cp = lista[13];
 	            		
 	            		Alumno a = new Alumno();
 			    		a.setDNI(dni);

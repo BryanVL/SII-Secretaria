@@ -133,16 +133,17 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
 				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
-				int n=1;
+				int n=0;
 	            for (CSVRecord csvRecord : csvParser) {
 	            	
-	            	if(n>=5) {
+	            	if(n>=4) {
 	            		
-	            		String nExpediente = csvRecord.get(4);
-	                	String notaMedia = csvRecord.get(17);
-	                	String creditosSuperados = csvRecord.get(18);
+	            		String[] lista = csvRecord.get(0).split(";");
+	            		String nExpediente = lista[4];
+	                	String notaMedia = lista[17];
+	                	String creditosSuperados = lista[18];
 	                	
-	                	String dniAlumno = csvRecord.get(1);
+	                	String dniAlumno = lista[0];
 	                	TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
 	                	query.setParameter("fdni", dniAlumno);
 	                    List<Alumno> alumnos = query.getResultList();

@@ -15,5 +15,5 @@ public class EncuestaImpl implements InterfazEncuesta{
 		Boolean res = encuesta.getAsignatura_ingles();
 		return res.toString();
 	}
-
+	
 }
