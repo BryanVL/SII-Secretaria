@@ -1,0 +1,84 @@
+﻿Titulac.;Ofertada;Cód.;Referencia;Asignatura;Curso;Créd. teoría;Créd. práctica;Total créditos;Duración;Plazas
+1056;Sí;101;53008;Bioquímica Estructural;1;6;0;6;1º Semestre;-
+1056;Sí;102;53009;Cálculo;1;6;0;6;1º Semestre;-
+1056;Sí;103;53010;Fundamentos de la Programación;1;6;0;6;1º Semestre;-
+1056;Sí;104;53011;Física I;1;6;0;6;1º Semestre;-
+1056;Sí;105;53012;Álgebra Lineal;1;6;0;6;1º Semestre;-
+1056;Sí;106;53013;Ampliación de Cálculo;1;6;0;6;2º Semestre;-
+1056;Sí;107;53014;Estadística;1;6;0;6;2º Semestre;-
+1056;Sí;108;53015;Física II;1;6;0;6;2º Semestre;-
+1056;Sí;109;53016;Gestión de Empresas;1;6;0;6;2º Semestre;-
+1056;Sí;110;53017;Programación Orientada a Objetos;1;6;0;6;2º Semestre;-
+1056;Sí;201;53109;Ampliación de Matemáticas;2;6;0;6;1º Semestre;-
+1056;Sí;202;53110;Biología Molecular y Bioquímica;2;6;0;6;1º Semestre;-
+1056;Sí;203;53111;Circuitos y Máquinas Eléctricas;2;6;0;6;1º Semestre;-
+1056;Sí;204;53112;Electrónica;2;6;0;6;1º Semestre;-
+1056;Sí;205;53113;Estructuras de Datos y Algoritmos;2;6;0;6;1º Semestre;-
+1056;Sí;206;53114;Anatomía y Fisiología;2;6;0;6;2º Semestre;-
+1056;Sí;207;53115;Arquitectura de Computadores y Sistemas Operativos;2;6;0;6;2º Semestre;-
+1056;Sí;208;53116;Bases de Datos;2;6;0;6;2º Semestre;-
+1056;Sí;209;53117;Biología Celular y Genética;2;6;0;6;2º Semestre;-
+1056;Sí;210;53118;Control Automático;2;6;0;6;2º Semestre;-
+1056;Sí;301;53161;Fundamentos de Informática Clínica;3;6;0;6;1º Semestre;-
+1056;Sí;302;53162;Imágenes Biomédicas;3;6;0;6;1º Semestre;-
+1056;Sí;303;53163;Ingeniería del Software;3;6;0;6;1º Semestre;-
+1056;Sí;304;53164;Redes y Sistemas Distribuidos;3;6;0;6;1º Semestre;-
+1056;Sí;305;53165;Sistemas Inteligentes;3;6;0;6;1º Semestre;-
+1056;Sí;320;53210;Bases de Datos Biológicas;3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;330;53211;Biomateriales;3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;331;53212;Biomecánica I: Sólidos;3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;332;53213;Biomecánica II: Fluidos;3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;333;53214;Biotecnología;3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;334;53215;Ciencia y Resistencia de Materiales;3;6;0;6;2º Semestre;Sin lím.
+1056;Sí;321;53218;Genómica, Proteómica y Metabolómica;3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;322;53220;Ingeniería del Software Avanzada;3;6;0;6;2º Semestre;Sin lím.
+1056;Sí;335;53221;Instrumentación Biomédica;3;6;0;6;2º Semestre;Sin lím.
+1056;Sí;323;53222;Minería de Datos;3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;324;53223;Programación Avanzada en Bioinformática;3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;325;53226;Técnicas y Modelos Algorítmicos;3;6;0;6;2º Semestre;Sin lím.
+1056;Sí;415;53283;Electromedicina;4;6;0;6;1º Semestre;Sin lím.
+1056;Sí;416;53286;Instalaciones Hospitalarias;4;6;0;6;1º Semestre;Sin lím.
+1056;Sí;414;53296;Proyectos de Ingeniería Biomédica;4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;422;53303;Prácticas Externas;4;13.5;0;13.5;2º Semestre;35
+1056;Sí;423;53304;Trabajo Fin de Grado;4;12;0;12;2º Semestre;-
+1056;Sí;425;53308;Biología de Sistemas;4;6;0;6;1º Semestre;Sin lím.
+1056;Sí;424;53309;Herramientas y Algoritmos en Bioinformática;4;6;0;6;1º Semestre;Sin lím.
+1056;Sí;426;53310;Proyectos de Bioinformática;4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;820;53407;Análisis de Datos de Expresión Génica;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;821;53408;Biofísica;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;822;53409;Biología Sintética;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;823;53410;Computación en Biotecnología;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;824;53411;Sistemas Biológicos Complejos;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;921;53412;Almacenes de Datos;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;920;53413;Aprendizaje Computacional;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;922;53414;Estándares de Datos Abiertos e Integración de Datos;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;923;53415;Ingeniería Web;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;924;53416;Minería de Textos;4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;830;53417;Biofísica Celular y Tisular;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;831;53418;Ingeniería de Tejidos;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;832;53419;Prostética;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;833;53420;Robótica Médica;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;834;53421;Sistemas de Control y Biomecatrónica;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;835;53422;Sistemas de Rehabilitación y Ayuda a la Discapacidad;4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;932;53423;Modelado de Sistemas Biomédicos;4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;Sí;930;53424;Bioseñales Médicas;4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;931;53425;Microtecnología y Nanotecnología en Biomedicina;4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;Sí;933;53426;Seguridad, Ética y Regulación en Ingeniería Biomédica;4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;934;53427;Telemedicina;4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;336;53824;Análisis Avanzado de Datos Clínicos (SE);3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;337;53825;Codificación y Gestión de la Información Sanitaria (SE);3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;338;53826;Diseño e Implementación de Sistemas de Información Clínica (SE);3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;339;53827;Infraestructuras de Sistemas de Información (SE);3;6;0;6;2º Semestre;Sin lím.
+1056;No;340;53828;Salud Pública y Organización Sanitaria (SE);3;6;0;6;2º Semestre;Sin lím.
+1056;No;341;53829;Seguridad, Confidencialidad y Gestión de la Identidad (SE);3;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;935;53830;Arquitectura de Sistemas y Software de Base (SE);4;6;0;6;1º Semestre;Sin lím.
+1056;No;936;53831;Computación Orientada a Servicios (SE);4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;937;53832;Gestión de Proyectos Informáticos (SE);4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;938;53833;Gestión de Servicios y Tecnologías de la Información (SE);4;6;0;6;1º Semestre;Sin lím.
+1056;No;939;53834;Gestión del Cambio, Comunicación y Liderazgo (SE);4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;940;53835;Minería de Datos Clínicos (SE);4;4.5;0;4.5;1º Semestre;Sin lím.
+1056;No;941;53836;Proyectos de Informática Clínica (SE);4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;942;53837;Sistemas de Información para Teleasistencia y Atención Remota (SE);4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;943;53838;Tecnología de las Comunicaciones (SE);4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;944;53839;Tecnologías para la Administración Electrónica (SE);4;4.5;0;4.5;2º Semestre;Sin lím.
+1056;No;945;53840;Ética y Legislación en Salud (SE);4;4.5;0;4.5;2º Semestre;Sin lím.

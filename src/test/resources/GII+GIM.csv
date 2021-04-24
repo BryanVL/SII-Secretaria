@@ -1,0 +1,60 @@
+﻿Titulac.;Ofertada;Cód.;Referencia;Asignatura;Curso;Créd. teoría;Créd. práctica;Columna5;Duración;Plazas;Otro Idioma
+1073;Sí;106;50659;Fundamentos Físicos de la Informática;1;6;0;6;1º Semestre;-;
+1073;Sí;104;50660;Fundamentos de Electrónica;1;6;0;6;1º Semestre;-;
+1073;Sí;105;50661;Fundamentos de la Programación;1;6;0;6;1º Semestre;-;Solo un grupo
+1073;Sí;109;50665;Organización Empresarial;1;6;0;6;2º Semestre;-;
+1073;Sí;110;50666;Programación Orientada a Objetos;1;6;0;6;2º Semestre;-;Solo un grupo
+1073;Sí;111;50667;Tecnología de Computadores;1;6;0;6;2º Semestre;-;Solo un grupo
+1073;Sí;204;50994;Análisis y Diseño de Algoritmos;2;6;0;6;1º Semestre;-;Solo un grupo
+1073;No;304;50995;Bases de Datos;3;6;0;6;1º Semestre;-;Solo un grupo
+1073;Sí;205;50996;Estructura de Computadores;2;6;0;6;1º Semestre;-;Solo un grupo
+1073;Sí;206;50997;Estructura de Datos;2;6;0;6;1º Semestre;-;Solo un grupo
+1073;No;305;50998;Teoría de Autómatas y Lenguajes Formales;3;6;0;6;1º Semestre;-;Solo un grupo
+1073;No;310;50999;Introducción a la Ingeniería del Software;3;6;0;6;2º Semestre;-;Solo un grupo
+1073;No;311;51000;Programación de Sistemas y Concurrencia;3;6;0;6;2º Semestre;-;Solo un grupo
+1073;Sí;210;51001;Redes y Sistemas Distribuidos;2;6;0;6;2º Semestre;-;Solo un grupo
+1073;Sí;211;51002;Sistemas Inteligentes;2;6;0;6;2º Semestre;-;Solo un grupo
+1073;Sí;212;51003;Sistemas Operativos;2;6;0;6;2º Semestre;-;Solo un grupo
+1073;No;306;51007;Introducción a los Sistemas de Información;3;6;0;6;1º Semestre;-;
+1073;No;411;51008;Lógica Computacional;4;6;0;6;1º Semestre;Sin lím.;
+1073;No;404;51009;Procesadores de Lenguajes;4;6;0;6;1º Semestre;-;
+1073;No;405;51011;Seguridad de la Información;4;6;0;6;1º Semestre;-;
+1073;No;409;51015;Administración de Bases de Datos;4;6;0;6;2º Semestre;-;
+1073;No;412;51016;Algoritmia y Complejidad;4;6;0;6;2º Semestre;Sin lím.;
+1073;No;312;51024;Sistemas Inteligentes II;3;6;0;6;2º Semestre;-;
+1073;No;410;51025;Sistemas de Información para Internet;4;6;0;6;2º Semestre;-;
+1073;No;510;51029;Aprendizaje Computacional;5;6;0;6;1º Semestre;Sin lím.;
+1073;No;507;51036;Modelos de la Computación;5;6;0;6;1º Semestre;Sin lím.;
+1073;No;508;51041;Robótica;5;6;0;6;1º Semestre;Sin lím.;
+1073;No;509;51046;Teoría de los Lenguajes de Programación;5;6;0;6;1º Semestre;Sin lím.;
+1073;No;506;51055;Proyectos y Legislación;5;6;0;6;2º Semestre;-;
+1073;No;512;51059;Trabajo Fin de Grado (Informática);5;12;0;12;2º Semestre;-;
+1073;Sí;102;51478;Análisis Matemático I;1;6;0;6;1º Semestre;-;
+1073;Sí;103;51479;Estructuras Básicas del Álgebra;1;6;0;6;1º Semestre;-;
+1073;Sí;201;51481;Matemática Discreta;2;6;0;6;1º Semestre;-;Ningún grupo
+1073;Sí;107;51483;Análisis Matemático II;1;6;0;6;2º Semestre;-;
+1073;Sí;108;51484;Estructuras Algebraicas;1;6;0;6;2º Semestre;-;
+1073;Sí;207;51486;Introducción a la Probabilidad y a la Estadística;2;6;0;6;2º Semestre;-;
+1073;Sí;101;51487;Álgebra Lineal y Geometría;1;12;0;12;1º y 2º ;-;
+1073;Sí;202;51488;Análisis Matemático III;2;6;0;6;1º Semestre;-;
+1073;Sí;203;51489;Ecuaciones Diferenciales I;2;6;0;6;1º Semestre;-;
+1073;No;302;51491;Métodos Numéricos I;3;6;0;6;1º Semestre;-;
+1073;No;301;51492;Topología General;3;6;0;6;1º Semestre;-;
+1073;Sí;208;51493;Ampliación de Álgebra Lineal y Geometría;2;6;0;6;2º Semestre;-;
+1073;Sí;209;51494;Análisis Matemático IV;2;6;0;6;2º Semestre;-;
+1073;No;307;51496;Geometría Diferencial de Curvas y Superficies;3;6;0;6;2º Semestre;-;
+1073;No;308;51497;Métodos Numéricos II;3;6;0;6;2º Semestre;-;
+1073;No;303;51498;Ecuaciones Diferenciales II;3;6;0;6;1º Semestre;-;
+1073;No;501;51499;Optimización;5;6;0;6;1º Semestre;-;
+1073;No;401;51500;Probabilidad;4;6;0;6;1º Semestre;-;
+1073;No;402;51501;Teoría de la Medida e Integración;4;6;0;6;1º Semestre;-;
+1073;No;403;51502;Topología Algebraica Básica;4;6;0;6;1º Semestre;-;
+1073;No;406;51503;Análisis Numérico;4;6;0;6;2º Semestre;-;
+1073;No;407;51504;Geometría Diferencial Global de Superficies;4;6;0;6;2º Semestre;-;
+1073;No;408;51505;Inferencia Estadística;4;6;0;6;2º Semestre;-;
+1073;No;504;51506;Teoría de Cuerpos;5;6;0;6;2º Semestre;-;
+1073;No;309;51507;Variable Compleja;3;6;0;6;2º Semestre;-;
+1073;No;502;51521;Ampliación de Teoría de la Probabilidad;5;6;0;6;1º Semestre;-;
+1073;No;503;51526;Ecuaciones en Derivadas Parciales y Análisis de Fourier;5;6;0;6;1º Semestre;-;
+1073;No;505;51536;Modelización;5;6;0;6;2º Semestre;-;
+1073;No;511;51539;Trabajo Fin de Grado (Matemáticas);5;12;0;12;2º Semestre;-;

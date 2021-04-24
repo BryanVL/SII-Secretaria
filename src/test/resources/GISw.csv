@@ -1,0 +1,71 @@
+﻿Titulac.;Ofertada;Cód.;Referencia;Asignatura;Curso;Créd. teoría;Créd. práctica;Columna5;Duración;Plazas;Otro Idioma
+1042;Sí;804;51006;Electrónica Digital;3;6;0;6;1º Semestre;35;
+1042;No;809;51010;Programación Gráfica 3D;3;6;0;6;1º Semestre;Sin lím.;
+1042;No;811;51012;Servicios Multimedia;3;6;0;6;1º Semestre;Sin lím.;
+1042;Sí;813;51014;Teoría de Dominios y Modelos Denotacionales;3;6;0;6;1º Semestre;35;
+1042;Sí;807;51018;Ingeniería de Protocolos;3;6;0;6;1º Semestre;35;
+1042;Sí;808;51019;Inteligencia Artificial para Juegos;3;6;0;6;1º Semestre;35;
+1042;Sí;860;51020;Laboratorio de Computación Científica;3;6;0;6;2º Semestre;35;
+1042;Sí;862;51021;Modelado y Simulación de Sistemas;3;6;0;6;2º Semestre;35;
+1042;Sí;866;51023;Programación de Videojuegos;3;6;0;6;2º Semestre;35;
+1042;Sí;815;51026;Visión por Computador;3;6;0;6;1º Semestre;35;
+1042;Sí;850;51030;Arquitecturas Cluster;3;6;0;6;2º Semestre;35;
+1042;Sí;803;51031;Desarrollo de Software Crítico;4;6;0;6;1º Semestre;35;
+1042;No;805;51035;Fundamentos de Economía y Política Económica;4;6;0;6;1º Semestre;Sin lím.;
+1042;Sí;864;51039;Procesamiento de Imágenes y Video;3;6;0;6;2º Semestre;35;
+1042;Sí;865;51040;Programación de Robots;3;6;0;6;2º Semestre;35;
+1042;No;812;51042;Sistemas de Automatización;4;6;0;6;1º Semestre;Sin lím.;
+1042;Sí;814;51044;Teoría de la Información y la Codificación;3;6;0;6;1º Semestre;35;
+1042;No;870;51045;Teoría de la Señal;4;6;0;6;2º Semestre;Sin lím.;
+1042;Sí;802;51047;Arquitecturas Virtuales;4;6;0;6;1º Semestre;35;
+1042;No;855;51048;Diseño de Equipos y Sistemas Electrónicos;4;6;0;6;2º Semestre;Sin lím.;
+1042;Sí;856;51049;Electrónica para Domótica;3;6;0;6;2º Semestre;35;
+1042;Sí;857;51050;Gestión Inteligente de la Información;4;6;0;6;2º Semestre;35;
+1042;Sí;806;51051;Herramientas de Diseño Electrónico;4;6;0;6;1º Semestre;35;
+1042;No;859;51052;Inteligencia Computacional;4;6;0;6;2º Semestre;Sin lím.;
+1042;No;861;51053;Lógica e Informática;4;6;0;6;2º Semestre;Sin lím.;
+1042;No;867;51054;Programación Declarativa;4;6;0;6;2º Semestre;Sin lím.;
+1042;Sí;810;51057;Redes Inalámbricas;3;6;0;6;1º Semestre;35;
+1042;Sí;869;51058;Sistemas de Información para la Industria;4;6;0;6;2º Semestre;35;
+1042;Sí;101;51138;Cálculo para la Computación;1;6;0;6;1º Semestre;-;
+1042;Sí;102;51139;Fundamentos Físicos de la Informática;1;6;0;6;1º Semestre;-;
+1042;Sí;103;51140;Fundamentos de Electrónica;1;6;0;6;1º Semestre;-;
+1042;Sí;104;51141;Fundamentos de la Programación;1;6;0;6;1º Semestre;-;Solo un grupo
+1042;Sí;105;51142;Matemática Discreta;1;6;0;6;1º Semestre;-;
+1042;Sí;106;51143;Estructuras Algebraicas para la Computación;1;6;0;6;2º Semestre;-;
+1042;Sí;107;51144;Métodos Estadísticos para la Computación;1;6;0;6;2º Semestre;-;
+1042;Sí;108;51145;Organización Empresarial;1;6;0;6;2º Semestre;-;
+1042;Sí;109;51146;Programación Orientada a Objetos;1;6;0;6;2º Semestre;-;Solo un grupo
+1042;Sí;110;51147;Tecnología de Computadores;1;6;0;6;2º Semestre;-;Solo un grupo
+1042;Sí;201;51148;Análisis y Diseño de Algoritmos;2;6;0;6;1º Semestre;-;Solo un grupo
+1042;Sí;202;51149;Bases de Datos;2;6;0;6;1º Semestre;-;Solo un grupo
+1042;Sí;203;51150;Estructura de Computadores;2;6;0;6;1º Semestre;-;Solo un grupo
+1042;Sí;204;51151;Estructura de Datos;2;6;0;6;1º Semestre;-;Solo un grupo
+1042;Sí;205;51152;Teoría de Autómatas y Lenguajes Formales;2;6;0;6;1º Semestre;-;Solo un grupo
+1042;Sí;206;51153;Introducción a la Ingeniería del Software;2;6;0;6;2º Semestre;-;Solo un grupo
+1042;Sí;207;51154;Programación de Sistemas y Concurrencia;2;6;0;6;2º Semestre;-;Solo un grupo
+1042;Sí;208;51155;Redes y Sistemas Distribuidos;2;6;0;6;2º Semestre;-;Solo un grupo
+1042;Sí;209;51156;Sistemas Inteligentes;2;6;0;6;2º Semestre;-;Solo un grupo
+1042;Sí;210;51157;Sistemas Operativos;2;6;0;6;2º Semestre;-;Solo un grupo
+1042;Sí;301;51160;Gestión de la Información;3;6;0;6;1º Semestre;-;
+1042;Sí;302;51161;Ingeniería de Requisitos;3;6;0;6;1º Semestre;-;
+1042;Sí;303;51162;Modelado y Diseño del Software;3;6;0;6;1º Semestre;-;
+1042;Sí;304;51166;Técnicas Computacionales para la Ingeniería del Software;3;6;0;6;1º Semestre;-;
+1042;Sí;305;51169;Interfaces de Usuario;3;6;0;6;2º Semestre;-;
+1042;Sí;306;51171;Mantenimiento y Pruebas del Software;3;6;0;6;2º Semestre;-;
+1042;Sí;307;51174;Seguridad en Servicios y Aplicaciones;3;6;0;6;2º Semestre;-;
+1042;Sí;308;51175;Tecnologías de Aplicaciones Web;3;6;0;6;2º Semestre;-;
+1042;Sí;402;51180;Gestión de Proyectos Software;4;6;0;6;1º Semestre;-;
+1042;Sí;403;51181;Ingeniería Web;4;6;0;6;1º Semestre;-;
+1042;Sí;404;51182;Métodos formales para la Ingeniería del Software;4;6;0;6;1º Semestre;-;
+1042;Sí;405;51186;Software para sistemas empotrados y dispositivos móviles;4;6;0;6;1º Semestre;-;
+1042;Sí;852;51190;Calidad de Software;4;6;0;6;2º Semestre;35;
+1042;Sí;853;51191;Cognición y Comunicación en Ingeniería del Software;4;6;0;6;2º Semestre;35;
+1042;No;854;51192;Desarrollo del Software Dirigido por Modelos;4;6;0;6;2º Semestre;Sin lím.;
+1042;Sí;401;51195;Proyectos y Legislación;4;6;0;6;2º Semestre;-;
+1042;Sí;863;51196;Prácticas Externas;4;12;0;12;2º Semestre;Sin lím.;
+1042;Sí;450;51198;Trabajo Fin de Grado;4;12;0;12;2º Semestre;-;
+1042;Sí;851;51730;Arquitecturas Especializadas;4;6;0;6;2º Semestre;35;
+1042;No;858;51734;Implementación Electrónica de Procesadores;4;6;0;6;2º Semestre;Sin lím.;
+1042;No;868;51738;Sensores y Actuadores;4;6;0;6;2º Semestre;Sin lím.;
+1042;No;801;53158;Ampliación de Física;3;6;0;6;1º Semestre;Sin lím.;
