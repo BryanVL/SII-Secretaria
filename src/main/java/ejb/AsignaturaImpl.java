@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -30,6 +32,7 @@ import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazAsignatura;
 import interfacesEJB.InterfazImportar;
 import jpa.Asignatura;
+import jpa.Idiomas;
 import jpa.Titulacion;
 
 
@@ -82,46 +85,62 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 
 		    		Cell cell = row.getCell(4); 
 		    		String referencia = cell.getStringCellValue();
-		    		cell = row.getCell(3); 
-		    		String codigo = cell.getStringCellValue();
-		    		cell = row.getCell(9); 
-		    		String creditos_total = cell.getStringCellValue();
-		    		cell = row.getCell(7); 
-		    		String creditos_teoria = cell.getStringCellValue();
-		    		cell = row.getCell(2); 
-		    		String ofertada =cell.getStringCellValue();
-		    		cell = row.getCell(5); 
-		    		String nombre = cell.getStringCellValue();
-		    		cell = row.getCell(6); 
-		    		String curso = cell.getStringCellValue();
-		    		//cell = row.getCell(); 
-		    		//String caracter = csvRecord.get();
-		    		cell = row.getCell(10); 
-		    		String duracion = cell.getStringCellValue();
-		    		//cell = row.getCell(); 
-		    		//String unidad_temporal = csvRecord.get(2);
-            		
-		    		cell = row.getCell(1); 
-		    		String codigoTitulacion = cell.getStringCellValue();
-		    		Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
-		    		if(titulacionExistente == null) {
-		    			throw new TitulacionException();
+		    		
+		    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia );
+		    		if(asignaturaExistente == null) {
+
+			    		cell = row.getCell(3); 
+			    		String codigo = cell.getStringCellValue();
+			    		cell = row.getCell(9); 
+			    		String creditos_total = cell.getStringCellValue();
+			    		cell = row.getCell(7); 
+			    		String creditos_teoria = cell.getStringCellValue();
+			    		cell = row.getCell(2); 
+			    		String ofertada =cell.getStringCellValue();
+			    		cell = row.getCell(5); 
+			    		String nombre = cell.getStringCellValue();
+			    		cell = row.getCell(6); 
+			    		String curso = cell.getStringCellValue();
+			    		//cell = row.getCell(); 
+			    		//String caracter = csvRecord.get();
+			    		cell = row.getCell(10); 
+			    		String duracion = cell.getStringCellValue();
+			    		//cell = row.getCell(); 
+			    		//String unidad_temporal = csvRecord.get(2);
+	            		
+			    		cell = row.getCell(1); 
+			    		String codigoTitulacion = cell.getStringCellValue();
+			    		Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
+			    		if(titulacionExistente == null) {
+			    			throw new TitulacionException();
+			    		}
+		    		
+	            		Asignatura a = new Asignatura();
+			    		a.setReferencia( Integer.parseInt(referencia));
+			    		a.setCodigo( Integer.parseInt(codigo));
+			    		a.setCreditos_total( Float.parseFloat(creditos_total) );
+			    		a.setCreditos_teoria( Float.parseFloat(creditos_teoria) );
+			    		a.setOfertada(ofertada);
+			    		a.setNombre(nombre);
+			    		a.setCurso( Integer.parseInt(curso) );
+			    		//a.setCaracter(caracter);
+			    		a.setDuracion(duracion);
+			    		//a.setUnidad_temporal(unidad_temporal);
+	            		a.setTitulacion(titulacionExistente);
+	            		
+	            		cell = row.getCell(12); 
+			    		String otro_idioma = cell.getStringCellValue();
+			    		if(otro_idioma!=null) {
+			    			Idiomas idioma = new Idiomas();
+			    			idioma.setNombre("Ingles");
+			    			List<Idiomas> idiomas = new ArrayList<>();
+			    			idiomas.add(idioma);
+			    			a.setIdiomas(idiomas);
+			    		}
+			    		
+			    		em.persist(a);
 		    		}
 		    		
-            		Asignatura a = new Asignatura();
-		    		a.setReferencia( Integer.parseInt(referencia));
-		    		a.setCodigo( Integer.parseInt(codigo));
-		    		a.setCreditos_total( Float.parseFloat(creditos_total) );
-		    		a.setCreditos_teoria( Float.parseFloat(creditos_teoria) );
-		    		a.setOfertada(ofertada);
-		    		a.setNombre(nombre);
-		    		a.setCurso( Integer.parseInt(curso) );
-		    		//a.setCaracter(caracter);
-		    		a.setDuracion(duracion);
-		    		//a.setUnidad_temporal(unidad_temporal);
-            		a.setTitulacion(titulacionExistente);
-		    		
-		    		em.persist(a);
 		    	}
 		    	
 		        n++;
@@ -148,36 +167,50 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 	            	if(n>=2) {
 	            		
 			    		String referencia = csvRecord.get(4);
-			    		String codigo = csvRecord.get(3);
-			    		String creditos_total = csvRecord.get(9);  
-			    		String creditos_teoria = csvRecord.get(7);
-			    		String ofertada = csvRecord.get(2);
-			    		String nombre = csvRecord.get(5);
-			    		String curso = csvRecord.get(6);
-			    		//String caracter = csvRecord.get();
-			    		String duracion = csvRecord.get(10);
-			    		//String unidad_temporal = csvRecord.get(2);
-	            		
-			    		String codigoTitulacion = csvRecord.get(1);
-			    		Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
-			    		if(titulacionExistente == null) {
-			    			throw new TitulacionException();
-			    		}
 			    		
-	            		Asignatura a = new Asignatura();
-			    		a.setReferencia( Integer.parseInt(referencia));
-			    		a.setCodigo( Integer.parseInt(codigo));
-			    		a.setCreditos_total( Float.parseFloat(creditos_total) );
-			    		a.setCreditos_teoria( Float.parseFloat(creditos_teoria) );
-			    		a.setOfertada(ofertada);
-			    		a.setNombre(nombre);
-			    		a.setCurso( Integer.parseInt(curso) );
-			    		//a.setCaracter(caracter);
-			    		a.setDuracion(duracion);
-			    		//a.setUnidad_temporal(unidad_temporal);
-	            		a.setTitulacion(titulacionExistente);
+			    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia );
+			    		if(asignaturaExistente == null) {
 			    		
-			    		em.persist(a);
+				    		String codigo = csvRecord.get(3);
+				    		String creditos_total = csvRecord.get(9);  
+				    		String creditos_teoria = csvRecord.get(7);
+				    		String ofertada = csvRecord.get(2);
+				    		String nombre = csvRecord.get(5);
+				    		String curso = csvRecord.get(6);
+				    		//String caracter = csvRecord.get();
+				    		String duracion = csvRecord.get(10);
+				    		//String unidad_temporal = csvRecord.get(2);
+		            		
+				    		String codigoTitulacion = csvRecord.get(1);
+				    		Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
+				    		if(titulacionExistente == null) {
+				    			throw new TitulacionException();
+				    		}
+				    		
+		            		Asignatura a = new Asignatura();
+				    		a.setReferencia( Integer.parseInt(referencia));
+				    		a.setCodigo( Integer.parseInt(codigo));
+				    		a.setCreditos_total( Float.parseFloat(creditos_total) );
+				    		a.setCreditos_teoria( Float.parseFloat(creditos_teoria) );
+				    		a.setOfertada(ofertada);
+				    		a.setNombre(nombre);
+				    		a.setCurso( Integer.parseInt(curso) );
+				    		//a.setCaracter(caracter);
+				    		a.setDuracion(duracion);
+				    		//a.setUnidad_temporal(unidad_temporal);
+		            		a.setTitulacion(titulacionExistente);
+				    		
+		            		String otro_idioma = csvRecord.get(12);
+				    		if(otro_idioma!=null) {
+				    			Idiomas idioma = new Idiomas();
+				    			idioma.setNombre("Ingles");
+				    			List<Idiomas> idiomas = new ArrayList<>();
+				    			idiomas.add(idioma);
+				    			a.setIdiomas(idiomas);
+				    		}
+		            		
+				    		em.persist(a);
+		            	}
 	            	}
 	            	n++;
 				}

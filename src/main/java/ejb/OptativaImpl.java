@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -81,8 +83,6 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 		    	
 		    	if(n>=2) {
 
-		    		
-            		
 		    		Cell cell = row.getCell(1); 
 		    		String referencia =cell.getStringCellValue();
 		    		cell = row.getCell(2); 
@@ -100,7 +100,13 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 		    		o.setMencion(mencion);
 		    		o.setAsignatura(asignaturaExistente);
 		    		
+		    		Titulacion titulacion = asignaturaExistente.getTitulacion();
+		    		List<Titulacion> titulaciones = new ArrayList<>();
+		    		titulaciones.add(titulacion);
+		    		o.setTitulaciones(titulaciones);
+		    		
 		    		em.persist(o);
+		    		
 		    	}
 		    	
 		        n++;
@@ -140,7 +146,13 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 			    		o.setMencion(mencion);
 			    		o.setAsignatura(asignaturaExistente);
 			    		
+			    		Titulacion titulacion = asignaturaExistente.getTitulacion();
+			    		List<Titulacion> titulaciones = new ArrayList<>();
+			    		titulaciones.add(titulacion);
+			    		o.setTitulaciones(titulaciones);
+			    		
 			    		em.persist(o);
+			    		
 	            	}
 	            	n++;
 				}
