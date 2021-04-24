@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
@@ -43,6 +44,7 @@ public class ExpedientePrueba {
 	}
 	
 	@Test
+	@Requisitos({"RF7"})
 	public void testImportarExpediente() {
 		String dir = "src/test/resources/alumnos.csv";
 		
@@ -67,6 +69,7 @@ public class ExpedientePrueba {
 	}
 	
 	@Test
+	@Requisitos({"R11"})
 	public void testVisualizarExpediente() {
 		
 		//Probamos si el expediente que ya tenemos en la base de datos es el mismo que obtenemos al llamar al método.
