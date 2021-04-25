@@ -5,7 +5,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.naming.NamingException;
@@ -15,16 +18,21 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
+import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ClaseException;
 import excepcionesEJB.ImportarException;
+import excepcionesEJB.MatriculaException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazHorarios;
 import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
+import jpa.Alumno;
 import jpa.Asignatura;
 import jpa.Clase;
 import jpa.Clase_PK;
 import jpa.Grupo;
+import jpa.Matricula;
+import jpa.Matricula_PK;
 import jpa.Titulacion;
 
 public class ClasePrueba {
@@ -127,39 +135,49 @@ public class ClasePrueba {
 		}
 	}
 	
-	@Ignore
+	
 	@Test
 	@Requisitos({"RF11"})
 	public void testVisualizarHorarioGrupo() {
-		/*
-		Titulacion tit = new Titulacion();
-		tit.setCodigo(1234);
-		tit.setNombre("Informatica");
-		tit.setCreditos( 240f );
 		
 		Grupo grupo = new Grupo();
 		grupo.setID(1l);
-		grupo.setCurso(1);
-		grupo.setLetra("A");
-		grupo.setTurno_Mañana_Tarde("Mañana");
-		grupo.setIngles("Sí");
-		grupo.setPlazas(50);
-		grupo.setPlazasDisponibles(50);
-		grupo.setTitulacion(tit);
+		List<Clase> lista = new ArrayList<>();
 		
 		try {
-			interfazClases.VisualizarHorarios(grupo);
+			lista = interfazClases.VisualizarHorarios(grupo);
 		} catch (ClaseException e) {
 			fail("No se encontro el grupo");
 		}
-		*/
+		
+		assertEquals(lista.get(0).getId().getHora_inicio(), new Time(10,45,0));
+		assertEquals(lista.get(0).getId().getDia(), new Date("24/09/2018"));
 		
 	}
 	
-	@Ignore
+	
 	@Test
 	@Requisitos({"RF11"})
 	public void testVisualizarHorarioAlumnoporMatricula() {
+		
+		Alumno alumno = new Alumno();
+		alumno.setID(1234L);
+			
+		Matricula_PK brk = new Matricula_PK();
+		brk.setCurso_academico("18/19");
+		brk.setIdExp(123);
+		Matricula matricula = new Matricula();
+		matricula.setId(brk);
+		
+		HashMap<Asignatura, List<Clase>> lista = new HashMap<>();
+		
+		try {
+			lista = interfazClases.VisualizarHorarios(alumno,matricula);
+		} catch (ClaseException | AlumnoException | MatriculaException e) {
+			fail("Ninguna clase encontrada");
+		}
+		
+		//assertTrue(lista.size()>0);
 		
 	}
 	

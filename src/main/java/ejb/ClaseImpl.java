@@ -229,8 +229,8 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 	//Visualizar todas las clases de un grupo
 	public List<Clase> VisualizarHorarios(Grupo g) throws ClaseException {
 		
-		TypedQuery query = em.createQuery("Select c from Clase c where c.Grupo = :id", Clase.class);	  
-		query.setParameter("id", g.getID()); 
+		Query query = em.createQuery("Select c from Clase c where c.grupo = :clave", Clase.class);	  
+		query.setParameter("clave", g); 
         List<Clase> clases = query.getResultList();
 		
 		if (clases == null) {
@@ -245,6 +245,7 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 
 		
 		HashMap<Asignatura, List<Clase>> res = new HashMap<Asignatura, List<Clase>>();
+		
 		Alumno alu = em.find(Alumno.class, a.getID());
 		if (alu == null) {	
 			throw new AlumnoException();
@@ -255,12 +256,8 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 			throw new MatriculaException();
 		}
 		
-		
 		for(Asignaturas_Matricula asiM: matr.getAsigMat()) {
-			List<Clase> clases = new ArrayList<Clase>();
-			Asignatura asig = asiM.getAsignatura();
-			clases.addAll(asig.getClases());
-			res.put(asig, clases);
+			res.put(asiM.getAsignatura(), asiM.getAsignatura().getClases());
 		}
 		
 		
