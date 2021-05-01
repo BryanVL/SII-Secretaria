@@ -17,6 +17,8 @@ import jpa.Matricula;
 @Local
 public interface InterfazHorarios {
 	
+	public List<Clase> visTodasClase() throws ClaseException;
+	
 	public Clase VisualizarHorarios(Clase c) throws ClaseException;
 	
 	public List<Clase> VisualizarHorarios(Grupo g) throws ClaseException;

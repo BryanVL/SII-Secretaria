@@ -66,27 +66,34 @@ public class ClasePrueba {
 			fail("Error al importar");
 		}
 		
-		/*Clase c = new Clase();
-		Clase_PK cpk = new Clase_PK();
-		cpk.setDia(new Date("25/05/2021"));
-		cpk.setHora_inicio(new Time(10,45,0));
-		cpk.setIdG(1l);
-		c.setId(cpk);
-		Asignatura asig = new Asignatura();
-		asig.setReferencia(50658);
-		c.setAsignatura(asig);
 		Grupo g = new Grupo();
 		g.setID(1l);
-		c.setGrupo(g);
+
 		
-		Clase cl = new Clase();
+		List<Clase> cl = new ArrayList<Clase>();
 		try {
-			cl = interfazClases.VisualizarHorarios(c);
+			cl = interfazClases.VisualizarHorarios(g);
+			
+			/*for(Clase c: cl) {
+				System.out.println("\n\n");
+				System.out.println(c.toString());
+				System.out.println("\n\n");
+			}*/
+			
 		} catch (ClaseException e) {
 			fail("No se encontro la clase");
 		}
-		*/
 		
+		try {
+			for(Clase ch: interfazClases.visTodasClase()) {
+				System.out.println("\n\n");
+				System.out.println(ch);
+				System.out.println("\n\n");
+			}
+		} catch (ClaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

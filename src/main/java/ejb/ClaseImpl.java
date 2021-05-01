@@ -164,19 +164,24 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 	}
 	
 	private Clase procesado(String curso, String gr, String asig, String dia, String hora_inicio, String hora_fin) throws GrupoException {
+		
 		Clase c = new Clase();
-        
         Asignatura asignatura = em.find(Asignatura.class, Integer.parseInt(asig));  
         c.setAsignatura(asignatura);
-        
-        //GrupoImpl gi = new GrupoImpl();
-        //Grupo g = gi.buscarPorCursoLetra(curso, grupo);
-        
-        
-        TypedQuery query = em.createQuery("Select g from Grupo g", Grupo.class);	              
+               
+        TypedQuery<Grupo> query = em.createQuery("Select g from Grupo g where g.Letra=:letra and g.Curso=:curso", Grupo.class);
+        query.setParameter("letra", gr);
+        query.setParameter("curso", curso);
         List<Grupo> grupos = query.getResultList();
+        
+        if(grupos.size()==0) {
+        	throw new GrupoException("No se encontro el grupo");
+        }
+        
+        Grupo g = grupos.get(0);
+        c.setGrupo(g);
    
-        boolean encontrado = false;     
+       /* boolean encontrado = false;     
         int i = 0;
         Grupo g = new Grupo();
         while(i<grupos.size() && !encontrado) {
@@ -190,7 +195,7 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
         
         if(!encontrado) {
         	throw new GrupoException();
-        }
+        }*/
         
         c.setHora_fin(new Date(hora_fin));
         Clase_PK id = new Clase_PK();
@@ -212,6 +217,12 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 		}
 
 		return res;
+	}
+	
+	public List<Clase> visTodasClase() throws ClaseException{
+		Query query = em.createQuery("Select c from Clase c", Clase.class);	  
+		List<Clase> clases = query.getResultList();
+		return clases;
 	}
 	
 	//Visualizar solo una clase
