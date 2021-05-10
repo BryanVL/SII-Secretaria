@@ -34,7 +34,8 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 			throw new GrupoException("El grupo indicado no existe.");
 		}
 		
-		TypedQuery query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE g.ID = a.grupo.ID",Asignaturas_Matricula.class);
+		TypedQuery query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE a.grupo.ID=:id",Asignaturas_Matricula.class);
+		query.setParameter("id", g.getID());
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 		
 		List<Alumno> listaAlum = new ArrayList();
@@ -55,7 +56,8 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 			throw new GrupoException("El grupo indicado no existe.");
 		}
 		
-		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a order by a.grupo",Asignaturas_Matricula.class);
+		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula where a.grupo.ID := id",Asignaturas_Matricula.class);
+		query.setParameter("id", g.getID());
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 		
 		return listaAsig;
@@ -70,7 +72,8 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 		throw new AsignaturaException("La asignatura indicada no existe.");
 		}
 
-		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a order by a.getAsignatura()",Asignaturas_Matricula.class);
+		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a where a.asignatura.referencia =: asignatura",Asignaturas_Matricula.class);
+		query.setParameter("asignatura", a.getReferencia());
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 
 		return listaAsig;
@@ -85,7 +88,8 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 		throw new MatriculaException("La matricula indicada no existe.");
 		}
 
-		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a order by a.getMatricula()",Asignaturas_Matricula.class);
+		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a where a.matricula.id =: id",Asignaturas_Matricula.class);
+		query.setParameter("id", m.getId());
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 
 		return listaAsig;
