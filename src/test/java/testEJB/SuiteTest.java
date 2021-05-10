@@ -14,7 +14,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import jpa.Alumno;
 
 @RunWith(Suite.class)
-@SuiteClasses({TitulacionPrueba.class,ExpedientePrueba.class, EncuestaPrueba.class, GrupoPrueba.class, ClasePrueba.class, AsignaturaPrueba.class, OptativaPrueba.class, AlumnoPrueba.class, MatriculaPrueba.class})//Dentro de los corchetes poner las clases de prueba
+@SuiteClasses({TitulacionPrueba.class,ExpedientePrueba.class, EncuestaPrueba.class, GrupoPrueba.class, ClasePrueba.class, AsignaturaPrueba.class, OptativaPrueba.class, AlumnoPrueba.class, MatriculaPrueba.class, AsignaturaMatriculaPrueba.class})//Dentro de los corchetes poner las clases de prueba
 public class SuiteTest {
 
 	private static final String GLASSFISH_CONFIGI_FILE_PROPERTY = "org.glassfish.ejb.embedded.glassfish.configuration.file";
