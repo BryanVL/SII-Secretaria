@@ -40,12 +40,16 @@ public class ClasePrueba {
 	private static final Logger LOG = Logger.getLogger(ClasePrueba.class.getCanonicalName());
 
 	private static final String CLASE_EJB = "java:global/classes/ClaseImpl!ejb.ClaseImpl";	
+	private static final String ASIGNATURA_EJB = "java:global/classes/AsignaturaImpl!ejb.AsignaturaImpl";	
+	private static final String TITULACION_EJB = "java:global/classes/TitulacionImpl!ejb.TitulacionImpl";
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
 	
 	
 	private InterfazImportar interfazImportar;
+	private InterfazImportar interfazImportar2;
+	private InterfazImportar interfazImportar3;
 	private InterfazHorarios interfazClases;
 	
 	
@@ -54,6 +58,8 @@ public class ClasePrueba {
 	public void setup() throws NamingException  {
 		interfazClases = (InterfazHorarios) SuiteTest.ctx.lookup(CLASE_EJB);
 		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(CLASE_EJB);
+		interfazImportar2 = (InterfazImportar) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
+		interfazImportar3 = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
@@ -61,7 +67,9 @@ public class ClasePrueba {
 	@Requisitos({"RF7"})
 	public void testImportarClase() {
 		try {
-			interfazImportar.Importar("/Secretaria/src/test/resources/horarios.csv");
+			interfazImportar3.Importar("src/test/resources/Titulacion.csv");
+			interfazImportar2.Importar("src/test/resources/GII.csv");
+			interfazImportar.Importar("src/test/resources/horarios.csv");
 		} catch (ImportarException e) {
 			fail("Error al importar");
 		}
@@ -85,14 +93,14 @@ public class ClasePrueba {
 		}
 		
 		try {
-			for(Clase ch: interfazClases.visTodasClase()) {
-				System.out.println("\n\n");
-				System.out.println(ch);
-				System.out.println("\n\n");
+			List<Clase> lista = interfazClases.visTodasClase();
+			if(lista != null) {
+				assertTrue(!lista.isEmpty());
+			} else {
+				fail("No se encontro la clase");
 			}
 		} catch (ClaseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail("No deberia lanzarse esta excepcion");
 		}
 		
 	}
@@ -133,10 +141,14 @@ public class ClasePrueba {
 		grupoA.setTitulacion(tit);
 		
 		cAsig.setGrupo(grupoA);
-		
-		Clase cl = new Clase();
 		try {
-			cl = interfazClases.VisualizarHorarios(cAsig);
+		Clase cl = interfazClases.VisualizarHorarios(cAsig);
+		
+			if(cl != null) {
+				assertEquals(cAsig,cl);
+			} else {
+				fail("No coinciden las referencias");
+			}
 		} catch (ClaseException e) {
 			fail("No se encontro la clase");
 		}
@@ -153,12 +165,12 @@ public class ClasePrueba {
 		
 		try {
 			lista = interfazClases.VisualizarHorarios(grupo);
+			assertEquals(lista.get(0).getId().getHora_inicio(), new Time(10,45,0));
+			assertEquals(lista.get(0).getId().getDia(), new Date("24/09/2018"));
 		} catch (ClaseException e) {
 			fail("No se encontro el grupo");
 		}
 		
-		assertEquals(lista.get(0).getId().getHora_inicio(), new Time(10,45,0));
-		assertEquals(lista.get(0).getId().getDia(), new Date("24/09/2018"));
 		
 	}
 	
@@ -183,8 +195,11 @@ public class ClasePrueba {
 		} catch (ClaseException | AlumnoException | MatriculaException e) {
 			fail("Ninguna clase encontrada");
 		}
-		
-		//assertTrue(lista.size()>0);
+		if(lista != null) {
+			assertTrue(!lista.isEmpty());
+		}else {
+			fail("No se ejecuta correctamente");
+		}
 		
 	}
 	

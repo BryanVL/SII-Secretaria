@@ -16,6 +16,8 @@ import javax.persistence.Persistence;
 
 import jpa.Alumno;
 import jpa.Asignatura;
+import jpa.Asignaturas_Matricula;
+import jpa.Asignaturas_Matricula_PK;
 import jpa.Clase;
 import jpa.Clase_PK;
 import jpa.Expediente;
@@ -182,6 +184,16 @@ public class BaseDatos {
 		cAsig.setGrupo(grupoA);
 		
 		em.persist(cAsig);
+		
+		Asignaturas_Matricula_PK ask = new Asignaturas_Matricula_PK();
+		ask.setIdM(brk);
+		Asignaturas_Matricula as = new Asignaturas_Matricula();
+		as.setId(ask);
+		as.setAsignatura(asignatura);
+		as.setGrupo(grupoA);
+		as.setMatricula(br);
+		
+		em.persist(as);
 		
 		Grupo grupoB = new Grupo();
 		grupoB.setID(2l);

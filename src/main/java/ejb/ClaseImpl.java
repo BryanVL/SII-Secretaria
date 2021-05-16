@@ -126,20 +126,18 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 			BufferedReader reader;
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
-				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
+				CSVParser csvParser = new CSVParser(reader, CSVFormat.newFormat(';'));		
 				int n=0;
 	            for (CSVRecord csvRecord : csvParser) {
 	            	
 	            	if(n>=1) {    
 	            		
-	            		String[] lista =  csvRecord.get(0).split(";");
-	            		
-		                String curso = lista[0];  
-		                String gr = lista[1];  
-			            String asig = lista[2];  
-			            String dia = lista[3]; 
-			            String hora_inicio = lista[4]; 			           
-			            String hora_fin = lista[5];  
+		                String curso = csvRecord.get(0);  
+		                String gr = csvRecord.get(1);  
+			            String asig = csvRecord.get(2);  
+			            String dia = csvRecord.get(3); 
+			            String hora_inicio = csvRecord.get(4); 			           
+			            String hora_fin = csvRecord.get(5);  
 	               
 			            Clase c = new Clase();
 				           try {
@@ -169,9 +167,9 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
         Asignatura asignatura = em.find(Asignatura.class, Integer.parseInt(asig));  
         c.setAsignatura(asignatura);
                
-        TypedQuery<Grupo> query = em.createQuery("Select g from Grupo g where g.Letra=:letra and g.Curso=:curso", Grupo.class);
+        TypedQuery<Grupo> query = em.createQuery("Select g from Grupo g where g.Letra = :letra and g.Curso = :curso", Grupo.class);
         query.setParameter("letra", gr);
-        query.setParameter("curso", curso);
+        query.setParameter("curso", Integer.parseInt(curso));
         List<Grupo> grupos = query.getResultList();
         
         if(grupos.size()==0) {
@@ -196,10 +194,13 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
         if(!encontrado) {
         	throw new GrupoException();
         }*/
-        
-        c.setHora_fin(new Date(hora_fin));
+        String[] diaa = dia.split("/");
+        int año = Integer.parseInt(diaa[2])-1900;
+        int mes = Integer.parseInt(diaa[1]);
+        int diab = Integer.parseInt(diaa[0]);
+        c.setHora_fin(convertirTime(hora_fin));
         Clase_PK id = new Clase_PK();
-        id.setDia(new Date(dia));
+        id.setDia(new Date(año,mes,diab));
         id.setHora_inicio(convertirTime(hora_inicio));
         id.setIdG(g.getID());
         c.setId(id);
@@ -211,7 +212,7 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 		Time res;
 		if(hora!=null) {
 			String[] tiempo = hora.split(":");
-			res = new Time(Integer.parseInt(tiempo[0]), Integer.parseInt(tiempo[1]), Integer.parseInt(tiempo[2]));	
+			res = new Time(Integer.parseInt(tiempo[0]), Integer.parseInt(tiempo[1]),0);	
 		}else {
 			res= new Time(0,0,0);
 		}
