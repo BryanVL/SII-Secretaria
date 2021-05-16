@@ -53,8 +53,27 @@ public class AlumnoPrueba {
 		try {
 			interfazImportar.Importar(dir);
 			
-			interfazAlumno.VisualizarAlumno("95115697E");
+			Alumno alumno = new Alumno();
+			alumno.setDNI("95115697E");
+			alumno.setID(51L);
+			alumno.setNombre("Carmelita");
+			alumno.setApellido1("Enríquez");
+			alumno.setApellido2("Navarro");
+			alumno.setEmail_institucional("06104200001@uma.es");
+			alumno.setEmail_personal("CarmelitaEnriquezNavarro@gustr.com");
+			alumno.setTelefono(795115697);
+			alumno.setMovil(795115697);
+			alumno.setDireccion("Ventanilla de Beas 72");
+			alumno.setLocalidad("Ourol");
+			alumno.setProvincia("MÁLAGA");
 			
+			Alumno a = interfazAlumno.VisualizarAlumno("95115697E");
+			
+			if(a!=null) {
+				assertEquals(a,alumno);
+			}else {
+				fail("No coinciden las referencias");
+			}
 		} catch (ImportarException e) {
 			fail("No debería lanzarse excepción");
 		} catch (AlumnoException e) {

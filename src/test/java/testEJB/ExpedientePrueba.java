@@ -15,8 +15,10 @@ import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
+import interfacesEJB.InterfazAlumno;
 import interfacesEJB.InterfazExpediente;
 import interfacesEJB.InterfazImportar;
+import interfacesEJB.InterfazTitulacion;
 import jpa.Expediente;
 import jpa.Titulacion;
 
@@ -24,6 +26,8 @@ public class ExpedientePrueba {
 
 	private static final Logger LOG = Logger.getLogger(ExpedientePrueba.class.getCanonicalName());
 
+	private static final String ALUMNO_EJB = "java:global/classes/AlumnoImpl!ejb.AlumnoImpl";
+	private static final String TITULACION_EJB = "java:global/classes/TitulacionImpl!ejb.TitulacionImpl";
 	private static final String EXPEDIENTE_EJB = "java:global/classes/ExpedienteImpl!ejb.ExpedienteImpl";
 	
 	
@@ -33,6 +37,8 @@ public class ExpedientePrueba {
 	
 	private InterfazImportar interfazImportar;
 	private InterfazExpediente interfazExpediente;
+	private InterfazImportar interfazImportarTit;
+	private InterfazImportar interfazImportarAl;
 	
 	
 	
@@ -40,17 +46,22 @@ public class ExpedientePrueba {
 	public void setup() throws NamingException  {
 		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
 		interfazExpediente = (InterfazExpediente) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
-		
+		interfazImportarTit = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
+		interfazImportarAl  = (InterfazImportar) SuiteTest.ctx.lookup(ALUMNO_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
 	@Test
 	@Requisitos({"RF7"})
-	@Ignore
 	public void testImportarExpediente() {
 		String dir = "src/test/resources/alumnos.csv";
 		
 		try {
+			//ES NECESARIO IMPORTAR PREVIAMENTE ALUMNOS Y TITULACION PARA QUE NO OCURRAN ERRORES:
+			interfazImportarAl.Importar(dir);
+			interfazImportarTit.Importar("src/test/resources/Titulacion.csv");
+			
+			//UNA VEZ IMPORTADOS LOS ANTERIORES DATOS, SE IMPORTAN LOS EXPEDIENTES Y SE COMPRUEBA QUE TODO ES CORRECTO:
 			interfazImportar.Importar(dir);
 			
 			Expediente e = new Expediente();

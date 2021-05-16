@@ -128,31 +128,31 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 				e1.printStackTrace();
 			}
 		} else if (dir.endsWith("csv")){
-			 //Para el archivo csv de 'alumnos' 
+			//Para el archivo csv de 'alumnos'
 			BufferedReader reader;
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
-				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
+				CSVParser csvParser = new CSVParser(reader, CSVFormat.newFormat(';'));		
 				int n=0;
 	            for (CSVRecord csvRecord : csvParser) {
 	            	
 	            	if(n>=4) {
 	            		
-	            		String[] lista = csvRecord.get(0).split(";");
-	            		String nExpediente = lista[4];
-	                	String notaMedia = lista[17];
-	                	String creditosSuperados = lista[18];
-	                	
-	                	String dniAlumno = lista[0];
+	            		String nExpediente = csvRecord.get(4);
+	                	String notaMedia = csvRecord.get(17);
+	                	String creditosSuperados = csvRecord.get(18);
+	                	String dniAlumno = csvRecord.get(0);
 	                	TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
 	                	query.setParameter("fdni", dniAlumno);
 	                    List<Alumno> alumnos = query.getResultList();
+	                    
 	                    if(alumnos.size() == 0) {
 	                    	throw new AlumnoException();
 	                    }
-	                	
-	                	String codigoTitulacion = nExpediente.substring(0, 4);
+	          
+	                    Integer codigoTitulacion = Integer.parseInt(nExpediente.substring(0, 4));
 	                	Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
+	                	
 	                	if(titulacionExistente == null) {
 	                    	throw new TitulacionException();
 	                    }

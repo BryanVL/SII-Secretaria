@@ -104,19 +104,16 @@ public class TitulacionImpl implements InterfazTitulacion, InterfazImportar {
 			
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
-				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
+				CSVParser csvParser = new CSVParser(reader, CSVFormat.newFormat(';'));		
 				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
 	            	if(n>=1) {
 	            		
-	            		String[] lista = csvRecord.get(0).split(";");
-	            		
-			    		String codigo = lista[0];
-			    		String nombre = lista[1];
-			    		String creditos = lista[2];  
+	            		String codigo = csvRecord.get(0);
+			    		String nombre = csvRecord.get(1);
+			    		String creditos = csvRecord.get(2);  
 			    		
-	            		
 	            		Titulacion t = new Titulacion();
 			    		t.setCodigo( Integer.parseInt(codigo) );
 			    		t.setNombre(nombre);
