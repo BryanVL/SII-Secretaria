@@ -18,6 +18,7 @@ import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazAsignatura;
 import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazOptativa;
+import interfacesEJB.InterfazTitulacion;
 import jpa.Asignatura;
 import jpa.Titulacion;
 
@@ -46,7 +47,6 @@ public class AsignaturaPrueba {
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
-	@Ignore
 	@Test
 	@Requisitos({"RF7"})
 	public void testImportarAsignatura() {
@@ -59,26 +59,40 @@ public class AsignaturaPrueba {
 			interfazImportar2.Importar(dir2);
 			interfazImportar.Importar(dir);
 			
+			Asignatura asig = new Asignatura();
+			asig.setReferencia(50658);
 			
-			assertEquals(1, 1);
+			Asignatura asignatura = interfazAsignatura.VisualizarAsignatura(50658);
+			
+			if(asignatura != null) {
+				assertEquals(asig,asignatura);
+			} else {
+				fail("No coinciden las referencias");
+			}
 		} catch (ImportarException e) {
+			fail("No debería lanzarse excepción");
+		} catch (AsignaturaException e) {
 			fail("No debería lanzarse excepción");
 		}
 		
 		
 	}
 	
-	@Ignore
 	@Test
 	@Requisitos({"RF11"})
 	public void testVisualizarAsignatura() {
-		
-		//Probamos si la titulacion que ya tenemos en la base de datos es la misma que obtenemos al llamar al método.
-		Asignatura asig = new Asignatura();
-		asig.setReferencia(50658);
-		
 		try {
-			assertEquals(asig,interfazAsignatura.VisualizarAsignatura(50658));
+		
+			Asignatura asig = new Asignatura();
+			asig.setReferencia(12345);
+			
+			Asignatura asignatura = interfazAsignatura.VisualizarAsignatura(12345);
+		
+			if(asignatura != null) {
+				assertEquals(asig,asignatura);
+			} else {
+				fail("No coinciden las referencias");
+			}
 		} catch (AsignaturaException e) {
 			fail("No debería lanzarse excepción");
 		}

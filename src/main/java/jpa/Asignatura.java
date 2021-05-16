@@ -27,13 +27,13 @@ public class Asignatura implements Serializable {
 	private Float Creditos_teoria;
 	@Column(length=2, nullable=false)
 	private String Ofertada;
-	@Column(length=30, nullable=false)
+	@Column(length=75, nullable=false)
 	private String Nombre;
 	@Column(length=1)
 	private Integer Curso;
 	@Column(length=10)
 	private String Caracter;
-	@Column(length=1)
+	@Column(length=20)
 	private String Duracion;
 	@Column(length=10)
 	private String Unidad_temporal;

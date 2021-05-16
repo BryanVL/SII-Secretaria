@@ -29,8 +29,7 @@ public class OptativaPrueba {
 	private static final Logger LOG = Logger.getLogger(OptativaPrueba.class.getCanonicalName());
 
 	private static final String OPTATIVA_EJB = "java:global/classes/OptativaImpl!ejb.OptativaImpl";
-	private static final String ASIGNATURA_EJB = "java:global/classes/AsignaturaImpl!ejb.AsignaturaImpl";	
-
+	private static final String ASIGNATURA_EJB = "java:global/classes/AsignaturaImpl!ejb.AsignaturaImpl";
 	private static final String TITULACION_EJB = "java:global/classes/TitulacionImpl!ejb.TitulacionImpl";	
 	
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
@@ -42,7 +41,6 @@ public class OptativaPrueba {
 	private InterfazImportar interfazImportar3;
 	
 	private InterfazOptativa interfazOptativa;
-	private InterfazAsignatura interfazAsignatura;
 	
 	
 	@Before
@@ -52,11 +50,9 @@ public class OptativaPrueba {
 		interfazImportar3 = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
 		
 		interfazOptativa = (InterfazOptativa) SuiteTest.ctx.lookup(OPTATIVA_EJB);
-		interfazAsignatura = (InterfazAsignatura) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
-	@Ignore
 	@Test
 	@Requisitos({"RF7"})
 	public void testImportarOptativa() {
@@ -70,35 +66,53 @@ public class OptativaPrueba {
 			interfazImportar3.Importar(dir3);
 			interfazImportar2.Importar(dir2);
 			interfazImportar.Importar(dir);
+			Optativa op = new Optativa();
+			Asignatura a = new Asignatura();
+			a.setReferencia(53158);
+			op.setAsignatura(a);
 			
+			Optativa opta = interfazOptativa.VisualizarOptativa(53158);
 			
-			assertEquals(1, 1);
+			if(a!=null) {
+				assertEquals(op,opta);
+			}else {
+				fail("No coinciden las referencias");
+			}
+			
 		} catch (ImportarException e) {
+			fail("No debería lanzarse excepción");
+		} catch (OptativaException e) {
 			fail("No debería lanzarse excepción");
 		}
 		
 	}
 	
-	@Ignore
 	@Test
 	@Requisitos({"RF11"})
 	public void testVisualizarOptativa() {
 		
 		try {
-			//Probamos si la titulacion que ya tenemos en la base de datos es la misma que obtenemos al llamar al método.
+			Asignatura asignatura = new Asignatura();
+			asignatura.setReferencia(12345);
+			asignatura.setCodigo(900);
+			asignatura.setCreditos_total((float)6);
+			asignatura.setOfertada("Si");
+			asignatura.setNombre("Pruebas con Junit");
+			
 			Optativa opt = new Optativa();
+			opt.setAsignatura(asignatura);
+			opt.setMencion("Informatica");
+			opt.setPlazas(50);
 			
-			Asignatura asig;
-			asig = interfazAsignatura.VisualizarAsignatura(53158);
-				
-			opt.setAsignatura(asig);
+			Optativa optativa = interfazOptativa.VisualizarOptativa(12345);
 			
-			assertEquals(asig,interfazOptativa.VisualizarOptativa(53158));
+			if(optativa != null) {
+				assertEquals(opt,optativa);
+			} else {
+				fail("No coinciden las referencias");
+			}
 		} catch (OptativaException e) {
 			fail("No debería lanzarse excepción");
-		} catch (AsignaturaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		
 	}

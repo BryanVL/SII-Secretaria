@@ -22,6 +22,7 @@ import jpa.Expediente;
 import jpa.Grupo;
 import jpa.Matricula;
 import jpa.Matricula_PK;
+import jpa.Optativa;
 import jpa.Titulacion;
 
 /*import es.uma.informatica.sii.ejb.practica.entidades.Ingrediente;
@@ -150,6 +151,13 @@ public class BaseDatos {
 		asignatura.setTitulacion(tit);
 		
 		em.persist(asignatura);
+		
+		Optativa optativa = new Optativa();
+		optativa.setAsignatura(asignatura);
+		optativa.setMencion("Informatica");
+		optativa.setPlazas(50);
+		
+		em.persist(optativa);
 		
 		Clase cAsig = new Clase();
 		Clase_PK cAsigPK = new Clase_PK();

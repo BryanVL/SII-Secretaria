@@ -160,36 +160,33 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 			
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
-				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
+				CSVParser csvParser = new CSVParser(reader, CSVFormat.newFormat(';'));		
 				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
 	            	if(n>=1) {
 	            		
-	            		String[] lista = csvRecord.get(0).split(";");
-			    		String referencia = lista[3];
+			    		Integer referencia = Integer.parseInt(csvRecord.get(3));
 			    		
 			    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia );
 			    		if(asignaturaExistente == null) {
 			    		
-				    		String codigo = lista[2];
-				    		String creditos_total = lista[8];  
-				    		String creditos_teoria = lista[7];
-				    		String ofertada = lista[1];
-				    		String nombre = lista[4];
-				    		String curso = lista[5];
-				    		//String caracter = csvRecord.get();
-				    		String duracion = lista[9];
-				    		//String unidad_temporal = csvRecord.get(2);
+				    		String codigo = csvRecord.get(2);
+				    		String creditos_total = csvRecord.get(8);  
+				    		String creditos_teoria = csvRecord.get(7);
+				    		String ofertada = csvRecord.get(1);
+				    		String nombre = csvRecord.get(4);
+				    		String curso = csvRecord.get(5);
+				    		String duracion = csvRecord.get(9);
 		            		
-				    		String codigoTitulacion = lista[0];
+				    		Integer codigoTitulacion = Integer.parseInt(csvRecord.get(0));
 				    		Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
 				    		if(titulacionExistente == null) {
 				    			throw new TitulacionException();
 				    		}
 				    		
 		            		Asignatura a = new Asignatura();
-				    		a.setReferencia( Integer.parseInt(referencia));
+				    		a.setReferencia(referencia);
 				    		a.setCodigo( Integer.parseInt(codigo));
 				    		a.setCreditos_total( Float.parseFloat(creditos_total) );
 				    		a.setCreditos_teoria( Float.parseFloat(creditos_teoria) );
@@ -202,13 +199,17 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 		            		a.setTitulacion(titulacionExistente);
 				    		
 		            		//Hacer un if que compare el length de lista y luego se añade o no el otro_idioma
-		            		if(lista.length == 12) {
-		            			String otro_idioma = lista[11];
+		            		if(csvRecord.size() == 12) {
+		            			String otro_idioma = csvRecord.get(11);
 		            			if(otro_idioma!=null) {
-		            				Idiomas idioma = new Idiomas();
-		            				idioma.setNombre("Ingles");
+		            				Idiomas idiomaExistente = em.find(Idiomas.class, "Ingles");
+		            				if(idiomaExistente == null) {
+		            					Idiomas idioma = new Idiomas();
+		            					idioma.setNombre("Ingles");
+		            					idiomaExistente = idioma;
+		            				}
 		            				List<Idiomas> idiomas = new ArrayList<>();
-		            				idiomas.add(idioma);
+		            				idiomas.add(idiomaExistente);
 		            				a.setIdiomas(idiomas);
 		            			}
 		            		}

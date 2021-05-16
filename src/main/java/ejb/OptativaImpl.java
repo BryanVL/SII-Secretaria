@@ -126,17 +126,16 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 			
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
-				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
+				CSVParser csvParser = new CSVParser(reader, CSVFormat.newFormat(';'));		
 				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
 	            	if(n>=1) {
 	            		
-	            		String[] lista = csvRecord.get(0).split(";");
-			    		String referencia = lista[0];
-			    		String plazas = lista[1];
+			    		Integer referencia = Integer.parseInt(csvRecord.get(0));
+			    		String plazas = csvRecord.get(1);
 			    		
-			    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia );
+			    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia);
 			    		if(asignaturaExistente == null) {
 			    			throw new AsignaturaException();
 			    		}
@@ -144,8 +143,8 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 			    		Optativa o = new Optativa();
 			    		o.setPlazas( Integer.parseInt(plazas) );
 			    		
-			    		if(lista.length == 3) {
-			    			String mencion = lista[2];
+			    		if(csvRecord.size() == 3) {
+			    			String mencion = csvRecord.get(2);
 			    			o.setMencion(mencion);
 			    		}
 			    		o.setAsignatura(asignaturaExistente);
@@ -176,9 +175,10 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 	}
 
 	@Override
-	public Optativa VisualizarOptativa(Integer referencia) throws OptativaException {
+	public Optativa VisualizarOptativa(Integer referencia) throws OptativaException{
 		// TODO Auto-generated method stub
-		Optativa optativaExistente = em.find(Optativa.class, referencia );
+		
+		Optativa optativaExistente = em.find(Optativa.class, referencia);
 		
 		if (optativaExistente == null) {
 			throw new OptativaException();
