@@ -16,6 +16,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -34,6 +35,7 @@ import excepcionesEJB.MatriculaException;
 import jpa.Asignaturas_Matricula;
 import jpa.Asignaturas_Matricula_PK;
 import jpa.Expediente;
+import jpa.Grupo;
 import jpa.Matricula;
 import jpa.Matricula_PK;
 
@@ -150,21 +152,20 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 			
 			try {
 				reader = Files.newBufferedReader(Paths.get(dir));
-				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);		
+				CSVParser csvParser = new CSVParser(reader, CSVFormat.newFormat(';'));		
 				int n=0;
 				
 	            for (CSVRecord csvRecord : csvParser) {
 	            	if(n>=1) {
 	            		
-			    		String[] listaa = csvRecord.get(0).split(";");
-			    		String Curso_academico = listaa[0];
-			    		String idExp = listaa[1];
-			    		String Estado = listaa[2];
-			    		String Fecha_de_matricula = listaa[3];
-			    		String Num_Archivo = listaa[4];
-			    		String Turno_Preferente = listaa[5];
-			    		String Nuevo_Ingreso = listaa[6];
-			    		String Listado_Asignaturas = listaa[7];
+			    		String Curso_academico = csvRecord.get(0);
+			    		String idExp = csvRecord.get(1);
+			    		String Estado = csvRecord.get(2);
+			    		String Fecha_de_matricula = csvRecord.get(3);
+			    		String Num_Archivo = csvRecord.get(4);
+			    		String Turno_Preferente = csvRecord.get(5);
+			    		String Nuevo_Ingreso = csvRecord.get(6);
+			    		String Listado_Asignaturas = csvRecord.get(7);
 			    		
 			    		//Administro la clave primaria de Matricula
 			    		Matricula_PK mpk = new Matricula_PK();
@@ -172,8 +173,9 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 			    		mpk.setIdExp(Integer.parseInt(idExp));
 			    		
 			    		//Administro el expediente asignado a la Matricula:
-			    		Expediente e = new Expediente();
-			    		e.setNum_expediente(Integer.parseInt(idExp));
+			    		TypedQuery<Expediente> query = em.createQuery("Select e from Expediente e where e.Num_expediente = :ide", Expediente.class);
+			            query.setParameter("ide", Integer.parseInt(idExp));
+			            Expediente e = query.getSingleResult();
 			    		
 			    		//Administro los datos de la fila total:
 			    		Matricula m = new Matricula();
@@ -186,18 +188,18 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 			    		m.setListado_Asignaturas(Listado_Asignaturas);
 			    		m.setExpediente(e);
 			    		
-			    		//Asigno los valores de la lista de asignaturas_matricula:
-			    		String[] asig = Listado_Asignaturas.split(",");
-			    		List<Asignaturas_Matricula> lista = new ArrayList();
-			    		Asignaturas_Matricula_PK amk = new Asignaturas_Matricula_PK();
-			    		Asignaturas_Matricula am = new Asignaturas_Matricula();
-			    		for(int i = 0; i < asig.length; i++) {
-			    			amk.setIdM(mpk);
-			    			amk.setIdAsig(Integer.parseInt(asig[i].substring(0,3)));
-			    			am.setId(amk);
-			    			lista.add(am);
-			    		}
-		            	m.setAsigMat(lista);
+//			    		//Asigno los valores de la lista de asignaturas_matricula:
+//			    		String[] asig = Listado_Asignaturas.split(",");
+//			    		List<Asignaturas_Matricula> lista = new ArrayList();
+//			    		Asignaturas_Matricula_PK amk = new Asignaturas_Matricula_PK();
+//			    		Asignaturas_Matricula am = new Asignaturas_Matricula();
+//			    		for(int i = 0; i < asig.length; i++) {
+//			    			amk.setIdM(mpk);
+//			    			amk.setIdAsig(Integer.parseInt(asig[i].substring(0,3)));
+//			    			am.setId(amk);
+//			    			lista.add(am);
+//			    		}
+//		            	m.setAsigMat(lista);
 			    		
 			    		em.persist(m);
 			    	}
