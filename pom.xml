@@ -8,6 +8,7 @@
 	  <module>Secretaria-ejb</module>
 	  <module>Secretaria-war</module>
 	  <module>Secretaria-ear</module>
+	  <module>Secretaria-tests</module>
   </modules>
   
 </project>
