@@ -17,7 +17,6 @@ public class Asignaturas_Matricula implements Serializable {
 	private Asignaturas_Matricula_PK id;
 	
 	@ManyToOne
-	@JoinColumn(nullable=false)
 	private Grupo grupo;
 	
 	@MapsId("idAsig")

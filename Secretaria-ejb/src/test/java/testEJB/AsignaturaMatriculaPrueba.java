@@ -1,6 +1,7 @@
 package testEJB;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -9,18 +10,18 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.AlumnoException;
+import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.GrupoException;
+import excepcionesEJB.MatriculaException;
 import interfacesEJB.InterfazAlumno;
 import interfacesEJB.InterfazAsignaturas_Matricula;
-import interfacesEJB.InterfazMatricula;
 import jpa.Alumno;
+import jpa.Asignaturas_Matricula;
 import jpa.Grupo;
-import jpa.Titulacion;
 
 public class AsignaturaMatriculaPrueba {
 	
@@ -46,26 +47,23 @@ public class AsignaturaMatriculaPrueba {
 	@Requisitos({"RF7"})
 	public void testVisualizarAlumnosPorGrupo() {
 		try {
-		Titulacion tit = new Titulacion();
-		tit.setCodigo(1234);
-		tit.setNombre("Informatica");
-		tit.setCreditos( 240f );
+		
 		Grupo grupoA = new Grupo();
 		grupoA.setID(1l);
-		grupoA.setCurso(1);
-		grupoA.setLetra("A");
-		grupoA.setTurno_Mañana_Tarde("Mañana");
-		grupoA.setIngles("Sí");
-		grupoA.setPlazas(50);
-		grupoA.setPlazasDisponibles(50);
-		grupoA.setTitulacion(tit);
 		List<Alumno> lista = interfazAsignaturas_Matricula.VisualizarAlumnosPorGrupo(grupoA);
-		boolean seCumple = true;
-		for(Alumno a : lista) {
-			 seCumple = seCumple && interfazAlumno.VisualizarAlumno(a.getDNI()).equals(a);
+		boolean seCumple = false;
+		if(lista != null) {
+			seCumple = true;
+			for(Alumno a : lista) {
+				seCumple = seCumple && interfazAlumno.VisualizarAlumno(a.getDNI()).equals(a);
+			}
+		} else {
+			fail("No se encuentran datos");
 		}
+		
+		
 		if(seCumple) {
-			assertEquals(1,1);
+			assertTrue(seCumple);
 		} else {
 			fail("No se encuentran los alumnos de forma correcta.");
 		}
@@ -78,23 +76,89 @@ public class AsignaturaMatriculaPrueba {
 	
 	@Test
 	@Requisitos({"RF18"})
-	@Ignore
-	public void testFiltrarPorAsignatura() {
-		assertEquals(1,1);
-	}
-	
-	@Test
-	@Requisitos({"RF18"})
-	@Ignore
 	public void testFiltrarPorGrupo() {
-		assertEquals(1,1);
+		try {
+			Grupo grupoA = new Grupo();
+			grupoA.setID(1l);
+			List<Asignaturas_Matricula> listaAsig = interfazAsignaturas_Matricula.AplicarFiltros(grupoA);
+			boolean seCumple = false;
+		
+			if(listaAsig != null) {
+				seCumple = true;
+				for(int i = 0; i < listaAsig.size();i++) {
+					seCumple = seCumple && (listaAsig.get(i) != null);
+				}
+			} else {
+				fail("No se han encontrado datos");
+			}
+		
+			if(seCumple) {
+				assertTrue(seCumple);
+			} else {
+				fail("No se han encontrado asignaturas_matricula");
+			}
+		
+		} catch (GrupoException e) {
+			fail("No deberia lanzar excepcion");
+		}
+		
 	}
 	
 	@Test
 	@Requisitos({"RF18"})
-	@Ignore
+	public void testFiltrarPorAsignatura() {
+		try {
+			Integer refer = 12345;
+			List<Asignaturas_Matricula> listaAsig = interfazAsignaturas_Matricula.AplicarFiltros(refer);
+			boolean seCumple = false;
+			
+			if(listaAsig != null) {
+				seCumple = true;
+				for(int i = 0; i < listaAsig.size();i++) {
+					seCumple = seCumple && (listaAsig.get(i) != null);
+				}
+			} else {
+				fail("No se han encontrado datos");
+			}
+			
+			if(seCumple) {
+				assertTrue(seCumple);
+			} else {
+				fail("No se han encontrado asignaturas_matricula");
+			}
+			
+		} catch(AsignaturaException e) {
+			fail("No deberia lanzarse excepcion");
+		}
+	}
+	
+	@Test
+	@Requisitos({"RF18"})
 	public void testFiltrarPorAsignaturas_Matricula() {
-		assertEquals(1,1);
+		try {
+			String curso = "18/19";
+			Integer idExp = 123;
+			List<Asignaturas_Matricula> listaAsig = interfazAsignaturas_Matricula.AplicarFiltros(curso,idExp);
+			boolean seCumple = false;
+			
+			if(listaAsig != null) {
+				seCumple = true;
+				for(int i = 0; i < listaAsig.size();i++) {
+					seCumple = seCumple && (listaAsig.get(i) != null);
+				}
+			} else {
+				fail("No se han encontrado datos");
+			}
+			
+			if(seCumple) {
+				assertTrue(seCumple);
+			} else {
+				fail("No se han encontrado asignaturas_matricula");
+			}
+			
+		} catch(MatriculaException e) {
+			fail("No deberia lanzarse excepcion");
+		}
 	}
 	
 	

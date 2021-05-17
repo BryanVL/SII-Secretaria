@@ -125,18 +125,18 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 		    		m.setListado_Asignaturas(Listado_Asignaturas);
 		    		m.setExpediente(e);
 		    		
-		    		//Asigno los valores de la lista de asignaturas_matricula:
-		    		String[] asig = Listado_Asignaturas.split(",");
-		    		List<Asignaturas_Matricula> lista = new ArrayList();
-		    		Asignaturas_Matricula_PK amk = new Asignaturas_Matricula_PK();
-		    		Asignaturas_Matricula am = new Asignaturas_Matricula();
-		    		for(int i = 0; i < asig.length; i++) {
-		    			amk.setIdM(mpk);
-		    			amk.setIdAsig(Integer.parseInt(asig[i].substring(0,3)));
-		    			am.setId(amk);
-		    			lista.add(am);
-		    		}
-	            	m.setAsigMat(lista);
+//		    		//Asigno los valores de la lista de asignaturas_matricula:
+//		    		String[] asig = Listado_Asignaturas.split(",");
+//		    		List<Asignaturas_Matricula> lista = new ArrayList();
+//		    		Asignaturas_Matricula_PK amk = new Asignaturas_Matricula_PK();
+//		    		Asignaturas_Matricula am = new Asignaturas_Matricula();
+//		    		for(int i = 0; i < asig.length; i++) {
+//		    			amk.setIdM(mpk);
+//		    			amk.setIdAsig(Integer.parseInt(asig[i].substring(0,3)));
+//		    			am.setId(amk);
+//		    			lista.add(am);
+//		    		}
+//	            	m.setAsigMat(lista);
 		    		
 		    		em.persist(m);
 		    	}

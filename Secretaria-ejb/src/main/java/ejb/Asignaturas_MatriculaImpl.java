@@ -18,6 +18,7 @@ import jpa.Asignatura;
 import jpa.Asignaturas_Matricula;
 import jpa.Grupo;
 import jpa.Matricula;
+import jpa.Matricula_PK;
 
 @Stateless
 @LocalBean
@@ -34,11 +35,11 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 			throw new GrupoException("El grupo indicado no existe.");
 		}
 		
-		TypedQuery query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE a.grupo.ID=:id",Asignaturas_Matricula.class);
+		TypedQuery<Asignaturas_Matricula> query = em.createQuery("SELECT a FROM Asignaturas_Matricula a WHERE a.grupo.ID= :id",Asignaturas_Matricula.class);
 		query.setParameter("id", g.getID());
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 		
-		List<Alumno> listaAlum = new ArrayList();
+		List<Alumno> listaAlum = new ArrayList<Alumno>();
 		
 		for(Asignaturas_Matricula a : listaAsig) {
 			listaAlum.add(a.getMatricula().getExpediente().getAlumno());
@@ -56,7 +57,7 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 			throw new GrupoException("El grupo indicado no existe.");
 		}
 		
-		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula where a.grupo.ID := id",Asignaturas_Matricula.class);
+		TypedQuery<Asignaturas_Matricula> query = em.createQuery("Select a from Asignaturas_Matricula a where a.grupo.ID = :id",Asignaturas_Matricula.class);
 		query.setParameter("id", g.getID());
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 		
@@ -64,32 +65,35 @@ public class Asignaturas_MatriculaImpl implements InterfazAsignaturas_Matricula{
 	}
 
 	@Override
-	public List<Asignaturas_Matricula> AplicarFiltros(Asignatura a) throws AsignaturaException {
+	public List<Asignaturas_Matricula> AplicarFiltros(Integer referencia) throws AsignaturaException {
 		
-		Asignatura asignaturaExistente = em.find(Asignatura.class,a.getReferencia());
+		Asignatura asignaturaExistente = em.find(Asignatura.class,referencia);
 
 		if(asignaturaExistente == null) {
 		throw new AsignaturaException("La asignatura indicada no existe.");
 		}
 
-		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a where a.asignatura.referencia =: asignatura",Asignaturas_Matricula.class);
-		query.setParameter("asignatura", a.getReferencia());
+		TypedQuery<Asignaturas_Matricula> query = em.createQuery("Select a from Asignaturas_Matricula a where a.asignatura.Referencia = :asignatura",Asignaturas_Matricula.class);
+		query.setParameter("asignatura", referencia);
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 
 		return listaAsig;
 	}
 
 	@Override
-	public List<Asignaturas_Matricula> AplicarFiltros(Matricula m) throws MatriculaException {
+	public List<Asignaturas_Matricula> AplicarFiltros(String curso,Integer idExp) throws MatriculaException {
 		
-		Matricula matriculaExistente = em.find(Matricula.class,m.getId());
+		Matricula_PK mpk = new Matricula_PK();
+		mpk.setCurso_academico(curso);
+		mpk.setIdExp(idExp);
+		Matricula matriculaExistente = em.find(Matricula.class,mpk);
 
 		if(matriculaExistente == null) {
-		throw new MatriculaException("La matricula indicada no existe.");
+			throw new MatriculaException("La matricula indicada no existe.");
 		}
 
-		TypedQuery query = em.createQuery("Select a from Asignaturas_Matricula a where a.matricula.id =: id",Asignaturas_Matricula.class);
-		query.setParameter("id", m.getId());
+		TypedQuery<Asignaturas_Matricula> query = em.createQuery("Select a from Asignaturas_Matricula a where a.matricula.id = :id",Asignaturas_Matricula.class);
+		query.setParameter("id", mpk);
 		List<Asignaturas_Matricula> listaAsig = query.getResultList();
 
 		return listaAsig;

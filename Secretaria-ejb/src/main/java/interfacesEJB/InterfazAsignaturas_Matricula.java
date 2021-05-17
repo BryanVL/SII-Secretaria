@@ -24,8 +24,8 @@ public interface InterfazAsignaturas_Matricula {
 	
 	public List<Asignaturas_Matricula> AplicarFiltros(Grupo g) throws GrupoException;
 	
-	public List<Asignaturas_Matricula> AplicarFiltros(Asignatura a) throws AsignaturaException;
+	public List<Asignaturas_Matricula> AplicarFiltros(Integer ref) throws AsignaturaException;
 
-	public List<Asignaturas_Matricula> AplicarFiltros(Matricula m) throws MatriculaException;
+	public List<Asignaturas_Matricula> AplicarFiltros(String curso, Integer expe) throws MatriculaException;
 
 }
