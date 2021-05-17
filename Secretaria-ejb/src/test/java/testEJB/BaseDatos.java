@@ -154,6 +154,16 @@ public class BaseDatos {
 		
 		em.persist(asignatura);
 		
+		Asignatura asignatura2 = new Asignatura();
+		asignatura2.setReferencia(12346);
+		asignatura2.setCodigo(901);
+		asignatura2.setCreditos_total((float)6);
+		asignatura2.setOfertada("Si");
+		asignatura2.setNombre("Pruebas con Junit2");
+		asignatura2.setTitulacion(tit);
+		
+		em.persist(asignatura2);
+		
 		Optativa optativa = new Optativa();
 		optativa.setAsignatura(asignatura);
 		optativa.setMencion("Informatica");

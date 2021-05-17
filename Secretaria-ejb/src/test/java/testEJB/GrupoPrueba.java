@@ -198,9 +198,9 @@ public class GrupoPrueba {
 		matricula.setEstado("Activo");
 		matricula.setFecha_de_matricula(new Date("12/09/2018"));
 		Grupo grupo = new Grupo();
-		grupo.setID(1l);
+		grupo.setID(2l);
 		Asignatura asignatura = new Asignatura();
-		asignatura.setReferencia(12345);
+		asignatura.setReferencia(12346);
 		
 		try {
 			interfazGrupo.asignarGrupo(matricula, grupo, asignatura);
@@ -214,7 +214,7 @@ public class GrupoPrueba {
 			fail("Grupo no encontrado");
 		}
 		
-		assertTrue(grupo.getID() == 1l);
+		assertTrue(grupo.getID() == 2l);
 	}
 	
 	

@@ -77,6 +77,7 @@ public class GrupoImpl implements InterfazGrupo{
 		}
 	}
 	
+	
 	public Grupo buscarPorCursoLetra(Integer titulacion, Integer curso, String letra) throws GrupoException {
 		
 		TypedQuery query = em.createQuery("Select g from Grupo g where g.Curso=:curso and g.Letra=:letra", Grupo.class);	 
@@ -158,9 +159,8 @@ public class GrupoImpl implements InterfazGrupo{
 			throw new AsignaturaException("La asignatura no ha sido encontrada");
 		}
 		
-		
 		if(g.getPlazasDisponibles()>0) {
-			//g.setPlazasDisponibles(g.getPlazasDisponibles()-1);//Disminuir en uno plazas
+			g.setPlazasDisponibles(g.getPlazasDisponibles()-1);//Disminuir en uno plazas
 			Asignaturas_Matricula am = new Asignaturas_Matricula();
 			am.setMatricula(m);
 			am.setGrupo(g);
@@ -177,5 +177,4 @@ public class GrupoImpl implements InterfazGrupo{
 		
 	}
 	
-    
 }
