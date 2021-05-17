@@ -1,1 +1,3 @@
 mvn verify -Dskip.ejb.tests -Dwebdriver.gecko.driver="/home/alumno/Descargas/geckodriver"
+
+mvn verify -Dskip.ejb.tests -Dwebdriver.gecko.driver="/home/alumno/eclipse-workspace/Secretaria/geckodriver"
