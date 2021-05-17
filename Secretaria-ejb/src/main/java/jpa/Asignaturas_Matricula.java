@@ -25,7 +25,7 @@ public class Asignaturas_Matricula implements Serializable {
 	private Asignatura asignatura;
 	
 	@MapsId("idM")
-	@Id @ManyToOne
+	@ManyToOne
 	private Matricula matricula;
 
 	private Boolean asignacionAutomatica; //Si es true la asignación ha sido automatica
