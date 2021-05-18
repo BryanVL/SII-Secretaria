@@ -72,7 +72,7 @@ public class ClasePrueba {
 			interfazImportar2.Importar("src/test/resources/GII.csv");
 			interfazImportar.Importar("src/test/resources/horarios.csv");
 //			interfazImportar3.Importar("src/test/resources/Titulacion.xlsx");
-//			interfazImportar2.Importar("src/test/resources/GII.xlsx");
+//			interfazImportar2.Importar("src/test/resources/Oferta asignaturas.xlsx");
 //			interfazImportar.Importar("src/test/resources/horarios.xlsx");
 		} catch (ImportarException e) {
 			fail("Error al importar");

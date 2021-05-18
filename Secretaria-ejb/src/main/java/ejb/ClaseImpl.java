@@ -25,16 +25,12 @@ import javax.persistence.TypedQuery;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ClaseException;
-import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.GrupoException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.MatriculaException;
@@ -43,10 +39,8 @@ import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 import jpa.Asignatura;
 import jpa.Asignaturas_Matricula;
-import jpa.Asignaturas_Matricula_PK;
 import jpa.Clase;
 import jpa.Clase_PK;
-import jpa.Expediente;
 import jpa.Grupo;
 import jpa.Matricula;
 
@@ -67,60 +61,71 @@ public class ClaseImpl implements InterfazImportar, InterfazHorarios{
 		
 		if(dir.endsWith(".xlsx")) {
 			//Para el archivo xlsx de 'Datos alumnadoFAKE' sin título
-		       File f = new File(dir);
-		       InputStream inp = null;
-		       
+			FileInputStream inp = null;
+			
 			try {
-				inp = new FileInputStream(f);
+				 inp = new FileInputStream(new File(dir));
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-		    Workbook wb = null;
+			XSSFWorkbook workbook = null;
+			
 			try {
-				wb = WorkbookFactory.create(inp);
-			} catch (EncryptedDocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				workbook = new XSSFWorkbook(inp);
+			} catch(IOException e) {
 				e.printStackTrace();
 			}
-		      
-		       
-		       Sheet sh = wb.getSheetAt(0);
-		       int iRow = 0;
-		       Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-		       int n=0;
-		       while(row!=null) {
-		    	  
-		    	   if(n>=1) {		    		   
-			           Cell cell = row.getCell(0);  
-			           String curso = cell.getStringCellValue();			           
-			           cell = row.getCell(1);  
-			           String gr = cell.getStringCellValue();			           
-			           cell = row.getCell(2);  
-			           String asig = cell.getStringCellValue();			           
-			           cell = row.getCell(3);  
-			           String dia = cell.getStringCellValue();			           
-			           cell = row.getCell(4);  
-			           String hora_inicio = cell.getStringCellValue();			           
-			           cell = row.getCell(5);  
-			           String hora_fin = cell.getStringCellValue();
-			           		
-			           Clase c = new Clase();
-			           try {
-			        	   c = procesado(curso,gr,asig,dia,hora_inicio, hora_fin);
-			           }catch(GrupoException e) {
-			        	   throw new RuntimeException();
-			           }
+			
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			
+			int contF = 1;
+			Row fila = sheet.getRow(contF);
+			while(fila != null) {
+				if(contF >= 1) {
+					
+		           Integer curso = (int) fila.getCell(0).getNumericCellValue();
+		           String gr = fila.getCell(1).getStringCellValue();
+		           Integer asig = (int) fila.getCell(2).getNumericCellValue();
+		           Date dia = fila.getCell(3).getDateCellValue();
+		           String hora_inicio = fila.getCell(4).getStringCellValue();
+		           String hora_fin = fila.getCell(5).getStringCellValue();
+		           		
+		           try {
+		        	   Clase c = new Clase();
+		               Asignatura asignatura = em.find(Asignatura.class, asig);  
+		               c.setAsignatura(asignatura);
+		                      
+		               TypedQuery<Grupo> query = em.createQuery("Select g from Grupo g where g.Letra = :letra and g.Curso = :curso", Grupo.class);
+		               query.setParameter("letra", gr);
+		               query.setParameter("curso", curso);
+		               List<Grupo> grupos = query.getResultList();
+		               
+		               if(grupos.size()==0) {
+		               	throw new GrupoException("No se encontro el grupo");
+		               }
+		               
+		               Grupo g = grupos.get(0);
+		               c.setGrupo(g);
+		               
+
+		               c.setHora_fin(convertirTime(hora_fin));
+		               Clase_PK id = new Clase_PK();
+		               id.setDia(dia);
+		               id.setHora_inicio(convertirTime(hora_inicio));
+		               id.setIdG(g.getID());
+		               c.setId(id);
+		               
 		               em.persist(c);
-		    	   }
-		           n++;
-		           iRow++;  
-		           row = sh.getRow(iRow);
-		       }
+		           }catch(GrupoException e) {
+		        	   throw new RuntimeException();
+		           }
+	               
+	    	   }
+	    		contF++;
+	    		fila = sheet.getRow(contF);
+			
+			} 
 		}else if(dir.endsWith(".csv")){
 			//Para el archivo csv de 'alumnos' 
 			BufferedReader reader;
