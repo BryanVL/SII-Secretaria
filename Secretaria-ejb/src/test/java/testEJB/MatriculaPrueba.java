@@ -32,6 +32,7 @@ public class MatriculaPrueba {
 	private static final String ALUMNO_EJB = "java:global/classes/AlumnoImpl!ejb.AlumnoImpl";
 	private static final String TITULACION_EJB = "java:global/classes/TitulacionImpl!ejb.TitulacionImpl";
 	private static final String EXPEDIENTE_EJB = "java:global/classes/ExpedienteImpl!ejb.ExpedienteImpl";
+//	private static final String ASIGNATURA_EJB = "java:global/classes/AsignaturaImpl!ejb.AsignaturaImpl";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
 	private InterfazImportar interfazImportar;
@@ -39,6 +40,7 @@ public class MatriculaPrueba {
 	private InterfazImportar interfazImportarExp;
 	private InterfazImportar interfazImportarAl;
 	private InterfazImportar interfazImportarTit;
+//	private InterfazImportar interfazImportarAsig;
 
 		
 	
@@ -49,20 +51,29 @@ public class MatriculaPrueba {
 		interfazImportarExp = (InterfazImportar) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
 		interfazImportarTit = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
 		interfazImportarAl  = (InterfazImportar) SuiteTest.ctx.lookup(ALUMNO_EJB);
+//		interfazImportarAsig  = (InterfazImportar) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
 	@Test
 	@Requisitos({"RF7"})
 	public void testImportarMatricula() {
-		String dir = "src/test/resources/Matriculas.csv";
+		//Elegir desde donde realizar la importacion:
+//		String dir = "src/test/resources/Matriculas.csv";
 		String dir2 = "src/test/resources/alumnos.csv";
+		String dir3 = "src/test/resources/Titulacion.csv";	
+//		String dir4 = "src/test/resources/GII.csv";
+		String dir = "src/test/resources/Matriculas.xlsx";
+//		String dir2 = "src/test/resources/alumnos.xlsx";
+//		String dir3 = "src/test/resources/Titulacion.xlsx";
+		
 		
 		try {
 			//HEMOS DE IMPORTAR ESTOS DATOS PREVIAMENTE A MATRICULAS:
 			interfazImportarAl.Importar(dir2);
-			interfazImportarTit.Importar("src/test/resources/Titulacion.csv");
+			interfazImportarTit.Importar(dir3);
 			interfazImportarExp.Importar(dir2);
+//			interfazImportarAsig.Importar(dir4);
 			
 			//UNA VEZ IMPORTADOS TODOS LOS DATOS RELACIONADOS, IMPORTAMOS LAS MATRICULAS.
 			interfazImportar.Importar(dir);

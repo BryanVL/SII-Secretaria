@@ -49,7 +49,9 @@ public class AlumnoPrueba {
 	@Test
 	@Requisitos({"RF7"})
 	public void testImportarAlumno() {
+		//Elegir la ruta desde la que probar la importacion:
 		String dir = "src/test/resources/alumnos.csv";
+		//String dir = "src/test/resources/alumnos.xlsx";
 		try {
 			interfazImportar.Importar(dir);
 			

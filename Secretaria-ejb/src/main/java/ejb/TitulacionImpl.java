@@ -23,6 +23,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ImportarException;
@@ -45,58 +47,46 @@ public class TitulacionImpl implements InterfazTitulacion, InterfazImportar {
 		if(dir.endsWith("xlsx")) {
 			//Para el archivo xlsx de 'Datos alumnadoFAKE'
 			
-			File f = new File(dir);
-			InputStream inp = null;
+			FileInputStream inp = null;
 			
 			try {
-				inp = new FileInputStream(f);
+				 inp = new FileInputStream(new File(dir));
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-		    Workbook wb = null;
+			XSSFWorkbook workbook = null;
 			
-		    try {
-				wb = WorkbookFactory.create(inp);
-			} catch (EncryptedDocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			try {
+				workbook = new XSSFWorkbook(inp);
+			} catch(IOException e) {
 				e.printStackTrace();
 			}
-		      
-			Sheet sh = wb.getSheet("Hoja1");
-			int iRow = 1;
-		    
-			Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-		    int n=1; 
-		    
-		    while(row!=null) 
-		    {
-		    	
-		    	if(n>=2) {
-		    		  
-		    		Cell cell = row.getCell(1);  
-		    		String codigo = cell.getStringCellValue();
-		    		cell = row.getCell(2); 
-		    		String nombre = cell.getStringCellValue();
-		    		cell = row.getCell(3); 
-		    		String creditos = cell.getStringCellValue(); 
-
-            		Titulacion t = new Titulacion();
-		    		t.setCodigo( Integer.parseInt(codigo) );
+			
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			
+			int contF = 1;
+			Row fila = sheet.getRow(contF);
+			while(fila != null) {
+				if(contF >= 1) {
+						
+					Integer codigo = (int) fila.getCell(0).getNumericCellValue();
+					String nombre = fila.getCell(1).getStringCellValue();
+					Float creditos = (float) fila.getCell(2).getNumericCellValue();
+					
+					Titulacion t = new Titulacion();
+		    		t.setCodigo(codigo);
 		    		t.setNombre(nombre);
-		    		t.setCreditos( Float.parseFloat(creditos) );
+		    		t.setCreditos(creditos);
 		    		
 		    		em.persist(t);
 		    	}
+		    		contF++;
+		    		fila = sheet.getRow(contF);
+			}
+
+            		
 		    	
-		        n++;
-		        iRow++;  
-		        row = sh.getRow(iRow);
-		    }
 		       
 		} else if (dir.endsWith("csv")){
 			 //Para el archivo csv de 'alumnos' 

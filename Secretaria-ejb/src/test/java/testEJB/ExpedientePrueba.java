@@ -54,12 +54,16 @@ public class ExpedientePrueba {
 	@Test
 	@Requisitos({"RF7"})
 	public void testImportarExpediente() {
-		String dir = "src/test/resources/alumnos.csv";
+		//Elegir desde donde realizar la importacion:
+//		String dir = "src/test/resources/alumnos.csv";
+//		String dir2 = "src/test/resources/Titulacion.csv";
+		String dir = "src/test/resources/alumnos.xlsx";
+		String dir2 = "src/test/resources/Titulacion.xlsx";
 		
 		try {
 			//ES NECESARIO IMPORTAR PREVIAMENTE ALUMNOS Y TITULACION PARA QUE NO OCURRAN ERRORES:
 			interfazImportarAl.Importar(dir);
-			interfazImportarTit.Importar("src/test/resources/Titulacion.csv");
+			interfazImportarTit.Importar(dir2);
 			
 			//UNA VEZ IMPORTADOS LOS ANTERIORES DATOS, SE IMPORTAN LOS EXPEDIENTES Y SE COMPRUEBA QUE TODO ES CORRECTO:
 			interfazImportar.Importar(dir);

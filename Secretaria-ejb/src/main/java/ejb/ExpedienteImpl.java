@@ -22,10 +22,13 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.sun.tools.hat.internal.parser.Reader;
 
@@ -54,44 +57,47 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 		// TODO Auto-generated method stub
 		if(dir.endsWith("xlsx")) {
 			//Para el archivo xlsx de 'Datos alumnadoFAKE' sin título
+			FileInputStream inp = null;
 			
-		       File f = new File(dir);
-		       InputStream inp = null;
 			try {
-				inp = new FileInputStream(f);
+				 inp = new FileInputStream(new File(dir));
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		       Workbook wb = null;
+			
+			XSSFWorkbook workbook = null;
+			
 			try {
-				wb = WorkbookFactory.create(inp);
-			} catch (EncryptedDocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				workbook = new XSSFWorkbook(inp);
+			} catch(IOException e) {
 				e.printStackTrace();
 			}
-		      
+				
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			
+			int contF = 4;
+			Row fila = sheet.getRow(contF);
 			try {
-				Sheet sh = wb.getSheetAt(1);
-				int iRow = 1;
-				Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-				int n=1;
-				while(row!=null) 
-				{
-		    	
-					if(n>=6) {
-		    		   Cell cell = row.getCell(4);  
-		    		   String nExpediente = cell.getStringCellValue();
-		    		   cell = row.getCell(17);  
-		    		   String notaMedia = cell.getStringCellValue();
-		    		   cell = row.getCell(18);  
-		    		   String creditosSuperados = cell.getStringCellValue();
-		           
-		    		   cell = row.getCell(1); 
-		    		   String dniAlumno = cell.getStringCellValue();
+				while(fila != null) {
+					if(contF >= 4 && (fila.getCell(0) !=null)) {
+	    	 
+		    		   Integer nExpediente = (int) fila.getCell(4).getNumericCellValue();
+		    		   
+		    		   Float notaMedia;
+		    		   if(fila.getCell(17).getCellType() == CellType.STRING) {
+		    			   notaMedia = Float.parseFloat(fila.getCell(17).getStringCellValue());
+		    		   } else {
+		    			   notaMedia = (float) fila.getCell(17).getNumericCellValue();
+		    		   }
+		    		   
+		    		   Float creditosSuperados;
+		    		   if(fila.getCell(18).getCellType() == CellType.NUMERIC) {
+		    			   creditosSuperados = (float) fila.getCell(18).getNumericCellValue();
+		    		   } else {
+		    			   creditosSuperados = Float.parseFloat(fila.getCell(18).getStringCellValue());
+		    		   }
+		    		   
+		    		   String dniAlumno = fila.getCell(0).getStringCellValue();
 		    		   TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
 		    		   query.setParameter("fdni", dniAlumno);
 		    		   List<Alumno> alumnos = query.getResultList();
@@ -99,7 +105,7 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 		    			   throw new AlumnoException();
 		    		   }
                	
-		    		   String codigoTitulacion = nExpediente.substring(0, 4);
+		    		   Integer codigoTitulacion = nExpediente/100000;
 		    		   Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
 		    		   if(titulacionExistente == null) {
 		    			   throw new TitulacionException();
@@ -107,18 +113,18 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 		           
 		           
 		    		   Expediente e = new Expediente();  
-		    		   e.setNota_media_provisional(Float.parseFloat(notaMedia));
-		    		   e.setCreditos_superados(Float.parseFloat(creditosSuperados));
-		    		   e.setNum_expediente(Integer.parseInt(nExpediente));
+		    		   e.setNota_media_provisional(notaMedia);
+		    		   e.setCreditos_superados(creditosSuperados);
+		    		   e.setNum_expediente(nExpediente);
 		    		   e.setActivo(true);
 		    		   e.setTitulacion(titulacionExistente);
 		    		   e.setAlumno(alumnos.get(0));
 	            	
 		    		   em.persist(e);
 		    	   }
-		           n++;
-		           iRow++;  
-		           row = sh.getRow(iRow);
+					
+			    	contF++;
+			    	fila = sheet.getRow(contF);
 		       }
 			} catch (AlumnoException e) {
 				// TODO Auto-generated catch block

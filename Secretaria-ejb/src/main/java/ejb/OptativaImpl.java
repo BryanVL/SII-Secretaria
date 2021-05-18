@@ -25,6 +25,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.ImportarException;
@@ -48,78 +50,63 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 		// TODO Auto-generated method stub
 		if(dir.endsWith("xlsx")) {
 			
-			File f = new File(dir);
-			InputStream inp = null;
+			FileInputStream inp = null;
 			
 			try {
-				inp = new FileInputStream(f);
+				 inp = new FileInputStream(new File(dir));
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-		    Workbook wb = null;
+			XSSFWorkbook workbook = null;
 			
-		    try {
-				wb = WorkbookFactory.create(inp);
-			} catch (EncryptedDocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			try {
+				workbook = new XSSFWorkbook(inp);
+			} catch(IOException e) {
 				e.printStackTrace();
 			}
-		    
-		    try {
-		    	
-			Sheet sh = wb.getSheetAt(2);
-			int iRow = 0;
-		    
-			Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-		    int n=1; 
-		    
-		    while(row!=null) 
-		    {
-		    	
-		    	if(n>=2) {
-
-		    		Cell cell = row.getCell(1); 
-		    		String referencia =cell.getStringCellValue();
-		    		cell = row.getCell(2); 
-		    		String plazas = cell.getStringCellValue();
-		    		cell = row.getCell(3); 
-		    		String mencion = cell.getStringCellValue();
-            		
-		    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia );
-		    		if(asignaturaExistente == null) {
-		    			throw new AsignaturaException();
-		    		}
-		    		
-		    		Optativa o = new Optativa();
-		    		o.setPlazas( Integer.parseInt(plazas) );
-		    		o.setMencion(mencion);
-		    		o.setAsignatura(asignaturaExistente);
-		    		
-		    		Titulacion titulacion = asignaturaExistente.getTitulacion();
-		    		List<Titulacion> titulaciones = new ArrayList<>();
-		    		titulaciones.add(titulacion);
-		    		o.setTitulaciones(titulaciones);
-		    		
-		    		em.persist(o);
-		    		
-		    	}
-		    	
-		        n++;
-		        iRow++;  
-		        row = sh.getRow(iRow);
-		    }
-		    
-		    
-		    }  catch (AsignaturaException e) {
-				// TODO Auto-generated catch block
+			try {
+				for(int i = 0; i < 2; i++) {
+				
+					XSSFSheet sheet = workbook.getSheetAt(i);
+					
+					int contF = 1;
+					Row fila = sheet.getRow(contF);
+					while(fila != null && fila.getCell(0) != null) {
+						if(contF >= 1) {
+								
+							Integer referencia = (int) fila.getCell(0).getNumericCellValue();
+							Integer plazas = (int) fila.getCell(1).getNumericCellValue();
+							String mencion;
+							if(i == 1) {
+								mencion = fila.getCell(2).getStringCellValue();
+							} else {
+								mencion = "Informatica";
+							}
+							Asignatura asignaturaExistente = em.find(Asignatura.class, referencia);
+				    		if(asignaturaExistente == null) {
+				    			throw new AsignaturaException();
+				    		}
+				    		
+				    		Optativa o = new Optativa();
+				    		o.setPlazas(plazas);
+				    		o.setMencion(mencion);
+				    		o.setAsignatura(asignaturaExistente);
+				    		
+				    		Titulacion titulacion = asignaturaExistente.getTitulacion();
+				    		List<Titulacion> titulaciones = new ArrayList<>();
+				    		titulaciones.add(titulacion);
+				    		o.setTitulaciones(titulaciones);
+				    		
+				    		em.persist(o);
+				    	}
+				    		contF++;
+				    		fila = sheet.getRow(contF);
+					}
+				}
+			} catch(AsignaturaException e) {
 				e.printStackTrace();
 			}
-		    
 		       
 		} else if (dir.endsWith("csv")){
 			BufferedReader reader;

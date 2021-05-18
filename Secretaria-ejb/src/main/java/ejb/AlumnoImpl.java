@@ -22,8 +22,8 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ImportarException;
@@ -55,102 +55,54 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 				e.printStackTrace();
 			}
 			
-			HSSFWorkbook workbook = null;
+			XSSFWorkbook workbook = null;
 			
 			try {
-				workbook = new HSSFWorkbook(inp);
+				workbook = new XSSFWorkbook(inp);
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
 			
-			HSSFSheet sheet = workbook.getSheetAt(0);
+			XSSFSheet sheet = workbook.getSheetAt(0);
 			
-			Iterator<Row> filaIterator = sheet.iterator();
-			
-			int contF = 0;
-			Row fila;
-			
-			while(filaIterator.hasNext()) {
-				
-				fila = filaIterator.next();
-				
-				if(contF > 3) {
-					
-					Iterator<Cell> celdaIterator = fila.cellIterator();
-					
-					int contC = 1;
-					Cell celda;
-					
-					if(celdaIterator.hasNext()) {
+			int contF = 4;
+			Row fila = sheet.getRow(contF);
+			while(fila != null) {
+				if(contF >= 4) {
 						
-						String dni="";
-						String nombre="";
-						String apellido1="";
-						String apellido2="";
-						String email_i="";
-						String email_p="";
-						String telefono="";
-						String movil="";
-						String direccion="";
-						String localidad="";
-						String provincia="";
-						String cp="";
+					String dni= fila.getCell(0).getStringCellValue();
+					String nombre = fila.getCell(1).getStringCellValue();
+					String apellido1 = fila.getCell(2).getStringCellValue();
+					String apellido2 = fila.getCell(3).getStringCellValue();
+					String email_i = fila.getCell(6).getStringCellValue();
+					String email_p = fila.getCell(7).getStringCellValue();
+					String telefono = fila.getCell(8).getStringCellValue();
+					String movil = fila.getCell(9).getStringCellValue();
+					String direccion = fila.getCell(10).getStringCellValue();
+					String localidad = fila.getCell(11).getStringCellValue();
+					String provincia = fila.getCell(12).getStringCellValue();
+					Integer cp = (int) fila.getCell(13).getNumericCellValue();
 					
-						while(celdaIterator.hasNext()) {
-							celda = celdaIterator.next();
-							
-							switch(contC) {
-								case(1):
-									dni = celda.getStringCellValue();
-								case(2):
-									nombre = celda.getStringCellValue();
-								case(3):
-									apellido1 = celda.getStringCellValue();
-								case(4):
-									apellido2 = celda.getStringCellValue();
-								case(7):
-									email_i = celda.getStringCellValue();
-								case(8):
-									email_p = celda.getStringCellValue();
-								case(9):
-									telefono = celda.getStringCellValue();
-								case(10):
-									movil = celda.getStringCellValue();
-								case(11):
-									direccion = celda.getStringCellValue();
-								case(12):
-									localidad = celda.getStringCellValue();
-								case(13):
-									provincia = celda.getStringCellValue();
-								case(14):
-									cp = celda.getStringCellValue();
-								default:
-							}
-							contC++;
-						}	
-						
-						Alumno a = new Alumno();
-			    		a.setDNI(dni);
-			    		a.setNombre(nombre);
-			    		a.setApellido1(apellido1);
-			    		a.setApellido2(apellido2);
-			    		a.setEmail_institucional(email_i);
-			    		a.setEmail_personal(email_p);
-			    		a.setTelefono( Integer.parseInt(telefono.replaceAll(" ","")) );
-			    		a.setMovil(Integer.parseInt(movil.replaceAll(" ", "")) );
-			    		a.setDireccion(direccion);
-			    		a.setLocalidad(localidad);
-			    		a.setProvincia(provincia);
-			    		a.setCP(Integer.parseInt(cp));
-						
-			    		em.persist(a);
-					}
+					Alumno a = new Alumno();
+		    		a.setDNI(dni);
+		    		a.setNombre(nombre);
+		    		a.setApellido1(apellido1);
+		    		a.setApellido2(apellido2);
+		    		a.setEmail_institucional(email_i);
+		    		a.setEmail_personal(email_p);
+		    		a.setTelefono( Integer.parseInt(telefono.replaceAll(" ","")) );
+		    		a.setMovil(Integer.parseInt(movil.replaceAll(" ", "")) );
+		    		a.setDireccion(direccion);
+		    		a.setLocalidad(localidad);
+		    		a.setProvincia(provincia);
+		    		a.setCP(cp);
 					
-				}else {
-					contF++;
-				}
+		    		em.persist(a);
+		    	}
+		    		contF++;
+		    		fila = sheet.getRow(contF);
 				
-			}
+			} 
 			
 		} else if (dir.endsWith("csv")){
 			 //Para el archivo csv de 'alumnos' 

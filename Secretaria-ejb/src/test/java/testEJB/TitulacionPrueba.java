@@ -63,7 +63,9 @@ public class TitulacionPrueba {
 	@Test
 	@Requisitos({"RF7"})
 	public void testImportarTitulacion() {
+		//Elegir desde donde realizar la importacion:
 		String dir = "src/test/resources/Titulacion.csv";
+//		String dir = "src/test/resources/Titulacion.xlsx";
 		
 		try {
 			interfazImportar.Importar(dir);

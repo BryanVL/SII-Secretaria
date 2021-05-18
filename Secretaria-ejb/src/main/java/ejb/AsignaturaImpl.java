@@ -21,16 +21,20 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazAsignatura;
 import interfacesEJB.InterfazImportar;
+import jpa.Alumno;
 import jpa.Asignatura;
 import jpa.Idiomas;
 import jpa.Titulacion;
@@ -48,110 +52,94 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 		// TODO Auto-generated method stub
 		if(dir.endsWith("xlsx")) {
 			
-			File f = new File(dir);
-			InputStream inp = null;
+			FileInputStream inp = null;
 			
 			try {
-				inp = new FileInputStream(f);
+				 inp = new FileInputStream(new File(dir));
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-		    Workbook wb = null;
+			XSSFWorkbook workbook = null;
 			
-		    try {
-				wb = WorkbookFactory.create(inp);
-			} catch (EncryptedDocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			try {
+				workbook = new XSSFWorkbook(inp);
+			} catch(IOException e) {
 				e.printStackTrace();
 			}
-		    
-		    try {
-		    	
-			Sheet sh = wb.getSheetAt(2);
-			int iRow = 0;
-		    
-			Row row = sh.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-		    int n=1; 
-		    
-		    while(row!=null) 
-		    {
-		    	
-		    	if(n>=2) {
-
-		    		Cell cell = row.getCell(4); 
-		    		String referencia = cell.getStringCellValue();
-		    		
-		    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia );
-		    		if(asignaturaExistente == null) {
-
-			    		cell = row.getCell(3); 
-			    		String codigo = cell.getStringCellValue();
-			    		cell = row.getCell(9); 
-			    		String creditos_total = cell.getStringCellValue();
-			    		cell = row.getCell(7); 
-			    		String creditos_teoria = cell.getStringCellValue();
-			    		cell = row.getCell(2); 
-			    		String ofertada =cell.getStringCellValue();
-			    		cell = row.getCell(5); 
-			    		String nombre = cell.getStringCellValue();
-			    		cell = row.getCell(6); 
-			    		String curso = cell.getStringCellValue();
-			    		//cell = row.getCell(); 
-			    		//String caracter = csvRecord.get();
-			    		cell = row.getCell(10); 
-			    		String duracion = cell.getStringCellValue();
-			    		//cell = row.getCell(); 
-			    		//String unidad_temporal = csvRecord.get(2);
-	            		
-			    		cell = row.getCell(1); 
-			    		String codigoTitulacion = cell.getStringCellValue();
-			    		Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
-			    		if(titulacionExistente == null) {
-			    			throw new TitulacionException();
-			    		}
-		    		 
-	            		Asignatura a = new Asignatura();
-			    		a.setReferencia( Integer.parseInt(referencia));
-			    		a.setCodigo( Integer.parseInt(codigo));
-			    		a.setCreditos_total( Float.parseFloat(creditos_total) );
-			    		a.setCreditos_teoria( Float.parseFloat(creditos_teoria) );
-			    		a.setOfertada(ofertada);
-			    		a.setNombre(nombre);
-			    		a.setCurso( Integer.parseInt(curso) );
-			    		//a.setCaracter(caracter);
-			    		a.setDuracion(duracion);
-			    		//a.setUnidad_temporal(unidad_temporal);
-	            		a.setTitulacion(titulacionExistente);
-	            		
-	            		cell = row.getCell(12); 
-			    		String otro_idioma = cell.getStringCellValue();
-			    		if(otro_idioma!=null) {
-			    			Idiomas idioma = new Idiomas();
-			    			idioma.setNombre("Ingles");
-			    			List<Idiomas> idiomas = new ArrayList<>();
-			    			idiomas.add(idioma);
-			    			a.setIdiomas(idiomas);
-			    		}
-			    		
-			    		em.persist(a);
-		    		}
-		    		
-		    	}
-		    	
-		        n++;
-		        iRow++;  
-		        row = sh.getRow(iRow);
-		    }
-		    
-		    
-		    } catch (TitulacionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for(int i = 2; i < 6; i++) {
+				
+				XSSFSheet sheet = workbook.getSheetAt(i);
+				
+				int contF = 1;
+				Row fila = sheet.getRow(contF);
+				try {
+					while(fila != null) {
+						if(contF >= 1 && (fila.getCell(0) !=null)) {
+								
+							Integer referencia = (int) fila.getCell(3).getNumericCellValue();
+							Asignatura asignaturaExistente = em.find(Asignatura.class, referencia);
+							if(asignaturaExistente == null) {
+								Integer codigo = (int) fila.getCell(2).getNumericCellValue();
+								Float creditos_total;
+								Float creditos_teoria;
+								
+								if(fila.getCell(8).getCellType() == CellType.NUMERIC) {
+									creditos_total = (float) fila.getCell(8).getNumericCellValue();
+									creditos_teoria = (float) fila.getCell(6).getNumericCellValue();
+								} else {
+									creditos_total = Float.parseFloat(fila.getCell(8).getStringCellValue());
+									creditos_teoria = Float.parseFloat(fila.getCell(6).getStringCellValue());
+								}
+								
+								String ofertada = fila.getCell(1).getStringCellValue();
+								String nombre = fila.getCell(4).getStringCellValue();
+								Integer curso = (int) fila.getCell(5).getNumericCellValue();
+								String duracion = fila.getCell(9).getStringCellValue();
+								Integer codigoTitulacion = (int) fila.getCell(0).getNumericCellValue();
+								
+								Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
+								if(titulacionExistente == null) {
+					    			throw new TitulacionException();
+					    		}
+								
+								Asignatura a = new Asignatura();
+					    		a.setReferencia(referencia);
+					    		a.setCodigo(codigo);
+					    		a.setCreditos_total(creditos_total);
+					    		a.setCreditos_teoria(creditos_teoria);
+					    		a.setOfertada(ofertada);
+					    		a.setNombre(nombre);
+					    		a.setCurso(curso);
+					    		a.setDuracion(duracion);
+			            		a.setTitulacion(titulacionExistente);
+			            		
+			            		if(fila.getCell(11) != null) {
+			            			String otro_idioma = fila.getCell(11).getStringCellValue();
+			            			if(otro_idioma!=null) {
+			            				Idiomas idiomaExistente = em.find(Idiomas.class, "Ingles");
+			            				if(idiomaExistente == null) {
+			            					Idiomas idioma = new Idiomas();
+			            					idioma.setNombre("Ingles");
+			            					idiomaExistente = idioma;
+			            				}
+			            				List<Idiomas> idiomas = new ArrayList<>();
+			            				idiomas.add(idiomaExistente);
+			            				a.setIdiomas(idiomas);
+			            			}
+			            		}
+			            		
+			            		em.persist(a);
+							}
+				    	}
+						
+				    	contF++;
+				    	fila = sheet.getRow(contF);
+					} 
+					
+				} catch (TitulacionException e) {
+					e.printStackTrace();
+				}
 			}
 		    
 		       

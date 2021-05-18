@@ -51,7 +51,8 @@ public class AsignaturaPrueba {
 	@Requisitos({"RF7"})
 	public void testImportarAsignatura() {
 
-		String dir = "src/test/resources/GII.csv";
+//		String dir = "src/test/resources/GII.csv";
+		String dir = "src/test/resources/Oferta asignaturas.xlsx";
 		String dir2 = "src/test/resources/Titulacion.csv";
 		
 		try {

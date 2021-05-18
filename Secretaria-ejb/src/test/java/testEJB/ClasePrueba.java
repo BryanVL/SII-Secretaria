@@ -67,9 +67,13 @@ public class ClasePrueba {
 	@Requisitos({"RF7"})
 	public void testImportarClase() {
 		try {
+			//Elegir desde donde realizar cada importacion:
 			interfazImportar3.Importar("src/test/resources/Titulacion.csv");
 			interfazImportar2.Importar("src/test/resources/GII.csv");
 			interfazImportar.Importar("src/test/resources/horarios.csv");
+//			interfazImportar3.Importar("src/test/resources/Titulacion.xlsx");
+//			interfazImportar2.Importar("src/test/resources/GII.xlsx");
+//			interfazImportar.Importar("src/test/resources/horarios.xlsx");
 		} catch (ImportarException e) {
 			fail("Error al importar");
 		}
