@@ -11,7 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Alumno implements Serializable {
@@ -53,6 +55,9 @@ public class Alumno implements Serializable {
 	
 	@OneToMany(mappedBy="alumno", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Expediente> expedientes;
+	
+	@OneToOne (cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+	private Usuario usuario;
 	
 	public Alumno() {
 		super();
@@ -176,6 +181,15 @@ public class Alumno implements Serializable {
 
 	public void setExpedientes(List<Expediente> expedientes) {
 		this.expedientes = expedientes;
+	}
+
+	
+	public Usuario getUser() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
