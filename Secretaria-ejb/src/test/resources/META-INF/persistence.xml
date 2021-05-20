@@ -17,6 +17,7 @@
 		<class>jpa.Optativa</class>
 		<class>jpa.Titulacion</class>
 		<class>jpa.Clase</class>
+		<class>jpa.Usuario</class>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
     	<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
