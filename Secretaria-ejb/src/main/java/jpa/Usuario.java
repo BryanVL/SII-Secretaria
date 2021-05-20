@@ -24,7 +24,7 @@ public class Usuario implements Serializable{
 	@Column( length=20, nullable=false)
 	private String rol;
 	
-	@OneToOne 
+	@OneToOne (cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
 	private Alumno alumno;
 
 	
