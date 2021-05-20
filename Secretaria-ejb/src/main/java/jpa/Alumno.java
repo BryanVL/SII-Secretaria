@@ -56,7 +56,7 @@ public class Alumno implements Serializable {
 	@OneToMany(mappedBy="alumno", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Expediente> expedientes;
 	
-	@OneToOne (cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+	@OneToOne (mappedBy ="alumno",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
 	private Usuario usuario;
 	
 	public Alumno() {

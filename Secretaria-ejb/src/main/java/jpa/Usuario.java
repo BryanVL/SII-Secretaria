@@ -24,7 +24,7 @@ public class Usuario implements Serializable{
 	@Column( length=20, nullable=false)
 	private String rol;
 	
-	@OneToOne (mappedBy ="usuario")
+	@OneToOne 
 	private Alumno alumno;
 
 	
