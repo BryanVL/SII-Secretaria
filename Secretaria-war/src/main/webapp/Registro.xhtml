@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+	<title>SECRETARIA</title>
+	<link rel="stylesheet" type="text/css" href="resources/StyleSheets.css"/>
+	<script type="text/javascript" src="resources/funciones.js"></script>
+</head>
+
+    <body>
+    <!-- Título de la página-->
+
+    <!--Formulario con todas las preguntas devolviendo alguna alerta si algo no va bien en la función validateRegister()-->
+     <form name="myForm" action="index.xhtml"
+           onsubmit="return validateRegister()" method="get">
+<h4>Nombre de usuario</h4>
+ <input type="text" name="Nombre" size="40"/>
+    
+<h4>Contraseña</h4>
+<input type="password" name="password" size="40"/>
+    
+ <h4>Confirmar Contraseña</h4>
+<input type="password" name="confirmpassword" size="40"/>   
+
+
+    
+ 
+ 
+<input type="submit" value="Enviar registro"/>
+ </form>   
+    
+    
+        <!--Pie de página -->
+	<div class="foot"> 
+		Universidad de Málaga.
+	</div>
+    </body>
+</html>
