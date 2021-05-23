@@ -6,6 +6,21 @@ body {
 
 }
 
+.centrado{
+	padding-top: 20px;
+	padding-right: 15px;
+	padding-bottom: 20px;
+	padding-left: 15px;
+	background-color: #F7F0F0;
+	border: 3px solid black;
+	margin-top:30px;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 10px;
+	width: 1000px;
+}
+
+
 .cabecera {
 	display: flex;
 	justify-content: center;

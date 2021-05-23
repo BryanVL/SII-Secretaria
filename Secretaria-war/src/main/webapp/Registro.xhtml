@@ -9,35 +9,39 @@
 <head>
 	<title>SECRETARIA</title>
 	<link rel="stylesheet" type="text/css" href="resources/StyleSheets.css"/>
-	<script type="text/javascript" src="resources/funciones.js"></script>
+	
 </head>
 
-    <body>
-    <!-- Título de la página-->
+<h:body>
 
-    <!--Formulario con todas las preguntas devolviendo alguna alerta si algo no va bien en la función validateRegister()-->
-     <form name="myForm" action="index.xhtml"
-           onsubmit="return validateRegister()" method="get">
-<h4>Nombre de usuario</h4>
- <input type="text" name="Nombre" size="40"/>
-    
-<h4>Contraseña</h4>
-<input type="password" name="password" size="40"/>
-    
- <h4>Confirmar Contraseña</h4>
-<input type="password" name="confirmpassword" size="40"/>   
+<div class="centrado">
 
+<h:form id="registroUsuarios">
 
-    
- 
- 
-<input type="submit" value="Enviar registro"/>
- </form>   
-    
-    
+<table>
+<thead>
+	
+	<tr>
+	<th>DNI</th>
+	<th>Usuario</th>
+	<th>Contraseña</th>
+	<th>Confirmar contraseña</th>
+	<th/>
+	</tr>
+</thead>
+<tr>
+	<td><h:inputText id="nombre" value="" required="true"/></td>
+	<td><h:inputText id="password" value=""/></td>
+	<td><h:inputText id="confirmacionpassword" value=""/></td>
+	<td><h:commandButton id="botonAniadir" action="index.xhtml" value="Registrarse"/></td>
+</tr>
+</table>
+
+</h:form>
+</div>  
         <!--Pie de página -->
 	<div class="foot"> 
 		Universidad de Málaga.
 	</div>
-    </body>
+</h:body>
 </html>
