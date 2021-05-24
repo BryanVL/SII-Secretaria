@@ -19,22 +19,14 @@
 <h:form id="registroUsuarios">
 
 <table>
-<thead>
-	
-	<tr>
-	<th>DNI</th>
-	<th>Usuario</th>
-	<th>Contraseña</th>
-	<th>Confirmar contraseña</th>
-	<th/>
-	</tr>
-</thead>
-<tr>
-	<td><h:inputText id="nombre" value="" required="true"/></td>
-	<td><h:inputText id="password" value=""/></td>
-	<td><h:inputText id="confirmacionpassword" value=""/></td>
-	<td><h:commandButton id="botonAniadir" action="index.xhtml" value="Registrarse"/></td>
-</tr>
+
+
+	<tr><td>DNI</td><td><h:inputText id="dni" value="" required="true"/></td></tr>
+	<tr><td>Usuario</td><td><h:inputText id="usuario" value=""  required="true"/></td></tr>
+	<tr><td>Contraseña</td><td><h:inputText id="password" value=""  required="true"/></td></tr>
+	<tr><td>Confirmar contraseña</td><td><h:inputText id="confirmacionpassword" value=""  required="true"/></td></tr>
+	<tr><td><h:commandButton id="botonRegistro" action="index.xhtml" value="Registrar usuario"/></td></tr>
+
 </table>
 
 </h:form>

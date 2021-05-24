@@ -3,22 +3,29 @@ body {
   background-image: url("https://image.freepik.com/foto-gratis/resumen-fondo-azul-gradiente-fondo-azul-pagina-web-o-presentacion_79161-487.jpg");
   background-repeat: none;
   background-size: cover;
+  margin:0 ;
+}
 
+
+
+table{ /*Para la tabla*/
+	margin: auto;
+	border-collapse: collapse;
+	
+	
+	
 }
 
 .centrado{
-	padding-top: 20px;
-	padding-right: 15px;
-	padding-bottom: 20px;
-	padding-left: 15px;
-	background-color: #F7F0F0;
-	border: 3px solid black;
-	margin-top:30px;
-	margin-right: auto;
-	margin-left: auto;
-	border-radius: 10px;
-	width: 1000px;
+	display:block;
+    margin:auto;
+	
 }
+
+button{
+    margin: 0 auto;
+}
+
 
 
 .cabecera {
