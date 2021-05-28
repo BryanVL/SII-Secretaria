@@ -11,9 +11,12 @@ body {
 table{ /*Para la tabla*/
 	margin: auto;
 	border-collapse: collapse;
-	
-	
-	
+	vertical-align:middle;
+	padding-top:50px;
+}
+
+th, td {
+	padding: 1em;
 }
 
 .centrado{
@@ -22,11 +25,33 @@ table{ /*Para la tabla*/
 	
 }
 
+.wrapper{
+	width:50%;
+	heigth:50%;
+	border: 1px solid black;
+	/*display: table-cell;
+	vertical-align:middle;*/
+	margin: 0 auto;
+	padding-top:10%;
+}
+
+.padSuperior{
+	padding-top:200px;
+}
+
 button{
     margin: 0 auto;
 }
 
-
+.centradoVertical{
+	
+	margin: 0;
+	position:relative;
+	top:50%;
+	/*left:50%;
+	-ms-transform:translateY(-50%,-50%);
+	transform:translateY(-50%,-50%);*/
+}
 
 .cabecera {
 	display: flex;
