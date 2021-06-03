@@ -12,22 +12,61 @@
 </h:head>
 
 <h:body>
-	<h1>BIenvenido..</h1>
-	<h:button value="Mis datos" outcome="MisDatos.xhtml"/>
- 	<div class="foot"> 
-		Universidad de Málaga.
-	</div>
+	<h1>Bienvenido a la página principal</h1>
 	
-	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<div class="centrado">
+		
+		
+		
+
+		
+ 
+
+		<div class="wrapper">
+			<table >
+			
+			
+			
+			
+			<tr><td >Asignaturas</td><td>Grupo</td></tr>
+			
+			<tr><td colspan="2" class="padSuperior"><h:button id="botonMisDatos" outcome="leerDatos.xhtml" 
+			value="Mostrar todos mis datos" class="centrado"/></td></tr>
+			
+			
+			</table>
+		</div>
+	  
+	  	
+	  	
+	  	
 	<table>
 
 
-	<tr><td >Asignaturas</td><td>Grupo</td></tr>
-	<tr><td>Usuario</td><td><h:inputText id="usuario" value=""  required="true"/></td></tr>
-	<tr><td>Contraseña</td><td><h:inputText id="password" value=""  required="true"/></td></tr>
-	<tr><td>Confirmar contraseña</td><td><h:inputText id="confirmacionpassword" value=""  required="true"/></td></tr>
-	<tr><td><h:commandButton id="botonRegistro" action="index.xhtml" value="Registrar usuario"/></td></tr>
+	
+	
+	<tr><td><h:commandButton id="botonRellenarEncuesta" action="encuesta.xhtml" value="Rellenar encuesta"/></td></tr>
 
-</table>
+	</table>
+	</div>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+
+	
+	
+
+
+ 	<div class="foot"> 
+		Universidad de Málaga.
+	</div>
 </h:body>
 </html>
