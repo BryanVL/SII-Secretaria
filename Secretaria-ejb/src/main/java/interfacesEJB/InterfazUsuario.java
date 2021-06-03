@@ -15,4 +15,5 @@ public interface InterfazUsuario {
 	
 	public void crearUsuario(String dni, String nombre, String pass, String rol) throws UsuarioException,AlumnoException;
 	
+	public void mostrarDatos(String nombre) throws UsuarioException,AlumnoException;
 }

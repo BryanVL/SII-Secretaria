@@ -58,13 +58,37 @@ public class UsuarioImpl implements InterfazUsuario{
 				usuario.setUsuario(nombre);
 				usuario.setPassword(pass);
 				usuario.setRol(rol);
-				
+				usuario.setAlumno(alumno);
 				em.persist(usuario);
+				
 			} else {
 				throw new UsuarioException("Ya existe un usuario asociado a este dni");
 			}
 		
 		
+		} catch(AlumnoException e) {
+			e.printStackTrace();
+		} catch(UsuarioException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void mostrarDatos(String nombre) throws UsuarioException, AlumnoException {
+		
+		try {
+			TypedQuery<Usuario> query = em.createQuery("SELECT u FROM usuario a WHERE a.nombre= :nombre",Usuario.class);
+			query.setParameter("nombre", nombre);
+			Usuario usuario = query.getSingleResult();
+			if(usuario == null) {
+				throw new UsuarioException();
+			}
+			Alumno alumno = usuario.getAlumno();
+			if(alumno == null) {
+				throw new AlumnoException();
+			}
+			
+			
 		} catch(AlumnoException e) {
 			e.printStackTrace();
 		} catch(UsuarioException e) {
