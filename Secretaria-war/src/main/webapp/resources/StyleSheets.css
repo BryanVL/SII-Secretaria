@@ -30,6 +30,36 @@ tr, td {
 	
 }
 
+.boton{
+  background-color: #008CBA; 
+  border: none;
+  color: white;
+  padding: 14px 28px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+
+.boton1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.boton1:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.boton1:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .wrapper{
 	width:50%;
 	heigth:50%;
