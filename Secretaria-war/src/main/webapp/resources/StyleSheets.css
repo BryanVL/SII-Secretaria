@@ -10,13 +10,14 @@ body {
 
 table{ /*Para la tabla*/
 	margin: auto;
-	border-collapse: collapse;
-	vertical-align:middle;
+	border-collapse: collapse;*/
+	/*vertical-align:middle;*/
 	padding-top:50px;
 }
 
-th, td {
+tr, td {
 	padding: 1em;
+	padding-top:3em;
 }
 
 .centrado{
@@ -28,15 +29,24 @@ th, td {
 .wrapper{
 	width:50%;
 	heigth:50%;
-	border: 1px solid black;
-	/*display: table-cell;
+	/*border: 1px solid black;
+	display: table-cell;
 	vertical-align:middle;*/
 	margin: 0 auto;
-	padding-top:10%;
+	padding-top:5%;
+}
+
+.wrapper table{
+	background-color: rgba(230,230,230,0.8);
+	border-radius: 15px;
+}
+
+.inputTxt{
+	width:80%;
 }
 
 .padSuperior{
-	padding-top:200px;
+	padding-top:120px;
 }
 
 button{
