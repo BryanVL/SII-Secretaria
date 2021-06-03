@@ -85,18 +85,6 @@ public class AlumnoPrueba {
 	}
 	
 	@Test
-	@Requisitos({"RF1"})
-	public void testValidarAcceso() {
-		try {
-			Alumno a = new Alumno();
-			a.setID(1234L);
-			interfazAlumno.validarAcceso(a);
-		}catch(AlumnoException e) {
-			fail("No deberia lanzarse esta excepcion.");
-		}
-	}
-	
-	@Test
 	@Requisitos({"RF11"})
 	public void testVisualizarAlumno() {
 		

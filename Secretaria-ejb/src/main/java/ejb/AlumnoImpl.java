@@ -159,16 +159,6 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 	}
 
 	
-	@Override
-	public void validarAcceso(Alumno a) throws AlumnoException {
-    	Alumno alumno = em.find(Alumno.class, a.getID());
-    	
-    	if(alumno==null) {
-    		throw new AlumnoException();
-    	}
-    	
-	}
-	
 	
 	@Override
 	public Alumno VisualizarAlumno(String dni) throws AlumnoException {

@@ -26,6 +26,7 @@ import jpa.Matricula;
 import jpa.Matricula_PK;
 import jpa.Optativa;
 import jpa.Titulacion;
+import jpa.Usuario;
 
 /*import es.uma.informatica.sii.ejb.practica.entidades.Ingrediente;
 import es.uma.informatica.sii.ejb.practica.entidades.Lote;
@@ -215,6 +216,13 @@ public class BaseDatos {
 		grupoB.setPlazasDisponibles(50);
 		grupoB.setTitulacion(tit);
 		em.persist(grupoB);
+		
+		Usuario marco = new Usuario();
+		marco.setUsuario("Marco12");
+		marco.setPassword("12345");
+		marco.setRol("Alumno");
+		marco.setAlumno(noel);
+		em.persist(marco);
 		
 		
 		
