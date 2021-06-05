@@ -136,18 +136,23 @@ button{
 
 
 .inp {
-	border: 2px solid lightblue;
+	border: 2px solid cornflowerblue;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-size:18px;
 	font-family:arial;
 	color:black;
 	border-radius:5px;
+	
+	transition-property: width;
+  	transition-duration: 0.5s;
+  	transition-timing-function: ease;
 }
 
 
 .inp:focus{
-	border: 2px solid blue;
+	border: 2px solid darkblue;
+	width:85%;
 }
 
 
