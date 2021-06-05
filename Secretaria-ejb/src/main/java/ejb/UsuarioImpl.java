@@ -80,15 +80,18 @@ public class UsuarioImpl implements InterfazUsuario{
 	@Override
 	public Usuario mostrarDatos(String nombre) throws UsuarioException{
 		
-		
-		TypedQuery<Usuario> query = em.createQuery("SELECT u FROM usuario a WHERE a.nombre= :nombre",Usuario.class);
-		query.setParameter("nombre", nombre);
-		List<Usuario> usuarios = query.getResultList();
-		if(usuarios == null || usuarios.size() == 0) {
-			throw new UsuarioException();
-		}
-		Usuario usuario = usuarios.get(0);
+		Usuario usuario = em.find(Usuario.class, nombre);
+//		TypedQuery<Usuario> query = em.find(Usuario.class,nombre);
+//		query.setParameter("usuario", nombre);
+//		List<Usuario> usuarios = query.getResultList();
+//		if(usuarios == null || usuarios.size() == 0) {
+//			throw new UsuarioException("No se ha encontrado el usuario");
+//		}
+//		Usuario usuario = usuarios.get(0);
 	
+		if(usuario == null) {
+			throw new UsuarioException("No se ha encontrado el usuario");
+		}
 		return usuario;
 	}
 }

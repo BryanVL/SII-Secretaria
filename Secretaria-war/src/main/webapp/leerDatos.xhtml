@@ -15,7 +15,40 @@
 
 	<div class="centrado">
 		<h1>Mis datos</h1>
-		
+		<h:form id="Alumnos">
+                    <h:dataTable value="#{user.leerDatos()}" var="u">
+                        <h:column>
+                            <f:facet name="header">Nombre</f:facet>
+                            <h:outputText value="#{u.usuario}"/>
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">DNI</f:facet>
+                            <h:outputText value="#{u.alumno.DNI}"/>
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Nombre</f:facet>
+                            <h:outputText value="#{u.alumno.Nombre}"/>
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Apellido1</f:facet>
+                            <h:outputText value="#{u.alumno.Apellido1}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Apellido2</f:facet>
+                            <h:outputText value="#{u.alumno.Apellido2}"/>
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Email_personal</f:facet>
+                            <h:outputText value="#{u.alumno.Email_personal}"/>
+                        </h:column>
+                        
+                    </h:dataTable>
+        </h:form>
 		
 		<table>
 		<tr><td><h:button value="Volver a la página principal" outcome="MainPage.xhtml"/></td></tr>

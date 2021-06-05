@@ -53,16 +53,17 @@ public class User{
 		return respuesta;
 	}
 	
-	public String leerDatos() {
-		String respuesta = null;
+	public Usuario leerDatos() {
+		Usuario usuario = null;
 		try {
 			
-			u.mostrarDatos(usuario.getUsuario());
+			usuario = u.mostrarDatos("admin");
 		
 		}catch(UsuarioException e) {
-			e.printStackTrace();
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
-		return respuesta;
+		return usuario;
 	}
 	
 }
