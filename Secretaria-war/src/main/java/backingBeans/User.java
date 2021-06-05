@@ -87,7 +87,7 @@ public class User{
 			usuario = u.mostrarDatosAdmin();
 		
 		}catch(UsuarioException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
+			FacesMessage fm = new FacesMessage("No hay datos que mostrar");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return usuario;
@@ -96,10 +96,7 @@ public class User{
 	public String borrarUsuarios() {
 		String respuesta = null;
 		try {
-			LOGGER.info("Entra al metodo");
 			u.borrarUsuarios();
-			LOGGER.info("Sale del metodo");
-			respuesta = "index.xhtml";
 		} catch(UsuarioException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);

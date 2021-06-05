@@ -49,11 +49,13 @@
                
            </h:dataTable>
         </h:form>
+		<h:form>
+			<table>
+			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarUsuarios" action="#{user.borrarUsuarios()}" value="Eliminar Usuarios" class="centrado boton boton1"/></td>
+			<h:message for=""></h:message></tr>
+			<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
+		</table></h:form>
 		
-		<table>
-		<tr><h:message for=""></h:message></tr>
-		<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
-		</table>
 	</div>
 
 	<div class="foot"> 

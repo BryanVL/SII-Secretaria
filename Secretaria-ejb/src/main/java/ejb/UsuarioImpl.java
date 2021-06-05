@@ -117,12 +117,7 @@ public class UsuarioImpl implements InterfazUsuario{
 	
 	@Override
 	public void borrarUsuarios() throws UsuarioException {
-		TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u",Usuario.class);
-		List<Usuario> usuarios = query.getResultList();
-		if(usuarios == null || usuarios.size() == 0) {
-			throw new UsuarioException("No se ha encontrado el usuario");
-		}
-		for(Usuario u : usuarios) {
+		for(Usuario u : mostrarDatosAdmin()) {
 			em.remove(u);
 		}
 	}
