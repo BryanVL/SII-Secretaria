@@ -28,6 +28,7 @@ public class Alumnos{
 	
 	private Alumno alumno;
 	private List<Alumno> alumnos;
+	private boolean buscar;
 	
 	public Alumnos() {
 		alumno = new Alumno();
@@ -47,6 +48,26 @@ public class Alumnos{
 	
 	public void setAlumnos(List<Alumno> alumnos) {
 		this.alumnos = alumnos;
+	}
+	
+	public boolean getBuscar() {
+		return buscar;
+	}
+	
+	public void setBuscar(boolean buscar) {
+		this.buscar = buscar;
+	}
+	
+	public Alumno buscarAlumno(String dni) {
+		Alumno alumno = null;
+		try {
+			buscar = true;
+			alumno = a.VisualizarAlumno(dni);
+		}catch(AlumnoException e) {
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		return alumno;
 	}
 	
 	public List<Alumno> leerDatosAdmin() {

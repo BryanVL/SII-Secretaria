@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
 	<title>SECRETARIA</title>
@@ -16,79 +18,157 @@
 	<div class="centrado">
 		<h1>ALUMNOS</h1>
 		<h:form id="Alumnos">
-           <h:dataTable value="#{alumno.leerDatosAdmin()}" var="a">
-               
-               <h:column>
-                   <f:facet name="header">DNI</f:facet>
-                   <h:outputText value="#{a.DNI}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Nombre</f:facet>
-                   <h:outputText value="#{a.Nombre}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Apellido1</f:facet>
-                   <h:outputText value="#{a.Apellido1}"/>
-               </h:column>
-
-               <h:column>
-                   <f:facet name="header">Apellido2</f:facet>
-                   <h:outputText value="#{a.Apellido2}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Email_institucional</f:facet>
-                   <h:outputText value="#{a.Email_institucional}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Email_personal</f:facet>
-                   <h:outputText value="#{a.Email_personal}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Telefono</f:facet>
-                   <h:outputText value="#{a.Telefono}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Movil</f:facet>
-                   <h:outputText value="#{a.Movil}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Direccion</f:facet>
-                   <h:outputText value="#{a.Direccion}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Localidad</f:facet>
-                   <h:outputText value="#{a.Localidad}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Provincia</f:facet>
-                   <h:outputText value="#{a.Provincia}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">CP</f:facet>
-                   <h:outputText value="#{a.CP}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Usuario</f:facet>
-                   <h:outputText value="#{a.Usuario}"/>
-               </h:column>
-               
-           </h:dataTable>
-        </h:form>
-		<h:form>
+			<div class="wrapper">
 			<table>
-			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarAlumnos" action="#{alumno.borrarAlumnos()}" value="Eliminar alumnos" class="centrado boton boton1"/></td></tr>
+				<tr><td colspan="2"><label>Buscar Alumno</label><br/><h:inputText id="dni" value="#{alumno.alumno.DNI}" required="true" class="inputTxt" p:placeholder="Introduce dni" /></td>
+				<td  class="padSuperior"><h:commandButton id="botonBuscarAlumno" action="#{alumno.buscarAlumno(dni)}" value="Buscar" var="b" class="centrado boton boton1"/></td></tr>
+			</table>
+			</div>
+			<c:choose> 
+            	<c:when test="#{alumno.buscar}">
+					<h:dataTable value="b">
+		               
+		               <h:column>
+		                   <f:facet name="header">DNI</f:facet>
+		                   <h:outputText value="#{b.DNI}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Nombre</f:facet>
+		                   <h:outputText value="#{b.Nombre}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Apellido1</f:facet>
+		                   <h:outputText value="#{b.Apellido1}"/>
+		               </h:column>
+		
+		               <h:column>
+		                   <f:facet name="header">Apellido2</f:facet>
+		                   <h:outputText value="#{b.Apellido2}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Email_institucional</f:facet>
+		                   <h:outputText value="#{b.Email_institucional}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Email_personal</f:facet>
+		                   <h:outputText value="#{b.Email_personal}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Telefono</f:facet>
+		                   <h:outputText value="#{b.Telefono}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Movil</f:facet>
+		                   <h:outputText value="#{b.Movil}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Direccion</f:facet>
+		                   <h:outputText value="#{b.Direccion}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Localidad</f:facet>
+		                   <h:outputText value="#{b.Localidad}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Provincia</f:facet>
+		                   <h:outputText value="#{b.Provincia}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">CP</f:facet>
+		                   <h:outputText value="#{b.CP}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Usuario</f:facet>
+		                   <h:outputText value="#{b.Usuario}"/>
+		               </h:column>
+		               
+           		</h:dataTable>
+			 	</c:when>
+            <c:otherwise>
+           		<h:dataTable value="#{alumno.leerDatosAdmin()}" var="a">
+		               
+		               <h:column>
+		                   <f:facet name="header">DNI</f:facet>
+		                   <h:outputText value="#{a.DNI}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Nombre</f:facet>
+		                   <h:outputText value="#{a.Nombre}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Apellido1</f:facet>
+		                   <h:outputText value="#{a.Apellido1}"/>
+		               </h:column>
+		
+		               <h:column>
+		                   <f:facet name="header">Apellido2</f:facet>
+		                   <h:outputText value="#{a.Apellido2}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Email_institucional</f:facet>
+		                   <h:outputText value="#{a.Email_institucional}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Email_personal</f:facet>
+		                   <h:outputText value="#{a.Email_personal}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Telefono</f:facet>
+		                   <h:outputText value="#{a.Telefono}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Movil</f:facet>
+		                   <h:outputText value="#{a.Movil}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Direccion</f:facet>
+		                   <h:outputText value="#{a.Direccion}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Localidad</f:facet>
+		                   <h:outputText value="#{a.Localidad}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Provincia</f:facet>
+		                   <h:outputText value="#{a.Provincia}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">CP</f:facet>
+		                   <h:outputText value="#{a.CP}"/>
+		               </h:column>
+		               
+		               <h:column>
+		                   <f:facet name="header">Usuario</f:facet>
+		                   <h:outputText value="#{a.Usuario}"/>
+		               </h:column>
+		               
+           		</h:dataTable>
+        	</c:otherwise>
+        </c:choose>
+			<table>
 			<tr><td><h:message for=""></h:message></td></tr>
+			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarAlumnos" action="#{alumno.borrarAlumnos()}" value="Eliminar alumnos" class="centrado boton boton1"/></td></tr>
 			<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
 			</table>
 		</h:form>

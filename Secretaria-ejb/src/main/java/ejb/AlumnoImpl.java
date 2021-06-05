@@ -169,11 +169,11 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
     	query.setParameter("fdni", dni);
         List<Alumno> alumnos = query.getResultList();
 		
-		Alumno alumnoExistente = em.find(Alumno.class, alumnos.get(0).getID() );
-		
-		if (alumnoExistente == null) {
-			throw new AlumnoException("No se ha encontrado el alumno");
-		}
+        if(alumnos == null || alumnos.size() == 0) {
+        	throw new AlumnoException("No se ha encontrado el alumno");
+        }
+        
+		Alumno alumnoExistente = alumnos.get(0);
 		
 		return alumnoExistente;
 	}
