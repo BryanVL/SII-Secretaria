@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -29,11 +30,11 @@ public class UsuarioImpl implements InterfazUsuario{
     	Usuario usuario = em.find(Usuario.class, nombre);
     	
     	if(usuario==null) {
-    		throw new UsuarioException();
+    		throw new UsuarioException("No se ha encontrado el usuario");
     	}
     	
-    	if(pass != usuario.getPassword()) {
-    		throw new UsuarioException();
+    	if(!pass.equals(usuario.getPassword())) {
+    		throw new UsuarioException("La constraseña no es correcta");
     	}
     	
 	}
@@ -42,57 +43,52 @@ public class UsuarioImpl implements InterfazUsuario{
 	@Override
 	public void crearUsuario(String dni, String nombre, String pass, String rol) throws UsuarioException, AlumnoException{
 		
-		try {
+		TypedQuery<Alumno> query = em.createQuery("SELECT a FROM Alumno a WHERE a.DNI= :dni",Alumno.class);
+		query.setParameter("dni", dni);
+		List<Alumno> alumnos = query.getResultList();
 		
-			TypedQuery<Alumno> query = em.createQuery("SELECT a FROM Alumno a WHERE a.DNI= :dni",Alumno.class);
-			query.setParameter("dni", dni);
-			Alumno alumno = query.getSingleResult();
-			
-			if(alumno == null) {
-				throw new AlumnoException("No existe un alumno asociado a ese dni.");
-			}
-			
-			if(alumno.getUser() == null) {
-				
-				Usuario usuario = new Usuario();
-				usuario.setUsuario(nombre);
-				usuario.setPassword(pass);
-				usuario.setRol(rol);
-				usuario.setAlumno(alumno);
-				em.persist(usuario);
-				
-			} else {
-				throw new UsuarioException("Ya existe un usuario asociado a este dni");
-			}
-		
-		
-		} catch(AlumnoException e) {
-			e.printStackTrace();
-		} catch(UsuarioException e) {
-			e.printStackTrace();
+		if(alumnos == null || alumnos.size() == 0) {
+			throw new AlumnoException("No se encuentra el alumno asociado a ese dni");
 		}
+		Alumno alumno = alumnos.get(0);
+		
+		if(alumno.getUser() == null) {
+			
+			Usuario usuario = new Usuario();
+			usuario.setUsuario(nombre);
+			usuario.setPassword(pass);
+			usuario.setRol(rol);
+			usuario.setAlumno(alumno);
+			em.persist(usuario);
+			
+		} else {
+			throw new UsuarioException("Ya existe un usuario asociado a este dni");
+		}
+		
 	}
 	
+//	public void crearSecretaria(String nombre, String pass) {
+//		Usuario usuario = new Usuario();
+//		
+//		usuario.setUsuario(nombre);
+//		usuario.setPassword(pass);
+//		usuario.setRol("Admin");
+//		em.persist(usuario);
+//		
+//	}
+	
 	@Override
-	public void mostrarDatos(String nombre) throws UsuarioException, AlumnoException {
+	public Usuario mostrarDatos(String nombre) throws UsuarioException{
 		
-		try {
-			TypedQuery<Usuario> query = em.createQuery("SELECT u FROM usuario a WHERE a.nombre= :nombre",Usuario.class);
-			query.setParameter("nombre", nombre);
-			Usuario usuario = query.getSingleResult();
-			if(usuario == null) {
-				throw new UsuarioException();
-			}
-			Alumno alumno = usuario.getAlumno();
-			if(alumno == null) {
-				throw new AlumnoException();
-			}
-			
-			
-		} catch(AlumnoException e) {
-			e.printStackTrace();
-		} catch(UsuarioException e) {
-			e.printStackTrace();
+		
+		TypedQuery<Usuario> query = em.createQuery("SELECT u FROM usuario a WHERE a.nombre= :nombre",Usuario.class);
+		query.setParameter("nombre", nombre);
+		List<Usuario> usuarios = query.getResultList();
+		if(usuarios == null || usuarios.size() == 0) {
+			throw new UsuarioException();
 		}
+		Usuario usuario = usuarios.get(0);
+	
+		return usuario;
 	}
 }

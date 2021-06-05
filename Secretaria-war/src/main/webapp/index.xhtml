@@ -30,9 +30,10 @@
 			<!-- <tr><td>Usuario</td><td><h:inputText id="usuario" value=""  required="true" class="inputTxt"/></td></tr>
 			<tr><td>Contraseña</td><td><h:inputText id="password" value=""  required="true" class="inputTxt"/></td></tr> -->
 			
-			<tr><td>Usuario</td><td><h:inputText id="usuario" value=""  required="true" class="inputTxt"/></td></tr>
-			<tr><td>Contraseña</td><td><h:inputText id="password" value=""  required="true" class="inputTxt"/></td></tr>
-			<tr><td class="padSuperior"><h:button id="botonInicioSesion" outcome="MainPage.xhtml" value="Iniciar sesión"  class="centrado"/>
+			<tr><td>Usuario</td><td><h:inputText id="usuario" value="#{user.usuario.usuario}"  required="true" class="inputTxt"/></td></tr>
+			<tr><td>Contraseña</td><td><h:inputText id="password" value="#{user.usuario.password}"  required="true" class="inputTxt"/></td></tr>
+			<tr><td class="padSuperior"><h:commandButton id="botonInicioSesion" action="#{user.iniciarSesion()}" value="Iniciar sesión"  class="centrado"/>
+			<h:message for=""></h:message>
 			</td><td class="padSuperior"><h:button id="botonRegistro" outcome="Registro.xhtml" value="Registrar usuario" class="centrado"/></td></tr>
 			</table>
 		</div>

@@ -20,12 +20,12 @@
 
 <div class="wrapper">
 <table >
-	<tr><td>DNI</td><td><h:inputText id="dni" value="" required="true" class="inputTxt"/></td></tr>
-	<tr><td>Usuario</td><td><h:inputText id="usuario" value=""  required="true" class="inputTxt"/></td></tr>
-	<tr><td>Contraseña</td><td><h:inputText id="password" value=""  required="true" class="inputTxt"/></td></tr>
-	<tr><td>Confirmar contraseña</td><td><h:inputText id="confirmacionpassword" value=""  required="true" class="inputTxt"/></td></tr>
-	<tr><td colspan="2" class="padSuperior"><h:commandButton id="botonRegistro" action="index.xhtml" value="Registrar usuario" class="centrado boton boton1"/></td></tr>
-
+	<tr><td>DNI</td><td><h:inputText id="dni" value="#{registro.dni}" required="true" class="inputTxt"/></td></tr>
+	<tr><td>Usuario</td><td><h:inputText id="usuario" value="#{registro.usuario.usuario}"  required="true" class="inputTxt"/></td></tr>
+	<tr><td>Contraseña</td><td><h:inputText id="password" value="#{registro.usuario.password}"  required="true" class="inputTxt"/></td></tr>
+	<tr><td>Confirmar contraseña</td><td><h:inputText id="confirmacionpassword" value="#{registro.pass2}"  required="true" class="inputTxt"/></td></tr>
+	<tr><td colspan="2" class="padSuperior"><h:commandButton id="botonRegistro" action="#{registro.registrarUsuario()}" value="Registrar usuario" class="centrado boton boton1"/></td></tr>
+	<tr><td><h:message for=""></h:message></td></tr>
 </table>
 </div>
 </h:form>

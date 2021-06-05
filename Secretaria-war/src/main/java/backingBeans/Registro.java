@@ -1,8 +1,13 @@
 package backingBeans;
 
+import java.util.logging.Logger;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.persistence.NoResultException;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.UsuarioException;
@@ -13,51 +18,34 @@ import jpa.Usuario;
 @RequestScoped
 public class Registro {
 	
-	@EJB
-	private InterfazUsuario usuario;
+	private static final Logger LOGGER = Logger.getLogger(Registro.class.getCanonicalName());
 	
-	private String nombre;
-	private String pass;
+	@EJB
+	private InterfazUsuario u;
+	
 	private String pass2;
-	private String rol;
 	private String dni;
 	
-	private Usuario u;
+	private Usuario usuario;
 	
 	public Registro() {
-		u = new Usuario();
+		usuario = new Usuario();
 	}
 	
-	public String getNombre() {
-		return nombre;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	public String getPass() {
-		return pass;
-	}
-	
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	public String getPass2() {
 		return pass2;
 	}
 	
-	public void setPass2(String nombre) {
+	public void setPass2(String pass2) {
 		this.pass2 = pass2;
-	}
-	
-	public String getRol() {
-		return rol;
-	}
-	
-	public void setRol(String rol) {
-		this.rol = rol;
 	}
 	
 	public String getDni() {
@@ -68,21 +56,36 @@ public class Registro {
 		this.dni = dni;
 	}
 	
+	//Metodo utilizado para crear el usuario admin con rol "Admin" y contraseña admin:
+	
+//	public String crearSecretaria() {
+//		String respuesta = null;
+//		
+//		u.crearSecretaria(usuario.getUsuario(), usuario.getPassword());
+//
+//		return respuesta;
+//	}
+	
 	public String registrarUsuario() {
 		String respuesta = null;
 		try {
 			
-			if(pass == pass2) {
-				usuario.crearUsuario(dni, nombre, pass, rol);
-				respuesta = "index.xhtml";
+			if(usuario.getPassword().equals(pass2)) {
+				LOGGER.info(usuario.toString() + ", " + dni);
+				u.crearUsuario(dni, usuario.getUsuario(), usuario.getPassword(), "Alumno");
+				respuesta = "MainPage.xhtml";
 			} else {
-				throw new UsuarioException("Las contraseñas deben coincidir.");
-			}
+				FacesMessage fm = new FacesMessage("Las contraseñas deben coincidir");
+                FacesContext.getCurrentInstance().addMessage(null, fm);
+            }
 			
+			LOGGER.info(respuesta);
 		} catch(UsuarioException e) {
-			e.printStackTrace();;
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
 		} catch(AlumnoException e) {
-			e.printStackTrace();
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		
 		
