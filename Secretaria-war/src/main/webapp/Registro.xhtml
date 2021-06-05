@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
 	<title>SECRETARIA</title>
@@ -20,10 +21,10 @@
 
 <div class="wrapper">
 <table >
-	<tr><td>DNI</td><td><label>DNI</label><h:inputText id="dni" value="#{registro.dni}" required="true" class="inputTxt inp"/></td></tr>
-	<tr><td>Usuario</td><td><h:inputText id="usuario" value="#{registro.usuario.usuario}"  required="true" class="inputTxt inp"/></td></tr>
-	<tr><td>Contraseña</td><td><h:inputSecret id="password" value="#{registro.usuario.password}"  required="true" class="inputTxt inp"/></td></tr>
-	<tr><td>Confirmar contraseña</td><td><h:inputSecret id="confirmacionpassword" value="#{registro.pass2}"  required="true" class="inputTxt inp"/></td></tr>
+	<tr><td colspan="2"><label>DNI</label><br/><h:inputText id="dni" value="#{registro.dni}" required="true" class="inputTxt" p:placeholder="Introduce dni" /></td></tr>
+	<tr><td colspan="2"><label>Usuario</label><br/><h:inputText id="usuario" value="#{registro.usuario.usuario}"  required="true" class="inputTxt" p:placeholder="Introduce usuario" /></td></tr>
+	<tr><td colspan="2"><label>Contraseña</label><br/><h:inputSecret id="password" value="#{registro.usuario.password}"  required="true" class="inputTxt" p:placeholder="Introduce Contraseña" /></td></tr>
+	<tr><td colspan="2"><label>Repetir contraseña</label><br/><h:inputSecret id="confirmacionpassword" value="#{registro.pass2}"  required="true" class="inputTxt" p:placeholder="Repite la contraseña" /></td></tr>
 	<tr><td  class="padSuperior"><h:commandButton id="botonRegistro" action="#{registro.registrarUsuario()}" value="Registrate" class="centrado boton boton1"/></td>
 	<td  class="padSuperior"><h:commandButton id="botonAdmin" action="#{registro.crearSecretaria()}" value="Secretaria" class="centrado boton boton1"/></td></tr>
 	<tr><td colspan="2"><h:message for=""></h:message></td></tr>

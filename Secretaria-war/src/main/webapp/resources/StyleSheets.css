@@ -24,10 +24,10 @@ h1{
 	text-align: center;
 }
 
-tr, td {
+.wrapper table tr, td {
 	padding: 1em;
-	padding-top:3em;
-	text-align: center;
+	padding-top:1em;
+	/*text-align: center;*/
 	vertical-align: middle;
 }
 
@@ -78,16 +78,35 @@ tr, td {
 }
 
 .wrapper table{
-	background-color: rgba(240,240,240,0.75);
+	background-color: rgba(245,245,245,0.7);
 	border-radius: 15px;
 }
 
 .inputTxt{
+	border-bottom: 2px solid cornflowerblue;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size:18px;
+	font-family:arial;
+	color:black;
+	/*border-radius:5px;*/
 	width:80%;
+	transition-property: width;
+  	transition-duration: 0.5s;
+  	transition-timing-function: ease;
+  	border-top: 0px;
+  	border-left: 0px;
+  	border-right: 0px;
+  	background-color: transparent;
+}
+
+.inputTxt:focus{
+	border-bottom: 2px solid darkblue;
+	width:90%;
 }
 
 .padSuperior{
-	padding-top:120px;
+	padding-top:60px;
 }
 
 button{
@@ -135,27 +154,9 @@ button{
 }
 
 
-.inp {
-	border: 2px solid cornflowerblue;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	font-size:18px;
-	font-family:arial;
-	color:black;
-	border-radius:5px;
-	
-	transition-property: width;
-  	transition-duration: 0.5s;
-  	transition-timing-function: ease;
-  	
-  	
-}
 
 
-.inp:focus{
-	border: 2px solid darkblue;
-	width:85%;
-}
+
 
 
 
