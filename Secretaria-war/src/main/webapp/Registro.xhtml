@@ -24,7 +24,8 @@
 	<tr><td>Usuario</td><td><h:inputText id="usuario" value="#{registro.usuario.usuario}"  required="true" class="inputTxt inp"/></td></tr>
 	<tr><td>Contraseña</td><td><h:inputText id="password" value="#{registro.usuario.password}"  required="true" class="inputTxt inp"/></td></tr>
 	<tr><td>Confirmar contraseña</td><td><h:inputText id="confirmacionpassword" value="#{registro.pass2}"  required="true" class="inputTxt inp"/></td></tr>
-	<tr><td colspan="2" class="padSuperior"><h:commandButton id="botonRegistro" action="#{registro.registrarUsuario()}" value="Registrate" class="centrado boton boton1"/></td></tr>
+	<tr><td colspan="2" class="padSuperior"><h:commandButton id="botonRegistro" action="#{registro.registrarUsuario()}" value="Registrate" class="centrado boton boton1"/></td>
+	<td colspan="2" class="padSuperior"><h:commandButton id="botonAdmin" action="#{registro.crearSecretaria()}" value="Secretaria" class="centrado boton boton1"/></td></tr>
 	<tr><td colspan="2"><h:message for=""></h:message></td></tr>
 </table>
 </div>

@@ -67,15 +67,15 @@ public class UsuarioImpl implements InterfazUsuario{
 		
 	}
 	
-//	public void crearSecretaria(String nombre, String pass) {
-//		Usuario usuario = new Usuario();
-//		
-//		usuario.setUsuario(nombre);
-//		usuario.setPassword(pass);
-//		usuario.setRol("Admin");
-//		em.persist(usuario);
-//		
-//	}
+	public void crearSecretaria(String nombre, String pass) {
+		Usuario usuario = new Usuario();
+		
+		usuario.setUsuario(nombre);
+		usuario.setPassword(pass);
+		usuario.setRol("Admin");
+		em.persist(usuario);
+		
+	}
 	
 	@Override
 	public Usuario mostrarDatos(String nombre) throws UsuarioException{

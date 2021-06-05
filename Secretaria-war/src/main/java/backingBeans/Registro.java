@@ -58,13 +58,13 @@ public class Registro {
 	
 	//Metodo utilizado para crear el usuario admin con rol "Admin" y contraseña admin:
 	
-//	public String crearSecretaria() {
-//		String respuesta = null;
-//		
-//		u.crearSecretaria(usuario.getUsuario(), usuario.getPassword());
-//
-//		return respuesta;
-//	}
+	public String crearSecretaria() {
+		String respuesta = null;
+		
+		u.crearSecretaria(usuario.getUsuario(), usuario.getPassword());
+		respuesta = "index.xhtml";
+		return respuesta;
+	}
 	
 	public String registrarUsuario() {
 		String respuesta = null;

@@ -53,7 +53,7 @@ public class User{
 		try {
 			LOGGER.info(usuario.toString());
 			u.validarAcceso(usuario.getUsuario(), usuario.getPassword());
-			if(usuario.getUsuario().equals("admin")) {
+			if(usuario.getRol().equals("admin")) {
 				respuesta = "MainPageAdmin.xhtml";
 			} else {
 				respuesta = "MainPage.xhtml";
@@ -93,5 +93,11 @@ public class User{
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return usuario;
+	}
+	
+	public String borrarUsuarios() {
+		String respuesta = null;
+		
+		return respuesta;
 	}
 }
