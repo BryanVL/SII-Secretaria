@@ -53,7 +53,7 @@ public class User{
 		try {
 			LOGGER.info(usuario.toString());
 			u.validarAcceso(usuario.getUsuario(), usuario.getPassword());
-			if(usuario.getRol().equals("admin")) {
+			if(usuario.getUsuario().equals("admin")) {
 				respuesta = "MainPageAdmin.xhtml";
 			} else {
 				respuesta = "MainPage.xhtml";
