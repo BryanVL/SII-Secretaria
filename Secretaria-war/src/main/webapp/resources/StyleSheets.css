@@ -1,4 +1,9 @@
 @charset "UTF-8";
+
+*{
+	font-family: arial;
+}
+
 body {
   background-image: url("https://image.freepik.com/foto-gratis/resumen-fondo-azul-gradiente-fondo-azul-pagina-web-o-presentacion_79161-487.jpg");
   background-repeat: none;
@@ -71,7 +76,7 @@ tr, td {
 }
 
 .wrapper table{
-	background-color: rgba(230,230,230,0.8);
+	background-color: rgba(240,240,240,0.75);
 	border-radius: 15px;
 }
 
@@ -126,4 +131,38 @@ button{
 	bottom: 0px;
 	margin-bottom: 25px;
 }
+
+
+.inp {
+	border: 1px solid lightblue;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size:18px;
+	font-family:arial;
+	color:black;
+	border-radius:5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
