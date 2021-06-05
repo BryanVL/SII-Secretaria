@@ -22,5 +22,5 @@ public interface InterfazUsuario {
 	
 	public List<Usuario> mostrarDatosAdmin() throws UsuarioException;
 	
-	public void crearSecretaria(String nombre, String pass);
+	public void crearSecretaria(String nombre, String pass) throws UsuarioException;
 }

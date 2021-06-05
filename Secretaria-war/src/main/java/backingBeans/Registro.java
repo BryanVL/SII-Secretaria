@@ -60,9 +60,18 @@ public class Registro {
 	
 	public String crearSecretaria() {
 		String respuesta = null;
-		
-		u.crearSecretaria(usuario.getUsuario(), usuario.getPassword());
-		respuesta = "index.xhtml";
+		try {
+			if(usuario.getPassword().equals(pass2)) {
+				u.crearSecretaria(usuario.getUsuario(), usuario.getPassword());
+				respuesta = "index.xhtml";
+			} else {
+				FacesMessage fm = new FacesMessage("Las contraseñas deben coincidir");
+				FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} catch(UsuarioException e) {
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
 		return respuesta;
 	}
 	
