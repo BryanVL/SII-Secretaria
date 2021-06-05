@@ -27,6 +27,8 @@ h1{
 tr, td {
 	padding: 1em;
 	padding-top:3em;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .centrado{
@@ -134,7 +136,7 @@ button{
 
 
 .inp {
-	border: 1px solid lightblue;
+	border: 2px solid lightblue;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-size:18px;
@@ -144,7 +146,9 @@ button{
 }
 
 
-
+.inp:focus{
+	border: 2px solid blue;
+}
 
 
 
