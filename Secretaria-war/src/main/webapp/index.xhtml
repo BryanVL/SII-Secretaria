@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
 	<title>SECRETARIA</title>
@@ -13,7 +14,19 @@
 
 <body>
 
-	<h1 class="cabecera"> SECRETARIA </h1>
+	<div class="cabecera"> 
+        <table>
+            <tr>
+                <td style="padding-left:100px"> <img class="img-uma" src=" https://www.uma.es/static/themes/uma2016/images/UMA_logo.png" width="25%"> </img> </td>    
+                <td style="padding-right: 100px"> <span style="color:#00B1EC;"> WELCOME </span> 
+                     <span style="color:#000000;"> TO </span> 
+                     <span style="color:#8F0000;"> UMA </span> </td>
+                <td style="padding-right:100px"> PÁGINA DE ASIGNACIÓN DE GRUPOS </td>
+            </tr> 
+        </table>
+	</div>
+
+	<!--  <h1 class="cabecera"> SECRETARIA </h1> -->
 	
 	<div class="centrado">
 		<h1> BIENVENIDO A LA PÁGINA DE ASIGNACIÓN DE GRUPOS DE LA UNIVERSIDAD DE MÁLAGA</h1>
@@ -30,18 +43,20 @@
 			<!-- <tr><td>Usuario</td><td><h:inputText id="usuario" value=""  required="true" class="inputTxt"/></td></tr>
 			<tr><td>Contraseña</td><td><h:inputText id="password" value=""  required="true" class="inputTxt"/></td></tr> -->
 			
-			<tr><td>Usuario</td><td><h:inputText id="usuario" value="#{user.usuario.usuario}"  required="true" class="inputTxt"/></td></tr>
-			<tr><td>Contraseña</td><td><h:inputText id="password" value="#{user.usuario.password}"  required="true" class="inputTxt"/></td></tr>
-			<tr><td class="padSuperior"><h:commandButton id="botonInicioSesion" action="#{user.iniciarSesion()}" value="Iniciar sesión"  class="centrado"/>
-			<h:message for=""></h:message>
-			</td><td class="padSuperior"><h:button id="botonRegistro" outcome="Registro.xhtml" value="Registrar usuario" class="centrado"/></td></tr>
+			<tr><td colspan="2"><label>Usuario</label><br/><h:inputText id="usuario" value="#{user.usuario.usuario}"  required="true" class="inputTxt" p:placeholder="Introduce usuario" /></td></tr>
+			<tr><td colspan="2"><label>Contraseña</label><br/><h:inputText id="password" value="#{user.usuario.password}"  required="true" class="inputTxt" p:placeholder="Introduce contraseña"/></td></tr>
+			<tr><td colspan="2"><h:message for=""></h:message></td></tr>
+			<tr><td class="padSuperior"><h:commandButton id="botonInicioSesion" action="#{user.iniciarSesion()}" value="Iniciar sesión"  class="centrado boton boton1"/>
+			</td><td class="padSuperior"><h:button id="botonRegistro" outcome="Registro.xhtml" value="Registrar usuario" class="centrado boton boton1"/></td></tr>
 			</table>
 		</div>
 	  	</h:form>
 	</div>
 
 	<div class="foot"> 
-		Universidad de Málaga.
+        <table>
+            <tr><td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA · Tel. 952 13 10 00 · info@uma.es</td></tr>
+        </table>
 	</div>
 	
 </body>
