@@ -118,7 +118,7 @@ public class UsuarioImpl implements InterfazUsuario{
 	@Override
 	public void borrarUsuarios() throws UsuarioException {
 		for(Usuario u : mostrarDatosAdmin()) {
-			if(u.getRol()!="Admin") {
+			if(!u.getRol().equals("Admin")) {
 				em.remove(u);
 			}
 		}
