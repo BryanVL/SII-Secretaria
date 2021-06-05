@@ -14,7 +14,7 @@ public interface InterfazUsuario {
 
 	/**Este método comprueba que el acceso se realiza de forma correcta
 	 * @param a alumno a validar*/
-	public void validarAcceso(String nombre, String pass) throws UsuarioException;
+	public Usuario validarAcceso(String nombre, String pass) throws UsuarioException;
 	
 	public void crearUsuario(String dni, String nombre, String pass, String rol) throws UsuarioException,AlumnoException;
 	
@@ -23,4 +23,6 @@ public interface InterfazUsuario {
 	public List<Usuario> mostrarDatosAdmin() throws UsuarioException;
 	
 	public void crearSecretaria(String nombre, String pass) throws UsuarioException;
+	
+	public void borrarUsuarios() throws UsuarioException;
 }

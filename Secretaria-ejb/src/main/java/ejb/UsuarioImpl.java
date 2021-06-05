@@ -26,7 +26,7 @@ public class UsuarioImpl implements InterfazUsuario{
 	
 	
 	@Override
-	public void validarAcceso(String nombre, String pass) throws UsuarioException {
+	public Usuario validarAcceso(String nombre, String pass) throws UsuarioException {
     	Usuario usuario = em.find(Usuario.class, nombre);
     	
     	if(usuario==null) {
@@ -36,6 +36,8 @@ public class UsuarioImpl implements InterfazUsuario{
     	if(!pass.equals(usuario.getPassword())) {
     		throw new UsuarioException("La constraseña no es correcta");
     	}
+    	
+    	return usuario;
     	
 	}
 
@@ -80,8 +82,6 @@ public class UsuarioImpl implements InterfazUsuario{
 			em.persist(usuario);
 		}
 		
-		
-		
 	}
 	
 	@Override
@@ -114,4 +114,17 @@ public class UsuarioImpl implements InterfazUsuario{
 		
 		return usuarios;
 	}
+	
+	@Override
+	public void borrarUsuarios() throws UsuarioException {
+		TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u",Usuario.class);
+		List<Usuario> usuarios = query.getResultList();
+		if(usuarios == null || usuarios.size() == 0) {
+			throw new UsuarioException("No se ha encontrado el usuario");
+		}
+		for(Usuario u : usuarios) {
+			em.remove(u);
+		}
+	}
+	
 }

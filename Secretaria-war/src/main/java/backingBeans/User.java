@@ -51,15 +51,13 @@ public class User{
 		String respuesta = null;
 		
 		try {
-			LOGGER.info(usuario.toString());
-			u.validarAcceso(usuario.getUsuario(), usuario.getPassword());
-			if(usuario.getUsuario().equals("admin")) {
+			
+			Usuario usu = u.validarAcceso(usuario.getUsuario(), usuario.getPassword());
+			if(usu.getRol().equals("Admin")) {
 				respuesta = "MainPageAdmin.xhtml";
 			} else {
 				respuesta = "MainPage.xhtml";
 			}
-			
-			LOGGER.info(respuesta);
 
 		}catch(UsuarioException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
@@ -97,7 +95,15 @@ public class User{
 	
 	public String borrarUsuarios() {
 		String respuesta = null;
-		
+		try {
+			LOGGER.info("Entra al metodo");
+			u.borrarUsuarios();
+			LOGGER.info("Sale del metodo");
+			respuesta = "index.xhtml";
+		} catch(UsuarioException e) {
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
 		return respuesta;
 	}
 }
