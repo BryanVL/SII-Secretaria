@@ -15,6 +15,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -29,6 +30,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import excepcionesEJB.AlumnoException;
 import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
@@ -228,10 +230,28 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 		Asignatura asignaturaExistente = em.find(Asignatura.class, Referencia );
 		
 		if (asignaturaExistente == null) {
-			throw new AsignaturaException();
+			throw new AsignaturaException("No se ha encontrado la asignatura");
 		}
 		
 		return asignaturaExistente;
+	}
+
+	@Override
+	public List<Asignatura> mostrarDatosAdmin() throws AsignaturaException {
+		TypedQuery<Asignatura> query = em.createQuery("SELECT a FROM Asignatura a",Asignatura.class);
+		List<Asignatura> asignaturas = query.getResultList();
+		if(asignaturas == null || asignaturas.size() == 0) {
+			throw new AsignaturaException("No se han encontrado asignaturas");
+		}
+		
+		return asignaturas;
+	}
+
+	@Override
+	public void borrarAsignaturas() throws AsignaturaException {
+		for(Asignatura a : mostrarDatosAdmin()) {
+			em.remove(a);
+		}
 	}
 	
 	

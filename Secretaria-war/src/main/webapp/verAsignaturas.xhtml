@@ -16,39 +16,45 @@
 	<div class="centrado">
 		<h1>ASIGNATURAS</h1>
 		<h:form id="Asignaturas">
-           <h:dataTable value="#{user.leerDatosAdmin()}" var="u">
+           <h:dataTable value="#{asignatura.leerDatosAdmin()}" var="a">
                
                <h:column>
-                   <f:facet name="header">DNI</f:facet>
-                   <h:outputText value="#{u.alumno.DNI}"/>
+                   <f:facet name="header">Referencia</f:facet>
+                   <h:outputText value="#{a.Referencia}"/>
+               </h:column>
+               
+               <h:column>
+                   <f:facet name="header">Codigo</f:facet>
+                   <h:outputText value="#{a.codigo}"/>
+               </h:column>
+               
+               <h:column>
+                   <f:facet name="header">Creditos Totales</f:facet>
+                   <h:outputText value="#{a.Creditos_Total}"/>
+               </h:column>
+               
+               <h:column>
+                   <f:facet name="header">Creditos Teoria</f:facet>
+                   <h:outputText value="#{a.Creditos_Teoria}"/>
+               </h:column>
+               
+               <h:column>
+                   <f:facet name="header">Ofertada</f:facet>
+                   <h:outputText value="#{a.Ofertada}"/>
                </h:column>
                
                <h:column>
                    <f:facet name="header">Nombre</f:facet>
-                   <h:outputText value="#{u.alumno.Nombre}"/>
+                   <h:outputText value="#{a.Nombre}"/>
                </h:column>
                
-               <h:column>
-                   <f:facet name="header">Apellido1</f:facet>
-                   <h:outputText value="#{u.alumno.Apellido1}"/>
-               </h:column>
-
-               <h:column>
-                   <f:facet name="header">Apellido2</f:facet>
-                   <h:outputText value="#{u.alumno.Apellido2}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Email_personal</f:facet>
-                   <h:outputText value="#{u.alumno.Email_personal}"/>
-               </h:column>
                
            </h:dataTable>
         </h:form>
 		<h:form>
 			<table>
-			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarAsignaturas" action="#{user.borrarUsuarios()}" value="Eliminar Asignaturas" class="centrado boton boton1"/></td>
-			<h:message for=""></h:message></tr>
+			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarAsignaturas" action="#{asignatura.borrarAsignaturas()}" value="Eliminar Asignaturas" class="centrado boton boton1"/></td></tr>
+			<tr><td><h:message for=""></h:message></td></tr>
 			<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
 			</table>
 		</h:form>

@@ -184,7 +184,7 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 		TypedQuery<Alumno> query = em.createQuery("SELECT a FROM Alumno a",Alumno.class);
 		List<Alumno> alumnos = query.getResultList();
 		if(alumnos == null || alumnos.size() == 0) {
-			throw new AlumnoException("No se ha encontrado el alumno");
+			throw new AlumnoException("No se ha encontrado alumnos");
 		}
 		
 		return alumnos;
