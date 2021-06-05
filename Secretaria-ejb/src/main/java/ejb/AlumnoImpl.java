@@ -27,9 +27,11 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ImportarException;
+import excepcionesEJB.UsuarioException;
 import interfacesEJB.InterfazAlumno;
 import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
+import jpa.Usuario;
 
 
 
@@ -170,12 +172,29 @@ public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
 		Alumno alumnoExistente = em.find(Alumno.class, alumnos.get(0).getID() );
 		
 		if (alumnoExistente == null) {
-			throw new AlumnoException();
+			throw new AlumnoException("No se ha encontrado el alumno");
 		}
 		
 		return alumnoExistente;
 	}
 	
+	@Override
+	public List<Alumno> mostrarDatosAdmin() throws AlumnoException{
+		
+		TypedQuery<Alumno> query = em.createQuery("SELECT a FROM Alumno a",Alumno.class);
+		List<Alumno> alumnos = query.getResultList();
+		if(alumnos == null || alumnos.size() == 0) {
+			throw new AlumnoException("No se ha encontrado el alumno");
+		}
+		
+		return alumnos;
+	}
 	
+	@Override
+	public void borrarAlumnos() throws AlumnoException {
+		for(Alumno a : mostrarDatosAdmin()) {
+			em.remove(a);
+		}
+	}
 	
 }

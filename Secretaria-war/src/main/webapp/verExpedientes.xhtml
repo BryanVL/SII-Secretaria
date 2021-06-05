@@ -14,7 +14,7 @@
 <body>
 
 	<div class="centrado">
-		<h1>Mis datos</h1>
+		<h1>EXPEDIENTES</h1>
 		<h:form id="Expedientes">
            <h:dataTable value="#{user.leerDatosAdmin()}" var="u">
                
@@ -47,7 +47,7 @@
         </h:form>
 		<h:form>
 			<table>
-			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarExpedientes" action="" value="Eliminar Expedientes" class="centrado boton boton1"/></td>
+			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarExpedientes" action="#{user.borrarUsuarios()}" value="Eliminar Expedientes" class="centrado boton boton1"/></td>
 			<h:message for=""></h:message></tr>
 			<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
 			</table>
