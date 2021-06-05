@@ -70,14 +70,17 @@ public class UsuarioImpl implements InterfazUsuario{
 	public void crearSecretaria(String nombre, String pass) throws UsuarioException{
 		
 		Usuario usuario = em.find(Usuario.class, nombre);
-		if(usuario == null || usuario.getUsuario().equals(nombre)) {
+		if(usuario != null) {
 			throw new UsuarioException("Ya existe ese usuario");
+		} else {
+			usuario = new Usuario();
+			usuario.setUsuario(nombre);
+			usuario.setPassword(pass);
+			usuario.setRol("Admin");
+			em.persist(usuario);
 		}
 		
-		usuario.setUsuario(nombre);
-		usuario.setPassword(pass);
-		usuario.setRol("Admin");
-		em.persist(usuario);
+		
 		
 	}
 	
