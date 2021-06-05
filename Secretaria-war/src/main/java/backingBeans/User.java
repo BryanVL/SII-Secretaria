@@ -26,6 +26,7 @@ public class User{
 	
 	private Usuario usuario;
 	private List<Usuario> usuarios;
+	private boolean buscar;
 	
 	public User() {
 		usuario = new Usuario();
@@ -45,6 +46,14 @@ public class User{
 	
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+	
+	public boolean getBuscar() {
+		return buscar;
+	}
+	
+	public void setBuscar(boolean buscar) {
+		this.buscar = buscar;
 	}
 	
 	public String iniciarSesion() {
@@ -103,4 +112,19 @@ public class User{
 		}
 		return respuesta;
 	}
+	
+	public Usuario buscarUsuario(String usuario) {
+		Usuario user = null;
+		
+		try {
+			buscar = true;
+			user = u.visualizarUsuario(usuario);
+		}catch(UsuarioException e) {
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		
+		return user;
+	}
+	
 }

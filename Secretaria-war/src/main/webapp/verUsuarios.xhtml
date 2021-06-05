@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
 	<title>SECRETARIA</title>
@@ -16,30 +18,57 @@
 	<div class="centrado">
 		<h1>USUARIOS</h1>
 		<h:form id="Usuarios">
-           <h:dataTable value="#{user.leerDatosAdmin()}" var="u">
-               
-               <h:column>
-                   <f:facet name="header">Usuario</f:facet>
-                   <h:outputText value="#{u.usuario}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Rol</f:facet>
-                   <h:outputText value="#{u.rol}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Alumno</f:facet>
-                   <h:outputText value="#{u.alumno.DNI}"/>
-               </h:column>
-               
-           </h:dataTable>
-        </h:form>
-		<h:form>
+			<div class="wrapper">
 			<table>
-			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarUsuarios" action="#{user.borrarUsuarios()}" value="Eliminar Usuarios" class="centrado boton boton1"/></td>
-			<h:message for=""></h:message></tr>
-			<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
+				<tr><td colspan="2"><label>Buscar Usuario</label><br/><h:inputText id="Nombre" value="#{user.usuario.usuario}" required="true" class="inputTxt" p:placeholder="Introduce Nombre" /></td>
+				<td  class="padSuperior"><h:commandButton id="botonBuscarUsuario" action="#{user.buscarUsuario(usuario.usuario)}" value="Buscar" var="b" class="centrado boton boton1"/></td></tr>
+			</table>
+			</div>
+			<c:choose> 
+            	<c:when test="#{user.buscar}">
+            		<h:dataTable value="b">
+	            		<h:column>
+							<f:facet name="header">Usuario</f:facet>
+				            <h:outputText value="#{b.usuario}"/>
+				        </h:column>
+	
+				        <h:column>
+				            <f:facet name="header">Rol</f:facet>
+				            <h:outputText value="#{b.rol}"/>
+				        </h:column>
+				               
+				        <h:column>
+				            <f:facet name="header">Alumno</f:facet>
+				            <h:outputText value="#{b.alumno.DNI}"/>
+				        </h:column>
+					</h:dataTable>
+            	</c:when>
+            	<c:otherwise>
+			           <h:dataTable value="#{user.leerDatosAdmin()}" var="u">
+			               
+			               <h:column>
+			                   <f:facet name="header">Usuario</f:facet>
+			                   <h:outputText value="#{u.usuario}"/>
+			               </h:column>
+			               
+			               <h:column>
+			                   <f:facet name="header">Rol</f:facet>
+			                   <h:outputText value="#{u.rol}"/>
+			               </h:column>
+			               
+			               <h:column>
+			                   <f:facet name="header">Alumno</f:facet>
+			                   <h:outputText value="#{u.alumno.DNI}"/>
+			               </h:column>
+			               
+			           </h:dataTable>
+				</c:otherwise>
+        </c:choose>
+			<table>
+			<tr><td colspan="2"><h:message for=""></h:message></td></tr>
+			<tr><td><h:button value="Ver todo" outcome="verUsuarios.xhtml" class="centrado boton boton1"/></td>
+			<td  class="padSuperior"><h:commandButton id="botonEliminarUsuarios" action="#{user.borrarUsuarios()}" value="Eliminar Usuarios" class="centrado boton boton1"/></td></tr>
+			<tr><td colspan="2"><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
 			</table>
 		</h:form>
 	</div>

@@ -24,6 +24,7 @@ public class Asignaturas{
 	
 	private Asignatura asignatura;
 	private List<Asignatura> asignaturas;
+	private boolean buscar;
 	
 	public Asignaturas() {
 		asignatura = new Asignatura();
@@ -43,6 +44,14 @@ public class Asignaturas{
 	
 	public void setasignaturas(List<Asignatura> asignaturas) {
 		this.asignaturas = asignaturas;
+	}
+	
+	public boolean getBuscar() {
+		return buscar;
+	}
+	
+	public void setBuscar(boolean buscar) {
+		this.buscar = buscar;
 	}
 	
 	public List<Asignatura> leerDatosAdmin() {

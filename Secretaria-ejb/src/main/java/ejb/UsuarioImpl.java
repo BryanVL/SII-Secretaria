@@ -124,4 +124,16 @@ public class UsuarioImpl implements InterfazUsuario{
 		}
 	}
 	
+	public Usuario visualizarUsuario(String usuario) throws UsuarioException{
+		
+		Usuario user = em.find(Usuario.class, usuario);
+		
+		if(user == null) {
+			throw new UsuarioException("No se ha encontrado el usuario");
+		}
+		
+		return user;
+		
+	}
+	
 }
