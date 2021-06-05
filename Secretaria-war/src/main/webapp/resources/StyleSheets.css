@@ -34,7 +34,10 @@ h1{
 .centrado{
 	display:block;
     margin:auto;
-	
+}
+
+.centrarTexto{
+	text-align:center;
 }
 
 .boton{
