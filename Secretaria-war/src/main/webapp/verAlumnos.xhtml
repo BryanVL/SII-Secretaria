@@ -15,8 +15,8 @@
 
 	<div class="centrado">
 		<h1>Mis datos</h1>
-		<h:form id="Alumnos">
-           <h:dataTable value="#{user.leerDatos(admin)}" var="u">
+		<h:form id="Alumno">
+           <h:dataTable value="#{user.leerDatos()}" var="u">
                <h:column>
                    <f:facet name="header">Nombre</f:facet>
                    <h:outputText value="#{u.usuario}"/>

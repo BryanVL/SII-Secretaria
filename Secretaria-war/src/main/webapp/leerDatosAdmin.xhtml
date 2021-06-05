@@ -15,8 +15,8 @@
 
 	<div class="centrado">
 		<h1>Mis datos</h1>
-		<h:form id="Alumnos">
-           <h:dataTable value="#{user.leerDatos(admin)}" var="u">
+		<h:form id="Usuarios">
+           <h:dataTable value="#{user.leerDatosAdmin()}" var="u">
                <h:column>
                    <f:facet name="header">Nombre</f:facet>
                    <h:outputText value="#{u.usuario}"/>
@@ -51,7 +51,7 @@
         </h:form>
 		
 		<table>
-		<tr><td><h:button value="Volver a la página principal" outcome="MainPage.xhtml"/></td></tr>
+		<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
 		</table>
 	</div>
 

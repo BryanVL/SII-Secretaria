@@ -1,5 +1,7 @@
 package interfacesEJB;
 
+import java.util.List;
+
 import javax.ejb.Local;
 import javax.persistence.NoResultException;
 
@@ -17,6 +19,8 @@ public interface InterfazUsuario {
 	public void crearUsuario(String dni, String nombre, String pass, String rol) throws UsuarioException,AlumnoException;
 	
 	public Usuario mostrarDatos(String nombre) throws UsuarioException;
+	
+	public List<Usuario> mostrarDatosAdmin() throws UsuarioException;
 	
 //	public void crearSecretaria(String nombre, String pass);
 }

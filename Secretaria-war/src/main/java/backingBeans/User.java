@@ -1,5 +1,7 @@
 package backingBeans;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
@@ -23,6 +25,7 @@ public class User{
 	private InterfazUsuario u;
 	
 	private Usuario usuario;
+	private List<Usuario> usuarios;
 	
 	public User() {
 		usuario = new Usuario();
@@ -36,13 +39,26 @@ public class User{
 		return usuario;
 	}
 	
+	public List<Usuario> getUsuarios(){
+		return usuarios;
+	}
+	
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+	
 	public String iniciarSesion() {
 		String respuesta = null;
 		
 		try {
 			LOGGER.info(usuario.toString());
 			u.validarAcceso(usuario.getUsuario(), usuario.getPassword());
-			respuesta = "MainPage.xhtml";
+			if(usuario.getUsuario().equals("admin")) {
+				respuesta = "MainPageAdmin.xhtml";
+			} else {
+				respuesta = "MainPage.xhtml";
+			}
+			
 			LOGGER.info(respuesta);
 
 		}catch(UsuarioException e) {
@@ -53,11 +69,11 @@ public class User{
 		return respuesta;
 	}
 	
-	public Usuario leerDatos() {
+	public Usuario leerDatos(String nombre) {
 		Usuario usuario = null;
 		try {
 			
-			usuario = u.mostrarDatos("admin");
+			usuario = u.mostrarDatos(nombre);
 		
 		}catch(UsuarioException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
@@ -66,4 +82,16 @@ public class User{
 		return usuario;
 	}
 	
+	public List<Usuario> leerDatosAdmin() {
+		List<Usuario> usuario = null;
+		try {
+			
+			usuario = u.mostrarDatosAdmin();
+		
+		}catch(UsuarioException e) {
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		return usuario;
+	}
 }
