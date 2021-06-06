@@ -97,7 +97,7 @@ public class Matriculas{
 			matricula = m.mostrarDatosAdmin();
 		
 		}catch(MatriculaException e) {
-			FacesMessage fm = new FacesMessage("No hay datos que mostrar");
+			FacesMessage fm = new FacesMessage("No hay matriculas que mostrar");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return matricula;
