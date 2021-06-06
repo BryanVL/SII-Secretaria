@@ -61,17 +61,20 @@
                
            </h:dataTable>
         </h:form>
+        
 		<h:form>
 			<table>
-			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarUsuarios" action="#{user.borrarUsuarios()}" value="Eliminar Usuarios" class="centrado boton boton1"/></td>
-			<h:message for=""></h:message></tr>
-			<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
+				<tr><td  class="padSuperior"><h:commandButton id="botonEliminarUsuarios" action="#{user.borrarUsuarios()}" value="Eliminar Usuarios" class="centrado boton boton1"/></td>
+					<h:message for=""></h:message></tr>
+				<tr><td><h:button value="Volver a la página principal" outcome="MainPageAdmin.xhtml"/></td></tr>
 		</table></h:form>
 		
 	</div>
 
 	<div class="foot"> 
-		Universidad de Málaga.
+        <table>
+            <tr><td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA · Tel. 952 13 10 00 · info@uma.es</td></tr>
+        </table>
 	</div>
 	
 </body>
