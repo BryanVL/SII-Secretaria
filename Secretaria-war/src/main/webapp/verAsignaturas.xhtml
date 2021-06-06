@@ -15,16 +15,30 @@
 
 <body>
 
+	<div class="cabecera"> 
+        <table>
+            <tr>
+                <td style="padding-left:100px"> <img class="img-uma" src=" https://www.uma.es/static/themes/uma2016/images/UMA_logo.png" width="25%"> </img> </td>    
+                <td style="padding-right: 100px"> <span style="color:#00B1EC;"> WELCOME </span> 
+                     <span style="color:#000000;"> TO </span> 
+                     <span style="color:#8F0000;"> UMA </span> </td>
+                <td style="padding-right:100px"> PÁGINA DE ASIGNACIÓN DE GRUPOS </td>
+            </tr> 
+        </table>
+	</div>
+
+
 	<div class="centrado">
 		<h1>ASIGNATURAS</h1>
+		
 		<h:form id="Asignaturas">
 			<div class="wrapper">
 				<table>
 					<tr><td><label>Buscar Asignatura</label><br/><h:inputText id="Referencia" value="#{asignatura.asignatura.referencia}" class="inputTxt" p:placeholder="Introduce Asignatura" /></td>
-					<td  class="padSuperior"><h:commandButton id="botonBuscarAsignatura" action="#{asignatura.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-					<td><h:button value="Ver todo" outcome="verAsignaturas.xhtml" class="centrado boton boton1"/></td>
-					<td  class="padSuperior"><h:commandButton id="botonEliminarAsignaturas" action="#{asignatura.borrarAsignaturas()}" value="Eliminar asignaturas" class="centrado boton boton1"/></td>
-					<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
+						<td  class="padSuperior"><h:commandButton id="botonBuscarAsignatura" action="#{asignatura.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+						<td><h:button value="Ver todo" outcome="verAsignaturas.xhtml" class="centrado boton boton1"/></td>
+						<td  class="padSuperior"><h:commandButton id="botonEliminarAsignaturas" action="#{asignatura.borrarAsignaturas()}" value="Eliminar asignaturas" class="centrado boton boton1"/></td>
+						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>
 			<c:choose> 
@@ -97,11 +111,12 @@
 			       	</h:dataTable>
 			    </c:otherwise>
 		</c:choose>
+		
 		<div class="centrarTexto">
 			<h:message for=""></h:message>
 		</div>
-        </h:form>
 		
+        </h:form>
 	</div>
 
 	<div class="foot"> 
