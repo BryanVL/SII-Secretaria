@@ -1,5 +1,7 @@
 package backingBeans;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -120,14 +122,27 @@ public class Titulaciones{
 		return respuesta;
 	}
 	
-	public String importarTitulaciones(String dir){
+	public String importarTitulaciones(){
 		String respuesta = null;
 		try {
-			
-			a.Importar("wildfly/docs/");
+			LOGGER.info("VAMOS BIMBO");
+			String sfile = "tmp/Titulacion.xlsx";
+			LOGGER.info("VAMOS PITO");
+			File temporal = new File(sfile);
+			LOGGER.info("VAMOS MAMBO");
+			temporal.delete();
+			LOGGER.info("VAMOS CABRA");
+			archivo.write(sfile);
+			LOGGER.info("VAMOS GUCCI");
+			a.Importar(sfile);
+			temporal.delete();
 			respuesta = "verTitulaciones.xhtml";
+			LOGGER.info("PS SI NINIO");
 		} catch(ImportarException e){
 			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		} catch (IOException e) {
+			FacesMessage fm = new FacesMessage("Comeme el webo");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;

@@ -40,7 +40,7 @@
 							</label>
 						</td>
 						
-						<td  class="padSuperior"><h:commandButton id="importarTitulacion" action="#{titulacion.importarTitulaciones(titulacion.archivo.getSubmittedFileName())}" value="Importar" var="b" class="centrado boton boton1"/></td>
+						<td  class="padSuperior"><h:commandButton id="importarTitulacion" action="#{titulacion.importarTitulaciones()}" value="Importar" var="b" class="centrado boton boton1"/></td>
 						<td><h:button value="Ver todo" outcome="verTitulaciones.xhtml" class="centrado boton boton1"/></td>
 						<td  class="padSuperior"><h:commandButton id="botonEliminarTitulaciones" action="#{titulacion.borrarTitulaciones()}" value="Eliminar titulaciones" class="centrado boton boton1"/></td>
 						<td><h:button value="Volver a Inicio" outcome="ImportarAdmin.xhtml" class="centrado boton boton1"/></td></tr>
