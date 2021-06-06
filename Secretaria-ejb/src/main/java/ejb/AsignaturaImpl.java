@@ -226,8 +226,8 @@ public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
 
 	@Override
 	public Asignatura VisualizarAsignatura(Integer Referencia) throws AsignaturaException {
-		// TODO Auto-generated method stub
-		Asignatura asignaturaExistente = em.find(Asignatura.class, Referencia );
+		
+		Asignatura asignaturaExistente = em.find(Asignatura.class, Referencia);
 		
 		if (asignaturaExistente == null) {
 			throw new AsignaturaException("No se ha encontrado la asignatura");

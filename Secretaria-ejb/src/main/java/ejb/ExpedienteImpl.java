@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -20,28 +19,19 @@ import javax.persistence.TypedQuery;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.sun.tools.hat.internal.parser.Reader;
-
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ExpedienteException;
-import excepcionesEJB.GrupoException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazExpediente;
 import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 import jpa.Expediente;
-import jpa.Grupo;
 import jpa.Titulacion;
 
 
@@ -178,15 +168,15 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (AlumnoException e1) {
+			} catch (AlumnoException e) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (TitulacionException e1) {
+				e.printStackTrace();
+			} catch (TitulacionException e) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				e.printStackTrace();
 			}
             
-		}else {
+		} else {
 			throw new ImportarException();
 		}
 
@@ -194,12 +184,32 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 
 	@Override
 	public Expediente VisualizarExpediente(Integer num_expediente) throws ExpedienteException {
-		// TODO Auto-generated method stub
+		
 		Expediente expedienteExistente = em.find(Expediente.class, num_expediente);
+		
 		if (expedienteExistente == null) {
-			throw new ExpedienteException();
+			throw new ExpedienteException("No se ha encontrado el expediente");
 		}
+		
 		return expedienteExistente;
+	}
+
+	@Override
+	public List<Expediente> mostrarDatosAdmin() throws ExpedienteException {
+		TypedQuery<Expediente> query = em.createQuery("SELECT a FROM Asignatura a",Expediente.class);
+		List<Expediente> expedientes = query.getResultList();
+		if(expedientes == null || expedientes.size() == 0) {
+			throw new ExpedienteException("No se han encontrado expedientes");
+		}
+		
+		return expedientes;
+	}
+
+	@Override
+	public void borrarExpedientes() throws ExpedienteException {
+		for(Expediente e : mostrarDatosAdmin()) {
+			em.remove(e);
+		}
 	}
 	
 	

@@ -29,7 +29,6 @@ public class UsuarioPrueba {
 	
 	
 	
-	private InterfazImportar interfazImportar;
 	private InterfazAlumno interfazAlumno;
 	private InterfazUsuario interfazUsuario;
 	
@@ -37,7 +36,6 @@ public class UsuarioPrueba {
 	
 	@Before
 	public void setup() throws NamingException  {
-		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(ALUMNO_EJB);
 		interfazAlumno  = (InterfazAlumno) SuiteTest.ctx.lookup(ALUMNO_EJB);
 		interfazUsuario = (InterfazUsuario) SuiteTest.ctx.lookup(USUARIO_EJB);
 		
@@ -67,7 +65,7 @@ public class UsuarioPrueba {
 			
 			Alumno alumno = interfazAlumno.VisualizarAlumno("125681D");
 			Usuario usuario = new Usuario();
-			interfazUsuario.crearUsuario("125680C", "Nowel13", "pepepe13", "Alumno");
+			interfazUsuario.crearUsuario("125680C", "Nowel13", "pepepe13");
 			
 			
 		} catch(AlumnoException e) {

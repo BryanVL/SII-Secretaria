@@ -7,7 +7,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.persistence.NoResultException;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.UsuarioException;
@@ -80,8 +79,7 @@ public class Registro {
 		try {
 			
 			if(usuario.getPassword().equals(pass2)) {
-				LOGGER.info(usuario.toString() + ", " + dni);
-				u.crearUsuario(dni, usuario.getUsuario(), usuario.getPassword(), "Alumno");
+				u.crearUsuario(dni, usuario.getUsuario(), usuario.getPassword());
 				respuesta = "MainPage.xhtml";
 			} else {
 				FacesMessage fm = new FacesMessage("Las contraseñas deben coincidir");

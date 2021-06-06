@@ -1,6 +1,5 @@
 package backingBeans;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -10,7 +9,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import excepcionesEJB.AlumnoException;
 import excepcionesEJB.UsuarioException;
 import interfacesEJB.InterfazUsuario;
 import jpa.Usuario;
@@ -75,18 +73,23 @@ public class User{
 		
 		return respuesta;
 	}
+
+	public String buscarTrue(){
+		String respuesta = null;
+		buscar = true;
+		return respuesta;
+	}
 	
-	public Usuario leerDatos(String nombre) {
-		Usuario usuario = null;
+	public Usuario buscarUsuario(String usuario) {
+		Usuario user = null;
 		try {
-			
-			usuario = u.mostrarDatos(nombre);
-		
+			LOGGER.info("Buscando Usuario: " + usuario);
+			user = u.mostrarDatos(usuario);
 		}catch(UsuarioException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
-		return usuario;
+		return user;
 	}
 	
 	public List<Usuario> leerDatosAdmin() {
@@ -112,19 +115,4 @@ public class User{
 		}
 		return respuesta;
 	}
-	
-	public Usuario buscarUsuario(String usuario) {
-		Usuario user = null;
-		
-		try {
-			buscar = true;
-			user = u.visualizarUsuario(usuario);
-		}catch(UsuarioException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-		}
-		
-		return user;
-	}
-	
 }

@@ -30,19 +30,19 @@ public class Asignaturas{
 		asignatura = new Asignatura();
 	}
 	
-	public void setasignatura(Asignatura asignatura) {
+	public void setAsignatura(Asignatura asignatura) {
 		this.asignatura = asignatura;
 	}
 	
-	public Asignatura getasignatura() {
+	public Asignatura getAsignatura() {
 		return asignatura;
 	}
 	
-	public List<Asignatura> getasignaturas(){
+	public List<Asignatura> getAsignaturas(){
 		return asignaturas;
 	}
 	
-	public void setasignaturas(List<Asignatura> asignaturas) {
+	public void setAsignaturas(List<Asignatura> asignaturas) {
 		this.asignaturas = asignaturas;
 	}
 	
@@ -52,6 +52,24 @@ public class Asignaturas{
 	
 	public void setBuscar(boolean buscar) {
 		this.buscar = buscar;
+	}
+	
+	public String buscarTrue() {
+		String respuesta = null;
+		buscar = true;
+		return respuesta;
+	}
+	
+	public Asignatura buscarAsignatura(Integer referencia) {
+		Asignatura asignatura = null;
+		try {
+			LOGGER.info("Buscando Asignatura: " + referencia);
+			asignatura = a.VisualizarAsignatura(referencia);
+		}catch(AsignaturaException e) {
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		return asignatura;
 	}
 	
 	public List<Asignatura> leerDatosAdmin() {

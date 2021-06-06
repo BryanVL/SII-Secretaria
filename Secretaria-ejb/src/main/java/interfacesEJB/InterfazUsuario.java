@@ -16,7 +16,7 @@ public interface InterfazUsuario {
 	 * @param a alumno a validar*/
 	public Usuario validarAcceso(String nombre, String pass) throws UsuarioException;
 	
-	public void crearUsuario(String dni, String nombre, String pass, String rol) throws UsuarioException,AlumnoException;
+	public void crearUsuario(String dni, String nombre, String pass) throws UsuarioException,AlumnoException;
 	
 	public Usuario mostrarDatos(String nombre) throws UsuarioException;
 	
@@ -26,5 +26,4 @@ public interface InterfazUsuario {
 	
 	public void borrarUsuarios() throws UsuarioException;
 	
-	public Usuario visualizarUsuario(String usuario) throws UsuarioException;
 }

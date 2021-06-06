@@ -43,7 +43,7 @@ public class UsuarioImpl implements InterfazUsuario{
 
 
 	@Override
-	public void crearUsuario(String dni, String nombre, String pass, String rol) throws UsuarioException, AlumnoException{
+	public void crearUsuario(String dni, String nombre, String pass) throws UsuarioException, AlumnoException{
 		
 		TypedQuery<Alumno> query = em.createQuery("SELECT a FROM Alumno a WHERE a.DNI= :dni",Alumno.class);
 		query.setParameter("dni", dni);
@@ -59,7 +59,7 @@ public class UsuarioImpl implements InterfazUsuario{
 			Usuario usuario = new Usuario();
 			usuario.setUsuario(nombre);
 			usuario.setPassword(pass);
-			usuario.setRol(rol);
+			usuario.setRol("Alumno");
 			usuario.setAlumno(alumno);
 			em.persist(usuario);
 			
@@ -88,13 +88,6 @@ public class UsuarioImpl implements InterfazUsuario{
 	public Usuario mostrarDatos(String nombre) throws UsuarioException{
 		
 		Usuario usuario = em.find(Usuario.class, nombre);
-//		TypedQuery<Usuario> query = em.find(Usuario.class,nombre);
-//		query.setParameter("usuario", nombre);
-//		List<Usuario> usuarios = query.getResultList();
-//		if(usuarios == null || usuarios.size() == 0) {
-//			throw new UsuarioException("No se ha encontrado el usuario");
-//		}
-//		Usuario usuario = usuarios.get(0);
 	
 		if(usuario == null) {
 			throw new UsuarioException("No se ha encontrado el usuario");
@@ -105,7 +98,6 @@ public class UsuarioImpl implements InterfazUsuario{
 	@Override
 	public List<Usuario> mostrarDatosAdmin() throws UsuarioException{
 		
-//		Usuario usuario = em.find(Usuario.class, nombre);
 		TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u",Usuario.class);
 		List<Usuario> usuarios = query.getResultList();
 		if(usuarios == null || usuarios.size() == 0) {
@@ -118,22 +110,14 @@ public class UsuarioImpl implements InterfazUsuario{
 	@Override
 	public void borrarUsuarios() throws UsuarioException {
 		for(Usuario u : mostrarDatosAdmin()) {
+//			if(!u.getUsuario().equals("admin")) {
+//				em.remove(u);
+//			}
 			if(!u.getRol().equals("Admin")) {
 				em.remove(u);
 			}
 		}
 	}
 	
-	public Usuario visualizarUsuario(String usuario) throws UsuarioException{
-		
-		Usuario user = em.find(Usuario.class, usuario);
-		
-		if(user == null) {
-			throw new UsuarioException("No se ha encontrado el usuario");
-		}
-		
-		return user;
-		
-	}
 	
 }

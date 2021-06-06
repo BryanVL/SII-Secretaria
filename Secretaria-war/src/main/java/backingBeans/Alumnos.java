@@ -1,6 +1,5 @@
 package backingBeans;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -11,11 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import excepcionesEJB.AlumnoException;
-import excepcionesEJB.UsuarioException;
 import interfacesEJB.InterfazAlumno;
-import interfacesEJB.InterfazUsuario;
 import jpa.Alumno;
-import jpa.Usuario;
 
 @Named(value = "alumno")
 @RequestScoped
@@ -58,10 +54,16 @@ public class Alumnos{
 		this.buscar = buscar;
 	}
 	
+	public String buscarTrue() {
+		String respuesta = null;
+		buscar = true;
+		return respuesta;
+	}
+	
 	public Alumno buscarAlumno(String dni) {
 		Alumno alumno = null;
 		try {
-			buscar = true;
+			LOGGER.info("Buscando Alumno: " + dni);
 			alumno = a.VisualizarAlumno(dni);
 		}catch(AlumnoException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
