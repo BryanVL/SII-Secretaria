@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
 	<title>SECRETARIA</title>
@@ -16,48 +18,90 @@
 	<div class="centrado">
 		<h1>ASIGNATURAS</h1>
 		<h:form id="Asignaturas">
-           <h:dataTable value="#{asignatura.leerDatosAdmin()}" var="a">
-               
-               <h:column>
-                   <f:facet name="header">Referencia</f:facet>
-                   <h:outputText value="#{a.Referencia}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Codigo</f:facet>
-                   <h:outputText value="#{a.codigo}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Creditos Totales</f:facet>
-                   <h:outputText value="#{a.Creditos_Total}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Creditos Teoria</f:facet>
-                   <h:outputText value="#{a.Creditos_Teoria}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Ofertada</f:facet>
-                   <h:outputText value="#{a.Ofertada}"/>
-               </h:column>
-               
-               <h:column>
-                   <f:facet name="header">Nombre</f:facet>
-                   <h:outputText value="#{a.Nombre}"/>
-               </h:column>
-               
-               
-           </h:dataTable>
+			<div class="wrapper">
+				<table>
+					<tr><td><label>Buscar Asignatura</label><br/><h:inputText id="Referencia" value="#{asignatura.asignatura.referencia}" class="inputTxt" p:placeholder="Introduce Asignatura" /></td>
+					<td  class="padSuperior"><h:commandButton id="botonBuscarAsignatura" action="#{asignatura.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+					<td><h:button value="Ver todo" outcome="verAsignaturas.xhtml" class="centrado boton boton1"/></td>
+					<td  class="padSuperior"><h:commandButton id="botonEliminarAsignaturas" action="#{asignatura.borrarAsignaturas()}" value="Eliminar asignaturas" class="centrado boton boton1"/></td>
+					<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
+				</table>
+			</div>
+			<c:choose> 
+            	<c:when test="#{asignatura.buscar}"> 
+            		<h:dataTable value="#{asignatura.buscarAsignatura(asignatura.asignatura.referencia)}" var="a">              
+			               <h:column>
+			                   <f:facet name="header">Referencia</f:facet>
+			                   <h:outputText value="#{a.Referencia}"/>
+			               </h:column>
+			               
+			               <h:column>
+			                   <f:facet name="header">Codigo</f:facet>
+			                   <h:outputText value="#{a.codigo}"/>
+			               </h:column>
+			               
+			               <h:column>
+			                   <f:facet name="header">Creditos Totales</f:facet>
+			                   <h:outputText value="#{a.Creditos_Total}"/>
+			               </h:column>
+			               
+			               <h:column>
+			                   <f:facet name="header">Creditos Teoria</f:facet>
+			                   <h:outputText value="#{a.Creditos_Teoria}"/>
+			               </h:column>
+			               
+			               <h:column>
+			                   <f:facet name="header">Ofertada</f:facet>
+			                   <h:outputText value="#{a.Ofertada}"/>
+			               </h:column>
+			               
+			               <h:column>
+			                   <f:facet name="header">Nombre</f:facet>
+			                   <h:outputText value="#{a.Nombre}"/>
+			               </h:column>
+			               
+			       	</h:dataTable>
+			    </c:when>
+			    <c:otherwise>
+			    	<h:dataTable value="#{asignatura.leerDatosAdmin()}" var="b">              
+			        	<h:column>
+			           		<f:facet name="header">Referencia</f:facet>
+			             	<h:outputText value="#{b.Referencia}"/>
+			          	</h:column>
+			               
+			        	<h:column>
+			               	<f:facet name="header">Codigo</f:facet>
+			              	<h:outputText value="#{b.codigo}"/>
+			           	</h:column>
+			               
+			          	<h:column>
+			               	<f:facet name="header">Creditos Totales</f:facet>
+			               	<h:outputText value="#{b.Creditos_Total}"/>
+			           	</h:column>
+			               
+			          	<h:column>
+			               	<f:facet name="header">Creditos Teoria</f:facet>
+			               	<h:outputText value="#{b.Creditos_Teoria}"/>
+			           	</h:column>
+			               
+			          	<h:column>
+			              	<f:facet name="header">Ofertada</f:facet>
+			               	<h:outputText value="#{b.Ofertada}"/>
+			          	</h:column>
+			               
+			           	<h:column>
+			              	<f:facet name="header">Nombre</f:facet>
+			             	<h:outputText value="#{b.Nombre}"/>
+			          	</h:column>
+			               
+			       	</h:dataTable>
+			    </c:otherwise>
+		</c:choose>
+		<div class="centrarTexto">
+			<h:message for=""></h:message>
+		</div>
         </h:form>
-		<h:form>
-			<table>
-			<tr><td  class="padSuperior"><h:commandButton id="botonEliminarAsignaturas" action="#{asignatura.borrarAsignaturas()}" value="Eliminar Asignaturas" class="centrado boton boton1"/></td></tr>
-			<tr><td><h:message for=""></h:message></td></tr>
-			<tr><td><h:button value="Volver a la página principal" outcome="DatosAdmin.xhtml"/></td></tr>
-			</table>
-		</h:form>
+		
 	</div>
 
 	<div class="foot"> 

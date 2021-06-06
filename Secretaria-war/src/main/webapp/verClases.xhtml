@@ -16,14 +16,14 @@
 <body>
 
 	<div class="centrado">
-		<h1>USUARIOS</h1>
-		<h:form id="Usuarios">
+		<h1>CLASES</h1>
+		<h:form id="Clases">
 			<div class="wrapper">
 			<table>
-				<tr><td colspan="2"><label>Buscar Grupo</label><br/><h:inputText id="Nombre" value="#{user.usuario.usuario}" class="inputTxt" p:placeholder="Introduce Nombre" /></td>
-				<td  class="padSuperior"><h:commandButton id="botonBuscarUsuario" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-				<td><h:button value="Ver todo" outcome="verUsuarios.xhtml" class="centrado boton boton1"/></td>
-				<td  class="padSuperior"><h:commandButton id="botonEliminarUsuarios" action="#{user.borrarUsuarios()}" value="Eliminar usuarios" class="centrado boton boton1"/></td>
+				<tr><td colspan="2"><label>Buscar Clase</label><br/><h:inputText id="Nombre" value="#{user.usuario.usuario}" class="inputTxt" p:placeholder="Introduce Nombre" /></td>
+				<td  class="padSuperior"><h:commandButton id="botonBuscarClase" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+				<td><h:button value="Ver todo" outcome="verClases.xhtml" class="centrado boton boton1"/></td>
+				<td  class="padSuperior"><h:commandButton id="botonEliminarClases" action="#{user.borrarUsuarios()}" value="Eliminar usuarios" class="centrado boton boton1"/></td>
 				<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
 			</table>
 			</div>

@@ -60,11 +60,15 @@ public class Asignaturas{
 		return respuesta;
 	}
 	
-	public Asignatura buscarAsignatura(Integer referencia) {
+	public Asignatura buscarAsignatura(String referencia) {
 		Asignatura asignatura = null;
 		try {
-			LOGGER.info("Buscando Asignatura: " + referencia);
-			asignatura = a.VisualizarAsignatura(referencia);
+			if(referencia.equals("")) {
+				FacesMessage fm = new FacesMessage("No se ha introducido ninguna referencia");
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}else {
+				asignatura = a.VisualizarAsignatura(Integer.parseInt(referencia));
+			}
 		}catch(AsignaturaException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);

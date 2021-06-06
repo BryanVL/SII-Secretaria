@@ -60,11 +60,15 @@ public class Expedientes{
 		return respuesta;
 	}
 	
-	public Expediente buscarExpediente(Integer referencia) {
+	public Expediente buscarExpediente(String referencia) {
 		Expediente expediente = null;
 		try {
-			LOGGER.info("Buscando Expediente: " + referencia);
-			expediente = e.VisualizarExpediente(referencia);
+			if(referencia.equals("")) {
+				FacesMessage fm = new FacesMessage("No se ha introducido ninguna referencia");
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}else {
+				expediente = e.VisualizarExpediente(Integer.parseInt(referencia));
+			}
 		}catch(ExpedienteException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);

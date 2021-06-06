@@ -196,7 +196,7 @@ public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
 
 	@Override
 	public List<Expediente> mostrarDatosAdmin() throws ExpedienteException {
-		TypedQuery<Expediente> query = em.createQuery("SELECT a FROM Asignatura a",Expediente.class);
+		TypedQuery<Expediente> query = em.createQuery("SELECT a FROM Expediente a",Expediente.class);
 		List<Expediente> expedientes = query.getResultList();
 		if(expedientes == null || expedientes.size() == 0) {
 			throw new ExpedienteException("No se han encontrado expedientes");
