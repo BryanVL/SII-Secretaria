@@ -15,61 +15,74 @@
 
 <body>
 
+	<div class="cabecera"> 
+        <table>
+            <tr>
+                <td style="padding-left:100px"> <img class="img-uma" src=" https://www.uma.es/static/themes/uma2016/images/UMA_logo.png" width="25%"> </img> </td>    
+                <td style="padding-right: 100px"> <span style="color:#00B1EC;"> WELCOME </span> 
+                     <span style="color:#000000;"> TO </span> 
+                     <span style="color:#8F0000;"> UMA </span> </td>
+                <td style="padding-right:100px"> PÁGINA DE ASIGNACIÓN DE GRUPOS </td>
+            </tr> 
+        </table>
+	</div>
+
+
 	<div class="centrado">
 		<h1>USUARIOS</h1>
+		
 		<h:form id="Usuarios">
 			<div class="wrapper">
-			<table>
-				<tr><td colspan="2"><label>Buscar Usuario</label><br/><h:inputText id="Nombre" value="#{user.usuario.usuario}" class="inputTxt" p:placeholder="Introduce Nombre" /></td>
-				<td  class="padSuperior"><h:commandButton id="botonBuscarUsuario" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-				<td><h:button value="Ver todo" outcome="verUsuarios.xhtml" class="centrado boton boton1"/></td>
-				<td  class="padSuperior"><h:commandButton id="botonEliminarUsuarios" action="#{user.borrarUsuarios()}" value="Eliminar usuarios" class="centrado boton boton1"/></td>
-				<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
-			</table>
+				<table>
+					<tr><td colspan="2"><label>Buscar Usuario</label><br/><h:inputText id="Nombre" value="#{user.usuario.usuario}" class="inputTxt" p:placeholder="Introduce Nombre" /></td>
+						<td  class="padSuperior"><h:commandButton id="botonBuscarUsuario" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+						<td><h:button value="Ver todo" outcome="verUsuarios.xhtml" class="centrado boton boton1"/></td>
+						<td  class="padSuperior"><h:commandButton id="botonEliminarUsuarios" action="#{user.borrarUsuarios()}" value="Eliminar usuarios" class="centrado boton boton1"/></td>
+						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
+				</table>
 			</div>
 			<c:choose> 
             	<c:when test="#{user.buscar}">
             		<h:dataTable value="#{user.buscarUsuario(user.usuario.usuario)}" var="b">
-	            		<h:column>
+            		
+		            	<h:column>
 							<f:facet name="header">Usuario</f:facet>
-				            <h:outputText value="#{b.usuario}"/>
-				        </h:column>
-	
-				        <h:column>
-				            <f:facet name="header">Rol</f:facet>
-				            <h:outputText value="#{b.rol}"/>
-				        </h:column>
-				               
-				        <h:column>
-				            <f:facet name="header">Alumno</f:facet>
-				            <h:outputText value="#{b.alumno.DNI}"/>
-				        </h:column>
+					       	<h:outputText value="#{b.usuario}"/>
+					   	</h:column>
+							               
+						<h:column>
+					     	<f:facet name="header">Alumno</f:facet>
+					       	<h:outputText value="#{b.alumno.DNI}"/>
+						</h:column>
+				        
 					</h:dataTable>
             	</c:when>
             	<c:otherwise>
-			           <h:dataTable value="#{user.leerDatosAdmin()}" var="u">
+			    	<h:dataTable value="#{user.leerDatosAdmin()}" var="u">
 			               
-			               <h:column>
-			                   <f:facet name="header">Usuario</f:facet>
-			                   <h:outputText value="#{u.usuario}"/>
-			               </h:column>
+			        	<h:column>
+			              	<f:facet name="header">Usuario</f:facet>
+			            	<h:outputText value="#{u.usuario}"/>
+			           	</h:column>
 			               
-			               <h:column>
-			                   <f:facet name="header">Rol</f:facet>
-			                   <h:outputText value="#{u.rol}"/>
-			               </h:column>
+			           	<h:column>
+			              	<f:facet name="header">Rol</f:facet>
+			           	   	<h:outputText value="#{u.rol}"/>
+			          	 </h:column>
 			               
-			               <h:column>
-			                   <f:facet name="header">Alumno</f:facet>
-			                   <h:outputText value="#{u.alumno.DNI}"/>
-			               </h:column>
+			           	<h:column>
+			            	<f:facet name="header">Alumno</f:facet>
+			             	<h:outputText value="#{u.alumno.DNI}"/>
+			           	</h:column>
 			               
-			           </h:dataTable>
+			   		</h:dataTable>	
 				</c:otherwise>
-        </c:choose>
+        	</c:choose>
+        
         <div class="centrarTexto">
 			<h:message for=""></h:message>
 		</div>
+		
 		</h:form>
 	</div>
 
