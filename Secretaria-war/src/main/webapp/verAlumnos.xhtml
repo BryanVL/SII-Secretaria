@@ -15,17 +15,31 @@
 
 <body>
 
+	<div class="cabecera"> 
+        <table>
+            <tr>
+                <td style="padding-left:100px"> <img class="img-uma" src=" https://www.uma.es/static/themes/uma2016/images/UMA_logo.png" width="25%"> </img> </td>    
+                <td style="padding-right: 100px"> <span style="color:#00B1EC;"> WELCOME </span> 
+                     <span style="color:#000000;"> TO </span> 
+                     <span style="color:#8F0000;"> UMA </span> </td>
+                <td style="padding-right:100px"> PÁGINA DE ASIGNACIÓN DE GRUPOS </td>
+            </tr> 
+        </table>
+	</div>
+	
+
 	<div class="centrado">
 		<h1>ALUMNOS</h1>
+		
 		<h:form id="Alumnos">
 			<div class="wrapper">
-			<table>
-				<tr><td><label>Buscar Alumno</label><br/><h:inputText id="dni" value="#{alumno.alumno.DNI}" class="inputTxt" p:placeholder="Introduce dni" /></td>
-				<td  class="padSuperior"><h:commandButton id="botonBuscarAlumno" action="#{alumno.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-				<td><h:button value="Ver todo" outcome="verAlumnos.xhtml" class="centrado boton boton1"/></td>
-				<td  class="padSuperior"><h:commandButton id="botonEliminarAlumnos" action="#{alumno.borrarAlumnos()}" value="Eliminar alumnos" class="centrado boton boton1"/></td>
-				<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
-			</table>
+				<table>
+					<tr><td><label>Buscar Alumno</label><br/><h:inputText id="dni" value="#{alumno.alumno.DNI}" class="inputTxt" p:placeholder="Introduce dni" /></td>
+						<td  class="padSuperior"><h:commandButton id="botonBuscarAlumno" action="#{alumno.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+						<td><h:button value="Ver todo" outcome="verAlumnos.xhtml" class="centrado boton boton1"/></td>
+						<td  class="padSuperior"><h:commandButton id="botonEliminarAlumnos" action="#{alumno.borrarAlumnos()}" value="Eliminar alumnos" class="centrado boton boton1"/></td>
+						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
+				</table>
 			</div>
 			<c:choose> 
             	<c:when test="#{alumno.buscar}">
@@ -96,7 +110,7 @@
 		                   <h:outputText value="#{b.Usuario}"/>
 		               </h:column>
 		               
-           		</h:dataTable>
+           			</h:dataTable>
 			 	</c:when>
             <c:otherwise>
            		<h:dataTable value="#{alumno.leerDatosAdmin()}" var="a">
@@ -169,9 +183,11 @@
            		</h:dataTable>
         	</c:otherwise>
         </c:choose>
+        
         <div class="centrarTexto">
 			<h:message for=""></h:message>
 		</div>
+		
 		</h:form>
 	</div>
 

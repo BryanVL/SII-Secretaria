@@ -14,6 +14,7 @@
 </head>
 
 <h:body>
+
     <div class="cabecera"> 
         <table>
             <tr>
@@ -25,29 +26,33 @@
             </tr> 
         </table>
 	</div>
-<div class="centrado">
+	
+	
+	<div class="centrado">
+		<h:form id="registroUsuarios">
 
-<h:form id="registroUsuarios">
+			<div class="wrapper">
+				<table >
+					<tr><td colspan="2"><label>DNI</label><br/><h:inputText id="dni" value="#{registro.dni}" required="true" class="inputTxt" p:placeholder="Introduce dni" /></td></tr>
+					<tr><td colspan="2"><label>Usuario</label><br/><h:inputText id="usuario" value="#{registro.usuario.usuario}"  required="true" class="inputTxt" p:placeholder="Introduce usuario" /></td></tr>
+					<tr><td colspan="2"><label>Contraseña</label><br/><h:inputSecret id="password" value="#{registro.usuario.password}"  required="true" class="inputTxt" p:placeholder="Introduce Contraseña" /></td></tr>
+					<tr><td colspan="2"><label>Repetir contraseña</label><br/><h:inputSecret id="confirmacionpassword" value="#{registro.pass2}"  required="true" class="inputTxt" p:placeholder="Repite la contraseña" /></td></tr>
+					<tr><td colspan="2"><h:message for=""></h:message></td></tr>
+					<tr><td  class="padSuperior"><h:commandButton id="botonRegistro" action="#{registro.registrarUsuario()}" value="Registrate" class="centrado boton boton1"/></td>
+						<td  class="padSuperior"><h:commandButton id="botonAdmin" action="#{registro.crearSecretaria()}" value="Secretaria" class="centrado boton boton1"/></td></tr>
+					<tr><td colspan="2"><h:button id="botonAtras" outcome="index.xhtml" value="Volver atrás" class="centrado boton boton1"/></td></tr>
+				</table>
+			</div>
 
-<div class="wrapper">
-<table >
-	<tr><td colspan="2"><label>DNI</label><br/><h:inputText id="dni" value="#{registro.dni}" required="true" class="inputTxt" p:placeholder="Introduce dni" /></td></tr>
-	<tr><td colspan="2"><label>Usuario</label><br/><h:inputText id="usuario" value="#{registro.usuario.usuario}"  required="true" class="inputTxt" p:placeholder="Introduce usuario" /></td></tr>
-	<tr><td colspan="2"><label>Contraseña</label><br/><h:inputSecret id="password" value="#{registro.usuario.password}"  required="true" class="inputTxt" p:placeholder="Introduce Contraseña" /></td></tr>
-	<tr><td colspan="2"><label>Repetir contraseña</label><br/><h:inputSecret id="confirmacionpassword" value="#{registro.pass2}"  required="true" class="inputTxt" p:placeholder="Repite la contraseña" /></td></tr>
-	<tr><td colspan="2"><h:message for=""></h:message></td></tr>
-	<tr><td  class="padSuperior"><h:commandButton id="botonRegistro" action="#{registro.registrarUsuario()}" value="Registrate" class="centrado boton boton1"/></td>
-	<td  class="padSuperior"><h:commandButton id="botonAdmin" action="#{registro.crearSecretaria()}" value="Secretaria" class="centrado boton boton1"/></td></tr>
-	<tr><td colspan="2"><h:button id="botonAtras" outcome="index.xhtml" value="Volver atrás" class="centrado boton boton1"/></td></tr>
-</table>
-</div>
-</h:form>
-</div>  
-        <!--Pie de página -->
+		</h:form>
+	</div>  
+	
+	
 	<div class="foot"> 
         <table>
             <tr><td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA · Tel. 952 13 10 00 · info@uma.es</td></tr>
         </table>
 	</div>
+	
 </h:body>
 </html>

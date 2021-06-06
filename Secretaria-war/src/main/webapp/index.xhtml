@@ -31,26 +31,24 @@
 	<div class="centrado">
 		<h1> BIENVENIDO A LA PÁGINA DE ASIGNACIÓN DE GRUPOS DE LA UNIVERSIDAD DE MÁLAGA</h1>
 		
-		
+ 		<h:form id="inicioSesion">
 
-		
- 	<h:form id="inicioSesion">
-
-		<div class="wrapper">
-			<table >
+			<div class="wrapper">
+				<table >
 			
+					<!-- <tr><td>Usuario</td><td><h:inputText id="usuario" value=""  required="true" class="inputTxt"/></td></tr>
+					<tr><td>Contraseña</td><td><h:inputText id="password" value=""  required="true" class="inputTxt"/></td></tr> -->
 			
-			<!-- <tr><td>Usuario</td><td><h:inputText id="usuario" value=""  required="true" class="inputTxt"/></td></tr>
-			<tr><td>Contraseña</td><td><h:inputText id="password" value=""  required="true" class="inputTxt"/></td></tr> -->
+					<tr><td colspan="2"><label>Usuario</label><br/><h:inputText id="usuario" value="#{user.usuario.usuario}"  required="true" class="inputTxt" p:placeholder="Introduce usuario" /></td></tr>
+					<tr><td colspan="2"><label>Contraseña</label><br/><h:inputText id="password" value="#{user.usuario.password}"  required="true" class="inputTxt" p:placeholder="Introduce contraseña"/></td></tr>
+					<tr><td colspan="2"><h:message for=""></h:message></td></tr>
+					<tr><td class="padSuperior"><h:commandButton id="botonInicioSesion" action="#{user.iniciarSesion()}" value="Iniciar sesión"  class="centrado boton boton1"/>
+						</td><td class="padSuperior"><h:button id="botonRegistro" outcome="Registro.xhtml" value="Registrate" class="centrado boton boton1"/></td></tr>
+				
+				</table>
+			</div>
 			
-			<tr><td colspan="2"><label>Usuario</label><br/><h:inputText id="usuario" value="#{user.usuario.usuario}"  required="true" class="inputTxt" p:placeholder="Introduce usuario" /></td></tr>
-			<tr><td colspan="2"><label>Contraseña</label><br/><h:inputText id="password" value="#{user.usuario.password}"  required="true" class="inputTxt" p:placeholder="Introduce contraseña"/></td></tr>
-			<tr><td colspan="2"><h:message for=""></h:message></td></tr>
-			<tr><td class="padSuperior"><h:commandButton id="botonInicioSesion" action="#{user.iniciarSesion()}" value="Iniciar sesión"  class="centrado boton boton1"/>
-			</td><td class="padSuperior"><h:button id="botonRegistro" outcome="Registro.xhtml" value="Registrate" class="centrado boton boton1"/></td></tr>
-			</table>
-		</div>
-	  	</h:form>
+		</h:form>
 	</div>
 
 	<div class="foot"> 
