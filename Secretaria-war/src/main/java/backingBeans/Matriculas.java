@@ -12,7 +12,6 @@ import javax.inject.Named;
 import excepcionesEJB.MatriculaException;
 import interfacesEJB.InterfazMatricula;
 import jpa.Matricula;
-import jpa.Matricula_PK;
 
 @Named(value = "matricula")
 @RequestScoped
