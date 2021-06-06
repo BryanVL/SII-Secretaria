@@ -1,6 +1,10 @@
 package backingBeans;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -14,6 +18,7 @@ import ejb.TitulacionImpl;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazTitulacion;
+import io.undertow.servlet.spec.PartImpl;
 import jpa.Titulacion;
 
 @Named(value = "titulacion")
@@ -26,7 +31,7 @@ public class Titulaciones{
 	private InterfazTitulacion a;
 	
 	private Titulacion titulacion;
-	private String archivo;
+	private PartImpl archivo;
 	private Integer codigo;
 	private List<Titulacion> titulaciones;
 	private boolean buscar;
@@ -43,11 +48,11 @@ public class Titulaciones{
 		return titulacion;
 	}
 	
-	public void setArchivo(String archivo) {
+	public void setArchivo(PartImpl archivo) {
 		this.archivo = archivo;
 	}
 	
-	public String getArchivo() {
+	public PartImpl getArchivo() {
 		return archivo;
 	}
 	
@@ -124,8 +129,8 @@ public class Titulaciones{
 	public String importarTitulaciones(String dir){
 		String respuesta = null;
 		try {
-			LOGGER.info("Importame esto crack   " + dir);
-			a.Importar(dir);
+			
+			a.Importar("wildfly/docs/");
 			respuesta = "verTitulaciones.xhtml";
 		} catch(ImportarException e){
 			FacesMessage fm = new FacesMessage(e.getMessage());

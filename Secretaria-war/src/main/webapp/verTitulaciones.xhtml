@@ -47,7 +47,7 @@
 	            		
 	            		<h:column>
 							<f:facet name="header">Codigo</f:facet>
-				            <h:outputText value="#{t.usuario}"/>
+				            <h:outputText value="#{t.codigo}"/>
 				        </h:column>
 	
 				        <h:column>
@@ -63,24 +63,24 @@
 					</h:dataTable>
             	</c:when>
             	<c:otherwise>
-			           <h:dataTable value="#{titulacion.leerDatosAdmin()}" var="u">
-			               
-			               <h:column>
+					<h:dataTable value="#{titulacion.leerDatosAdmin()}" var="u">
+
+						<h:column>
 							<f:facet name="header">Codigo</f:facet>
-				            <h:outputText value="#{u.usuario}"/>
-				        </h:column>
-	
-				        <h:column>
-				            <f:facet name="header">Nombre</f:facet>
-				            <h:outputText value="#{u.nombre}"/>
-				        </h:column>
-				               
-				        <h:column>
-				            <f:facet name="header">Creditos</f:facet>
-				            <h:outputText value="#{u.creditos}"/>
-				        </h:column>
-			               
-			           </h:dataTable>
+							<h:outputText value="#{u.codigo}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Nombre</f:facet>
+							<h:outputText value="#{u.nombre}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Creditos</f:facet>
+							<h:outputText value="#{u.creditos}" />
+						</h:column>
+
+					</h:dataTable>
 				</c:otherwise>
         </c:choose>
         
