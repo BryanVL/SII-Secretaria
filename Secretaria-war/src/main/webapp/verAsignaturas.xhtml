@@ -44,6 +44,7 @@
 			<c:choose> 
             	<c:when test="#{asignatura.buscar}"> 
             		<h:dataTable value="#{asignatura.buscarAsignatura(asignatura.asignatura.referencia)}" var="a">              
+			               
 			               <h:column>
 			                   <f:facet name="header">Referencia</f:facet>
 			                   <h:outputText value="#{a.Referencia}"/>
@@ -77,7 +78,8 @@
 			       	</h:dataTable>
 			    </c:when>
 			    <c:otherwise>
-			    	<h:dataTable value="#{asignatura.leerDatosAdmin()}" var="b">              
+			    	<h:dataTable value="#{asignatura.leerDatosAdmin()}" var="b">    
+			    	          
 			        	<h:column>
 			           		<f:facet name="header">Referencia</f:facet>
 			             	<h:outputText value="#{b.Referencia}"/>
