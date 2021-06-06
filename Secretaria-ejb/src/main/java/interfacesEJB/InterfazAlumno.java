@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 import excepcionesEJB.AlumnoException;
+import excepcionesEJB.ImportarException;
 import jpa.Alumno;
 
 
@@ -25,4 +26,5 @@ public interface InterfazAlumno {
 	
 	public void borrarAlumnos() throws AlumnoException;
 	
+	public void Importar(String dir) throws ImportarException;
 }

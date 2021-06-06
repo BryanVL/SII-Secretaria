@@ -7,6 +7,7 @@ import javax.ejb.Local;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ClaseException;
+import excepcionesEJB.ImportarException;
 import excepcionesEJB.MatriculaException;
 import jpa.Alumno;
 import jpa.Asignatura;
@@ -25,4 +26,5 @@ public interface InterfazHorarios {
 	
 	public HashMap<Asignatura, List<Clase>> VisualizarHorarios(Alumno a, Matricula matricula) throws ClaseException, AlumnoException, MatriculaException;
 	
+	public void Importar(String dir) throws ImportarException;
 }

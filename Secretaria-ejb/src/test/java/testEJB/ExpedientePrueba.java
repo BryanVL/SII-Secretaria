@@ -17,7 +17,6 @@ import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazAlumno;
 import interfacesEJB.InterfazExpediente;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Expediente;
 import jpa.Titulacion;
@@ -35,19 +34,17 @@ public class ExpedientePrueba {
 	
 	
 	
-	private InterfazImportar interfazImportar;
 	private InterfazExpediente interfazExpediente;
-	private InterfazImportar interfazImportarTit;
-	private InterfazImportar interfazImportarAl;
+	private InterfazTitulacion interfazImportarTit;
+	private InterfazAlumno interfazImportarAl;
 	
 	
 	
 	@Before
 	public void setup() throws NamingException  {
-		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
 		interfazExpediente = (InterfazExpediente) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
-		interfazImportarTit = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
-		interfazImportarAl  = (InterfazImportar) SuiteTest.ctx.lookup(ALUMNO_EJB);
+		interfazImportarTit = (InterfazTitulacion) SuiteTest.ctx.lookup(TITULACION_EJB);
+		interfazImportarAl  = (InterfazAlumno) SuiteTest.ctx.lookup(ALUMNO_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
@@ -66,7 +63,7 @@ public class ExpedientePrueba {
 			interfazImportarTit.Importar(dir2);
 			
 			//UNA VEZ IMPORTADOS LOS ANTERIORES DATOS, SE IMPORTAN LOS EXPEDIENTES Y SE COMPRUEBA QUE TODO ES CORRECTO:
-			interfazImportar.Importar(dir);
+			interfazExpediente.Importar(dir);
 			
 			Expediente e = new Expediente();
 			e.setNum_expediente(104200001);

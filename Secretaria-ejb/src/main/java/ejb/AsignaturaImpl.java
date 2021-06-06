@@ -35,7 +35,6 @@ import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazAsignatura;
-import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 import jpa.Asignatura;
 import jpa.Idiomas;
@@ -44,7 +43,7 @@ import jpa.Titulacion;
 
 @Stateless
 @LocalBean
-public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
+public class AsignaturaImpl implements InterfazAsignatura{
 	@PersistenceContext(unitName = "Secretaria")
     private EntityManager em;
 

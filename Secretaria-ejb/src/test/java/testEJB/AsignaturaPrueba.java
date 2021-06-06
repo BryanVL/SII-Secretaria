@@ -16,7 +16,6 @@ import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazAsignatura;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazOptativa;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Asignatura;
@@ -33,16 +32,14 @@ public class AsignaturaPrueba {
 	
 	
 	
-	private InterfazImportar interfazImportar;
-	private InterfazImportar interfazImportar2;
+	private InterfazTitulacion interfazTitulacion;
 	private InterfazAsignatura interfazAsignatura;
 	
 	
 	
 	@Before
 	public void setup() throws NamingException  {
-		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
-		interfazImportar2 = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
+		interfazTitulacion = (InterfazTitulacion) SuiteTest.ctx.lookup(TITULACION_EJB);
 		interfazAsignatura = (InterfazAsignatura) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
@@ -57,8 +54,8 @@ public class AsignaturaPrueba {
 		
 		try {
 			
-			interfazImportar2.Importar(dir2);
-			interfazImportar.Importar(dir);
+			interfazTitulacion.Importar(dir2);
+			interfazAsignatura.Importar(dir);
 			
 			Asignatura asig = new Asignatura();
 			asig.setReferencia(50658);

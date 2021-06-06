@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.ExpedienteException;
+import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import jpa.Asignatura;
 import jpa.Expediente;
@@ -22,4 +23,5 @@ public interface InterfazExpediente {
 	
 	public void borrarExpedientes() throws ExpedienteException;
 	
+	public void Importar(String dir) throws ImportarException;
 }

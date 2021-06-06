@@ -1,5 +1,6 @@
 package backingBeans;
 
+import java.io.File;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -9,6 +10,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import ejb.TitulacionImpl;
+import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Titulacion;
@@ -23,6 +26,7 @@ public class Titulaciones{
 	private InterfazTitulacion a;
 	
 	private Titulacion titulacion;
+	private String archivo;
 	private Integer codigo;
 	private List<Titulacion> titulaciones;
 	private boolean buscar;
@@ -37,6 +41,14 @@ public class Titulaciones{
 	
 	public Titulacion getTitulacion() {
 		return titulacion;
+	}
+	
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
+	}
+	
+	public String getArchivo() {
+		return archivo;
 	}
 	
 	public void setCodigo(Integer codigo) {
@@ -103,6 +115,19 @@ public class Titulaciones{
 		try {
 			a.borrarTitulaciones();
 		} catch(TitulacionException e) {
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		return respuesta;
+	}
+	
+	public String importarTitulaciones(String dir){
+		String respuesta = null;
+		try {
+			LOGGER.info("Importame esto crack   " + dir);
+			a.Importar(dir);
+			respuesta = "verTitulaciones.xhtml";
+		} catch(ImportarException e){
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}

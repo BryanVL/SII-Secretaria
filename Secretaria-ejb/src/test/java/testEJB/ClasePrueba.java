@@ -23,8 +23,8 @@ import excepcionesEJB.ClaseException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.MatriculaException;
 import excepcionesEJB.TitulacionException;
+import interfacesEJB.InterfazAsignatura;
 import interfacesEJB.InterfazHorarios;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Alumno;
 import jpa.Asignatura;
@@ -47,9 +47,8 @@ public class ClasePrueba {
 	
 	
 	
-	private InterfazImportar interfazImportar;
-	private InterfazImportar interfazImportar2;
-	private InterfazImportar interfazImportar3;
+	private InterfazAsignatura interfazImportar2;
+	private InterfazTitulacion interfazImportar3;
 	private InterfazHorarios interfazClases;
 	
 	
@@ -57,9 +56,8 @@ public class ClasePrueba {
 	@Before
 	public void setup() throws NamingException  {
 		interfazClases = (InterfazHorarios) SuiteTest.ctx.lookup(CLASE_EJB);
-		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(CLASE_EJB);
-		interfazImportar2 = (InterfazImportar) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
-		interfazImportar3 = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
+		interfazImportar2 = (InterfazAsignatura) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
+		interfazImportar3 = (InterfazTitulacion) SuiteTest.ctx.lookup(TITULACION_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 	
@@ -70,7 +68,7 @@ public class ClasePrueba {
 			//Elegir desde donde realizar cada importacion:
 			interfazImportar3.Importar("src/test/resources/Titulacion.csv");
 			interfazImportar2.Importar("src/test/resources/GII.csv");
-			interfazImportar.Importar("src/test/resources/horarios.csv");
+			interfazClases.Importar("src/test/resources/horarios.csv");
 //			interfazImportar3.Importar("src/test/resources/Titulacion.xlsx");
 //			interfazImportar2.Importar("src/test/resources/Oferta asignaturas.xlsx");
 //			interfazImportar.Importar("src/test/resources/horarios.xlsx");

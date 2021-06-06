@@ -33,7 +33,6 @@ import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.OptativaException;
 import excepcionesEJB.TitulacionException;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazOptativa;
 import jpa.Asignatura;
 import jpa.Optativa;
@@ -42,7 +41,7 @@ import jpa.Titulacion;
 
 @Stateless
 @LocalBean
-public class OptativaImpl implements InterfazOptativa, InterfazImportar{
+public class OptativaImpl implements InterfazOptativa{
 	@PersistenceContext(unitName = "Secretaria")
     private EntityManager em;
 	

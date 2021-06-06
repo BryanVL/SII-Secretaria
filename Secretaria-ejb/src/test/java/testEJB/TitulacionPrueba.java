@@ -23,7 +23,6 @@ import org.junit.Test;
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Titulacion;
 
@@ -48,14 +47,12 @@ public class TitulacionPrueba {
 	
 	
 	
-	private InterfazImportar interfazImportar;
 	private InterfazTitulacion interfazTitulacion;
 	
 	
 	
 	@Before
 	public void setup() throws NamingException  {
-		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
 		interfazTitulacion = (InterfazTitulacion) SuiteTest.ctx.lookup(TITULACION_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
@@ -68,7 +65,7 @@ public class TitulacionPrueba {
 //		String dir = "src/test/resources/Titulacion.xlsx";
 		
 		try {
-			interfazImportar.Importar(dir);
+			interfazTitulacion.Importar(dir);
 			
 			Titulacion titulacion = new Titulacion();
 			titulacion.setCodigo(1041);

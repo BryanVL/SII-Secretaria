@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import jpa.Titulacion;
 
@@ -18,5 +19,7 @@ public interface InterfazTitulacion {
 	public List<Titulacion> mostrarDatosAdmin() throws TitulacionException;
 	
 	public void borrarTitulaciones() throws TitulacionException;
+	
+	public void Importar(String dir) throws ImportarException;
 	
 }

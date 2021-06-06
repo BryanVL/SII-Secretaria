@@ -14,7 +14,6 @@ import org.junit.Test;
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ImportarException;
 import interfacesEJB.InterfazEncuesta;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Encuesta;
 

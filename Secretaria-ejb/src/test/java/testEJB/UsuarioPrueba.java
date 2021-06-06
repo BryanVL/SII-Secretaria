@@ -13,7 +13,6 @@ import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.UsuarioException;
 import interfacesEJB.InterfazAlumno;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazUsuario;
 import jpa.Alumno;
 import jpa.Usuario;

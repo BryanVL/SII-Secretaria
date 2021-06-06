@@ -33,7 +33,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.ImportarException;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazMatricula;
 import excepcionesEJB.MatriculaException;
 import excepcionesEJB.TitulacionException;
@@ -49,7 +48,7 @@ import jpa.Matricula_PK;
 
 @Stateless
 @LocalBean
-public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
+public class MatriculaImpl implements InterfazMatricula{
 
 	@PersistenceContext(name = "Secretaria")
 	private EntityManager em;

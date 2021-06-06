@@ -29,7 +29,6 @@ import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.UsuarioException;
 import interfacesEJB.InterfazAlumno;
-import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 import jpa.Usuario;
 
@@ -38,7 +37,7 @@ import jpa.Usuario;
 
 @Stateless
 @LocalBean
-public class AlumnoImpl implements InterfazImportar,InterfazAlumno{
+public class AlumnoImpl implements InterfazAlumno{
     @PersistenceContext(unitName = "Secretaria")
     private EntityManager em;
 

@@ -29,7 +29,6 @@ import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazExpediente;
-import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 import jpa.Expediente;
 import jpa.Titulacion;
@@ -37,7 +36,7 @@ import jpa.Titulacion;
 
 @Stateless
 @LocalBean
-public class ExpedienteImpl implements InterfazImportar,InterfazExpediente{
+public class ExpedienteImpl implements InterfazExpediente{
 
 	@PersistenceContext(name="Secretaria")
 	private EntityManager em;

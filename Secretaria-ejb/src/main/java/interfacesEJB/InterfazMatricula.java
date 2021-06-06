@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import excepcionesEJB.AlumnoException;
+import excepcionesEJB.ImportarException;
 import excepcionesEJB.MatriculaException;
 import jpa.Alumno;
 import jpa.Matricula;
@@ -22,5 +23,7 @@ public interface InterfazMatricula {
 	public List<Matricula> mostrarDatosAdmin() throws MatriculaException;
 	
 	public void borrarMatriculas() throws MatriculaException;
+	
+	public void Importar(String dir) throws ImportarException;
 	
 }

@@ -15,9 +15,10 @@ import org.junit.Test;
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.MatriculaException;
+import interfacesEJB.InterfazAlumno;
 import interfacesEJB.InterfazExpediente;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazMatricula;
+import interfacesEJB.InterfazTitulacion;
 import jpa.Matricula;
 import jpa.Matricula_PK;
 
@@ -35,22 +36,20 @@ public class MatriculaPrueba {
 //	private static final String ASIGNATURA_EJB = "java:global/classes/AsignaturaImpl!ejb.AsignaturaImpl";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
 	
-	private InterfazImportar interfazImportar;
 	private InterfazMatricula interfazMatricula; 
-	private InterfazImportar interfazImportarExp;
-	private InterfazImportar interfazImportarAl;
-	private InterfazImportar interfazImportarTit;
+	private InterfazExpediente interfazImportarExp;
+	private InterfazAlumno interfazImportarAl;
+	private InterfazTitulacion interfazImportarTit;
 //	private InterfazImportar interfazImportarAsig;
 
 		
 	
 	@Before
 	public void setup() throws NamingException  {
-		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(MATRICULA_EJB);
 		interfazMatricula = (InterfazMatricula)  SuiteTest.ctx.lookup(MATRICULA_EJB);
-		interfazImportarExp = (InterfazImportar) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
-		interfazImportarTit = (InterfazImportar) SuiteTest.ctx.lookup(TITULACION_EJB);
-		interfazImportarAl  = (InterfazImportar) SuiteTest.ctx.lookup(ALUMNO_EJB);
+		interfazImportarExp = (InterfazExpediente) SuiteTest.ctx.lookup(EXPEDIENTE_EJB);
+		interfazImportarTit = (InterfazTitulacion) SuiteTest.ctx.lookup(TITULACION_EJB);
+		interfazImportarAl  = (InterfazAlumno) SuiteTest.ctx.lookup(ALUMNO_EJB);
 //		interfazImportarAsig  = (InterfazImportar) SuiteTest.ctx.lookup(ASIGNATURA_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
@@ -76,7 +75,7 @@ public class MatriculaPrueba {
 //			interfazImportarAsig.Importar(dir4);
 			
 			//UNA VEZ IMPORTADOS TODOS LOS DATOS RELACIONADOS, IMPORTAMOS LAS MATRICULAS.
-			interfazImportar.Importar(dir);
+			interfazMatricula.Importar(dir);
 			
 			interfazMatricula.VisualizarMatricula("2020/2021",104200001);
 			

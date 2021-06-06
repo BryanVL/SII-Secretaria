@@ -35,7 +35,6 @@ import excepcionesEJB.GrupoException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.MatriculaException;
 import interfacesEJB.InterfazHorarios;
-import interfacesEJB.InterfazImportar;
 import jpa.Alumno;
 import jpa.Asignatura;
 import jpa.Asignaturas_Matricula;
@@ -49,7 +48,7 @@ import jpa.Matricula;
  */
 @Stateless
 @LocalBean
-public class ClaseImpl implements InterfazImportar, InterfazHorarios{
+public class ClaseImpl implements InterfazHorarios{
 
 	@PersistenceContext(name="Secretaria")
 	private EntityManager em;

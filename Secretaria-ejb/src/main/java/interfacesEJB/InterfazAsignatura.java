@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.AsignaturaException;
+import excepcionesEJB.ImportarException;
 import jpa.Alumno;
 import jpa.Asignatura;
 
@@ -20,4 +21,5 @@ public interface InterfazAsignatura {
 	
 	public void borrarAsignaturas() throws AsignaturaException;
 	
+	public void Importar(String dir) throws ImportarException;
 }

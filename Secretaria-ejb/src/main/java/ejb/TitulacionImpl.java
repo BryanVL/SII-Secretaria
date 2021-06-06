@@ -31,7 +31,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.TitulacionException;
 import excepcionesEJB.ImportarException;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Alumno;
 import jpa.Titulacion;
@@ -39,7 +38,7 @@ import jpa.Titulacion;
 
 @Stateless
 @LocalBean
-public class TitulacionImpl implements InterfazTitulacion, InterfazImportar {
+public class TitulacionImpl implements InterfazTitulacion{
 	@PersistenceContext(unitName = "Secretaria")
     private EntityManager em;
 

@@ -17,7 +17,6 @@ import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazAlumno;
-import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Alumno;
 import jpa.Titulacion;
@@ -33,14 +32,12 @@ public class AlumnoPrueba {
 	
 	
 	
-	private InterfazImportar interfazImportar;
 	private InterfazAlumno interfazAlumno;
 	
 	
 	
 	@Before
 	public void setup() throws NamingException  {
-		interfazImportar = (InterfazImportar) SuiteTest.ctx.lookup(ALUMNO_EJB);
 		interfazAlumno  = (InterfazAlumno) SuiteTest.ctx.lookup(ALUMNO_EJB);
 		
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
@@ -53,7 +50,7 @@ public class AlumnoPrueba {
 		String dir = "src/test/resources/alumnos.csv";
 		//String dir = "src/test/resources/alumnos.xlsx";
 		try {
-			interfazImportar.Importar(dir);
+			interfazAlumno.Importar(dir);
 			
 			Alumno alumno = new Alumno();
 			alumno.setDNI("95115697E");
