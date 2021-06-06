@@ -15,14 +15,16 @@
 
 <body>
 
+
+
 	<div class="centrado">
 		<h1>Mis datos</h1>
 		<h:form id="Usuario">
 			<div class="wrapper">
 				<table>
 					<tr><td colspan="2"><label>Introduce tu nombre de usuario</label><br/><h:inputText id="MiNombre" value="#{user.usuario.usuario}" required="True" class="inputTxt" p:placeholder="Ejemplo: Pacopepe14" /></td>
-					<td  class="padSuperior"><h:commandButton id="botonBuscarMiUsuario" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-					<td><h:button value="Volver atrás" outcome="MainPage.xhtml" class="centrado boton boton1"/></td></tr>
+						<td  class="padSuperior"><h:commandButton id="botonBuscarMiUsuario" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+						<td><h:button value="Volver atrás" outcome="MainPage.xhtml" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>
            	<c:choose> 
@@ -100,15 +102,18 @@
 					</h:dataTable>
             	</c:when>
         	</c:choose>
+        	
         	<div class="centrarTexto">
 				<h:message for=""></h:message>
 			</div>
+			
         </h:form>
-		
 	</div>
 
 	<div class="foot"> 
-		Universidad de Málaga.
+        <table>
+            <tr><td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA · Tel. 952 13 10 00 · info@uma.es</td></tr>
+        </table>
 	</div>
 	
 </body>
