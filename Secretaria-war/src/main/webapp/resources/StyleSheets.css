@@ -60,7 +60,7 @@ h1{
   border: 2px solid #008CBA;
 }
 
-.boton1:hover {
+.boton1:hover, .boton1:focus {
   background-color: #008CBA;
   color: white;
 }
@@ -198,6 +198,7 @@ button{
     font-size: 15px;
     font-family: OpenSans;
     color: #ffffff;
+     
 }
 
 .foot table{
