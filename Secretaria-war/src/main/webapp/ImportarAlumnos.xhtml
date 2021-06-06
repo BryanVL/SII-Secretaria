@@ -108,7 +108,7 @@
 		                   <h:outputText value="#{b.Usuario}"/>
 		               </h:column>
 		               
-           		</h:dataTable>
+           			</h:dataTable>
 			 	</c:when>
             <c:otherwise>
            		<h:dataTable value="#{alumno.leerDatosAdmin()}" var="a">
@@ -181,9 +181,11 @@
            		</h:dataTable>
         	</c:otherwise>
         </c:choose> 
+        
         <div class="centrarTexto">
 			<h:message for=""></h:message>
 		</div>
+		
 		</h:form>
 	</div>
 
