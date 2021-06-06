@@ -29,6 +29,12 @@
 	  		<version>0.0.1-SNAPSHOT</version>
 	  		<scope>provided</scope>
 	  	</dependency>
+	  	<dependency>
+		    <groupId>io.undertow</groupId>
+		    <artifactId>undertow-servlet</artifactId>
+		    <version>2.2.8.Final</version>
+		</dependency>
+	  	
   </dependencies>
   <packaging>war</packaging>
     <build>
