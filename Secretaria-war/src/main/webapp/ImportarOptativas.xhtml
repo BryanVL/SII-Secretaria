@@ -15,17 +15,19 @@
 
 <body>
 
+
+
 	<div class="centrado">
 		<h1>OPTATIVAS</h1>
 		<h:form id="Optativas">
 			<div class="wrapper">
-			<table>
-				<tr><td colspan="2"><label>Buscar Alumno</label><br/><h:inputText id="dni" value="#{alumno.alumno.DNI}" class="inputTxt" p:placeholder="Introduce dni" /></td>
-				<td  class="padSuperior"><h:commandButton id="botonBuscarAlumno" action="#{alumno.buscarTrue()}" value="Buscar" var="b" class="centrado boton boton1"/></td>
-				<td><h:button value="Ver todo" outcome="verAlumnos.xhtml" class="centrado boton boton1"/></td>
-				<td  class="padSuperior"><h:commandButton id="botonEliminarAlumnos" action="#{alumno.borrarAlumnos()}" value="Eliminar alumnos" class="centrado boton boton1"/></td>
-				<td><h:button value="Volver a Inicio" outcome="ImportarAdmin.xhtml" class="centrado boton boton1"/></td></tr>
-			</table>
+				<table>
+					<tr><td colspan="2"><label>Buscar Alumno</label><br/><h:inputText id="dni" value="#{alumno.alumno.DNI}" class="inputTxt" p:placeholder="Introduce dni" /></td>
+						<td  class="padSuperior"><h:commandButton id="botonBuscarAlumno" action="#{alumno.buscarTrue()}" value="Buscar" var="b" class="centrado boton boton1"/></td>
+						<td><h:button value="Ver todo" outcome="verAlumnos.xhtml" class="centrado boton boton1"/></td>
+						<td  class="padSuperior"><h:commandButton id="botonEliminarAlumnos" action="#{alumno.borrarAlumnos()}" value="Eliminar alumnos" class="centrado boton boton1"/></td>
+						<td><h:button value="Volver a Inicio" outcome="ImportarAdmin.xhtml" class="centrado boton boton1"/></td></tr>
+				</table>
 			</div>
 			<c:choose> 
             	<c:when test="#{alumno.buscar}">
@@ -96,7 +98,7 @@
 		                   <h:outputText value="#{b.Usuario}"/>
 		               </h:column>
 		               
-           		</h:dataTable>
+           			</h:dataTable>
 			 	</c:when>
             <c:otherwise>
            		<h:dataTable value="#{alumno.leerDatosAdmin()}" var="a">
@@ -169,14 +171,18 @@
            		</h:dataTable>
         	</c:otherwise>
         </c:choose>
+        
         <div class="centrarTexto">
 			<h:message for=""></h:message>
 		</div>
+		
 		</h:form>
 	</div>
 
 	<div class="foot"> 
-		Universidad de Málaga.
+        <table>
+            <tr><td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA · Tel. 952 13 10 00 · info@uma.es</td></tr>
+        </table>
 	</div>
 	
 </body>
