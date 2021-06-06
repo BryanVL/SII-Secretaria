@@ -17,14 +17,15 @@
 
 	<div class="centrado">
 		<h1>EXPEDIENTES</h1>
+		
 		<h:form id="Expedientes">
 			<div class="wrapper">
 				<table>
 					<tr><td><label>Buscar Expediente</label><br/><h:inputText id="Num_Exp" value="#{expediente.expediente.num_expediente}" class="inputTxt" p:placeholder="Introduce Numero Expediente" /></td>
-					<td  class="padSuperior"><h:commandButton id="botonBuscarExpediente" action="#{expediente.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-					<td><h:button value="Ver todo" outcome="verExpedientes.xhtml" class="centrado boton boton1"/></td>
-					<td  class="padSuperior"><h:commandButton id="botonEliminarExpedientes" action="#{expediente.borrarExpedientes()}" value="Eliminar expediente" class="centrado boton boton1"/></td>
-					<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
+						<td  class="padSuperior"><h:commandButton id="botonBuscarExpediente" action="#{expediente.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+						<td><h:button value="Ver todo" outcome="verExpedientes.xhtml" class="centrado boton boton1"/></td>
+						<td  class="padSuperior"><h:commandButton id="botonEliminarExpedientes" action="#{expediente.borrarExpedientes()}" value="Eliminar expediente" class="centrado boton boton1"/></td>
+						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>
 			<c:choose> 
@@ -79,14 +80,18 @@
 		           </h:dataTable>
 		     	</c:otherwise>
         	</c:choose>
+        	
         	<div class="centrarTexto">
-			<h:message for=""></h:message>
+				<h:message for=""></h:message>
 			</div>
+			
 		</h:form>
 	</div>
 
 	<div class="foot"> 
-		Universidad de Málaga.
+        <table>
+            <tr><td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA · Tel. 952 13 10 00 · info@uma.es</td></tr>
+        </table>
 	</div>
 	
 </body>
