@@ -26,6 +26,7 @@ import jpa.Matricula;
 import jpa.Matricula_PK;
 import jpa.Optativa;
 import jpa.Titulacion;
+import jpa.Usuario;
 
 /*import es.uma.informatica.sii.ejb.practica.entidades.Ingrediente;
 import es.uma.informatica.sii.ejb.practica.entidades.Lote;
@@ -216,6 +217,11 @@ public class BaseDatos {
 		grupoB.setTitulacion(tit);
 		em.persist(grupoB);
 		
+		Usuario user = new Usuario();
+		user.setUsuario("admin");
+		user.setPassword("admin");
+		user.setRol("Admin");
+		em.persist(user);
 		
 		
 		em.getTransaction().commit();
