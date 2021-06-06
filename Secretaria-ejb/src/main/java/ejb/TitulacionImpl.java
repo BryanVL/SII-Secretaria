@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -27,8 +29,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import excepcionesEJB.AlumnoException;
-import excepcionesEJB.ImportarException;
 import excepcionesEJB.TitulacionException;
+import excepcionesEJB.ImportarException;
 import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazTitulacion;
 import jpa.Alumno;
@@ -127,7 +129,7 @@ public class TitulacionImpl implements InterfazTitulacion, InterfazImportar {
 
 	@Override
 	public Titulacion VisualizarTitulacion(Integer codigo) throws TitulacionException {
-		// TODO Auto-generated method stub
+		
 		Titulacion titulacionExistente = em.find(Titulacion.class, codigo );
 		
 		if (titulacionExistente == null) {
@@ -137,6 +139,23 @@ public class TitulacionImpl implements InterfazTitulacion, InterfazImportar {
 		return titulacionExistente;
 	}
 
+	@Override
+	public List<Titulacion> mostrarDatosAdmin() throws TitulacionException {
+		TypedQuery<Titulacion> query = em.createQuery("SELECT t FROM Titulacion t",Titulacion.class);
+		List<Titulacion> titulaciones = query.getResultList();
+		if(titulaciones == null || titulaciones.size() == 0) {
+			throw new TitulacionException("No se han encontrado titulaciones");
+		}
+		
+		return titulaciones;
+	}
+
+	@Override
+	public void borrarTitulaciones() throws TitulacionException {
+		for(Titulacion t : mostrarDatosAdmin()) {
+			em.remove(t);
+		}
+	}
 	
 	
 }

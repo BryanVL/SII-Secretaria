@@ -15,6 +15,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -174,4 +175,23 @@ public class OptativaImpl implements InterfazOptativa, InterfazImportar{
 		return  optativaExistente;
 	}
 
+	@Override
+	public List<Optativa> mostrarDatosAdmin() throws OptativaException {
+		TypedQuery<Optativa> query = em.createQuery("SELECT a FROM Optativa a",Optativa.class);
+		List<Optativa> optativas = query.getResultList();
+		if(optativas == null || optativas.size() == 0) {
+			throw new OptativaException("No se han encontrado optativas");
+		}
+		
+		return optativas;
+	}
+
+	@Override
+	public void borrarOptativas() throws OptativaException {
+		for(Optativa a : mostrarDatosAdmin()) {
+			em.remove(a);
+		}
+	}
+	
+	
 }

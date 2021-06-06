@@ -34,51 +34,51 @@
 		<h:form id="Titulaciones">
 			<div class="wrapper">
 				<table>
-					<tr><td colspan="2"><label>Buscar Titulación</label><br/><h:inputText id="Nombre" value="#{user.usuario.usuario}" class="inputTxt" p:placeholder="Introduce Nombre" /></td>
-						<td  class="padSuperior"><h:commandButton id="botonBuscarTitulacion" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+					<tr><td colspan="2"><label>Buscar Titulación</label><br/><h:inputText id="Titulacion" value="#{titulacion.codigo}" class="inputTxt" p:placeholder="Introduce Codigo" /></td>
+						<td  class="padSuperior"><h:commandButton id="botonBuscarTitulacion" action="#{titulacion.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
 						<td><h:button value="Ver todo" outcome="verTitulaciones.xhtml" class="centrado boton boton1"/></td>
-						<td  class="padSuperior"><h:commandButton id="botonEliminarTitulaciones" action="#{user.borrarUsuarios()}" value="Eliminar usuarios" class="centrado boton boton1"/></td>
+						<td  class="padSuperior"><h:commandButton id="botonEliminarTitulaciones" action="#{titulacion.borrarTitulaciones()}" value="Eliminar Titulaciones" class="centrado boton boton1"/></td>
 						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>
 			<c:choose> 
-            	<c:when test="#{user.buscar}">
-            		<h:dataTable value="#{user.buscarUsuario(user.usuario.usuario)}" var="b">
+            	<c:when test="#{titulacion.buscar}">
+            		<h:dataTable value="#{titulacion.buscarTitulacion(titulacion.codigo)}" var="t">
 	            		
 	            		<h:column>
-							<f:facet name="header">Usuario</f:facet>
-				            <h:outputText value="#{b.usuario}"/>
+							<f:facet name="header">Codigo</f:facet>
+				            <h:outputText value="#{t.usuario}"/>
 				        </h:column>
 	
 				        <h:column>
-				            <f:facet name="header">Rol</f:facet>
-				            <h:outputText value="#{b.rol}"/>
+				            <f:facet name="header">Nombre</f:facet>
+				            <h:outputText value="#{t.nombre}"/>
 				        </h:column>
 				               
 				        <h:column>
-				            <f:facet name="header">Alumno</f:facet>
-				            <h:outputText value="#{b.alumno.DNI}"/>
+				            <f:facet name="header">Creditos</f:facet>
+				            <h:outputText value="#{t.creditos}"/>
 				        </h:column>
 				        
 					</h:dataTable>
             	</c:when>
             	<c:otherwise>
-			           <h:dataTable value="#{user.leerDatosAdmin()}" var="u">
+			           <h:dataTable value="#{titulacion.leerDatosAdmin()}" var="u">
 			               
 			               <h:column>
-			                   <f:facet name="header">Usuario</f:facet>
-			                   <h:outputText value="#{u.usuario}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Rol</f:facet>
-			                   <h:outputText value="#{u.rol}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Alumno</f:facet>
-			                   <h:outputText value="#{u.alumno.DNI}"/>
-			               </h:column>
+							<f:facet name="header">Codigo</f:facet>
+				            <h:outputText value="#{u.usuario}"/>
+				        </h:column>
+	
+				        <h:column>
+				            <f:facet name="header">Nombre</f:facet>
+				            <h:outputText value="#{u.nombre}"/>
+				        </h:column>
+				               
+				        <h:column>
+				            <f:facet name="header">Creditos</f:facet>
+				            <h:outputText value="#{u.creditos}"/>
+				        </h:column>
 			               
 			           </h:dataTable>
 				</c:otherwise>

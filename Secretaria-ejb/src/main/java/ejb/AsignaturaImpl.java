@@ -42,7 +42,6 @@ import jpa.Idiomas;
 import jpa.Titulacion;
 
 
-
 @Stateless
 @LocalBean
 public class AsignaturaImpl implements InterfazAsignatura, InterfazImportar {
