@@ -78,13 +78,7 @@ public class MatriculaPrueba {
 			//UNA VEZ IMPORTADOS TODOS LOS DATOS RELACIONADOS, IMPORTAMOS LAS MATRICULAS.
 			interfazImportar.Importar(dir);
 			
-			Matricula m = new Matricula();
-			
-			Matricula_PK mpk=new Matricula_PK();
-			mpk.setCurso_academico("2020/2021");
-			mpk.setIdExp(104200001);
-			m.setId(mpk);
-			interfazMatricula.VisualizarMatricula(m);
+			interfazMatricula.VisualizarMatricula("2020/2021",104200001);
 			
 		} catch (ImportarException e) {
 			fail("No debería lanzarse excepción(importar)");
@@ -110,7 +104,7 @@ public class MatriculaPrueba {
 			m.setNum_Archivo(306000001);
 			m.setTurno_Preferente("Mañana");
 			m.setNuevo_Ingreso("Si");
-			Matricula mat = interfazMatricula.VisualizarMatricula(m);
+			Matricula mat = interfazMatricula.VisualizarMatricula("18/19",123);
 			if(mat != null) {
 				assertEquals(mat,m);
 			} else {

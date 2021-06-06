@@ -30,12 +30,14 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ExpedienteException;
 import excepcionesEJB.ImportarException;
 import interfacesEJB.InterfazImportar;
 import interfacesEJB.InterfazMatricula;
 import excepcionesEJB.MatriculaException;
 import excepcionesEJB.TitulacionException;
+import jpa.Alumno;
 import jpa.Asignatura;
 import jpa.Asignaturas_Matricula;
 import jpa.Asignaturas_Matricula_PK;
@@ -206,15 +208,37 @@ public class MatriculaImpl implements InterfazImportar,InterfazMatricula{
 	}
 
 	@Override
-	public Matricula VisualizarMatricula(Matricula m) throws MatriculaException {
+	public Matricula VisualizarMatricula(String curso, Integer idexp) throws MatriculaException {
 		// TODO Auto-generated method stub
-		Matricula matriculaExistente = em.find(Matricula.class, m.getId());
+		Matricula_PK mpk = new Matricula_PK();
+		mpk.setCurso_academico(curso);
+		mpk.setIdExp(idexp);
+		Matricula matriculaExistente = em.find(Matricula.class, mpk);
 		
 		if(matriculaExistente == null) {
 			throw new MatriculaException();
 		}
 		
 		return matriculaExistente;
+	}
+	
+	@Override
+	public List<Matricula> mostrarDatosAdmin() throws MatriculaException{
+		
+		TypedQuery<Matricula> query = em.createQuery("SELECT m FROM Matricula m",Matricula.class);
+		List<Matricula> matriculas = query.getResultList();
+		if(matriculas == null || matriculas.size() == 0) {
+			throw new MatriculaException("No se ha encontrado matriculas");
+		}
+		
+		return matriculas;
+	}
+	
+	@Override
+	public void borrarMatriculas() throws MatriculaException {
+		for(Matricula m : mostrarDatosAdmin()) {
+			em.remove(m);
+		}
 	}
 	
 }
