@@ -125,21 +125,29 @@ public class Titulaciones{
 	public String importarTitulaciones(){
 		String respuesta = null;
 		try {
-			String sfile = "/tmp/Titulacion.xlsx";
-			File temporal = new File(sfile);
-			temporal.delete();
-			LOGGER.info("AQUI BIEN");
-			archivo.write(sfile);
-			LOGGER.info("AQUI NO LLEGA");
-			a.Importar(sfile);
-			temporal.delete();
-			respuesta = "verTitulaciones.xhtml";
-			LOGGER.info("PS SI NINIO");
+			if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
+				String sfile = "/tmp/Titulacion.xlsx";
+				File temporal = new File(sfile);
+				archivo.write(sfile);
+				a.Importar(sfile);
+				temporal.delete();
+				respuesta = "verTitulaciones.xhtml";
+			} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
+				String sfile = "/tmp/Titulacion.csv";
+				File temporal = new File(sfile);
+				archivo.write(sfile);
+				a.Importar(sfile);
+				temporal.delete();
+				respuesta = "verTitulaciones.xhtml";
+			} else {
+				FacesMessage fm = new FacesMessage("El archivo no es correcto");
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
 		} catch(ImportarException e){
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		} catch (IOException e) {
-			FacesMessage fm = new FacesMessage("aqui llega");
+			FacesMessage fm = new FacesMessage("Error en el archivo");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;

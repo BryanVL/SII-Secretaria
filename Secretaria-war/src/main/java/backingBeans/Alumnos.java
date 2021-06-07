@@ -1,5 +1,7 @@
 package backingBeans;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -10,7 +12,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import excepcionesEJB.AlumnoException;
+import excepcionesEJB.ImportarException;
 import interfacesEJB.InterfazAlumno;
+import io.undertow.servlet.spec.PartImpl;
 import jpa.Alumno;
 
 @Named(value = "alumno")
@@ -23,6 +27,7 @@ public class Alumnos{
 	private InterfazAlumno a;
 	
 	private Alumno alumno;
+	private PartImpl archivo;
 	private List<Alumno> alumnos;
 	private boolean buscar;
 	
@@ -36,6 +41,14 @@ public class Alumnos{
 	
 	public Alumno getAlumno() {
 		return alumno;
+	}
+	
+	public void setArchivo(PartImpl archivo) {
+		this.archivo = archivo;
+	}
+	
+	public PartImpl getArchivo() {
+		return archivo;
 	}
 	
 	public List<Alumno> getAlumnos(){
@@ -91,6 +104,37 @@ public class Alumnos{
 			a.borrarAlumnos();
 		} catch(AlumnoException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		return respuesta;
+	}
+	
+	public String importarAlumnos(){
+		String respuesta = null;
+		try {
+			if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
+				String sfile = "/tmp/Alumnos.xlsx";
+				File temporal = new File(sfile);
+				archivo.write(sfile);
+				a.Importar(sfile);
+				temporal.delete();
+				respuesta = "verAlumnos.xhtml";
+			} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
+				String sfile = "/tmp/Alumnos.csv";
+				File temporal = new File(sfile);
+				archivo.write(sfile);
+				a.Importar(sfile);
+				temporal.delete();
+				respuesta = "verAlumnos.xhtml";
+			} else {
+				FacesMessage fm = new FacesMessage("El archivo no es correcto");
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} catch(ImportarException e){
+			FacesMessage fm = new FacesMessage(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		} catch (IOException e) {
+			FacesMessage fm = new FacesMessage("Error en el archivo");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;

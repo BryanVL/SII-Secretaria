@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import excepcionesEJB.MatriculaException;
 import interfacesEJB.InterfazMatricula;
+import io.undertow.servlet.spec.PartImpl;
 import jpa.Matricula;
 
 @Named(value = "matricula")
@@ -23,6 +24,7 @@ public class Matriculas{
 	private InterfazMatricula m;
 	
 	private Matricula matricula;
+	private PartImpl archivo;
 	private List<Matricula> matriculas;
 	private String curso_academico;
 	private Integer idexp;
@@ -38,6 +40,14 @@ public class Matriculas{
 	
 	public Matricula getMatricula() {
 		return matricula;
+	}
+	
+	public void setArchivo(PartImpl archivo) {
+		this.archivo = archivo;
+	}
+	
+	public PartImpl getArchivo() {
+		return archivo;
 	}
 	
 	public List<Matricula> getMatriculas(){

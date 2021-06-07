@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import excepcionesEJB.ExpedienteException;
 import interfacesEJB.InterfazExpediente;
+import io.undertow.servlet.spec.PartImpl;
 import jpa.Expediente;
 
 @Named(value = "expediente")
@@ -23,6 +24,7 @@ public class Expedientes{
 	private InterfazExpediente e;
 	
 	private Expediente expediente;
+	private PartImpl archivo;
 	private List<Expediente> expedientes;
 	private boolean buscar;
 	
@@ -36,6 +38,14 @@ public class Expedientes{
 	
 	public Expediente getExpediente() {
 		return expediente;
+	}
+	
+	public void setArchivo(PartImpl archivo) {
+		this.archivo = archivo;
+	}
+	
+	public PartImpl getArchivo() {
+		return archivo;
 	}
 	
 	public List<Expediente> getExpedientes(){

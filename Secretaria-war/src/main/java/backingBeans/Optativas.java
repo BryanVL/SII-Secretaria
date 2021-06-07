@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import excepcionesEJB.OptativaException;
 import interfacesEJB.InterfazOptativa;
+import io.undertow.servlet.spec.PartImpl;
 import jpa.Optativa;
 
 @Named(value = "optativa")
@@ -23,6 +24,7 @@ public class Optativas{
 	private InterfazOptativa a;
 	
 	private Optativa optativa;
+	private PartImpl archivo;
 	private Integer referencia;
 	private List<Optativa> optativas;
 	private boolean buscar;
@@ -37,6 +39,14 @@ public class Optativas{
 	
 	public Optativa getOptativa() {
 		return optativa;
+	}
+	
+	public void setArchivo(PartImpl archivo) {
+		this.archivo = archivo;
+	}
+	
+	public PartImpl getArchivo() {
+		return archivo;
 	}
 	
 	public void setReferencia(Integer referencia) {

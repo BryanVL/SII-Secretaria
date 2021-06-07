@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import excepcionesEJB.AsignaturaException;
 import interfacesEJB.InterfazAsignatura;
+import io.undertow.servlet.spec.PartImpl;
 import jpa.Asignatura;
 
 @Named(value = "asignatura")
@@ -23,6 +24,7 @@ public class Asignaturas{
 	private InterfazAsignatura a;
 	
 	private Asignatura asignatura;
+	private PartImpl archivo;
 	private List<Asignatura> asignaturas;
 	private boolean buscar;
 	
@@ -36,6 +38,14 @@ public class Asignaturas{
 	
 	public Asignatura getAsignatura() {
 		return asignatura;
+	}
+	
+	public void setArchivo(PartImpl archivo) {
+		this.archivo = archivo;
+	}
+	
+	public PartImpl getArchivo() {
+		return archivo;
 	}
 	
 	public List<Asignatura> getAsignaturas(){
