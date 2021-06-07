@@ -42,6 +42,7 @@
 						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>
+			<div class="centrado ovf">
 			<c:choose> 
             	<c:when test="#{matricula.buscar}">
             		<h:dataTable value="#{matricula.buscarMatricula(matricula.curso_academico,matricula.idExp)}" var="b">
@@ -84,7 +85,7 @@
 			    	</h:dataTable>
 				</c:otherwise>
         	</c:choose>
-        
+        	</div>
         <div class="centrarTexto">
 			<h:message for=""></h:message>
 		</div>
