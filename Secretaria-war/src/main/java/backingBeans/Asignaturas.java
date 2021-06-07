@@ -122,14 +122,14 @@ public class Asignaturas{
 				archivo.write(sfile);
 				a.Importar(sfile);
 				temporal.delete();
-				respuesta = "verAsignaturas.xhtml";
+				respuesta = "ImportarAdmin.xhtml";
 			} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
 				String sfile = "/tmp/Asignaturas.csv";
 				File temporal = new File(sfile);
 				archivo.write(sfile);
 				a.Importar(sfile);
 				temporal.delete();
-				respuesta = "verAsignaturas.xhtml";
+				respuesta = "ImportarAdmin.xhtml";
 			} else {
 				FacesMessage fm = new FacesMessage("El archivo no es correcto");
 	            FacesContext.getCurrentInstance().addMessage(null, fm);

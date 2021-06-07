@@ -131,14 +131,14 @@ public class Optativas{
 				archivo.write(sfile);
 				a.Importar(sfile);
 				temporal.delete();
-				respuesta = "verOptativas.xhtml";
+				respuesta = "ImportarAdmin.xhtml";
 			} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
 				String sfile = "/tmp/Optativas.csv";
 				File temporal = new File(sfile);
 				archivo.write(sfile);
 				a.Importar(sfile);
 				temporal.delete();
-				respuesta = "verOptativas.xhtml";
+				respuesta = "ImportarAdmin.xhtml";
 			} else {
 				FacesMessage fm = new FacesMessage("El archivo no es correcto");
 	            FacesContext.getCurrentInstance().addMessage(null, fm);
