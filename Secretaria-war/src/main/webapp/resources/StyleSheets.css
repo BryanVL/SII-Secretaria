@@ -38,8 +38,11 @@ h1{
 
 .ovf{
 	overflow: auto;
-	width: 1000px;
-	height: 800px;
+	width: 1600px;
+	height: 500px;
+	margin-top: 50px;
+	background-color: rgba(245,245,245,0.7);
+	border-radius: 15px;
 }
 
 .centrarTexto{
