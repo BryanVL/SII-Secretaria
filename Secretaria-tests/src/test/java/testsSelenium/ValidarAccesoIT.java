@@ -18,18 +18,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import interfacesEJB.InterfazAlumno;
-import testsSelenium.BaseDatos;
-/*import testEJB.BaseDatos;*/
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-public class ValidarUsuarioIT {
+public class ValidarAccesoIT {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
@@ -42,9 +37,9 @@ public class ValidarUsuarioIT {
     driver = new FirefoxDriver();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
-	
-	BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
-	
+    
+    BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
+    
   }
   @After
   public void tearDown() {
@@ -66,6 +61,30 @@ public class ValidarUsuarioIT {
     driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(2)")).click();
     assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(2)")).getText(), is("Admin"));
     driver.findElement(By.cssSelector("td:nth-child(5) > .centrado")).click();
+    driver.findElement(By.id("botonCerrarSesion")).click();
+  }
+  @Test
+  public void validarAccesoAlumnoIT() {
+    driver.get("http://localhost:8080/Secretaria-war/");
+    driver.manage().window().setSize(new Dimension(1283, 887));
+    driver.findElement(By.id("inicioSesion:usuario")).click();
+    driver.findElement(By.id("inicioSesion:usuario")).sendKeys("bvl");
+    driver.findElement(By.id("inicioSesion:password")).sendKeys("test");
+    driver.findElement(By.id("inicioSesion:botonInicioSesion")).click();
+    driver.findElement(By.id("botonMisDatos")).click();
+    assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(1)")).getText(), is("bvl"));
+    assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(2)")).getText(), is("Alumno"));
+    assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(3)")).getText(), is("125678A"));
+    assertThat(driver.findElement(By.cssSelector("td:nth-child(4)")).getText(), is("Bryan"));
+    assertThat(driver.findElement(By.cssSelector("td:nth-child(5)")).getText(), is("velicka"));
+    assertThat(driver.findElement(By.cssSelector("td:nth-child(7)")).getText(), is("velicka.b@uma.es"));
+    driver.findElement(By.cssSelector("th:nth-child(8)")).click();
+    driver.findElement(By.cssSelector(".boton")).click();
+    driver.findElement(By.id("botonRellenarEncuesta")).click();
+    assertFalse(driver.findElement(By.id("j_idt2:j_idt4:0")).isSelected());
+    assertFalse(driver.findElement(By.id("j_idt2:j_idt8:0")).isSelected());
+    assertFalse(driver.findElement(By.id("j_idt2:j_idt14:0")).isSelected());
+    driver.findElement(By.cssSelector("td:nth-child(2) > .centrado")).click();
     driver.findElement(By.id("botonCerrarSesion")).click();
   }
 }
