@@ -27,12 +27,70 @@
 	
 	<div class="centrado">
 		<h1> Rellenar encuesta </h1>
+		<h:form>
 		
-		<table>
-			<tr><td><h:button value="Enviar encuesta" outcome="leerEncuesta.xhtml" class="centrado boton boton1"/></td>
-				<td><h:button value="Volver atrás" outcome="MainPage.xhtml" class="centrado boton boton1"/></td></tr>
-		</table>
-		
+		<div class="wrapper">
+
+				<table>
+				
+					<tr>
+						<td colspan="2"><label>El alumno desea cursar asignaturas en inglés:</label></td>
+					</tr>
+					<tr><td colspan="2">
+						<h:selectOneRadio value="">
+							<f:selectItem itemValue="1" itemLabel="Sí" />
+							
+							<f:selectItem itemValue="2" itemLabel="No" />
+						</h:selectOneRadio>
+						</td>
+					</tr>
+				
+				
+				
+					<tr>
+						<td colspan="2"><label>Si vas a cursar alguna una
+								asignatura de segundo curso seleccione uno más grupos:</label></td>
+					</tr>
+					<tr><td colspan="2">
+						<h:selectManyCheckbox value="">
+							<f:selectItem itemValue="1" itemLabel="2ºA" />
+							
+							<f:selectItem itemValue="2" itemLabel="2ºB (Inglés)" />
+							
+							<f:selectItem itemValue="3" itemLabel="2ºC (Tarde)" />
+							
+							<f:selectItem itemValue="4" itemLabel="2ºD" />
+							
+
+						</h:selectManyCheckbox></td>
+					</tr>
+
+
+					<tr>
+						<td colspan="2"><label>Si vas a cursar alguna una
+								asignatura de tercer curso seleccione uno de los grupos:</label></td>
+					</tr>
+					<tr><td colspan="2">
+						<h:selectManyCheckbox value="">
+							<f:selectItem itemValue="1" itemLabel="3ºA" />
+							
+							<f:selectItem itemValue="2" itemLabel="3ºB" />
+							
+
+
+						</h:selectManyCheckbox></td>
+					</tr>
+
+					<tr>
+						<td><h:button value="Enviar encuesta" type="submit"
+								outcome="leerEncuesta.xhtml" class="centrado boton boton1" /></td>
+						<td><h:button value="Volver atrás" outcome="MainPage.xhtml"
+								class="centrado boton boton1" /></td>
+					</tr>
+				</table>
+
+			</div>
+		</h:form>
 	</div>
 
 	<div class="foot"> 
