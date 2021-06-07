@@ -36,6 +36,10 @@ h1{
     margin:auto;
 }
 
+.ovf{
+	overflow: auto;
+}
+
 .centrarTexto{
 	text-align:center;
 }

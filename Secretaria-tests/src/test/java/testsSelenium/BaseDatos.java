@@ -156,7 +156,7 @@ public class BaseDatos {
 			//-----------------------------------------------//
 			Asignatura asignatura = new Asignatura();
 			asignatura.setReferencia(12345);
-			asignatura.setCodigo(900);
+			asignatura.setCodigo(950);
 			asignatura.setCreditos_total((float)6);
 			asignatura.setOfertada("Si");
 			asignatura.setNombre("Pruebas con Junit");
@@ -166,7 +166,7 @@ public class BaseDatos {
 			
 			Asignatura asignatura2 = new Asignatura();
 			asignatura2.setReferencia(12346);
-			asignatura2.setCodigo(901);
+			asignatura2.setCodigo(951);
 			asignatura2.setCreditos_total((float)6);
 			asignatura2.setOfertada("Si");
 			asignatura2.setNombre("Pruebas con Junit2");
