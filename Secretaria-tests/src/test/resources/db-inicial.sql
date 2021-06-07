@@ -1,0 +1,2 @@
+INSERT INTO Usuario (usuario,password,rol) VALUES ('admin','admin','Admin');
+insert into Alumno (nombre, apellido1, id, dni, Email_institucional) values ('Bryan', 'velicka', 1234, '125678A', 'velicka.b@uma.es');

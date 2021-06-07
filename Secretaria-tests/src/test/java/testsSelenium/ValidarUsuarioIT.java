@@ -33,7 +33,10 @@ public class ValidarUsuarioIT {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
-  private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaTest";
+  
+  private static final String UNIDAD_PERSITENCIA_PRUEBAS = "SecretariaPU";
+  
+  
   @Before
   public void setUp() {
     driver = new FirefoxDriver();
