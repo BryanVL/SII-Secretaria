@@ -9,4 +9,6 @@ insert into Asignatura (referencia, codigo, Creditos_total, Ofertada, Nombre, TI
 insert into Optativa (ASIGNATURA_REFERENCIA, Mencion, Plazas) values (12346, 'Informatica', 50);
 insert into Grupo(id, curso, letra, Turno_Mañana_Tarde, Ingles, Plazas, PlazasDisponibles, TITULACION_CODIGO) values (1,1,'A', 'Mañana', 'Sí', 50, 50, 1234);
 insert into Grupo(id, curso, letra, Turno_Mañana_Tarde, Ingles, Plazas, PlazasDisponibles, TITULACION_CODIGO) values (2,1,'B', 'Mañana', 'Sí', 50, 50, 1234);
+insert into Clase (dia, hora_inicio, grupo_id, ASIGNATURA_REFERENCIA) values (str_to_date('24/09/2018', '%d/%m/%Y'), TIME('10:45:00'), 1, 12345);
+insert into Clase (dia, hora_inicio, grupo_id, ASIGNATURA_REFERENCIA) values (str_to_date('24/09/2018', '%d/%m/%Y'), TIME('12:45:00'), 2, 12345);
 
