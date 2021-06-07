@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import excepcionesEJB.UsuarioException;
@@ -21,6 +22,9 @@ public class User{
 	
 	@EJB
 	private InterfazUsuario u;
+	
+	@Inject
+	private InfoSesion sesion;
 	
 	private Usuario usuario;
 	private List<Usuario> usuarios;
@@ -60,6 +64,7 @@ public class User{
 		try {
 			
 			Usuario usu = u.validarAcceso(usuario.getUsuario(), usuario.getPassword());
+			sesion.setUsuario(usu);
 			if(usu.getRol().equals("Admin")) {
 				respuesta = "MainPageAdmin.xhtml";
 			} else {

@@ -125,15 +125,11 @@ public class Titulaciones{
 	public String importarTitulaciones(){
 		String respuesta = null;
 		try {
-			LOGGER.info("VAMOS BIMBO");
 			String sfile = "tmp/Titulacion.xlsx";
-			LOGGER.info("VAMOS PITO");
 			File temporal = new File(sfile);
-			LOGGER.info("VAMOS MAMBO");
-			temporal.delete();
-			LOGGER.info("VAMOS CABRA");
+			LOGGER.info("AQUI BIEN");
 			archivo.write(sfile);
-			LOGGER.info("VAMOS GUCCI");
+			LOGGER.info("AQUI NO LLEGA");
 			a.Importar(sfile);
 			temporal.delete();
 			respuesta = "verTitulaciones.xhtml";
@@ -142,7 +138,7 @@ public class Titulaciones{
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		} catch (IOException e) {
-			FacesMessage fm = new FacesMessage("Comeme el webo");
+			FacesMessage fm = new FacesMessage("aqui llega");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;

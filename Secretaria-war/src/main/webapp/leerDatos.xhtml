@@ -32,14 +32,11 @@
 		<h:form id="Usuario">
 			<div class="wrapper">
 				<table>
-					<tr><td colspan="2"><label>Introduce tu nombre de usuario</label><br/><h:inputText id="MiNombre" value="#{user.usuario.usuario}" required="True" class="inputTxt" p:placeholder="Ejemplo: Pacopepe14" /></td>
-						<td  class="padSuperior"><h:commandButton id="botonBuscarMiUsuario" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+					<tr>
 						<td><h:button value="Volver atrás" outcome="MainPage.xhtml" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>
-           	<c:choose> 
-            	<c:when test="#{user.buscar}">
-            		<h:dataTable value="#{user.buscarUsuario(user.usuario.usuario)}" var="a">
+            		<h:dataTable value="#{user.buscarUsuario(infoSesion.usuario.usuario)}" var="a">
 	            		<h:column>
 							<f:facet name="header">Usuario</f:facet>
 				            <h:outputText value="#{a.usuario}"/>
@@ -110,8 +107,6 @@
 		                   	<h:outputText value="#{a.alumno.CP}"/>
 		               	</h:column>
 					</h:dataTable>
-            	</c:when>
-        	</c:choose>
         	
         	<div class="centrarTexto">
 				<h:message for=""></h:message>
