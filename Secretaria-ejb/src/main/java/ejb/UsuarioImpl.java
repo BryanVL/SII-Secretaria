@@ -2,6 +2,7 @@ package ejb;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -119,6 +120,20 @@ public class UsuarioImpl implements InterfazUsuario{
 				em.merge(al);
 				em.remove(u);
 			}
+		}
+	}
+	
+	@PostConstruct
+	public void comprobarAdmin() {
+		
+		Usuario usuario = em.find(Usuario.class, "admin");
+		
+		if(usuario==null) {
+			Usuario user = new Usuario();
+			user.setUsuario("admin");
+			user.setPassword("admin");
+			user.setRol("Admin");
+			em.persist(user);
 		}
 	}
 	
