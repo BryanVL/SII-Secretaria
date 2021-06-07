@@ -296,5 +296,24 @@ public class ClaseImpl implements InterfazHorarios{
 		
 		return res;
 	}
+
+	@Override
+	public List<Clase> mostrarDatosAdmin() throws ClaseException{
+		
+		TypedQuery<Clase> query = em.createQuery("SELECT a FROM Clase a",Clase.class);
+		List<Clase> clases = query.getResultList();
+		if(clases == null || clases.size() == 0) {
+			throw new ClaseException("No se ha encontrado clases");
+		}
+		
+		return clases;
+	}
+	
+	@Override
+	public void borrarClases() throws ClaseException {
+		for(Clase c : mostrarDatosAdmin()) {
+			em.remove(c);
+		}
+	}
 	
 }

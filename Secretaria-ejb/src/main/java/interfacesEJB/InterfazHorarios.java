@@ -27,4 +27,8 @@ public interface InterfazHorarios {
 	public HashMap<Asignatura, List<Clase>> VisualizarHorarios(Alumno a, Matricula matricula) throws ClaseException, AlumnoException, MatriculaException;
 	
 	public void Importar(String dir) throws ImportarException;
+	
+	public void borrarClases() throws ClaseException;
+	
+	public List<Clase> mostrarDatosAdmin() throws ClaseException;
 }

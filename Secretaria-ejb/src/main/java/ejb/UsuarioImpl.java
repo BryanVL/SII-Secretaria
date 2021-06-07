@@ -109,17 +109,13 @@ public class UsuarioImpl implements InterfazUsuario{
 	}
 	
 	@Override
-	public void borrarUsuarios() throws UsuarioException {
-		for(Usuario u : mostrarDatosAdmin()) {
-//			if(!u.getUsuario().equals("admin")) {
-//				em.remove(u);
-//			}
-			if(!u.getRol().equals("Admin")) {
-				Alumno al = u.getAlumno();
-				al.setUsuario(null);
-				em.merge(al);
-				em.remove(u);
-			}
+	public void borrarUsuario(String usuario) throws UsuarioException {
+		if(!usuario.equals("admin")) {
+			Usuario u = em.find(Usuario.class, usuario);
+			Alumno al = u.getAlumno();
+			al.setUsuario(null);
+			em.merge(al);
+			em.remove(u);
 		}
 	}
 	

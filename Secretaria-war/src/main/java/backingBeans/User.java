@@ -85,11 +85,10 @@ public class User{
 		return respuesta;
 	}
 	
-	public Usuario buscarUsuario(String usuario) {
+	public Usuario buscarUsuario(String nombre) {
 		Usuario user = null;
 		try {
-			LOGGER.info("Buscando Usuario: " + usuario);
-			user = u.mostrarDatos(usuario);
+			user = u.mostrarDatos(nombre);
 		}catch(UsuarioException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);
@@ -110,14 +109,20 @@ public class User{
 		return usuario;
 	}
 	
-	public String borrarUsuarios() {
+	
+	public String borrarUsuarios(String nombre) {
 		String respuesta = null;
 		try {
-			u.borrarUsuarios();
+			u.borrarUsuario(nombre);
 		} catch(UsuarioException e) {
 			FacesMessage fm = new FacesMessage(e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;
 	}
+	
+	public String cerrarSesion() {
+		return sesion.cerrarSesion();
+	}
+	
 }

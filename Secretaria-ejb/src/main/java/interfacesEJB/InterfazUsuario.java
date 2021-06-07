@@ -24,6 +24,6 @@ public interface InterfazUsuario {
 	
 	public void crearSecretaria(String nombre, String pass) throws UsuarioException;
 	
-	public void borrarUsuarios() throws UsuarioException;
+	public void borrarUsuario(String usuario) throws UsuarioException;
 	
 }

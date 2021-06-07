@@ -33,16 +33,15 @@
 		<div class="wrapper">
 			<table >
 				<tr><td><h:button value="Ver Datos" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td>
-					<td><h:button value="Importar Datos" outcome="ImportarAdmin.xhtml" class="centrado boton boton1"/></td>
-					<td><h:button value="Ver Datos de un Usuario" outcome="MainPage.xhtml" class="centrado boton boton1"/></td></tr>
+					<td><h:button value="Importar Datos" outcome="ImportarAdmin.xhtml" class="centrado boton boton1"/></td></tr>
 			</table>
 		</div>
 
-  	
+  	<h:form>
 		<table>
-			<tr><td><h:button id="botonCerrarSesion" outcome="index.xhtml" value="Cerrar Sesión" class="centrado boton boton1"/></td></tr>
+			<tr><td><h:commandButton id="botonCerrarSesion" action="#{user.cerrarSesion}" value="Cerrar Sesión" class="centrado boton boton1"/></td></tr>
 		</table>
-		
+	</h:form>	
 	</div>
  	
 
