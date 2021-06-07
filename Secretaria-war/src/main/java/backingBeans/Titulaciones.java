@@ -125,8 +125,9 @@ public class Titulaciones{
 	public String importarTitulaciones(){
 		String respuesta = null;
 		try {
-			String sfile = "tmp/Titulacion.xlsx";
+			String sfile = "/tmp/Titulacion.xlsx";
 			File temporal = new File(sfile);
+			temporal.delete();
 			LOGGER.info("AQUI BIEN");
 			archivo.write(sfile);
 			LOGGER.info("AQUI NO LLEGA");

@@ -72,6 +72,8 @@ public class TitulacionImpl implements InterfazTitulacion{
 				if(contF >= 1) {
 						
 					Integer codigo = (int) fila.getCell(0).getNumericCellValue();
+					Titulacion prueba = em.find(Titulacion.class, codigo);
+					if(prueba == null) {
 					String nombre = fila.getCell(1).getStringCellValue();
 					Float creditos = (float) fila.getCell(2).getNumericCellValue();
 					
@@ -81,6 +83,7 @@ public class TitulacionImpl implements InterfazTitulacion{
 		    		t.setCreditos(creditos);
 		    		
 		    		em.persist(t);
+					}
 		    	}
 		    		contF++;
 		    		fila = sheet.getRow(contF);
@@ -102,6 +105,8 @@ public class TitulacionImpl implements InterfazTitulacion{
 	            	if(n>=1) {
 	            		
 	            		String codigo = csvRecord.get(0);
+	            		Titulacion prueba = em.find(Titulacion.class, Integer.parseInt(codigo));
+						if(prueba == null) {
 			    		String nombre = csvRecord.get(1);
 			    		String creditos = csvRecord.get(2);  
 			    		
@@ -111,6 +116,7 @@ public class TitulacionImpl implements InterfazTitulacion{
 			    		t.setCreditos( Float.parseFloat(creditos) );
 			    		 
 			    		em.persist(t);
+						}
 	            	}
 	            	n++;
 				}

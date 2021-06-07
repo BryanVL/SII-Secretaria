@@ -33,13 +33,14 @@
 			<div class="wrapper">
 				<table>
 					<tr>
-						
-						<td>
-							<label class="centrado boton boton1">
-								<h:inputFile  id="file-id" type="file" value="#{titulacion.archivo}" required="true" requiredMessage="Please upload a file" />
-							</label>
-						</td>
-						
+						<td><h:form id="Importar" method="post"
+								enctype="multipart/form-data">
+								<label class="centrado boton boton1"> <h:inputFile
+										id="file-id" value="#{titulacion.archivo}" required="true"
+										requiredMessage="Please upload a file" />
+								</label>
+							</h:form></td>
+
 						<td  class="padSuperior"><h:commandButton id="importarTitulacion" action="#{titulacion.importarTitulaciones()}" value="Importar" var="b" class="centrado boton boton1"/></td>
 						<td><h:button value="Ver todo" outcome="verTitulaciones.xhtml" class="centrado boton boton1"/></td>
 						<td  class="padSuperior"><h:commandButton id="botonEliminarTitulaciones" action="#{titulacion.borrarTitulaciones()}" value="Eliminar titulaciones" class="centrado boton boton1"/></td>

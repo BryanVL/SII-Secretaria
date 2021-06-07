@@ -182,6 +182,7 @@ public class MatriculaImpl implements InterfazMatricula{
 //			    			TypedQuery<Asignatura> query2 = em.createQuery("Select a from Asignatura a where a.Codigo = :codi", Asignatura.class);
 //				            query2.setParameter("codi",Integer.parseInt(asig[i].substring(0,3)));
 //				    		Asignatura asignatura = query2.getSingleResult();
+//							PROBAR CON GETRESULTLIST()
 //				    		am.setAsignatura(asignatura);
 //			    			am.setMatricula(m);
 //				    		lista.add(am);
@@ -189,7 +190,6 @@ public class MatriculaImpl implements InterfazMatricula{
 //			    		}
 //		            	m.setAsigMat(lista);
 //		            	em.merge(m);
-//			    		
 			    		
 			    	}
 	            	n++;
