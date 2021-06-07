@@ -76,29 +76,33 @@ public class OptativaImpl implements InterfazOptativa{
 						if(contF >= 1) {
 								
 							Integer referencia = (int) fila.getCell(0).getNumericCellValue();
-							Integer plazas = (int) fila.getCell(1).getNumericCellValue();
-							String mencion;
-							if(i == 1) {
-								mencion = fila.getCell(2).getStringCellValue();
-							} else {
-								mencion = "Informatica";
+							
+							Optativa opt = em.find(Optativa.class, referencia);
+							if(opt == null) {
+								Integer plazas = (int) fila.getCell(1).getNumericCellValue();
+								String mencion;
+								if(i == 1) {
+									mencion = fila.getCell(2).getStringCellValue();
+								} else {
+									mencion = "Informatica";
+								}
+								Asignatura asignaturaExistente = em.find(Asignatura.class, referencia);
+					    		if(asignaturaExistente == null) {
+					    			throw new AsignaturaException();
+					    		}
+					    		
+					    		Optativa o = new Optativa();
+					    		o.setPlazas(plazas);
+					    		o.setMencion(mencion);
+					    		o.setAsignatura(asignaturaExistente);
+					    		
+					    		Titulacion titulacion = asignaturaExistente.getTitulacion();
+					    		List<Titulacion> titulaciones = new ArrayList<>();
+					    		titulaciones.add(titulacion);
+					    		o.setTitulaciones(titulaciones);
+					    		
+					    		em.persist(o);
 							}
-							Asignatura asignaturaExistente = em.find(Asignatura.class, referencia);
-				    		if(asignaturaExistente == null) {
-				    			throw new AsignaturaException();
-				    		}
-				    		
-				    		Optativa o = new Optativa();
-				    		o.setPlazas(plazas);
-				    		o.setMencion(mencion);
-				    		o.setAsignatura(asignaturaExistente);
-				    		
-				    		Titulacion titulacion = asignaturaExistente.getTitulacion();
-				    		List<Titulacion> titulaciones = new ArrayList<>();
-				    		titulaciones.add(titulacion);
-				    		o.setTitulaciones(titulaciones);
-				    		
-				    		em.persist(o);
 				    	}
 				    		contF++;
 				    		fila = sheet.getRow(contF);
@@ -120,29 +124,32 @@ public class OptativaImpl implements InterfazOptativa{
 	            	if(n>=1) {
 	            		
 			    		Integer referencia = Integer.parseInt(csvRecord.get(0));
-			    		String plazas = csvRecord.get(1);
 			    		
-			    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia);
-			    		if(asignaturaExistente == null) {
-			    			throw new AsignaturaException();
-			    		}
-			    		
-			    		Optativa o = new Optativa();
-			    		o.setPlazas( Integer.parseInt(plazas) );
-			    		
-			    		if(csvRecord.size() == 3) {
-			    			String mencion = csvRecord.get(2);
-			    			o.setMencion(mencion);
-			    		}
-			    		o.setAsignatura(asignaturaExistente);
-			    		
-			    		Titulacion titulacion = asignaturaExistente.getTitulacion();
-			    		List<Titulacion> titulaciones = new ArrayList<>();
-			    		titulaciones.add(titulacion);
-			    		o.setTitulaciones(titulaciones);
-			    		
-			    		em.persist(o);
-			    		
+			    		Optativa opt = em.find(Optativa.class, referencia);
+						if(opt == null) {
+				    		String plazas = csvRecord.get(1);
+				    		
+				    		Asignatura asignaturaExistente = em.find(Asignatura.class, referencia);
+				    		if(asignaturaExistente == null) {
+				    			throw new AsignaturaException();
+				    		}
+				    		
+				    		Optativa o = new Optativa();
+				    		o.setPlazas( Integer.parseInt(plazas) );
+				    		
+				    		if(csvRecord.size() == 3) {
+				    			String mencion = csvRecord.get(2);
+				    			o.setMencion(mencion);
+				    		}
+				    		o.setAsignatura(asignaturaExistente);
+				    		
+				    		Titulacion titulacion = asignaturaExistente.getTitulacion();
+				    		List<Titulacion> titulaciones = new ArrayList<>();
+				    		titulaciones.add(titulacion);
+				    		o.setTitulaciones(titulaciones);
+				    		
+				    		em.persist(o);
+						}
 	            	}
 	            	n++;
 				}

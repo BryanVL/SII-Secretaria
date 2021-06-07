@@ -72,33 +72,40 @@ public class AlumnoImpl implements InterfazAlumno{
 				if(contF >= 4) {
 						
 					String dni= fila.getCell(0).getStringCellValue();
-					String nombre = fila.getCell(1).getStringCellValue();
-					String apellido1 = fila.getCell(2).getStringCellValue();
-					String apellido2 = fila.getCell(3).getStringCellValue();
-					String email_i = fila.getCell(6).getStringCellValue();
-					String email_p = fila.getCell(7).getStringCellValue();
-					String telefono = fila.getCell(8).getStringCellValue();
-					String movil = fila.getCell(9).getStringCellValue();
-					String direccion = fila.getCell(10).getStringCellValue();
-					String localidad = fila.getCell(11).getStringCellValue();
-					String provincia = fila.getCell(12).getStringCellValue();
-					Integer cp = (int) fila.getCell(13).getNumericCellValue();
 					
-					Alumno a = new Alumno();
-		    		a.setDNI(dni);
-		    		a.setNombre(nombre);
-		    		a.setApellido1(apellido1);
-		    		a.setApellido2(apellido2);
-		    		a.setEmail_institucional(email_i);
-		    		a.setEmail_personal(email_p);
-		    		a.setTelefono( Integer.parseInt(telefono.replaceAll(" ","")) );
-		    		a.setMovil(Integer.parseInt(movil.replaceAll(" ", "")) );
-		    		a.setDireccion(direccion);
-		    		a.setLocalidad(localidad);
-		    		a.setProvincia(provincia);
-		    		a.setCP(cp);
+					TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
+			    	query.setParameter("fdni", dni);
+			        List<Alumno> alumnos = query.getResultList();
 					
-		    		em.persist(a);
+			        if(alumnos == null || alumnos.size() == 0) {
+						String nombre = fila.getCell(1).getStringCellValue();
+						String apellido1 = fila.getCell(2).getStringCellValue();
+						String apellido2 = fila.getCell(3).getStringCellValue();
+						String email_i = fila.getCell(6).getStringCellValue();
+						String email_p = fila.getCell(7).getStringCellValue();
+						String telefono = fila.getCell(8).getStringCellValue();
+						String movil = fila.getCell(9).getStringCellValue();
+						String direccion = fila.getCell(10).getStringCellValue();
+						String localidad = fila.getCell(11).getStringCellValue();
+						String provincia = fila.getCell(12).getStringCellValue();
+						Integer cp = (int) fila.getCell(13).getNumericCellValue();
+						
+						Alumno a = new Alumno();
+			    		a.setDNI(dni);
+			    		a.setNombre(nombre);
+			    		a.setApellido1(apellido1);
+			    		a.setApellido2(apellido2);
+			    		a.setEmail_institucional(email_i);
+			    		a.setEmail_personal(email_p);
+			    		a.setTelefono( Integer.parseInt(telefono.replaceAll(" ","")) );
+			    		a.setMovil(Integer.parseInt(movil.replaceAll(" ", "")) );
+			    		a.setDireccion(direccion);
+			    		a.setLocalidad(localidad);
+			    		a.setProvincia(provincia);
+			    		a.setCP(cp);
+						
+			    		em.persist(a);
+			        }
 		    	}
 		    		contF++;
 		    		fila = sheet.getRow(contF);
@@ -118,33 +125,41 @@ public class AlumnoImpl implements InterfazAlumno{
 	            	if(n>=4) {
 	            		
 			    		String dni = csvRecord.get(0);
-			    		String nombre = csvRecord.get(1);
-			    		String apellido1 = csvRecord.get(2);  
-			    		String apellido2 = csvRecord.get(3);
-			    		String email_i = csvRecord.get(6);
-			    		String email_p = csvRecord.get(7); 
-			    		String telefono = csvRecord.get(8);
-			    		String movil = csvRecord.get(9);
-			    		String direccion = csvRecord.get(10);
-			    		String localidad = csvRecord.get(11);
-			    		String provincia = csvRecord.get(12);
-			    		String cp = csvRecord.get(13);
-	            		
-	            		Alumno a = new Alumno();
-			    		a.setDNI(dni);
-			    		a.setNombre(nombre);
-			    		a.setApellido1(apellido1);
-			    		a.setApellido2(apellido2);
-			    		a.setEmail_institucional(email_i);
-			    		a.setEmail_personal(email_p);
-			    		a.setTelefono( Integer.parseInt(telefono.replaceAll(" ","")) );
-			    		a.setMovil(Integer.parseInt(movil.replaceAll(" ", "")) );
-			    		a.setDireccion(direccion);
-			    		a.setLocalidad(localidad);
-			    		a.setProvincia(provincia);
-			    		a.setCP( Integer.parseInt(cp) );
-			    		 
-			    		em.persist(a);
+			    		
+			    		TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
+			        	query.setParameter("fdni", dni);
+			            List<Alumno> alumnos = query.getResultList();
+			    		
+			            if(alumnos == null || alumnos.size() == 0) {
+			    		
+				    		String nombre = csvRecord.get(1);
+				    		String apellido1 = csvRecord.get(2);  
+				    		String apellido2 = csvRecord.get(3);
+				    		String email_i = csvRecord.get(6);
+				    		String email_p = csvRecord.get(7); 
+				    		String telefono = csvRecord.get(8);
+				    		String movil = csvRecord.get(9);
+				    		String direccion = csvRecord.get(10);
+				    		String localidad = csvRecord.get(11);
+				    		String provincia = csvRecord.get(12);
+				    		String cp = csvRecord.get(13);
+		            		
+		            		Alumno a = new Alumno();
+				    		a.setDNI(dni);
+				    		a.setNombre(nombre);
+				    		a.setApellido1(apellido1);
+				    		a.setApellido2(apellido2);
+				    		a.setEmail_institucional(email_i);
+				    		a.setEmail_personal(email_p);
+				    		a.setTelefono( Integer.parseInt(telefono.replaceAll(" ","")) );
+				    		a.setMovil(Integer.parseInt(movil.replaceAll(" ", "")) );
+				    		a.setDireccion(direccion);
+				    		a.setLocalidad(localidad);
+				    		a.setProvincia(provincia);
+				    		a.setCP( Integer.parseInt(cp) );
+				    		 
+				    		em.persist(a);
+			            }
 	            	}
 	            	n++;
 				}

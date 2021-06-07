@@ -72,44 +72,48 @@ public class ExpedienteImpl implements InterfazExpediente{
 	    	 
 		    		   Integer nExpediente = (int) fila.getCell(4).getNumericCellValue();
 		    		   
-		    		   Float notaMedia;
-		    		   if(fila.getCell(17).getCellType() == CellType.STRING) {
-		    			   notaMedia = Float.parseFloat(fila.getCell(17).getStringCellValue());
-		    		   } else {
-		    			   notaMedia = (float) fila.getCell(17).getNumericCellValue();
+		    		   Expediente exp = em.find(Expediente.class, nExpediente);
+		    		   if(exp == null) {
+			    		   
+			    		   Float notaMedia;
+			    		   if(fila.getCell(17).getCellType() == CellType.STRING) {
+			    			   notaMedia = Float.parseFloat(fila.getCell(17).getStringCellValue());
+			    		   } else {
+			    			   notaMedia = (float) fila.getCell(17).getNumericCellValue();
+			    		   }
+			    		   
+			    		   Float creditosSuperados;
+			    		   if(fila.getCell(18).getCellType() == CellType.NUMERIC) {
+			    			   creditosSuperados = (float) fila.getCell(18).getNumericCellValue();
+			    		   } else {
+			    			   creditosSuperados = Float.parseFloat(fila.getCell(18).getStringCellValue());
+			    		   }
+			    		   
+			    		   String dniAlumno = fila.getCell(0).getStringCellValue();
+			    		   TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
+			    		   query.setParameter("fdni", dniAlumno);
+			    		   List<Alumno> alumnos = query.getResultList();
+			    		   if(alumnos.size() == 0) {
+			    			   throw new AlumnoException();
+			    		   }
+	               	
+			    		   Integer codigoTitulacion = nExpediente/100000;
+			    		   Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
+			    		   if(titulacionExistente == null) {
+			    			   throw new TitulacionException();
+			    		   }
+			           
+			           
+			    		   Expediente e = new Expediente();  
+			    		   e.setNota_media_provisional(notaMedia);
+			    		   e.setCreditos_superados(creditosSuperados);
+			    		   e.setNum_expediente(nExpediente);
+			    		   e.setActivo(true);
+			    		   e.setTitulacion(titulacionExistente);
+			    		   e.setAlumno(alumnos.get(0));
+		            	
+			    		   em.persist(e);
 		    		   }
-		    		   
-		    		   Float creditosSuperados;
-		    		   if(fila.getCell(18).getCellType() == CellType.NUMERIC) {
-		    			   creditosSuperados = (float) fila.getCell(18).getNumericCellValue();
-		    		   } else {
-		    			   creditosSuperados = Float.parseFloat(fila.getCell(18).getStringCellValue());
-		    		   }
-		    		   
-		    		   String dniAlumno = fila.getCell(0).getStringCellValue();
-		    		   TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
-		    		   query.setParameter("fdni", dniAlumno);
-		    		   List<Alumno> alumnos = query.getResultList();
-		    		   if(alumnos.size() == 0) {
-		    			   throw new AlumnoException();
-		    		   }
-               	
-		    		   Integer codigoTitulacion = nExpediente/100000;
-		    		   Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
-		    		   if(titulacionExistente == null) {
-		    			   throw new TitulacionException();
-		    		   }
-		           
-		           
-		    		   Expediente e = new Expediente();  
-		    		   e.setNota_media_provisional(notaMedia);
-		    		   e.setCreditos_superados(creditosSuperados);
-		    		   e.setNum_expediente(nExpediente);
-		    		   e.setActivo(true);
-		    		   e.setTitulacion(titulacionExistente);
-		    		   e.setAlumno(alumnos.get(0));
-	            	
-		    		   em.persist(e);
 		    	   }
 					
 			    	contF++;
@@ -134,33 +138,38 @@ public class ExpedienteImpl implements InterfazExpediente{
 	            	if(n>=4) {
 	            		
 	            		String nExpediente = csvRecord.get(4);
-	                	String notaMedia = csvRecord.get(17);
-	                	String creditosSuperados = csvRecord.get(18);
-	                	String dniAlumno = csvRecord.get(0);
-	                	TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
-	                	query.setParameter("fdni", dniAlumno);
-	                    List<Alumno> alumnos = query.getResultList();
-	                    
-	                    if(alumnos.size() == 0) {
-	                    	throw new AlumnoException();
-	                    }
-	          
-	                    Integer codigoTitulacion = Integer.parseInt(nExpediente.substring(0, 4));
-	                	Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
-	                	
-	                	if(titulacionExistente == null) {
-	                    	throw new TitulacionException();
-	                    }
-
-	                	Expediente e = new Expediente();
-	                	e.setNota_media_provisional(Float.parseFloat(notaMedia));
-	                	e.setCreditos_superados(Float.parseFloat(creditosSuperados));
-	                	e.setNum_expediente(Integer.parseInt(nExpediente));
-	                	e.setActivo(true);
-	                	e.setTitulacion(titulacionExistente);
-	                	e.setAlumno(alumnos.get(0));
-	                
-	            		em.persist(e);
+	            		
+	            		Expediente exp = em.find(Expediente.class, Integer.parseInt(nExpediente));
+	            		if(exp == null) {
+		            		
+		                	String notaMedia = csvRecord.get(17);
+		                	String creditosSuperados = csvRecord.get(18);
+		                	String dniAlumno = csvRecord.get(0);
+		                	TypedQuery <Alumno> query = em.createQuery("Select a from Alumno a where a.DNI = :fdni", Alumno.class);
+		                	query.setParameter("fdni", dniAlumno);
+		                    List<Alumno> alumnos = query.getResultList();
+		                    
+		                    if(alumnos.size() == 0) {
+		                    	throw new AlumnoException();
+		                    }
+		          
+		                    Integer codigoTitulacion = Integer.parseInt(nExpediente.substring(0, 4));
+		                	Titulacion titulacionExistente = em.find(Titulacion.class, codigoTitulacion );
+		                	
+		                	if(titulacionExistente == null) {
+		                    	throw new TitulacionException();
+		                    }
+	
+		                	Expediente e = new Expediente();
+		                	e.setNota_media_provisional(Float.parseFloat(notaMedia));
+		                	e.setCreditos_superados(Float.parseFloat(creditosSuperados));
+		                	e.setNum_expediente(Integer.parseInt(nExpediente));
+		                	e.setActivo(true);
+		                	e.setTitulacion(titulacionExistente);
+		                	e.setAlumno(alumnos.get(0));
+		                
+		            		em.persist(e);
+	            		}
 	            	}
 	            	n++;
 				}

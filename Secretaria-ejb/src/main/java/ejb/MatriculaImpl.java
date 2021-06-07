@@ -97,26 +97,30 @@ public class MatriculaImpl implements InterfazMatricula{
 			    		mpk.setCurso_academico(Curso_academico);
 			    		mpk.setIdExp(Integer.parseInt(idExp));
 			    		
-			    		//Administro el expediente asignado a la Matricula:
-			    		TypedQuery<Expediente> query = em.createQuery("Select e from Expediente e where e.Num_expediente = :ide", Expediente.class);
-			            query.setParameter("ide", Integer.parseInt(idExp));
-			    		Expediente e = query.getSingleResult();
-			    		if(e == null) {
-			    			throw new ExpedienteException();
+			    		Matricula mat = em.find(Matricula.class, mpk);
+			    		if(mat == null) {
+				    		
+				    		//Administro el expediente asignado a la Matricula:
+				    		TypedQuery<Expediente> query = em.createQuery("Select e from Expediente e where e.Num_expediente = :ide", Expediente.class);
+				            query.setParameter("ide", Integer.parseInt(idExp));
+				    		Expediente e = query.getSingleResult();
+				    		if(e == null) {
+				    			throw new ExpedienteException();
+				    		}
+				    		
+				    		//Administro los datos de la fila total:
+				    		Matricula m = new Matricula();
+				    		m.setId(mpk);
+				    		m.setEstado(Estado);
+			            	m.setFecha_de_matricula(Fecha_de_matricula);
+				    		m.setNum_Archivo(Num_Archivo);
+				    		m.setTurno_Preferente(Turno_Preferente);
+				    		m.setNuevo_Ingreso(Nuevo_Ingreso);
+				    		m.setListado_Asignaturas(Listado_Asignaturas);
+				    		m.setExpediente(e);
+				    		
+				    		em.persist(m);
 			    		}
-			    		
-			    		//Administro los datos de la fila total:
-			    		Matricula m = new Matricula();
-			    		m.setId(mpk);
-			    		m.setEstado(Estado);
-		            	m.setFecha_de_matricula(Fecha_de_matricula);
-			    		m.setNum_Archivo(Num_Archivo);
-			    		m.setTurno_Preferente(Turno_Preferente);
-			    		m.setNuevo_Ingreso(Nuevo_Ingreso);
-			    		m.setListado_Asignaturas(Listado_Asignaturas);
-			    		m.setExpediente(e);
-			    		
-			    		em.persist(m);
 			    	}
 					contF++;
 					fila = sheet.getRow(contF);
@@ -153,22 +157,25 @@ public class MatriculaImpl implements InterfazMatricula{
 			    		mpk.setCurso_academico(Curso_academico);
 			    		mpk.setIdExp(Integer.parseInt(idExp));
 			    		
-			    		//Administro el expediente asignado a la Matricula:
-			    		TypedQuery<Expediente> query = em.createQuery("Select e from Expediente e where e.Num_expediente = :ide", Expediente.class);
-			            query.setParameter("ide", Integer.parseInt(idExp));
-			    		Expediente e = query.getSingleResult();
-			            
-			    		//Administro los datos de la fila total:
-			    		Matricula m = new Matricula();
-			    		m.setId(mpk);
-			    		m.setEstado(Estado);
-		            	m.setFecha_de_matricula(new Date(Fecha_de_matricula));
-			    		m.setNum_Archivo(Integer.parseInt(Num_Archivo));
-			    		m.setTurno_Preferente(Turno_Preferente);
-			    		m.setNuevo_Ingreso(Nuevo_Ingreso);
-			    		m.setListado_Asignaturas(Listado_Asignaturas);
-			    		m.setExpediente(e);
-			    		em.persist(m);
+			    		Matricula mat = em.find(Matricula.class, mpk);
+			    		if(mat == null) {
+				    		
+				    		//Administro el expediente asignado a la Matricula:
+				    		TypedQuery<Expediente> query = em.createQuery("Select e from Expediente e where e.Num_expediente = :ide", Expediente.class);
+				            query.setParameter("ide", Integer.parseInt(idExp));
+				    		Expediente e = query.getSingleResult();
+				            
+				    		//Administro los datos de la fila total:
+				    		Matricula m = new Matricula();
+				    		m.setId(mpk);
+				    		m.setEstado(Estado);
+			            	m.setFecha_de_matricula(new Date(Fecha_de_matricula));
+				    		m.setNum_Archivo(Integer.parseInt(Num_Archivo));
+				    		m.setTurno_Preferente(Turno_Preferente);
+				    		m.setNuevo_Ingreso(Nuevo_Ingreso);
+				    		m.setListado_Asignaturas(Listado_Asignaturas);
+				    		m.setExpediente(e);
+				    		em.persist(m);
 			    		
 //			    		//Asigno los valores de la lista de asignaturas_matricula:
 //			    		String[] asig = Listado_Asignaturas.split(",");
@@ -190,7 +197,7 @@ public class MatriculaImpl implements InterfazMatricula{
 //			    		}
 //		            	m.setAsigMat(lista);
 //		            	em.merge(m);
-			    		
+			    		}
 			    	}
 	            	n++;
 				}

@@ -50,13 +50,13 @@ public class Alumno implements Serializable {
 	@Column(precision=5)
 	private Integer CP;
 	@Column(length=40)
-	private String Usuario;
+	private String user;
 
 	
 	@OneToMany(mappedBy="alumno", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Expediente> expedientes;
 	
-	@OneToOne (mappedBy ="alumno")
+	@OneToOne (mappedBy ="alumno", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
 	private Usuario usuario;
 	
 	public Alumno() {
@@ -167,12 +167,12 @@ public class Alumno implements Serializable {
 		CP = cP;
 	}
 
-	public String getUsuario() {
-		return Usuario;
+	public String getUser() {
+		return user;
 	}
 
-	public void setUsuario(String usuario) {
-		Usuario = usuario;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
 	public List<Expediente> getExpedientes() {
@@ -184,7 +184,7 @@ public class Alumno implements Serializable {
 	}
 
 	
-	public Usuario getUser() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 	
@@ -233,7 +233,7 @@ public class Alumno implements Serializable {
 		if(Direccion != null) 			{ sj.add("Direccion=" + Direccion);}
 		if(Localidad != null) 			{ sj.add("Localidad=" + Localidad);}
 		if(Provincia != null) 			{ sj.add("Provincia=" + Provincia);}
-		if(Usuario != null) 			{ sj.add("Usuario=" + Usuario);}
+		if(user != null) 			{ sj.add("Usuario=" + user);}
 		if(expedientes != null) {
 			sj2 = new StringJoiner(", ","Expedientes=(",")");
 			for(Expediente e : expedientes) { if(e.getNum_expediente() != null) { sj2.add(e.getNum_expediente().toString());}}

@@ -54,7 +54,7 @@ public class UsuarioImpl implements InterfazUsuario{
 		}
 		Alumno alumno = alumnos.get(0);
 		
-		if(alumno.getUser() == null) {
+		if(alumno.getUsuario() == null) {
 			
 			Usuario usuario = new Usuario();
 			usuario.setUsuario(nombre);
@@ -114,6 +114,9 @@ public class UsuarioImpl implements InterfazUsuario{
 //				em.remove(u);
 //			}
 			if(!u.getRol().equals("Admin")) {
+				Alumno al = u.getAlumno();
+				al.setUsuario(null);
+				em.merge(al);
 				em.remove(u);
 			}
 		}

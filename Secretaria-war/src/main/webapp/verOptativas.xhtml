@@ -9,103 +9,131 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
-	<title>SECRETARIA</title>
-	<link rel="stylesheet" type="text/css" href="resources/StyleSheets.css"/>
+<title>SECRETARIA</title>
+<link rel="stylesheet" type="text/css" href="resources/StyleSheets.css" />
 </head>
 
 <body>
 
-	<div class="cabecera"> 
-        <table>
-            <tr>
-                <td style="padding-left:100px"> <img class="img-uma" src=" https://www.uma.es/static/themes/uma2016/images/UMA_logo.png" width="25%"> </img> </td>    
-                <td style="padding-right: 100px"> <span style="color:#00B1EC;"> WELCOME </span> 
-                     <span style="color:#000000;"> TO </span> 
-                     <span style="color:#8F0000;"> UMA </span> </td>
-                <td style="padding-right:100px"> PÁGINA DE ASIGNACIÓN DE GRUPOS </td>
-            </tr> 
-        </table>
+	<div class="cabecera">
+		<table>
+			<tr>
+				<td style="padding-left: 100px"><img class="img-uma"
+					src=" https://www.uma.es/static/themes/uma2016/images/UMA_logo.png"
+					width="25%"> </img></td>
+				<td style="padding-right: 100px"><span style="color: #00B1EC;">
+						WELCOME </span> <span style="color: #000000;"> TO </span> <span
+					style="color: #8F0000;"> UMA </span></td>
+				<td style="padding-right: 100px">PÁGINA DE ASIGNACIÓN DE GRUPOS
+				</td>
+			</tr>
+		</table>
 	</div>
-	
+
 
 	<div class="centrado">
 		<h1>OPTATIVAS</h1>
-		
+
 		<h:form id="Optativas">
 			<div class="wrapper">
 				<table>
-					<tr><td><label>Buscar Optativa</label><br/><h:inputText id="Optativa" value="#{optativa.referencia}" class="inputTxt" p:placeholder="Introduce Referencia" /></td>
-						<td  class="padSuperior"><h:commandButton id="botonBuscarOptativa" action="#{optativa.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-						<td><h:button value="Ver todo" outcome="verOptativas.xhtml" class="centrado boton boton1"/></td>
-						<td  class="padSuperior"><h:commandButton id="botonEliminarOptativas" action="#{optativa.borrarOptativas()}" value="Eliminar optativas" class="centrado boton boton1"/></td>
-						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
+					<tr>
+						<td><label>Buscar Optativa</label><br />
+						<h:inputText id="Optativa" value="#{optativa.referencia}"
+								class="inputTxt" p:placeholder="Introduce Referencia" /></td>
+						<td class="padSuperior"><h:commandButton
+								id="botonBuscarOptativa" action="#{optativa.buscarTrue()}"
+								value="Buscar" class="centrado boton boton1" /></td>
+						<td><h:button value="Ver todo" outcome="verOptativas.xhtml"
+								class="centrado boton boton1" /></td>
+						<td class="padSuperior"><h:commandButton
+								id="botonEliminarOptativas"
+								action="#{optativa.borrarOptativas()}"
+								value="Eliminar optativas" class="centrado boton boton1" /></td>
+						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml"
+								class="centrado boton boton1" /></td>
+					</tr>
 				</table>
 			</div>
-			<c:choose> 
-            	<c:when test="#{optativa.buscar}">
-            		<h:dataTable value="#{optativa.buscarOptativa(optativa.referencia)}" var="o">
-	            		
-	            		<h:column>
+			<c:choose>
+				<c:when test="#{optativa.buscar}">
+					<h:dataTable
+						value="#{optativa.buscarOptativa(optativa.referencia)}" var="o">
+
+						<h:column>
 							<f:facet name="header">Asignatura</f:facet>
-				            <h:outputText value="#{o.asignatura.referencia}"/>
-				        </h:column>
-	
-				        <h:column>
-				            <f:facet name="header">Plazas</f:facet>
-				            <h:outputText value="#{o.plazas}"/>
-				        </h:column>
-				               
-				        <h:column>
-				            <f:facet name="header">Mencion</f:facet>
-				            <h:outputText value="#{o.mencion}"/>
-				        </h:column>
-				        
-				        <h:column>
-				            <f:facet name="header">Titulaciones</f:facet>
-				            <h:outputText value="#{o.titulaciones}"/>
-				        </h:column>
-				        
+							<h:outputText value="#{o.asignatura.referencia}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Nombre</f:facet>
+							<h:outputText value="#{o.asignatura.nombre}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Codigo</f:facet>
+							<h:outputText value="#{o.asignatura.codigo}" />
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Plazas</f:facet>
+							<h:outputText value="#{o.plazas}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Mencion</f:facet>
+							<h:outputText value="#{o.mencion}" />
+						</h:column>
+
 					</h:dataTable>
-            	</c:when>
-            	<c:otherwise>
-			           <h:dataTable value="#{optativa.leerDatosAdmin()}" var="u">
-			               
-			               	<h:column>
-								<f:facet name="header">Asignatura</f:facet>
-				            	<h:outputText value="#{u.asignatura.referencia}"/>
-				        	</h:column>
-	
-				        	<h:column>
-				            	<f:facet name="header">Plazas</f:facet>
-				            	<h:outputText value="#{u.plazas}"/>
-				        	</h:column>
-				               
-				        	<h:column>
-				            	<f:facet name="header">Mencion</f:facet>
-				            	<h:outputText value="#{u.mencion}"/>
-				        	</h:column>
-				        	
-				        	<h:column>
-				            	<f:facet name="header">Titulaciones</f:facet>
-				            	<h:outputText value="#{u.titulaciones}"/>
-				        	</h:column>
-			               
-			           </h:dataTable>
+				</c:when>
+				<c:otherwise>
+					<h:dataTable value="#{optativa.leerDatosAdmin()}" var="u">
+
+						<h:column>
+							<f:facet name="header">Asignatura</f:facet>
+							<h:outputText value="#{u.asignatura.referencia}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Nombre</f:facet>
+							<h:outputText value="#{u.asignatura.nombre}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Codigo</f:facet>
+							<h:outputText value="#{u.asignatura.codigo}" />
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Plazas</f:facet>
+							<h:outputText value="#{u.plazas}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Mencion</f:facet>
+							<h:outputText value="#{u.mencion}" />
+						</h:column>
+
+					</h:dataTable>
 				</c:otherwise>
-        </c:choose>
-        
-        <div class="centrarTexto">
-			<h:message for=""></h:message>
-		</div>
-		
+			</c:choose>
+
+			<div class="centrarTexto">
+				<h:message for=""></h:message>
+			</div>
+
 		</h:form>
 	</div>
 
-	<div class="foot"> 
-        <table>
-            <tr><td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA · Tel. 952 13 10 00 · info@uma.es</td></tr>
-        </table>
+	<div class="foot">
+		<table>
+			<tr>
+				<td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA ·
+					Tel. 952 13 10 00 · info@uma.es</td>
+			</tr>
+		</table>
 	</div>
-	
+
 </body>
 </html>

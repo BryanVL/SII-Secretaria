@@ -9,123 +9,163 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
-	<title>SECRETARIA</title>
-	<link rel="stylesheet" type="text/css" href="resources/StyleSheets.css"/>
+<title>SECRETARIA</title>
+<link rel="stylesheet" type="text/css" href="resources/StyleSheets.css" />
 </head>
 
 <body>
 
-	<div class="cabecera"> 
-        <table>
-            <tr>
-                <td style="padding-left:100px"> <img class="img-uma" src=" https://www.uma.es/static/themes/uma2016/images/UMA_logo.png" width="25%"> </img> </td>    
-                <td style="padding-right: 100px"> <span style="color:#00B1EC;"> WELCOME </span> 
-                     <span style="color:#000000;"> TO </span> 
-                     <span style="color:#8F0000;"> UMA </span> </td>
-                <td style="padding-right:100px"> PÁGINA DE ASIGNACIÓN DE GRUPOS </td>
-            </tr> 
-        </table>
+	<div class="cabecera">
+		<table>
+			<tr>
+				<td style="padding-left: 100px"><img class="img-uma"
+					src=" https://www.uma.es/static/themes/uma2016/images/UMA_logo.png"
+					width="25%"> </img></td>
+				<td style="padding-right: 100px"><span style="color: #00B1EC;">
+						WELCOME </span> <span style="color: #000000;"> TO </span> <span
+					style="color: #8F0000;"> UMA </span></td>
+				<td style="padding-right: 100px">PÁGINA DE ASIGNACIÓN DE GRUPOS
+				</td>
+			</tr>
+		</table>
 	</div>
 
 
 	<div class="centrado">
 		<h1>ASIGNATURAS</h1>
-		
+
 		<h:form id="Asignaturas">
 			<div class="wrapper">
 				<table>
-					<tr><td><label>Buscar Asignatura</label><br/><h:inputText id="Referencia" value="#{asignatura.asignatura.referencia}" class="inputTxt" p:placeholder="Introduce Asignatura" /></td>
-						<td  class="padSuperior"><h:commandButton id="botonBuscarAsignatura" action="#{asignatura.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-						<td><h:button value="Ver todo" outcome="verAsignaturas.xhtml" class="centrado boton boton1"/></td>
-						<td  class="padSuperior"><h:commandButton id="botonEliminarAsignaturas" action="#{asignatura.borrarAsignaturas()}" value="Eliminar asignaturas" class="centrado boton boton1"/></td>
-						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
+					<tr>
+						<td><label>Buscar Asignatura</label><br />
+						<h:inputText id="Referencia"
+								value="#{asignatura.asignatura.referencia}" class="inputTxt"
+								p:placeholder="Introduce Asignatura" /></td>
+						<td class="padSuperior"><h:commandButton
+								id="botonBuscarAsignatura" action="#{asignatura.buscarTrue()}"
+								value="Buscar" class="centrado boton boton1" /></td>
+						<td><h:button value="Ver todo" outcome="verAsignaturas.xhtml"
+								class="centrado boton boton1" /></td>
+						<td class="padSuperior"><h:commandButton
+								id="botonEliminarAsignaturas"
+								action="#{asignatura.borrarAsignaturas()}"
+								value="Eliminar asignaturas" class="centrado boton boton1" /></td>
+						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml"
+								class="centrado boton boton1" /></td>
+					</tr>
 				</table>
 			</div>
-			<c:choose> 
-            	<c:when test="#{asignatura.buscar}"> 
-            		<h:dataTable value="#{asignatura.buscarAsignatura(asignatura.asignatura.referencia)}" var="a">              
-			               
-			               <h:column>
-			                   <f:facet name="header">Referencia</f:facet>
-			                   <h:outputText value="#{a.Referencia}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Codigo</f:facet>
-			                   <h:outputText value="#{a.codigo}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Creditos Totales</f:facet>
-			                   <h:outputText value="#{a.Creditos_Total}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Creditos Teoria</f:facet>
-			                   <h:outputText value="#{a.Creditos_Teoria}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Ofertada</f:facet>
-			                   <h:outputText value="#{a.Ofertada}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Nombre</f:facet>
-			                   <h:outputText value="#{a.Nombre}"/>
-			               </h:column>
-			               
-			       	</h:dataTable>
-			    </c:when>
-			    <c:otherwise>
-			    	<h:dataTable value="#{asignatura.leerDatosAdmin()}" var="b">    
-			    	          
-			        	<h:column>
-			           		<f:facet name="header">Referencia</f:facet>
-			             	<h:outputText value="#{b.Referencia}"/>
-			          	</h:column>
-			               
-			        	<h:column>
-			               	<f:facet name="header">Codigo</f:facet>
-			              	<h:outputText value="#{b.codigo}"/>
-			           	</h:column>
-			               
-			          	<h:column>
-			               	<f:facet name="header">Creditos Totales</f:facet>
-			               	<h:outputText value="#{b.Creditos_Total}"/>
-			           	</h:column>
-			               
-			          	<h:column>
-			               	<f:facet name="header">Creditos Teoria</f:facet>
-			               	<h:outputText value="#{b.Creditos_Teoria}"/>
-			           	</h:column>
-			               
-			          	<h:column>
-			              	<f:facet name="header">Ofertada</f:facet>
-			               	<h:outputText value="#{b.Ofertada}"/>
-			          	</h:column>
-			               
-			           	<h:column>
-			              	<f:facet name="header">Nombre</f:facet>
-			             	<h:outputText value="#{b.Nombre}"/>
-			          	</h:column>
-			               
-			       	</h:dataTable>
-			    </c:otherwise>
-		</c:choose>
-		
-		<div class="centrarTexto">
-			<h:message for=""></h:message>
-		</div>
-		
-        </h:form>
+			<c:choose>
+				<c:when test="#{asignatura.buscar}">
+					<h:dataTable
+						value="#{asignatura.buscarAsignatura(asignatura.asignatura.referencia)}"
+						var="a">
+
+						<h:column>
+							<f:facet name="header">Referencia</f:facet>
+							<h:outputText value="#{a.referencia}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Codigo</f:facet>
+							<h:outputText value="#{a.codigo}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Creditos Totales</f:facet>
+							<h:outputText value="#{a.creditos_total}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Creditos Teoria</f:facet>
+							<h:outputText value="#{a.creditos_teoria}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Ofertada</f:facet>
+							<h:outputText value="#{a.ofertada}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Nombre</f:facet>
+							<h:outputText value="#{a.nombre}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Curso</f:facet>
+							<h:outputText value="#{a.curso}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Duracion</f:facet>
+							<h:outputText value="#{a.duracion}" />
+						</h:column>
+
+					</h:dataTable>
+				</c:when>
+				<c:otherwise>
+					<h:dataTable value="#{asignatura.leerDatosAdmin()}" var="b">
+
+						<h:column>
+							<f:facet name="header">Referencia</f:facet>
+							<h:outputText value="#{b.referencia}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Codigo</f:facet>
+							<h:outputText value="#{b.codigo}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Creditos Totales</f:facet>
+							<h:outputText value="#{b.creditos_total}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Creditos Teoria</f:facet>
+							<h:outputText value="#{b.creditos_teoria}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Ofertada</f:facet>
+							<h:outputText value="#{b.ofertada}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Nombre</f:facet>
+							<h:outputText value="#{b.nombre}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Curso</f:facet>
+							<h:outputText value="#{b.curso}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Duracion</f:facet>
+							<h:outputText value="#{b.duracion}" />
+						</h:column>
+
+					</h:dataTable>
+				</c:otherwise>
+			</c:choose>
+
+			<div class="centrarTexto">
+				<h:message for=""></h:message>
+			</div>
+
+		</h:form>
 	</div>
 
-	<div class="foot"> 
-        <table>
-            <tr><td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA · Tel. 952 13 10 00 · info@uma.es</td></tr>
-        </table>
+	<div class="foot">
+		<table>
+			<tr>
+				<td>Universidad de Málaga · Avda. Cervantes, 2. 29071 MÁLAGA ·
+					Tel. 952 13 10 00 · info@uma.es</td>
+			</tr>
+		</table>
 	</div>
-	
+
 </body>
 </html>

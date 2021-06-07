@@ -80,7 +80,7 @@ public class Registro {
 			
 			if(usuario.getPassword().equals(pass2)) {
 				u.crearUsuario(dni, usuario.getUsuario(), usuario.getPassword());
-				respuesta = "MainPage.xhtml";
+				respuesta = "index.xhtml";
 			} else {
 				FacesMessage fm = new FacesMessage("Las contraseñas deben coincidir");
                 FacesContext.getCurrentInstance().addMessage(null, fm);
