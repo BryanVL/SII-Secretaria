@@ -34,28 +34,32 @@
 			<table >
 				<tr><td class="padSuperior"><h:button id="botonAlumnos" outcome="verAlumnos.xhtml" 
 						value="Mostrar Alumnos" class="centrado boton boton1"/></td>
-					<td class="padSuperior"><h:button id="botonUsuarios" outcome="verUsuarios.xhtml" 
-						value="Mostrar Usuarios" class="centrado boton boton1"/></td>
+					<td class="padSuperior"><h:button id="botonTitulaciones" outcome="verTitulaciones.xhtml" 
+						value="Mostrar Titulaciones" class="centrado boton boton1"/></td>
 					<td class="padSuperior"><h:button id="botonAsignaturas" outcome="verAsignaturas.xhtml" 
 						value="Mostrar Asignaturas" class="centrado boton boton1"/></td>
 					<td class="padSuperior"><h:button id="botonExpedientes" outcome="verExpedientes.xhtml" 
 						value="Mostrar Expedientes" class="centrado boton boton1"/></td></tr>
 				<tr><td class="padSuperior"><h:button id="botonMatriculas" outcome="verMatriculas.xhtml" 
 						value="Mostrar Matriculas" class="centrado boton boton1"/></td>
-					<td class="padSuperior"><h:button id="botonTitulaciones" outcome="verTitulaciones.xhtml" 
-						value="Mostrar Titulaciones" class="centrado boton boton1"/></td>
 					<td class="padSuperior"><h:button id="botonOptativas" outcome="verOptativas.xhtml" 
 						value="Mostrar Optativas" class="centrado boton boton1"/></td>
+					<td class="padSuperior"><h:button id="botonGrupos" outcome="verGrupos.xhtml" 
+						value="Mostrar Grupos" class="centrado boton boton1"/></td>					
 					<td class="padSuperior"><h:button id="botonClases" outcome="verClases.xhtml" 
 						value="Mostrar Clases" class="centrado boton boton1"/></td></tr>
-					<tr><td colspan="4"><h:button value="Volver atrás" outcome="MainPageAdmin.xhtml" class="centrado boton boton1"/></td></tr>	
+				<tr>
+					<td colspan="4" class="padSuperior"><h:button id="botonUsuarios" outcome="verUsuarios.xhtml" 
+						value="Mostrar Usuarios" class="centrado boton boton1"/></td></tr>
+					
 			</table>
 		</div>
 	  	
 	  	
   		<h:form>
 			<table>
-				<tr><td><h:commandButton id="botonCerrarSesion" action="#{user.cerrarSesion}" value="Cerrar Sesión" class="centrado boton boton1"/></td></tr>
+				<tr><td><h:button value="Volver atrás" outcome="MainPageAdmin.xhtml" class="centrado boton boton1"/></td>
+				<td><h:commandButton id="botonCerrarSesion" action="#{user.cerrarSesion}" value="Cerrar Sesión" class="centrado boton boton1"/></td></tr>
 			</table>
 		</h:form>	
 		
