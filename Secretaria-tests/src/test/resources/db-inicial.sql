@@ -1,5 +1,6 @@
 INSERT INTO Usuario (usuario,password,rol) VALUES ('admin','admin','Admin');
 insert into Alumno (nombre, apellido1, id, dni, Email_institucional) values ('Bryan', 'velicka', 1234, '125678A', 'velicka.b@uma.es');
+insert into Alumno (nombre, apellido1, id, dni, Email_institucional) values ('Franco manuel', 'Garcia', 1235, '123456A', 'fran@uma.es');
 INSERT INTO Usuario (usuario,password,rol, alumno_id) VALUES ('bvl','test','Alumno', 1234);
 insert into Titulacion (codigo, creditos, nombre) values (1234, 240, 'Informatica');
 insert into Expediente (num_expediente, alumno_id, TITULACION_CODIGO) values (123,1234, 1234);
