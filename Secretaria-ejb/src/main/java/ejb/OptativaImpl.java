@@ -180,24 +180,25 @@ public class OptativaImpl implements InterfazOptativa{
 		
 		return  optativaExistente;
 	}
-
+	
+	
 	@Override
-	public List<Optativa> mostrarDatosAdmin() throws OptativaException {
-		TypedQuery<Optativa> query = em.createQuery("SELECT o FROM Optativa o",Optativa.class);
-		List<Optativa> optativas = query.getResultList();
+	public List<Asignatura> mostrarDatosAdmin() throws OptativaException {
+		TypedQuery<Asignatura> query = em.createQuery("SELECT a FROM Asignatura a where a.optativa is not null",Asignatura.class);
+		List<Asignatura> optativas = query.getResultList();
 		if(optativas == null || optativas.size() == 0) {
-			throw new OptativaException("No se ha encontrado optativas");
+			throw new OptativaException("No se han encontrado optativas");
 		}
-		
 		return optativas;
 	}
 
 	@Override
 	public void borrarOptativas() throws OptativaException {
-		for(Optativa a : mostrarDatosAdmin()) {
-			em.remove(a);
+		for(Asignatura a : mostrarDatosAdmin()) {
+			LOGGER.info(a.getOptativa().toString());
+			if(a.getOptativa()!= null) {
+			em.remove(a.getOptativa());
+			}
 		}
 	}
-	
-	
 }
