@@ -18,6 +18,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import es.uma.informatica.sii.anotaciones.Requisitos;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
@@ -44,6 +47,8 @@ public class UsuarioIT {
   public void tearDown() {
     driver.quit();
   }
+  
+  @Requisitos({"RF1"})
   @Test
   public void comprobarSesion() {
     driver.get("http://localhost:8080/Secretaria-war/faces/DatosAdmin.xhtml");
@@ -63,6 +68,8 @@ public class UsuarioIT {
     driver.findElement(By.cssSelector("td:nth-child(5) > .centrado")).click();
     driver.findElement(By.id("j_idt15:botonCerrarSesion")).click();
   }
+  
+  @Requisitos({"RF1","RF2"})
   @Test
   public void validarAccesoAdmin() {
     driver.get("http://localhost:8080/Secretaria-war/");
@@ -89,6 +96,8 @@ public class UsuarioIT {
     driver.findElement(By.cssSelector("td:nth-child(4) > .centrado")).click();
     driver.findElement(By.id("j_idt15:botonCerrarSesion")).click();
   }
+  
+  @Requisitos({"RF1","RF2"})
   @Test
   public void validarAccesoAlumno() {
     driver.get("http://localhost:8080/Secretaria-war/");
@@ -108,6 +117,8 @@ public class UsuarioIT {
     driver.findElement(By.cssSelector(".boton")).click();
     driver.findElement(By.id("j_idt8:botonCerrarSesion")).click();
   }
+  
+  @Requisitos({"RF1"})
   @Test
   public void registrarUsuario() {
     driver.get("http://localhost:8080/Secretaria-war/");
@@ -133,6 +144,8 @@ public class UsuarioIT {
     driver.findElement(By.cssSelector(".boton")).click();
     driver.findElement(By.id("j_idt8:botonCerrarSesion")).click();
   }
+  
+  @Requisitos({"RF2"})
   @Test
   public void eliminarUsuario() {
     driver.get("http://localhost:8080/Secretaria-war/");
