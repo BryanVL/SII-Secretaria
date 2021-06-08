@@ -26,4 +26,5 @@ public interface InterfazUsuario {
 	
 	public void borrarUsuario(String usuario) throws UsuarioException;
 	
+	
 }

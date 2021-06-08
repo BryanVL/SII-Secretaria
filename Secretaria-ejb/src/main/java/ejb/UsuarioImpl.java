@@ -118,21 +118,6 @@ public class UsuarioImpl implements InterfazUsuario{
 		}
 	}
 	
-	@PostConstruct
-	public void comprobarAdmin() {
-		
-		Usuario usuario = em.find(Usuario.class, "admin");
-		
-		if(usuario==null) {
-			Usuario user = new Usuario();
-			user.setUsuario("admin");
-			user.setPassword("admin");
-			user.setRol("Admin");
-			em.persist(user);
-		}
-		
-		
-	}
 	
 	
 }
