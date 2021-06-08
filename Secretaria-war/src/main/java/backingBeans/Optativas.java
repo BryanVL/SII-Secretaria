@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import excepcionesEJB.ImportarException;
@@ -27,6 +28,10 @@ public class Optativas{
 	
 	@EJB
 	private InterfazOptativa a;
+
+	@Inject
+	private InfoSesion sesion;
+	
 	
 	private Optativa optativa;
 	private PartImpl archivo;
@@ -80,21 +85,31 @@ public class Optativas{
 	
 	public String buscarTrue() {
 		String respuesta = null;
-		buscar = true;
+		if(sesion.comprobarSesion()) {
+			buscar = true;
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
 		return respuesta;
 	}
 	
 	public Optativa buscarOptativa(String referencia) {
 		Optativa optativa = null;
-		try {
-			if(referencia.equals("")) {
-				FacesMessage fm = new FacesMessage("No se ha introducido ninguna referencia");
+		if(sesion.comprobarSesion()) {
+			try {
+				if(referencia.equals("")) {
+					FacesMessage fm = new FacesMessage("No se ha introducido ninguna referencia");
+		            FacesContext.getCurrentInstance().addMessage(null, fm);
+				}else {
+					optativa = a.VisualizarOptativa(Integer.parseInt(referencia));
+				}
+			}catch(OptativaException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
 	            FacesContext.getCurrentInstance().addMessage(null, fm);
-			}else {
-				optativa = a.VisualizarOptativa(Integer.parseInt(referencia));
 			}
-		}catch(OptativaException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return optativa;
@@ -102,16 +117,21 @@ public class Optativas{
 	
 	public List<Optativa> leerDatosAdmin() {
 		List<Optativa> optativas = new ArrayList<Optativa>();
-		try {
-			List<Asignatura> asignaturas = a.mostrarDatosAdmin();
-			for(Asignatura a: asignaturas) {
-				if(a.getOptativa() != null) {
-					optativas.add(a.getOptativa());
+		if(sesion.comprobarSesion()) {
+			try {
+				List<Asignatura> asignaturas = a.mostrarDatosAdmin();
+				for(Asignatura a: asignaturas) {
+					if(a.getOptativa() != null) {
+						optativas.add(a.getOptativa());
+					}
 				}
+			
+			}catch(OptativaException e) {
+				FacesMessage fm = new FacesMessage("No hay datos que mostrar");
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
 			}
-		
-		}catch(OptativaException e) {
-			FacesMessage fm = new FacesMessage("No hay datos que mostrar");
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return optativas;
@@ -119,10 +139,15 @@ public class Optativas{
 	
 	public String borrarOptativas() {
 		String respuesta = null;
-		try {
-			a.borrarOptativas();
-		} catch(OptativaException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
+		if(sesion.comprobarSesion()) {
+			try {
+				a.borrarOptativas();
+			} catch(OptativaException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;
@@ -130,30 +155,35 @@ public class Optativas{
 	
 	public String importarOptativas(){
 		String respuesta = null;
-		try {
-			if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
-				String sfile = "/tmp/Optativas.xlsx";
-				File temporal = new File(sfile);
-				archivo.write(sfile);
-				a.Importar(sfile);
-				temporal.delete();
-				respuesta = "ImportarAdmin.xhtml";
-			} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
-				String sfile = "/tmp/Optativas.csv";
-				File temporal = new File(sfile);
-				archivo.write(sfile);
-				a.Importar(sfile);
-				temporal.delete();
-				respuesta = "ImportarAdmin.xhtml";
-			} else {
-				FacesMessage fm = new FacesMessage("El archivo no es correcto");
+		if(sesion.comprobarSesion()) {
+			try {
+				if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
+					String sfile = "/tmp/Optativas.xlsx";
+					File temporal = new File(sfile);
+					archivo.write(sfile);
+					a.Importar(sfile);
+					temporal.delete();
+					respuesta = "ImportarAdmin.xhtml";
+				} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
+					String sfile = "/tmp/Optativas.csv";
+					File temporal = new File(sfile);
+					archivo.write(sfile);
+					a.Importar(sfile);
+					temporal.delete();
+					respuesta = "ImportarAdmin.xhtml";
+				} else {
+					FacesMessage fm = new FacesMessage("El archivo no es correcto");
+		            FacesContext.getCurrentInstance().addMessage(null, fm);
+				}
+			} catch(ImportarException e){
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			} catch (IOException e) {
+				FacesMessage fm = new FacesMessage("Error en el archivo");
 	            FacesContext.getCurrentInstance().addMessage(null, fm);
 			}
-		} catch(ImportarException e){
-			FacesMessage fm = new FacesMessage(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-		} catch (IOException e) {
-			FacesMessage fm = new FacesMessage("Error en el archivo");
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;

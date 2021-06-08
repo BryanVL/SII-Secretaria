@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import excepcionesEJB.ClaseException;
@@ -25,6 +26,10 @@ public class Clases{
 	
 	@EJB
 	private InterfazHorarios c;
+
+	@Inject
+	private InfoSesion sesion;
+	
 	
 	private Clase clase;
 	private PartImpl archivo;
@@ -69,18 +74,28 @@ public class Clases{
 	
 	public String buscarTrue() {
 		String respuesta = null;
-		buscar = true;
+		if(sesion.comprobarSesion()) {
+			buscar = true;
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
 		return respuesta;
 	}
 	
 	public List<Clase> leerDatosAdmin() {
 		List<Clase> clase = null;
-		try {
+		if(sesion.comprobarSesion()) {
+			try {
+				
+				clase = c.mostrarDatosAdmin();
 			
-			clase = c.mostrarDatosAdmin();
-		
-		}catch(ClaseException e) {
-			FacesMessage fm = new FacesMessage("No hay datos que mostrar");
+			}catch(ClaseException e) {
+				FacesMessage fm = new FacesMessage("No hay datos que mostrar");
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return clase;
@@ -88,10 +103,15 @@ public class Clases{
 	
 	public String borrarClases() {
 		String respuesta = null;
-		try {
-			c.borrarClases();
-		} catch(ClaseException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
+		if(sesion.comprobarSesion()) {
+			try {
+				c.borrarClases();
+			} catch(ClaseException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;
@@ -99,30 +119,35 @@ public class Clases{
 	
 	public String importarClases(){
 		String respuesta = null;
-		try {
-			if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
-				String sfile = "/tmp/Clases.xlsx";
-				File temporal = new File(sfile);
-				archivo.write(sfile);
-				c.Importar(sfile);
-				temporal.delete();
-				respuesta = "ImportarAdmin.xhtml";
-			} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
-				String sfile = "/tmp/Clases.csv";
-				File temporal = new File(sfile);
-				archivo.write(sfile);
-				c.Importar(sfile);
-				temporal.delete();
-				respuesta = "ImportarAdmin.xhtml";
-			} else {
-				FacesMessage fm = new FacesMessage("El archivo no es correcto");
+		if(sesion.comprobarSesion()) {
+			try {
+				if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
+					String sfile = "/tmp/Clases.xlsx";
+					File temporal = new File(sfile);
+					archivo.write(sfile);
+					c.Importar(sfile);
+					temporal.delete();
+					respuesta = "ImportarAdmin.xhtml";
+				} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
+					String sfile = "/tmp/Clases.csv";
+					File temporal = new File(sfile);
+					archivo.write(sfile);
+					c.Importar(sfile);
+					temporal.delete();
+					respuesta = "ImportarAdmin.xhtml";
+				} else {
+					FacesMessage fm = new FacesMessage("El archivo no es correcto");
+		            FacesContext.getCurrentInstance().addMessage(null, fm);
+				}
+			} catch(ImportarException e){
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			} catch (IOException e) {
+				FacesMessage fm = new FacesMessage("Error en el archivo");
 	            FacesContext.getCurrentInstance().addMessage(null, fm);
 			}
-		} catch(ImportarException e){
-			FacesMessage fm = new FacesMessage(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-		} catch (IOException e) {
-			FacesMessage fm = new FacesMessage("Error en el archivo");
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;

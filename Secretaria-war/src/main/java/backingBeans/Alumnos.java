@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import excepcionesEJB.AlumnoException;
@@ -25,6 +26,9 @@ public class Alumnos{
 	
 	@EJB
 	private InterfazAlumno a;
+
+	@Inject
+	private InfoSesion sesion;
 	
 	private Alumno alumno;
 	private PartImpl archivo;
@@ -69,17 +73,27 @@ public class Alumnos{
 	
 	public String buscarTrue() {
 		String respuesta = null;
-		buscar = true;
+		if(sesion.comprobarSesion()) {
+			buscar = true;
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
 		return respuesta;
 	}
 	
 	public Alumno buscarAlumno(String dni) {
 		Alumno alumno = null;
-		try {
-			LOGGER.info("Buscando Alumno: " + dni);
-			alumno = a.VisualizarAlumno(dni);
-		}catch(AlumnoException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
+		if(sesion.comprobarSesion()) {
+			try {
+				LOGGER.info("Buscando Alumno: " + dni);
+				alumno = a.VisualizarAlumno(dni);
+			}catch(AlumnoException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return alumno;
@@ -87,54 +101,69 @@ public class Alumnos{
 	
 	public List<Alumno> leerDatosAdmin() {
 		List<Alumno> alumno = null;
-		try {
+		if(sesion.comprobarSesion()) {
+			try {
+				
+				alumno = a.mostrarDatosAdmin();
 			
-			alumno = a.mostrarDatosAdmin();
-		
-		}catch(AlumnoException e) {
-			FacesMessage fm = new FacesMessage("No hay datos que mostrar");
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}catch(AlumnoException e) {
+				FacesMessage fm = new FacesMessage("No hay datos que mostrar");
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+	        FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return alumno;
 	}
 	
 	public String borrarAlumnos() {
 		String respuesta = null;
-		try {
-			a.borrarAlumnos();
-		} catch(AlumnoException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+		if(sesion.comprobarSesion()) {
+			try {
+				a.borrarAlumnos();
+			} catch(AlumnoException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+	        FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;
 	}
 	
 	public String importarAlumnos(){
 		String respuesta = null;
-		try {
-			if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
-				String sfile = "/tmp/Alumnos.xlsx";
-				File temporal = new File(sfile);
-				archivo.write(sfile);
-				a.Importar(sfile);
-				temporal.delete();
-				respuesta = "ImportarAdmin.xhtml";
-			} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
-				String sfile = "/tmp/Alumnos.csv";
-				File temporal = new File(sfile);
-				archivo.write(sfile);
-				a.Importar(sfile);
-				temporal.delete();
-				respuesta = "ImportarAdmin.xhtml";
-			} else {
-				FacesMessage fm = new FacesMessage("El archivo no es correcto");
+		if(sesion.comprobarSesion()) {
+			try {
+				if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
+					String sfile = "/tmp/Alumnos.xlsx";
+					File temporal = new File(sfile);
+					archivo.write(sfile);
+					a.Importar(sfile);
+					temporal.delete();
+					respuesta = "ImportarAdmin.xhtml";
+				} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
+					String sfile = "/tmp/Alumnos.csv";
+					File temporal = new File(sfile);
+					archivo.write(sfile);
+					a.Importar(sfile);
+					temporal.delete();
+					respuesta = "ImportarAdmin.xhtml";
+				} else {
+					FacesMessage fm = new FacesMessage("El archivo no es correcto");
+		            FacesContext.getCurrentInstance().addMessage(null, fm);
+				}
+			} catch(ImportarException e){
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			} catch (IOException e) {
+				FacesMessage fm = new FacesMessage("Error en el archivo");
 	            FacesContext.getCurrentInstance().addMessage(null, fm);
 			}
-		} catch(ImportarException e){
-			FacesMessage fm = new FacesMessage(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-		} catch (IOException e) {
-			FacesMessage fm = new FacesMessage("Error en el archivo");
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;

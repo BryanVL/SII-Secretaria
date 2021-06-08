@@ -81,30 +81,45 @@ public class User{
 
 	public String buscarTrue(){
 		String respuesta = null;
-		buscar = true;
+		if(sesion.comprobarSesion()) {
+			buscar = true;
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+	        FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
 		return respuesta;
 	}
 	
 	public Usuario buscarUsuario(String nombre) {
 		Usuario user = null;
-		try {
-			user = u.mostrarDatos(nombre);
-		}catch(UsuarioException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+		if(sesion.comprobarSesion()) {
+			try {
+				user = u.mostrarDatos(nombre);
+			}catch(UsuarioException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+	        FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return user;
 	}
 	
 	public List<Usuario> leerDatosAdmin() {
 		List<Usuario> usuario = null;
-		try {
+		if(sesion.comprobarSesion()) {
+			try {
+				
+				usuario = u.mostrarDatosAdmin();
 			
-			usuario = u.mostrarDatosAdmin();
-		
-		}catch(UsuarioException e) {
-			FacesMessage fm = new FacesMessage("No hay datos que mostrar");
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}catch(UsuarioException e) {
+				FacesMessage fm = new FacesMessage("No hay datos que mostrar");
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+	        FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return usuario;
 	}
@@ -112,11 +127,16 @@ public class User{
 	
 	public String borrarUsuarios(String nombre) {
 		String respuesta = null;
-		try {
-			u.borrarUsuario(nombre);
-		} catch(UsuarioException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, fm);
+		if(sesion.comprobarSesion()) {
+			try {
+				u.borrarUsuario(nombre);
+			} catch(UsuarioException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+	        FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;
 	}
