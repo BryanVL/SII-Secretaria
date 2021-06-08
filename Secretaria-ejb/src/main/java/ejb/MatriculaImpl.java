@@ -96,14 +96,7 @@ public class MatriculaImpl implements InterfazMatricula{
 						Estado = fila.getCell(1).getStringCellValue();
 					}
 					if(contF >= 4 && (fila.getCell(0) !=null)) {
-					
-//						String idExp = csvRecord.get(4);
-//			    		String Fecha_de_matricula = csvRecord.get(14);
-//			    		String Num_Archivo = csvRecord.get(5);
-//			    		String Turno_Preferente = csvRecord.get(15);
-//			    		String Nuevo_Ingreso = "Si";
-//			    		String Listado_Asignaturas = csvRecord.get(16);
-			    		
+						
 			    		String idExp = fila.getCell(4).getStringCellValue();
 			    		Date Fecha_de_matricula = fila.getCell(14).getDateCellValue();
 			    		Integer Num_Archivo = (int) fila.getCell(5).getNumericCellValue();
