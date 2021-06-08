@@ -17,12 +17,12 @@ public class Optativa implements Serializable {
 	@Id @OneToOne
 	private Asignatura asignatura;
 	
-	@Column(length=2, nullable=false)
+	@Column(length=3, nullable=false)
 	private Integer Plazas;
 	@Column(length=30)
 	private String Mencion;
 	
-	@ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
+	@ManyToMany
 	private List<Titulacion> titulaciones;
 	
 	public Optativa() {

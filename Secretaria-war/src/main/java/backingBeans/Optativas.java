@@ -2,6 +2,7 @@ package backingBeans;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import excepcionesEJB.ImportarException;
 import excepcionesEJB.OptativaException;
 import interfacesEJB.InterfazOptativa;
 import io.undertow.servlet.spec.PartImpl;
+import jpa.Asignatura;
 import jpa.Optativa;
 
 @Named(value = "optativa")
@@ -99,16 +101,20 @@ public class Optativas{
 	}
 	
 	public List<Optativa> leerDatosAdmin() {
-		List<Optativa> optativa = null;
+		List<Optativa> optativas = new ArrayList<Optativa>();
 		try {
-			
-			optativa = a.mostrarDatosAdmin();
+			List<Asignatura> asignaturas = a.mostrarDatosAdmin();
+			for(Asignatura a: asignaturas) {
+				if(a.getOptativa() != null) {
+					optativas.add(a.getOptativa());
+				}
+			}
 		
 		}catch(OptativaException e) {
 			FacesMessage fm = new FacesMessage("No hay datos que mostrar");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
-		return optativa;
+		return optativas;
 	}
 	
 	public String borrarOptativas() {

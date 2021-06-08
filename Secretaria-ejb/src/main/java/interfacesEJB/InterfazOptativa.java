@@ -16,7 +16,7 @@ public interface InterfazOptativa {
 	 * @param e expediente a visualizar*/
 	public Optativa VisualizarOptativa(Integer referencia) throws OptativaException;
 
-	public List<Optativa> mostrarDatosAdmin() throws OptativaException;
+	public List<Asignatura> mostrarDatosAdmin() throws OptativaException;
 	
 	public void borrarOptativas() throws OptativaException;
 	
