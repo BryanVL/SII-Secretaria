@@ -32,10 +32,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.ImportarException;
+import excepcionesEJB.MatriculaException;
 import excepcionesEJB.OptativaException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazOptativa;
 import jpa.Asignatura;
+import jpa.Matricula;
 import jpa.Optativa;
 import jpa.Titulacion;
 
@@ -69,7 +71,6 @@ public class OptativaImpl implements InterfazOptativa{
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
-			try {
 				for(int i = 0; i < 2; i++) {
 				
 					XSSFSheet sheet = workbook.getSheetAt(i);
@@ -91,29 +92,25 @@ public class OptativaImpl implements InterfazOptativa{
 									mencion = "Informatica";
 								}
 								Asignatura asignaturaExistente = em.find(Asignatura.class, referencia);
-					    		if(asignaturaExistente == null) {
-					    			throw new AsignaturaException();
+					    		if(asignaturaExistente != null) {
+
+						    		Optativa o = new Optativa();
+						    		o.setPlazas(plazas);
+						    		o.setMencion(mencion);
+						    		o.setAsignatura(asignaturaExistente);
+						    		
+						    		Titulacion titulacion = asignaturaExistente.getTitulacion();
+						    		List<Titulacion> titulaciones = new ArrayList<>();
+						    		titulaciones.add(titulacion);
+						    		o.setTitulaciones(titulaciones);
+						    		em.persist(o);
 					    		}
-					    		
-					    		Optativa o = new Optativa();
-					    		o.setPlazas(plazas);
-					    		o.setMencion(mencion);
-					    		o.setAsignatura(asignaturaExistente);
-					    		
-					    		Titulacion titulacion = asignaturaExistente.getTitulacion();
-					    		List<Titulacion> titulaciones = new ArrayList<>();
-					    		titulaciones.add(titulacion);
-					    		o.setTitulaciones(titulaciones);
-					    		em.persist(o);
 							}
 				    	}
 				    		contF++;
 				    		fila = sheet.getRow(contF);
 					}
 				}
-			} catch(AsignaturaException e) {
-				e.printStackTrace();
-			}
 		       
 		} else if (dir.endsWith("csv")){
 			BufferedReader reader;
@@ -185,22 +182,20 @@ public class OptativaImpl implements InterfazOptativa{
 	}
 
 	@Override
-	public List<Asignatura> mostrarDatosAdmin() throws OptativaException {
-		TypedQuery<Asignatura> query = em.createQuery("SELECT a FROM Asignatura a where a.optativa is not null",Asignatura.class);
-		List<Asignatura> optativas = query.getResultList();
+	public List<Optativa> mostrarDatosAdmin() throws OptativaException {
+		TypedQuery<Optativa> query = em.createQuery("SELECT o FROM Optativa o",Optativa.class);
+		List<Optativa> optativas = query.getResultList();
 		if(optativas == null || optativas.size() == 0) {
-			throw new OptativaException("No se han encontrado optativas");
+			throw new OptativaException("No se ha encontrado optativas");
 		}
+		
 		return optativas;
 	}
 
 	@Override
 	public void borrarOptativas() throws OptativaException {
-		for(Asignatura a : mostrarDatosAdmin()) {
-			LOGGER.info(a.getOptativa().toString());
-			if(a.getOptativa()!= null) {
-			em.remove(a.getOptativa());
-			}
+		for(Optativa a : mostrarDatosAdmin()) {
+			em.remove(a);
 		}
 	}
 	
