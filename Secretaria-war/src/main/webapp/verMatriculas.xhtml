@@ -60,8 +60,33 @@
 				        <h:column>
 				            <f:facet name="header">Estado</f:facet>
 				            <h:outputText value="#{b.estado}"/>
-				        
 				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Fecha</f:facet>
+				            <h:outputText value="#{b.fecha_de_matricula}"/>
+				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Archivo</f:facet>
+				            <h:outputText value="#{b.num_Archivo}"/>
+				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Turno Preferente</f:facet>
+				            <h:outputText value="#{b.turno_Preferente}"/>
+				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Nuevo Ingreso</f:facet>
+				            <h:outputText value="#{b.nuevo_Ingreso}"/>
+				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Asignaturas</f:facet>
+				            <h:outputText value="#{b.listado_Asignaturas}"/>
+				        </h:column>
+				        
 					</h:dataTable>
             	</c:when>
             	<c:otherwise>
@@ -81,7 +106,32 @@
 				            <f:facet name="header">Estado</f:facet>
 				            <h:outputText value="#{u.estado}"/>
 				        </h:column>
-			               
+			            
+			            <h:column>
+				            <f:facet name="header">Fecha</f:facet>
+				            <h:outputText value="#{u.fecha_de_matricula}"/>
+				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Archivo</f:facet>
+				            <h:outputText value="#{u.num_Archivo}"/>
+				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Turno Preferente</f:facet>
+				            <h:outputText value="#{u.turno_Preferente}"/>
+				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Nuevo Ingreso</f:facet>
+				            <h:outputText value="#{u.nuevo_Ingreso}"/>
+				        </h:column>
+				        
+				        <h:column>
+				            <f:facet name="header">Asignaturas</f:facet>
+				            <h:outputText value="#{u.listado_Asignaturas}"/>
+				        </h:column>
+				        
 			    	</h:dataTable>
 				</c:otherwise>
         	</c:choose>

@@ -23,12 +23,14 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.ExpedienteException;
@@ -77,20 +79,37 @@ public class MatriculaImpl implements InterfazMatricula{
 			}
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			
-			int contF = 1;
+			int contF = 0;
+			String Curso_academico="";
+			String Estado="";
 			Row fila = sheet.getRow(contF);
 			try {
 				while(fila != null) {
-					if(contF >= 1 && (fila.getCell(0) !=null)) {
+					if(contF == 0) {
+						if(fila.getCell(1).getCellType() == CellType.STRING) {
+							Curso_academico = fila.getCell(1).getStringCellValue();
+						} else {
+							Curso_academico = fila.getCell(1).getStringCellValue().toString();
+						}
+					}
+					if(contF == 2) {
+						Estado = fila.getCell(1).getStringCellValue();
+					}
+					if(contF >= 4 && (fila.getCell(0) !=null)) {
 					
-			    		String Curso_academico = fila.getCell(0).getStringCellValue();
-			    		String idExp = fila.getCell(1).getStringCellValue();
-			    		String Estado = fila.getCell(2).getStringCellValue();
-			    		Date Fecha_de_matricula = fila.getCell(3).getDateCellValue();
-			    		Integer Num_Archivo = (int) fila.getCell(4).getNumericCellValue();
-			    		String Turno_Preferente = fila.getCell(5).getStringCellValue();
-			    		String Nuevo_Ingreso = fila.getCell(6).getStringCellValue();
-			    		String Listado_Asignaturas = fila.getCell(7).getStringCellValue();
+//						String idExp = csvRecord.get(4);
+//			    		String Fecha_de_matricula = csvRecord.get(14);
+//			    		String Num_Archivo = csvRecord.get(5);
+//			    		String Turno_Preferente = csvRecord.get(15);
+//			    		String Nuevo_Ingreso = "Si";
+//			    		String Listado_Asignaturas = csvRecord.get(16);
+			    		
+			    		String idExp = fila.getCell(4).getStringCellValue();
+			    		Date Fecha_de_matricula = fila.getCell(14).getDateCellValue();
+			    		Integer Num_Archivo = (int) fila.getCell(5).getNumericCellValue();
+			    		String Turno_Preferente = fila.getCell(15).getStringCellValue();
+			    		String Nuevo_Ingreso = "Si";
+			    		String Listado_Asignaturas = fila.getCell(16).getStringCellValue();
 			    		
 			    		//Administro la clave primaria de Matricula:
 			    		Matricula_PK mpk = new Matricula_PK();
@@ -101,25 +120,25 @@ public class MatriculaImpl implements InterfazMatricula{
 			    		if(mat == null) {
 				    		
 				    		//Administro el expediente asignado a la Matricula:
-				    		TypedQuery<Expediente> query = em.createQuery("Select e from Expediente e where e.Num_expediente = :ide", Expediente.class);
-				            query.setParameter("ide", Integer.parseInt(idExp));
-				    		Expediente e = query.getSingleResult();
-				    		if(e == null) {
-				    			throw new ExpedienteException();
-				    		}
-				    		
-				    		//Administro los datos de la fila total:
-				    		Matricula m = new Matricula();
-				    		m.setId(mpk);
-				    		m.setEstado(Estado);
-			            	m.setFecha_de_matricula(Fecha_de_matricula);
-				    		m.setNum_Archivo(Num_Archivo);
-				    		m.setTurno_Preferente(Turno_Preferente);
-				    		m.setNuevo_Ingreso(Nuevo_Ingreso);
-				    		m.setListado_Asignaturas(Listado_Asignaturas);
-				    		m.setExpediente(e);
-				    		
-				    		em.persist(m);
+				    		//Administro el expediente asignado a la Matricula:
+				    		Expediente e = em.find(Expediente.class, Integer.parseInt(idExp));
+				            if(e != null){
+					    		
+					    		//Administro los datos de la fila total:
+					    		Matricula m = new Matricula();
+					    		m.setId(mpk);
+					    		m.setEstado(Estado);
+				            	m.setFecha_de_matricula(Fecha_de_matricula);
+					    		m.setNum_Archivo(Num_Archivo);
+					    		m.setTurno_Preferente(Turno_Preferente);
+					    		m.setNuevo_Ingreso(Nuevo_Ingreso);
+					    		m.setListado_Asignaturas(Listado_Asignaturas);
+					    		m.setExpediente(e);
+					    		
+					    		em.persist(m);
+				            } else {
+				            	throw new ExpedienteException("No se ha encontrado el expediente");
+				            }
 			    		}
 			    	}
 					contF++;
