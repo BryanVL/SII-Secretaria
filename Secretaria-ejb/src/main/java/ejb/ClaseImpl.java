@@ -114,7 +114,6 @@ public class ClaseImpl implements InterfazHorarios{
 		               id.setHora_inicio(convertirTime(hora_inicio));
 		               id.setIdG(g.getID());
 		               c.setId(id);
-		               
 		               em.persist(c);
 		           }catch(GrupoException e) {
 		        	   throw new RuntimeException();
@@ -149,8 +148,7 @@ public class ClaseImpl implements InterfazHorarios{
 				           }catch(GrupoException e) {
 				        	   throw new RuntimeException();
 				           }
-		             	
-			            em.persist(c);
+		             	em.persist(c);
 	            	}
 	            n++;
 				}

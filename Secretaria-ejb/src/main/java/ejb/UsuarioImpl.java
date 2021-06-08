@@ -6,16 +6,15 @@ import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import excepcionesEJB.AlumnoException;
 import excepcionesEJB.UsuarioException;
-import interfacesEJB.InterfazAlumno;
 import interfacesEJB.InterfazUsuario;
 import jpa.Alumno;
-import jpa.Asignaturas_Matricula;
+import jpa.Grupo;
+import jpa.Titulacion;
 import jpa.Usuario;
 
 @Stateless
@@ -131,6 +130,8 @@ public class UsuarioImpl implements InterfazUsuario{
 			user.setRol("Admin");
 			em.persist(user);
 		}
+		
+		
 	}
 	
 	

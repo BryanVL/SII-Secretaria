@@ -34,56 +34,34 @@
 		<h:form id="Clases">
 			<div class="wrapper">
 				<table>
-					<tr><td colspan="2"><label>Buscar Clase</label><br/><h:inputText id="Nombre" value="#{user.usuario.usuario}" class="inputTxt" p:placeholder="Introduce Nombre" /></td>
-						<td  class="padSuperior"><h:commandButton id="botonBuscarClase" action="#{user.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
-						<td><h:button value="Ver todo" outcome="verClases.xhtml" class="centrado boton boton1"/></td>
-						<td  class="padSuperior"><h:commandButton id="botonEliminarClases" action="#{user.borrarUsuarios()}" value="Eliminar usuarios" class="centrado boton boton1"/></td>
+					<tr><td  class="padSuperior"><h:commandButton id="botonEliminarClases" action="#{clase.borrarClases()}" value="Eliminar clases" class="centrado boton boton1"/></td>
 						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>
 			<div class="centrado ovf">
-			<c:choose> 
-            	<c:when test="#{user.buscar}">
-            		<h:dataTable value="#{user.buscarUsuario(user.usuario.usuario)}" var="b">
-            		
-	            		<h:column>
-							<f:facet name="header">Usuario</f:facet>
-				            <h:outputText value="#{b.usuario}"/>
-				        </h:column>
-	
-				        <h:column>
-				            <f:facet name="header">Rol</f:facet>
-				            <h:outputText value="#{b.rol}"/>
-				        </h:column>
-				               
-				        <h:column>
-				            <f:facet name="header">Alumno</f:facet>
-				            <h:outputText value="#{b.alumno.DNI}"/>
-				        </h:column>
-				        
-					</h:dataTable>
-            	</c:when>
-            	<c:otherwise>
-			           <h:dataTable value="#{user.leerDatosAdmin()}" var="u">
-			               
-			               <h:column>
-			                   <f:facet name="header">Usuario</f:facet>
-			                   <h:outputText value="#{u.usuario}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Rol</f:facet>
-			                   <h:outputText value="#{u.rol}"/>
-			               </h:column>
-			               
-			               <h:column>
-			                   <f:facet name="header">Alumno</f:facet>
-			                   <h:outputText value="#{u.alumno.DNI}"/>
-			               </h:column>
-			               
-			           </h:dataTable>
-				</c:otherwise>
-        </c:choose>
+	           <h:dataTable value="#{clase.leerDatosAdmin()}" var="u">
+	               
+	               <h:column>
+	                   <f:facet name="header">Dia</f:facet>
+	                   <h:outputText value="#{u.id.dia}"/>
+	               </h:column>
+	               
+	               <h:column>
+	                   <f:facet name="header">Hora Inicio</f:facet>
+	                   <h:outputText value="#{u.id.hora_inicio}"/>
+	               </h:column>
+	               
+	               <h:column>
+	                   <f:facet name="header">Hora Fin</f:facet>
+	                   <h:outputText value="#{u.hora_fin}"/>
+	               </h:column>
+	               
+	               <h:column>
+	                   <f:facet name="header">Id Grupo</f:facet>
+	                   <h:outputText value="#{u.id.idG}"/>
+	               </h:column>
+	               
+	           </h:dataTable>
         </div>
         <div class="centrarTexto">
 			<h:message for=""></h:message>

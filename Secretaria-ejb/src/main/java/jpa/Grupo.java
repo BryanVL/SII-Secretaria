@@ -25,7 +25,7 @@ public class Grupo implements Serializable {
 	@Column(length=1, nullable=false)
 	private String Letra;
 	
-	@Column(length=6, nullable=false)
+	@Column(length=7, nullable=false)
 	private String Turno_Mañana_Tarde;
 	@Column(length=2, nullable=false)
 	private String Ingles;
