@@ -139,18 +139,24 @@ public class MatriculaImpl implements InterfazMatricula{
 				reader = Files.newBufferedReader(Paths.get(dir));
 				CSVParser csvParser = new CSVParser(reader, CSVFormat.newFormat(';'));		
 				int n=0;
+				String Curso_academico = "";
+				String Estado = "";
 				
 	            for (CSVRecord csvRecord : csvParser) {
-	            	if(n>=1) {
+	            	if(n==0) {
+	            		Curso_academico = csvRecord.get(1);
+	            	} else
+	            	if(n==2) {
+	            		Estado = csvRecord.get(1);
+	            	}
+	            	if(n>=4) {
 	            		
-			    		String Curso_academico = csvRecord.get(0);
-			    		String idExp = csvRecord.get(1);
-			    		String Estado = csvRecord.get(2);
-			    		String Fecha_de_matricula = csvRecord.get(3);
-			    		String Num_Archivo = csvRecord.get(4);
-			    		String Turno_Preferente = csvRecord.get(5);
-			    		String Nuevo_Ingreso = csvRecord.get(6);
-			    		String Listado_Asignaturas = csvRecord.get(7);
+			    		String idExp = csvRecord.get(4);
+			    		String Fecha_de_matricula = csvRecord.get(14);
+			    		String Num_Archivo = csvRecord.get(5);
+			    		String Turno_Preferente = csvRecord.get(15);
+			    		String Nuevo_Ingreso = "Si";
+			    		String Listado_Asignaturas = csvRecord.get(16);
 			    		
 			    		//Administro la clave primaria de Matricula
 			    		Matricula_PK mpk = new Matricula_PK();
@@ -161,9 +167,7 @@ public class MatriculaImpl implements InterfazMatricula{
 			    		if(mat == null) {
 				    		
 				    		//Administro el expediente asignado a la Matricula:
-				    		TypedQuery<Expediente> query = em.createQuery("Select e from Expediente e where e.Num_expediente = :ide", Expediente.class);
-				            query.setParameter("ide", Integer.parseInt(idExp));
-				    		Expediente e = query.getSingleResult();
+				    		Expediente e = em.find(Expediente.class, Integer.parseInt(idExp));
 				            
 				    		//Administro los datos de la fila total:
 				    		Matricula m = new Matricula();

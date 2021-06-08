@@ -154,6 +154,7 @@ public class Titulaciones{
 				if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
 					String sfile = "/tmp/Titulacion.xlsx";
 					File temporal = new File(sfile);
+					temporal.delete();
 					archivo.write(sfile);
 					a.Importar(sfile);
 					temporal.delete();
@@ -161,6 +162,7 @@ public class Titulaciones{
 				} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
 					String sfile = "/tmp/Titulacion.csv";
 					File temporal = new File(sfile);
+					temporal.delete();
 					archivo.write(sfile);
 					a.Importar(sfile);
 					temporal.delete();

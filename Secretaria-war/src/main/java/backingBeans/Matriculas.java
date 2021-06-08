@@ -159,6 +159,7 @@ public class Matriculas{
 				if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
 					String sfile = "/tmp/Matriculas.xlsx";
 					File temporal = new File(sfile);
+					temporal.delete();
 					archivo.write(sfile);
 					m.Importar(sfile);
 					temporal.delete();
@@ -166,6 +167,7 @@ public class Matriculas{
 				} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
 					String sfile = "/tmp/Matriculas.csv";
 					File temporal = new File(sfile);
+					temporal.delete();
 					archivo.write(sfile);
 					m.Importar(sfile);
 					temporal.delete();

@@ -124,6 +124,7 @@ public class Clases{
 				if(archivo.getSubmittedFileName().endsWith(".xlsx")) {
 					String sfile = "/tmp/Clases.xlsx";
 					File temporal = new File(sfile);
+					temporal.delete();
 					archivo.write(sfile);
 					c.Importar(sfile);
 					temporal.delete();
@@ -131,6 +132,7 @@ public class Clases{
 				} else if(archivo.getSubmittedFileName().endsWith(".csv")) {
 					String sfile = "/tmp/Clases.csv";
 					File temporal = new File(sfile);
+					temporal.delete();
 					archivo.write(sfile);
 					c.Importar(sfile);
 					temporal.delete();
