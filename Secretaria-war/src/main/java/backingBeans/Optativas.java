@@ -116,15 +116,10 @@ public class Optativas{
 	}
 	
 	public List<Optativa> leerDatosAdmin() {
-		List<Optativa> optativas = new ArrayList<Optativa>();
+		List<Optativa> optativas = null;
 		if(sesion.comprobarSesion()) {
 			try {
-				List<Asignatura> asignaturas = a.mostrarDatosAdmin();
-				for(Asignatura a: asignaturas) {
-					if(a.getOptativa() != null) {
-						optativas.add(a.getOptativa());
-					}
-				}
+				optativas = a.mostrarDatosAdmin();
 			
 			}catch(OptativaException e) {
 				FacesMessage fm = new FacesMessage("No hay datos que mostrar");
