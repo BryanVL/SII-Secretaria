@@ -89,7 +89,7 @@ public class ClaseImpl implements InterfazHorarios{
 		           Date dia = fila.getCell(3).getDateCellValue();
 		           String hora_inicio = fila.getCell(4).getStringCellValue();
 		           String hora_fin = fila.getCell(5).getStringCellValue();
-		           		
+
 		           try {
 		        	   Clase c = new Clase();
 		               Asignatura asignatura = em.find(Asignatura.class, asig);  
@@ -114,7 +114,10 @@ public class ClaseImpl implements InterfazHorarios{
 		               id.setHora_inicio(convertirTime(hora_inicio));
 		               id.setIdG(g.getID());
 		               c.setId(id);
-		               em.persist(c);
+		               Clase clase = em.find(Clase.class,id);
+		               if(clase == null) {
+		            	   em.persist(c);
+		               }
 		           }catch(GrupoException e) {
 		        	   throw new RuntimeException();
 		           }
@@ -148,6 +151,10 @@ public class ClaseImpl implements InterfazHorarios{
 				           }catch(GrupoException e) {
 				        	   throw new RuntimeException();
 				           }
+				           Clase clase = em.find(Clase.class,c.getId());
+			               if(clase == null) {
+			            	   em.persist(c);
+			               }
 		             	em.persist(c);
 	            	}
 	            n++;
@@ -206,6 +213,7 @@ public class ClaseImpl implements InterfazHorarios{
         id.setHora_inicio(convertirTime(hora_inicio));
         id.setIdG(g.getID());
         c.setId(id);
+        
         
         return c;
 	}

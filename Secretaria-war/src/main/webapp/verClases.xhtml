@@ -41,6 +41,26 @@
 	           <h:dataTable value="#{clase.leerDatosAdmin()}" var="u">
 	               
 	               <h:column>
+	                   <f:facet name="header">Curso</f:facet>
+	                   <h:outputText value="#{u.grupo.curso}"/>
+	               </h:column>
+	               
+	               <h:column>
+	                   <f:facet name="header">Letra</f:facet>
+	                   <h:outputText value="#{u.grupo.letra}"/>
+	               </h:column>
+	               
+	               <h:column>
+	                   <f:facet name="header">Asignatura</f:facet>
+	                   <h:outputText value="#{u.asignatura.referencia}"/>
+	               </h:column>
+	               
+	               <h:column>
+	                   <f:facet name="header">Nombre</f:facet>
+	                   <h:outputText value="#{u.asignatura.nombre}"/>
+	               </h:column>
+	               
+	               <h:column>
 	                   <f:facet name="header">Dia</f:facet>
 	                   <h:outputText value="#{u.id.dia}"/>
 	               </h:column>

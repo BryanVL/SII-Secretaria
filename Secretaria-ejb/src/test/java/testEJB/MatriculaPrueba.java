@@ -58,12 +58,9 @@ public class MatriculaPrueba {
 	@Requisitos({"RF7"})
 	public void testImportarMatricula() {
 		//Elegir desde donde realizar la importacion:
-//		String dir = "src/test/resources/Matriculas.csv";
 		String dir2 = "src/test/resources/alumnos.csv";
 		String dir3 = "src/test/resources/Titulacion.csv";	
 //		String dir4 = "src/test/resources/GII.csv";
-		String dir = "src/test/resources/Matriculas.xlsx";
-//		String dir2 = "src/test/resources/alumnos.xlsx";
 //		String dir3 = "src/test/resources/Titulacion.xlsx";
 		
 		
@@ -72,10 +69,9 @@ public class MatriculaPrueba {
 			interfazImportarAl.Importar(dir2);
 			interfazImportarTit.Importar(dir3);
 			interfazImportarExp.Importar(dir2);
-//			interfazImportarAsig.Importar(dir4);
 			
 			//UNA VEZ IMPORTADOS TODOS LOS DATOS RELACIONADOS, IMPORTAMOS LAS MATRICULAS.
-			interfazMatricula.Importar(dir);
+			interfazMatricula.Importar(dir2);
 			
 			interfazMatricula.VisualizarMatricula("2020/2021",104200001);
 			

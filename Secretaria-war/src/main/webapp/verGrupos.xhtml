@@ -34,52 +34,86 @@
 		<h:form id="Grupos">
 			<div class="wrapper">
 				<table>
-					<tr><td colspan="2"><label>Buscar Grupo</label><br/><h:inputText id="Grupo" value="#{grupo.ID}" class="inputTxt" p:placeholder="Introduce Codigo" /></td>
-						<td  class="padSuperior"><h:commandButton id="botonBuscarGrupo" action="#{grupo.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
+					<tr><td ><label>Titulacion</label><br/><h:inputText id="titulacion" value="#{grupo.codigotit}" class="inputTxt" p:placeholder="Introduce Titulacion" /></td>
+						<td ><label>Curso</label><br/><h:inputText id="curso" value="#{grupo.curso}" class="inputTxt" p:placeholder="Introduce Curso" /></td>
+						<td ><label>Letra</label><br/><h:inputText id="letra" value="#{grupo.letra}" class="inputTxt" p:placeholder="Introduce Letra" /></td></tr>
+					<tr><td  class="padSuperior"><h:commandButton id="botonBuscarGrupo" action="#{grupo.buscarTrue()}" value="Buscar" class="centrado boton boton1"/></td>
 						<td><h:button value="Ver todo" outcome="verGrupos.xhtml" class="centrado boton boton1"/></td>
-						<td  class="padSuperior"><h:commandButton id="botonEliminarGrupos" action="#{grupo.borrarGrupos()}" value="Eliminar Grupos" class="centrado boton boton1"/></td>
 						<td><h:button value="Volver atrás" outcome="DatosAdmin.xhtml" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>
 			<div class="centrado ovf">
 			<c:choose> 
             	<c:when test="#{grupo.buscar}">
-            		<h:dataTable value="#{grupo.buscarGrupo(grupo.codigo)}" var="t">
-	            		
-	            		<h:column>
-							<f:facet name="header">Codigo</f:facet>
-				            <h:outputText value="#{t.codigo}"/>
-				        </h:column>
+            	<c:choose>
+            		<c:when test="#{grupo.noseusa}">
+	            		<h:dataTable value="#{grupo.buscarGrupo(grupo.curso,grupo.letra)}" var="g">
+		            		
+		            		<h:column>
+								<f:facet name="header">Titulacion</f:facet>
+								<h:outputText value="#{g.titulacion.codigo}" />
+							</h:column>
 	
-				        <h:column>
-				            <f:facet name="header">Nombre</f:facet>
-				            <h:outputText value="#{t.nombre}"/>
-				        </h:column>
-				               
-				        <h:column>
-				            <f:facet name="header">Creditos</f:facet>
-				            <h:outputText value="#{t.creditos}"/>
-				        </h:column>
-				        
-					</h:dataTable>
+							<h:column>
+								<f:facet name="header">Curso</f:facet>
+								<h:outputText value="#{g.curso}" />
+							</h:column>
+	
+							<h:column>
+								<f:facet name="header">Letra</f:facet>
+								<h:outputText value="#{g.letra}" />
+							</h:column>
+					        
+						</h:dataTable>
+					</c:when>
+					<c:otherwise>
+						<h:dataTable value="#{grupo.buscarGrupo(grupo.codigotit,grupo.curso,grupo.letra)}" var="g">
+		            		
+		            		<h:column>
+								<f:facet name="header">Titulacion</f:facet>
+								<h:outputText value="#{g.titulacion.codigo}" />
+							</h:column>
+	
+							<h:column>
+								<f:facet name="header">Curso</f:facet>
+								<h:outputText value="#{g.curso}" />
+							</h:column>
+	
+							<h:column>
+								<f:facet name="header">Letra</f:facet>
+								<h:outputText value="#{g.letra}" />
+							</h:column>
+					        
+						</h:dataTable>
+					</c:otherwise>
+				</c:choose>
             	</c:when>
             	<c:otherwise>
 					<h:dataTable value="#{grupo.leerDatosAdmin()}" var="u">
 
 						<h:column>
-							<f:facet name="header">Codigo</f:facet>
-							<h:outputText value="#{u.codigo}" />
+							<f:facet name="header">Titulacion</f:facet>
+							<h:outputText value="#{u.titulacion.codigo}" />
 						</h:column>
 
 						<h:column>
-							<f:facet name="header">Nombre</f:facet>
-							<h:outputText value="#{u.nombre}" />
+							<f:facet name="header">Curso</f:facet>
+							<h:outputText value="#{u.curso}" />
 						</h:column>
 
 						<h:column>
-							<f:facet name="header">Creditos</f:facet>
-							<h:outputText value="#{u.creditos}" />
+							<f:facet name="header">Letra</f:facet>
+							<h:outputText value="#{u.letra}" />
 						</h:column>
+
+							<h:column>
+								<f:facet name="header"></f:facet>
+								<h:commandButton id="botonEliminarGrupo"
+									action="#{grupo.borrarGrupo(u.titulacion.codigo,u.curso,u.letra)}"
+									value="Eliminar Grupo" class="centrado boton boton1" />
+							</h:column>
+
+						
 
 					</h:dataTable>
 				</c:otherwise>

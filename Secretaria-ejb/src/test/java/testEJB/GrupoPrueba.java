@@ -47,22 +47,9 @@ public class GrupoPrueba {
 	@Test
 	@Requisitos({"RF4"})
 	public void testCrearGrupo() {
-		Grupo grupoB = new Grupo();
-		Titulacion tit = new Titulacion();
-		tit.setCodigo(1234);
-		tit.setNombre("Informatica");
-		tit.setCreditos( 240f );
 		
-		grupoB.setID(35l);
-		grupoB.setCurso(2);
-		grupoB.setLetra("A");
-		grupoB.setTurno_Mañana_Tarde("Mañana");
-		grupoB.setIngles("No");
-		grupoB.setPlazas(50);
-		grupoB.setPlazasDisponibles(50);
-		grupoB.setTitulacion(tit);
 		try {
-			interfazGrupo.Crear(grupoB);
+			interfazGrupo.crear(1234,2,"A");
 		} catch (GrupoException e) {
 			fail("El grupo ya existia");
 		}
@@ -75,7 +62,7 @@ public class GrupoPrueba {
 		Grupo nuevo = new Grupo();
 		grupo.setID(1l);
 		try {
-			nuevo = interfazGrupo.Leer(grupo);
+			nuevo = interfazGrupo.leer(grupo);
 		} catch (GrupoException e) {
 			fail("no se encontro el objeto");
 		}
@@ -90,13 +77,13 @@ public class GrupoPrueba {
 		grupo.setID(1l);
 		
 		try {
-			interfazGrupo.Borrar(grupo);
+			interfazGrupo.borrar(grupo);
 		} catch (GrupoException e) {
 			fail("no se encontro el objeto");
 		}
 		
 		try {
-			interfazGrupo.Leer(grupo);
+			interfazGrupo.leer(grupo);
 		} catch (GrupoException e) {
 			//No lo encuentra, como debe ser
 		}
@@ -111,20 +98,20 @@ public class GrupoPrueba {
 		Grupo grupo = new Grupo();
 		g.setID(1l);
 		try {
-			grupo = interfazGrupo.Leer(g);
+			grupo = interfazGrupo.leer(g);
 		} catch (GrupoException e) {
 			fail("no se encontro el objeto");
 		}
 		
 		grupo.setIngles("No");
 		try {
-			interfazGrupo.Actualizar(grupo);
+			interfazGrupo.actualizar(grupo);
 		} catch (GrupoException e) {
 			fail("no se encontro el objeto");
 		}
 		
 		try {
-			assertEquals(grupo, interfazGrupo.Leer(g));
+			assertEquals(grupo, interfazGrupo.leer(g));
 		} catch (GrupoException e) {
 			fail("no se encontro el objeto");
 		}
@@ -138,13 +125,13 @@ public class GrupoPrueba {
 		g.setID(1l);
 		Grupo grupo = new Grupo();
 		try {
-			grupo=interfazGrupo.Leer(g);
+			grupo=interfazGrupo.leer(g);
 		} catch (GrupoException e) {
 			fail("no se encontro el objeto");
 		}
 		
 		try {
-			interfazGrupo.ComprobarPlazas(grupo);
+			interfazGrupo.comprobarPlazas(grupo);
 		} catch (GrupoException e) {
 			fail("no se encontro el objeto");
 		}
@@ -175,7 +162,12 @@ public class GrupoPrueba {
 		String letra = "A";
 		List<Grupo> g = new ArrayList<Grupo>();
 
-		g = interfazGrupo.buscarPorCursoLetra(curso, letra);
+		try {
+			g = interfazGrupo.buscarPorCursoLetra(curso, letra);
+		} catch (GrupoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		boolean probando = true;
 		for(Grupo grupo: g) {
@@ -209,7 +201,7 @@ public class GrupoPrueba {
 		}
 		
 		try {
-			grupo=interfazGrupo.Leer(grupo);
+			grupo=interfazGrupo.leer(grupo);
 		} catch (GrupoException e) {
 			fail("Grupo no encontrado");
 		}

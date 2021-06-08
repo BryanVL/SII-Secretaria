@@ -52,9 +52,8 @@ public class ExpedientePrueba {
 	@Requisitos({"RF7"})
 	public void testImportarExpediente() {
 		//Elegir desde donde realizar la importacion:
-//		String dir = "src/test/resources/alumnos.csv";
+		String dir = "src/test/resources/alumnos.csv";
 //		String dir2 = "src/test/resources/Titulacion.csv";
-		String dir = "src/test/resources/alumnos.xlsx";
 		String dir2 = "src/test/resources/Titulacion.xlsx";
 		
 		try {

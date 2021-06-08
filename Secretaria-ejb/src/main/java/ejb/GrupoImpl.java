@@ -1,7 +1,7 @@
 package ejb;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -9,17 +9,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import excepcionesEJB.AlumnoException;
 import excepcionesEJB.AsignaturaException;
 import excepcionesEJB.GrupoException;
 import excepcionesEJB.MatriculaException;
 import interfacesEJB.InterfazGrupo;
-import jpa.Alumno;
 import jpa.Asignatura;
 import jpa.Asignaturas_Matricula;
 import jpa.Asignaturas_Matricula_PK;
 import jpa.Grupo;
 import jpa.Matricula;
+import jpa.Optativa;
+import jpa.Titulacion;
 
 @Stateless
 @LocalBean
@@ -29,119 +29,110 @@ public class GrupoImpl implements InterfazGrupo{
     @PersistenceContext(unitName = "Secretaria")
     private EntityManager em;
 
+	private static final Logger LOGGER = Logger.getLogger(Grupo.class.getCanonicalName());
+
+    
 	@Override
-	public void Crear(Grupo g) throws GrupoException {
-		// TODO Auto-generated method stub
-		Grupo grupoExistente = em.find(Grupo.class, g.getID());
-		if (grupoExistente != null) {
-			throw new GrupoException();
+	public void crear(Integer titulacion, Integer curso, String letra) throws GrupoException {
+
+		Grupo g = new Grupo();
+		Titulacion tit = em.find(Titulacion.class, titulacion);
+		if(tit != null) {
+			g.setCurso(curso);
+			g.setLetra(letra);
+			g.setTurno_Mañana_Tarde("Mañana");
+			g.setIngles("Si");
+			g.setTitulacion(tit);
+			Grupo grupo = buscarPorCursoLetra(titulacion, curso, letra);
+			if(grupo == null) {
+				em.persist(g);
+			}
 		}
-		em.persist(g);
 	}
 
 	@Override
-	public Grupo Leer(Grupo g) throws GrupoException {
-		// TODO Auto-generated method stub
+	public Grupo leer(Grupo g) throws GrupoException {
+
 		Grupo grupoExistente = em.find(Grupo.class, g.getID());
 		if (grupoExistente == null) {
-			throw new GrupoException();
+			throw new GrupoException("No existe ningun grupo asociado a ese ID");
 		}
 		return grupoExistente;
 	}
 
 	@Override
-	public void Borrar(Grupo g) throws GrupoException {
-		// TODO Auto-generated method stub
+	public void borrar(Grupo g) throws GrupoException {
+
 		Grupo grupoExistente = em.find(Grupo.class, g.getID());
 		if (grupoExistente == null) {
-			throw new GrupoException();
+			throw new GrupoException("No existe ningun grupo asociado a ese ID");
 		}
 		em.remove(grupoExistente);
 	}
 
 	@Override
-	public void Actualizar(Grupo g) throws GrupoException {
-		// TODO Auto-generated method stub
+	public void actualizar(Grupo g) throws GrupoException {
+		
 		Grupo grupoExistente = em.find(Grupo.class, g.getID());
 		if (grupoExistente == null) {
-			throw new GrupoException();
+			throw new GrupoException("No se ha encontrado el grupo");
 		}
 		em.merge(g);
 	}
 
 
 	@Override
-	public void ComprobarPlazas(Grupo g) throws GrupoException {
+	public void comprobarPlazas(Grupo g) throws GrupoException {
 		if(g.getPlazasDisponibles()==0) {
-			throw new GrupoException();
+			throw new GrupoException("No hay mas hueco en el grupo");
 		}
 	}
 	
 	
 	public Grupo buscarPorCursoLetra(Integer titulacion, Integer curso, String letra) throws GrupoException {
 		
-		TypedQuery query = em.createQuery("Select g from Grupo g where g.Curso=:curso and g.Letra=:letra", Grupo.class);	 
-		query.setParameter("curso", curso);
-		query.setParameter("letra", letra);
-        List<Grupo> grupos = query.getResultList();
-		
-        
+		List<Grupo> grupos = buscarPorCursoLetra(curso,letra);
         boolean encontrado = false;     
         int i = 0;
-        Grupo g = new Grupo();
-        while(i<grupos.size() && !encontrado) {
+        Grupo g = null;
+        while(i < grupos.size() && !encontrado) {
+        	
      	   g = grupos.get(i); 
+     	   
      	   if(g.getTitulacion().getCodigo().equals(titulacion)) {
      		   encontrado=true;
      	   }
+     	   
      	   i++;
         }
         
-        if(!encontrado) {
-        	throw new GrupoException();
-        }
         
-		/* boolean encontrado = false;     
-	        int i = 0;
-	        Grupo g = new Grupo();
-	        while(i<grupos.size() && !encontrado) {
-	     	   g = grupos.get(i); 
-	     	   if(g.getCurso().equals(curso) && g.getLetra().equalsIgnoreCase(letra) && g.getTitulacion().getCodigo().equals(titulacion)) {
-	     		   encontrado=true;
-	     	   }
-	     	   i++;
-	        }
-	        
-	        if(!encontrado) {
-	        	throw new GrupoException();
-	        }*/
-	        
 		return g;
 	}
 	
 	
-	public List<Grupo> buscarPorCursoLetra(Integer curso, String letra) {
+	public List<Grupo> buscarPorCursoLetra(Integer curso, String letra) throws GrupoException{
 		
-		TypedQuery query = em.createQuery("Select g from Grupo g where g.Curso=:curso and g.Letra=:letra", Grupo.class);
+		TypedQuery<Grupo> query = em.createQuery("Select g from Grupo g where g.Curso=:curso and g.Letra=:letra", Grupo.class);
 		query.setParameter("curso", curso);
 		query.setParameter("letra", letra);
         List<Grupo> grupos = query.getResultList();
-		
-    
-        /*int i = 0;
-        List<Grupo> g = new ArrayList<Grupo>();
-        Grupo gr = new Grupo();
-        while(i<grupos.size()) {
-     	   gr = grupos.get(i); 
-     	   if(gr.getCurso().equals(curso) && gr.getLetra().equalsIgnoreCase(letra)) {
-     		   g.add(gr);
-     	   }
-     	   i++;
-        }*/
 	        
 		return grupos;
 	}
 	
+	@Override
+	public List<Grupo> mostrarDatosAdmin() throws GrupoException{
+		
+		TypedQuery<Grupo> query = em.createQuery("SELECT g FROM Grupo g",Grupo.class);
+		List<Grupo> grupos = query.getResultList();
+
+		if(grupos == null || grupos.size() == 0) {
+			throw new GrupoException("No se han encontrado grupos");
+		}
+		
+		return grupos;
+	}
 	
 	public void asignarGrupo(Matricula matricula, Grupo grupo, Asignatura asignatura) throws MatriculaException, GrupoException, AsignaturaException {
 		Matricula m = em.find(Matricula.class, matricula.getId());
