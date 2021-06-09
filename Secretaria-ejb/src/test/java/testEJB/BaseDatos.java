@@ -95,6 +95,7 @@ public class BaseDatos {
 		//---------------------Fran---------------------//
 		fran.setNombre("Franco manuel");
 		fran.setApellido1("garcia");
+		fran.setID(1235L);
 		fran.setDNI("125679B");
 		fran.setEmail_institucional("franco@uma.es");
 		
@@ -106,6 +107,7 @@ public class BaseDatos {
 		//---------------------Amin---------------------//
 		amin.setNombre("amin");
 		amin.setApellido1("chachaSuperFast");
+		amin.setID(1236L);
 		amin.setDNI("125680C");
 		amin.setEmail_institucional("amin@uma.es");
 		
@@ -117,6 +119,7 @@ public class BaseDatos {
 		//---------------------Noel---------------------//
 		noel.setNombre("noel");
 		noel.setApellido1("ApellidoDeNoel");
+		noel.setID(1237L);
 		noel.setDNI("125681D");
 		noel.setEmail_institucional("noel@uma.es");
 		
@@ -128,6 +131,7 @@ public class BaseDatos {
 		//---------------------David---------------------//
 		david.setNombre("david");
 		david.setApellido1("ApellidoDeDavid");
+		david.setID(1238L);
 		david.setDNI("125682E");
 		david.setEmail_institucional("david@uma.es");
 		
