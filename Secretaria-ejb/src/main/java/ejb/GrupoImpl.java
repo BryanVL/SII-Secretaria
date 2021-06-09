@@ -59,6 +59,16 @@ public class GrupoImpl implements InterfazGrupo{
 		}
 		return grupoExistente;
 	}
+	
+	@Override
+	public Grupo leer2(Long id) throws GrupoException {
+
+		Grupo grupoExistente = em.find(Grupo.class, id);
+		if (grupoExistente == null) {
+			throw new GrupoException("No existe ningun grupo asociado a ese ID");
+		}
+		return grupoExistente;
+	}
 
 	@Override
 	public void borrar(Grupo g) throws GrupoException {
@@ -72,12 +82,13 @@ public class GrupoImpl implements InterfazGrupo{
 
 	@Override
 	public void actualizar(Grupo g) throws GrupoException {
-		
-		Grupo grupoExistente = em.find(Grupo.class, g.getID());
-		if (grupoExistente == null) {
-			throw new GrupoException("No se ha encontrado el grupo");
+		if(g.getID() != null) {
+			Grupo grupoExistente = em.find(Grupo.class, g.getID());
+			if (grupoExistente == null) {
+				throw new GrupoException("No se ha encontrado el grupo");
+			}
+			em.merge(g);
 		}
-		em.merge(g);
 	}
 
 

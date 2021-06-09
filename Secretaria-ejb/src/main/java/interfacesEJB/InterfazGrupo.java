@@ -43,5 +43,7 @@ public interface InterfazGrupo {
 
 	
 	public void asignarGrupo(Matricula matricula, Grupo grupo, Asignatura asignatura) throws MatriculaException, GrupoException, AsignaturaException;
+
+	Grupo leer2(Long id) throws GrupoException;
 	
 }

@@ -35,13 +35,14 @@
 			<div class="wrapper">
 				<table>
 					
-					<tr><td colspan="2"><label>Curso</label><br/><h:inputText id="curso" value="#{grupo.curso}"  class="inputTxt" p:placeholder="#{grupo.GM.curso}" /></td></tr>
-					<tr><td colspan="2"><label>Letra</label><br/><h:inputText id="letra" value="#{grupo.letra}"  class="inputTxt" p:placeholder="#{grupo.GM.letra}" /></td></tr>
-					<tr><td colspan="2"><label>Letra</label><br/><h:inputText id="letra" value="#{grupo.letra}"  class="inputTxt" p:placeholder="#{grupo.GM.letra}" /></td></tr>
-					<tr><td colspan="2"><label>Letra</label><br/><h:inputText id="letra" value="#{grupo.letra}"  class="inputTxt" p:placeholder="#{grupo.GM.letra}" /></td></tr>
+					<tr><td colspan="2"><label>Curso</label><br/><h:inputText id="curso" value="#{grupo.GM.curso}"  class="inputTxt" p:placeholder="#{grupo.GM.curso}" /></td></tr>
+					<tr><td colspan="2"><label>Letra</label><br/><h:inputText id="letra" value="#{grupo.GM.letra}"  class="inputTxt" p:placeholder="#{grupo.GM.letra}" /></td></tr>
+					<tr><td colspan="2"><label>Turno</label><br/><h:inputText id="turno" value="#{grupo.GM.turno_Mañana_Tarde}"  class="inputTxt" p:placeholder="#{grupo.GM.turno_Mañana_Tarde}" /></td></tr>
+					<tr><td colspan="2"><label>Ingles</label><br/><h:inputText id="ingles" value="#{grupo.GM.ingles}"  class="inputTxt" p:placeholder="#{grupo.GM.ingles}" /></td></tr>
 					
 					<tr><td colspan="2"><h:message for=""></h:message></td></tr>
 					
+					<tr><td class="padSuperior"><h:commandButton id="botonModificar" action="#{grupo.modificar()}" value="modificaGrupo" class="centrado boton boton1"/></td></tr>
 					<tr><td colspan="2"><h:button id="botonAtras" outcome="verGrupos.xhtml" value="Volver atrás" class="centrado boton boton1"/></td></tr>
 				</table>
 			</div>

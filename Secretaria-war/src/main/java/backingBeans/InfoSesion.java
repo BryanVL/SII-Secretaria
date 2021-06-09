@@ -14,7 +14,7 @@ import jpa.Usuario;
 public class InfoSesion implements Serializable {
 	
 	private static final Logger LOGGER = Logger.getLogger(User.class.getCanonicalName());
-
+	private Long idgm;
 	
 	private Usuario usuario;
 	
@@ -27,6 +27,14 @@ public class InfoSesion implements Serializable {
 
     public synchronized Usuario getUsuario() {
         return usuario;
+    }
+    
+    public synchronized void setIdgm(Long id) {
+        this.idgm = id;
+    }
+
+    public synchronized Long getIdgm() {
+        return idgm;
     }
     
     public synchronized String cerrarSesion() {

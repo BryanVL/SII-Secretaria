@@ -10,6 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bouncycastle.jcajce.provider.asymmetric.GM;
+
 import excepcionesEJB.GrupoException;
 import excepcionesEJB.TitulacionException;
 import interfacesEJB.InterfazGrupo;
@@ -237,14 +239,17 @@ public class Grupos{
 		respuesta = "mGrupo.xhtml";
 		
 		if(sesion.comprobarSesion()) {
+			
 			try {
 				grupo = a.buscarPorCursoLetra(codigotit, curso, letra);
+				
 				
 				if(grupo == null) {
 					FacesMessage fm = new FacesMessage("No se ha encontrado el grupo");
 		            FacesContext.getCurrentInstance().addMessage(null, fm);
 				}
 				gM = grupo;
+				sesion.setIdgm(gM.getID());
 				respuesta = "mGrupo.xhtml";
 				
 			}catch(GrupoException e) {
@@ -262,6 +267,43 @@ public class Grupos{
 	public Grupo getGrupoModf() {
 		return gM;
 		
+	}
+	
+	public String modificar() {
+		String respuesta = null;
+		respuesta = "verGrupos.xhtml";
+		Grupo prueba;
+		
+		if(sesion.comprobarSesion()) {
+			
+			try {
+				
+				prueba = a.leer2( sesion.getIdgm() );
+				if(gM.getCurso() != null || !gM.getCurso().equals("")) {
+					prueba.setCurso(gM.getCurso());
+				}
+				if(gM.getLetra() != null || !gM.getLetra().equals("")) {
+					prueba.setLetra(gM.getLetra());
+				}
+				if(gM.getTurno_Mañana_Tarde() != null || !gM.getTurno_Mañana_Tarde().equals("")) {
+					prueba.setTurno_Mañana_Tarde(gM.getTurno_Mañana_Tarde());
+				}
+				if(gM.getIngles() != null || !gM.getIngles().equals("")) {
+					prueba.setIngles(gM.getIngles());
+				}
+				
+				a.actualizar(prueba);
+				
+			} catch(GrupoException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+	        FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		
+		return respuesta;
 	}
 
 }
