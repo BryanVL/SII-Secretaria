@@ -32,6 +32,9 @@ public class Grupos{
 	@Inject
 	private InfoSesion sesion;
 	
+	private Grupo gM;
+	
+	
 	private Grupo grupo;
 	private List<Grupo> grupos;
 	private boolean noseusa;
@@ -42,6 +45,7 @@ public class Grupos{
 	
 	public Grupos() {
 		grupo = new Grupo();
+		gM = new Grupo();
 	}
 	
 	public void setGrupo(Grupo grupo) {
@@ -50,6 +54,14 @@ public class Grupos{
 	
 	public Grupo getGrupo() {
 		return grupo;
+	}
+	
+	public void setGM(Grupo grupo) {
+		this.gM = grupo;
+	}
+	
+	public Grupo getGM() {
+		return gM;
 	}
 	
 	public List<Grupo> getGrupos(){
@@ -99,6 +111,8 @@ public class Grupos{
 	public void setLetra(String letra) {
 		this.letra = letra;
 	}
+	
+	
 	
 	public String buscarTrue() {
 		String respuesta = null;
@@ -216,6 +230,38 @@ public class Grupos{
 	        FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		return respuesta;
+	}
+	
+	public String modificarGrupo(Integer codigotit, Integer curso, String letra) {
+		String respuesta = null;
+		respuesta = "mGrupo.xhtml";
+		
+		if(sesion.comprobarSesion()) {
+			try {
+				grupo = a.buscarPorCursoLetra(codigotit, curso, letra);
+				
+				if(grupo == null) {
+					FacesMessage fm = new FacesMessage("No se ha encontrado el grupo");
+		            FacesContext.getCurrentInstance().addMessage(null, fm);
+				}
+				gM = grupo;
+				respuesta = "mGrupo.xhtml";
+				
+			}catch(GrupoException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+		}
+		
+		return respuesta;
+	}
+	
+	public Grupo getGrupoModf() {
+		return gM;
+		
 	}
 
 }
