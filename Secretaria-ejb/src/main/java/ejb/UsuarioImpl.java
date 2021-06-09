@@ -112,8 +112,10 @@ public class UsuarioImpl implements InterfazUsuario{
 		if(!usuario.equals("admin")) {
 			Usuario u = em.find(Usuario.class, usuario);
 			Alumno al = u.getAlumno();
-			al.setUsuario(null);
-			em.merge(al);
+			if(al != null) {
+				al.setUsuario(null);
+				em.merge(al);
+			}
 			em.remove(u);
 		}
 	}

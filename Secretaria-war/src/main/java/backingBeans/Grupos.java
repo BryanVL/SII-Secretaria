@@ -117,20 +117,26 @@ public class Grupos{
 	public String crearGrupos() {
 		String respuesta = null;
 		
-		try {
-			Integer tit = 1041;
-				a.crear(tit, 1, "A");
-				a.crear(tit, 2, "A");
-				a.crear(tit, 3, "A");
-				a.crear(tit, 4, "A");
-				a.crear(tit, 1, "B");
-				a.crear(tit, 2, "B");
-				a.crear(tit, 3, "B");
-				a.crear(tit, 1, "C");
-				a.crear(tit, 2, "C");
-				a.crear(tit, 1, "D");
-		} catch (GrupoException e) {
-			FacesMessage fm = new FacesMessage(e.getMessage());
+		if(sesion.comprobarSesion()) {
+			try {
+				Integer tit = 1041;
+					a.crear(tit, 1, "A");
+					a.crear(tit, 2, "A");
+					a.crear(tit, 3, "A");
+					a.crear(tit, 4, "A");
+					a.crear(tit, 1, "B");
+					a.crear(tit, 2, "B");
+					a.crear(tit, 3, "B");
+					a.crear(tit, 1, "C");
+					a.crear(tit, 2, "C");
+					a.crear(tit, 1, "D");
+					respuesta = "ImportarAdmin.xhtml";
+			} catch (GrupoException e) {
+				FacesMessage fm = new FacesMessage(e.getMessage());
+	            FacesContext.getCurrentInstance().addMessage(null, fm);
+			}
+		} else {
+			FacesMessage fm = new FacesMessage("No se ha iniciado sesion");
             FacesContext.getCurrentInstance().addMessage(null, fm);
 		}
 		
@@ -212,6 +218,4 @@ public class Grupos{
 		return respuesta;
 	}
 
-	
-	
 }
