@@ -106,15 +106,19 @@
 							<h:outputText value="#{u.letra}" />
 						</h:column>
 
-							<h:column>
-								<f:facet name="header"></f:facet>
-								<h:commandButton id="botonEliminarGrupo"
-									action="#{grupo.borrarGrupo(u.titulacion.codigo,u.curso,u.letra)}"
-									value="Eliminar Grupo" class="centrado boton boton1" />
-							</h:column>
-
+						<h:column>
+							<f:facet name="header"></f:facet>
+							<h:commandButton id="botonEliminarGrupo"
+								action="#{grupo.borrarGrupo(u.titulacion.codigo,u.curso,u.letra)}"
+								value="Eliminar Grupo" class="centrado boton boton1" />
+						</h:column>
 						
-
+						<h:column>
+							<f:facet name="header"></f:facet>
+							<h:commandButton id="botonModificarGrupo"
+								value="Modificar Grupo" class="centrado boton boton1" />
+						</h:column>
+							
 					</h:dataTable>
 				</c:otherwise>
         </c:choose>
