@@ -27,7 +27,7 @@ import org.openqa.selenium.Keys;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-public class UsuarioIT {
+public class UsuarioIT{
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
@@ -46,27 +46,6 @@ public class UsuarioIT {
   @After
   public void tearDown() {
     driver.quit();
-  }
-  
-  @Requisitos({"RF1"})
-  @Test
-  public void comprobarSesion() {
-    driver.get("http://localhost:8080/Secretaria-war/faces/DatosAdmin.xhtml");
-    driver.manage().window().setSize(new Dimension(1680, 900));
-    driver.findElement(By.id("botonAlumnos")).click();
-    driver.findElement(By.cssSelector("html")).click();
-    assertThat(driver.findElement(By.cssSelector(".centrarTexto")).getText(), is("No se ha iniciado sesion"));
-    driver.findElement(By.cssSelector("td:nth-child(3) > .centrado")).click();
-    driver.findElement(By.cssSelector(".centrarTexto")).click();
-    assertThat(driver.findElement(By.cssSelector(".centrarTexto")).getText(), is("No se ha iniciado sesion"));
-    driver.findElement(By.cssSelector("td:nth-child(5) > .centrado")).click();
-    driver.findElement(By.id("botonUsuarios")).click();
-    driver.findElement(By.cssSelector(".centrarTexto")).click();
-    assertThat(driver.findElement(By.cssSelector(".centrarTexto")).getText(), is("No se ha iniciado sesion"));
-    driver.findElement(By.cssSelector("td:nth-child(4) > .centrado")).click();
-    driver.findElement(By.id("botonAlumnos")).click();
-    driver.findElement(By.cssSelector("td:nth-child(5) > .centrado")).click();
-    driver.findElement(By.id("j_idt15:botonCerrarSesion")).click();
   }
   
   @Requisitos({"RF1","RF2"})
@@ -95,27 +74,6 @@ public class UsuarioIT {
     assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(1)")).getText(), is("admin"));
     driver.findElement(By.cssSelector("td:nth-child(4) > .centrado")).click();
     driver.findElement(By.id("j_idt15:botonCerrarSesion")).click();
-  }
-  
-  @Requisitos({"RF1","RF2"})
-  @Test
-  public void validarAccesoAlumno() {
-    driver.get("http://localhost:8080/Secretaria-war/");
-    driver.manage().window().setSize(new Dimension(1028, 723));
-    driver.findElement(By.id("inicioSesion:usuario")).click();
-    driver.findElement(By.id("inicioSesion:usuario")).sendKeys("bvl");
-    driver.findElement(By.id("inicioSesion:password")).sendKeys("test");
-    driver.findElement(By.id("inicioSesion:botonInicioSesion")).click();
-    driver.findElement(By.id("botonMisDatos")).click();
-    driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(1)")).click();
-    assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(1)")).getText(), is("bvl"));
-    driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(2)")).click();
-    assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(2)")).getText(), is("Alumno"));
-    driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(3)")).click();
-    driver.findElement(By.cssSelector("td:nth-child(6)")).click();
-    assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(3)")).getText(), is("125678A"));
-    driver.findElement(By.cssSelector(".boton")).click();
-    driver.findElement(By.id("j_idt8:botonCerrarSesion")).click();
   }
   
   @Requisitos({"RF1"})
@@ -147,35 +105,62 @@ public class UsuarioIT {
   
   @Requisitos({"RF2"})
   @Test
-  public void eliminarUsuario() {
+  public void eliminarUsuarioBien() {
     driver.get("http://localhost:8080/Secretaria-war/");
-    driver.manage().window().setSize(new Dimension(1028, 723));
+    driver.manage().window().setSize(new Dimension(1529, 861));
     driver.findElement(By.id("inicioSesion:usuario")).click();
     driver.findElement(By.id("inicioSesion:usuario")).sendKeys("admin");
     driver.findElement(By.id("inicioSesion:password")).sendKeys("admin");
     driver.findElement(By.id("inicioSesion:botonInicioSesion")).click();
     driver.findElement(By.cssSelector("table:nth-child(1) td:nth-child(1) > .centrado")).click();
     driver.findElement(By.id("botonUsuarios")).click();
-    driver.findElement(By.cssSelector("tr:nth-child(2) > td:nth-child(1)")).click();
-    assertThat(driver.findElement(By.cssSelector("tr:nth-child(2) > td:nth-child(1)")).getText(), is("bvl"));
-    {
-      List<WebElement> elements = driver.findElements(By.id("Usuarios:j_idt9:1:botonEliminarUsuario"));
-      assert(elements.size() > 0);
-    }
     driver.findElement(By.id("Usuarios:Nombre")).click();
     driver.findElement(By.id("Usuarios:Nombre")).sendKeys("bvl");
     driver.findElement(By.id("Usuarios:botonBuscarUsuario")).click();
-    {
-      List<WebElement> elements = driver.findElements(By.id("Usuarios:j_idt9:0:botonEliminarUsuario"));
-      assert(elements.size() == 0);
-    }
     driver.findElement(By.cssSelector("td:nth-child(3) > .centrado")).click();
-    driver.findElement(By.id("Usuarios:j_idt9:1:botonEliminarUsuario")).click();
+    driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(1)")).click();
+    assertThat(driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(1)")).getText(), is("bvl"));
+    driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(2)")).click();
+    assertThat(driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(2)")).getText(), is("125678A"));
+    driver.findElement(By.id("Usuarios:j_idt9:2:botonEliminarUsuario")).click();
     {
-      List<WebElement> elements = driver.findElements(By.id("Usuarios:j_idt9:2:botonEliminarUsuario"));
+      List<WebElement> elements = driver.findElements(By.cssSelector("tr:nth-child(4) > td:nth-child(1)"));
       assert(elements.size() == 0);
     }
     driver.findElement(By.cssSelector("td:nth-child(4) > .centrado")).click();
     driver.findElement(By.id("j_idt15:botonCerrarSesion")).click();
+  }
+  
+  @Requisitos({"RF1"})
+  @Test
+  public void comprobarSesionBien() {
+    driver.get("http://localhost:8080/Secretaria-war/faces/DatosAdmin.xhtml");
+    driver.manage().window().setSize(new Dimension(1561, 914));
+    driver.findElement(By.id("botonAlumnos")).click();
+    driver.findElement(By.cssSelector(".centrarTexto")).click();
+    assertThat(driver.findElement(By.cssSelector(".centrarTexto")).getText(), is("No se ha iniciado sesion"));
+    driver.findElement(By.cssSelector("td:nth-child(3) > .centrado")).click();
+    driver.findElement(By.cssSelector(".centrarTexto")).click();
+    assertThat(driver.findElement(By.cssSelector(".centrarTexto")).getText(), is("No se ha iniciado sesion"));
+    driver.findElement(By.cssSelector("td:nth-child(4) > .centrado")).click();
+    driver.findElement(By.id("j_idt15:botonCerrarSesion")).click();
+  }
+  
+  @Requisitos({"RF1","RF2"})
+  @Test
+  public void validarAcessoAlumnoBien() {
+    driver.get("http://localhost:8080/Secretaria-war/");
+    driver.manage().window().setSize(new Dimension(1308, 796));
+    driver.findElement(By.id("inicioSesion:usuario")).click();
+    driver.findElement(By.id("inicioSesion:usuario")).sendKeys("alumno");
+    driver.findElement(By.id("inicioSesion:password")).sendKeys("test");
+    driver.findElement(By.id("inicioSesion:botonInicioSesion")).click();
+    driver.findElement(By.id("botonMisDatos")).click();
+    driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(1)")).click();
+    assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(1)")).getText(), is("alumno"));
+    driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(2)")).click();
+    assertThat(driver.findElement(By.cssSelector("tbody:nth-child(2) td:nth-child(2)")).getText(), is("Alumno"));
+    driver.findElement(By.cssSelector(".boton")).click();
+    driver.findElement(By.id("j_idt8:botonCerrarSesion")).click();
   }
 }

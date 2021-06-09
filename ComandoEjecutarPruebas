@@ -1,3 +1,5 @@
 mvn verify -Dskip.ejb.tests -Dwebdriver.gecko.driver="/home/alumno/Descargas/geckodriver"
 
+mvn verify -Dskip.ejb.tests -Dwebdriver.chrome.driver="/home/alumno/Descargas/chromedriver"
+
 mvn verify -Dskip.ejb.tests -Dwebdriver.gecko.driver="/Secretaria/geckodriver"
